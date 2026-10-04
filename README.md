@@ -63,6 +63,7 @@ UI 通过 `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)`
 
 日志位于 `%LOCALAPPDATA%\Firaxis Games\Sid Meier's Civilization VI\Logs\`：
 - `Lua.log`：搜索 `[CivConquest]` 或 `Runtime Error`
+  - 调试日志（`CivConquest_Common.lua` 中的 `CQ.DEBUG_LOG`，默认开启）：单位训练或购买时会写一行 `[CivConquest] Debug: ...`，包含当回合文化进度的变化，可用来检查“训练单位获得文化”一类的能力
 - `Database.log`、`Modding.log`：数据加载与 mod 加载问题
 
 ---
@@ -126,6 +127,7 @@ The gameplay SQL runs with `LoadOrder` 20000, after other civilization mods, so 
 
 Logs are in `%LOCALAPPDATA%\Firaxis Games\Sid Meier's Civilization VI\Logs\`:
 - `Lua.log`: search for `[CivConquest]` or `Runtime Error`
+  - Debug log (`CQ.DEBUG_LOG` in `CivConquest_Common.lua`, on by default): each unit trained or purchased writes a `[CivConquest] Debug: ...` line with the change in civic progress, useful for checking abilities like "culture when training units"
 - `Database.log`, `Modding.log`: data and mod loading issues
 
 ---
@@ -144,6 +146,7 @@ CivConquestMode/
 ├─ Scripts/CivConquest_Common.lua    共用逻辑 · logic shared by UI and gameplay
 ├─ Scripts/CivConquest_Gameplay.lua  解锁、激活、区域转换 · unlocks, activation, district conversion
 ├─ UI/CivConquestPanel.xml / .lua    工具栏按钮与领袖面板 · Launch Bar button and leader panel
+├─ UI/CivConquestDebug.lua           调试日志 · debug logging (CQ.DEBUG_LOG)
 └─ Text/CivConquest_Text.xml         英文 / 简体中文 · English / Simplified Chinese text
 ```
 

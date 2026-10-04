@@ -53,6 +53,7 @@
 			<File>Scripts/CivConquest_Common.lua</File>
 			<File>UI/CivConquestPanel.lua</File>
 			<File>UI/CivConquestPanel.xml</File>
+			<File>UI/CivConquestDebug.lua</File>
 		</ImportFiles>
 		<AddGameplayScripts id="CivConquest_Scripts" criteria="CivConquest_Mode">
 			<File>Scripts/CivConquest_Gameplay.lua</File>
@@ -74,6 +75,7 @@
 		<File>Scripts/CivConquest_Gameplay.lua</File>
 		<File>UI/CivConquestPanel.lua</File>
 		<File>UI/CivConquestPanel.xml</File>
+		<File>UI/CivConquestDebug.lua</File>
 		<File>Text/CivConquest_Text.xml</File>
 	</Files>
 </Mod>

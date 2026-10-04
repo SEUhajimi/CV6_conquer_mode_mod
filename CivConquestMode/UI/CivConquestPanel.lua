@@ -6,6 +6,7 @@
 -- =============================================================================
 include("InstanceManager");
 include("CivConquest_Common");
+include("CivConquestDebug");
 
 -- ===========================================================================
 --	常量 / 成员
@@ -594,5 +595,7 @@ function Initialize()
 	Events.LocalPlayerChanged.Add(OnLocalPlayerChanged);
 
 	LuaEvents.CivConquest_Toggle.Add(Toggle);
+
+	CQ.InitDebugLog();
 end
 Initialize();

@@ -9,6 +9,8 @@ CQ.PROP_TRAIT		= "CQ_TRAIT_";		-- 玩家属性：CQ_TRAIT_<TraitType>  = 1  已�
 CQ.SCRIPT_ACTIVATE	= "CQ_ActivateTrait";	-- EXECUTE_SCRIPT 的 GameEvent 名
 CQ.SCRIPT_RECORD_CAPITAL = "CQ_RecordCapital";	-- UI 上报原始首都位置
 
+CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
+
 CQ.CATEGORY_ORDER = {
 	CIV_ABILITY		= 1,
 	LEADER_ABILITY	= 2,
