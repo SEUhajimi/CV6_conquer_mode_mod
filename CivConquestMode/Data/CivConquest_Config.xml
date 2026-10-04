@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameInfo>
+	<Parameters>
+		<!-- 游戏模式开关（出现在“游戏模式”分组中，与结社/天启等模式并列） -->
+		<Row Key1="Ruleset" Key2="RULESET_STANDARD" ParameterId="GameMode_CivConquest" Name="LOC_GAMEMODE_CIV_CONQUEST_NAME" Description="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="110"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_1" ParameterId="GameMode_CivConquest" Name="LOC_GAMEMODE_CIV_CONQUEST_NAME" Description="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="110"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="GameMode_CivConquest" Name="LOC_GAMEMODE_CIV_CONQUEST_NAME" Description="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Domain="bool" DefaultValue="0" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" NameArrayConfigurationId="GAMEMODES_ENABLED_NAMES" GroupId="GameModes" SortIndex="110"/>
+
+		<!-- 附属选项：AI 占领首都后自动激活（仅在开启本模式时显示） -->
+		<Row Key1="Ruleset" Key2="RULESET_STANDARD" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_1" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
+	</Parameters>
+	<ParameterCriteria>
+		<Row ParameterId="GameMode_CivConquest" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
+	</ParameterCriteria>
+	<ParameterDependencies>
+		<Row ParameterId="GameMode_CivConquest" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
+		<Row ParameterId="CivConquest_AIAutoActivate" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" Operator="Equals" ConfigurationValue="1"/>
+	</ParameterDependencies>
+	<GameModeItems>
+		<!-- 立绘/背景复用本体托米丽司的资源，避免额外打包贴图 -->
+		<Row GameModeType="GAMEMODE_CIV_CONQUEST" Name="LOC_GAMEMODE_CIV_CONQUEST_NAME" Description="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Portrait="LEADER_TOMYRIS_NEUTRAL" Background="LEADER_TOMYRIS_BACKGROUND" Icon="ICON_GAMEMODE_CIV_CONQUEST" SortIndex="110"/>
+	</GameModeItems>
+</GameInfo>

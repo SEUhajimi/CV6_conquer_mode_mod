@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="72a3670d-1356-435f-af92-a219446a2337" version="1">
+	<Properties>
+		<Name>LOC_CQ_MOD_TITLE</Name>
+		<Teaser>LOC_CQ_MOD_TEASER</Teaser>
+		<Description>LOC_CQ_MOD_DESCRIPTION</Description>
+		<Authors>nyumshhl</Authors>
+		<CompatibleVersions>2.0</CompatibleVersions>
+		<AffectsSavedGames>1</AffectsSavedGames>
+	</Properties>
+	<ActionCriteria>
+		<Criteria id="CivConquest_Mode">
+			<ConfigurationValueMatches>
+				<Group>Game</Group>
+				<ConfigurationId>GAMEMODE_CIV_CONQUEST</ConfigurationId>
+				<Value>1</Value>
+			</ConfigurationValueMatches>
+		</Criteria>
+	</ActionCriteria>
+	<LocalizedText>
+		<File>Text/CivConquest_Text.xml</File>
+	</LocalizedText>
+	<FrontEndActions>
+		<UpdateDatabase id="CivConquest_Config">
+			<File>Data/CivConquest_Config.xml</File>
+		</UpdateDatabase>
+		<UpdateIcons id="CivConquest_ConfigIcons">
+			<File>Data/CivConquest_Icons.xml</File>
+		</UpdateIcons>
+		<UpdateText id="CivConquest_ConfigText">
+			<File>Text/CivConquest_Text.xml</File>
+		</UpdateText>
+	</FrontEndActions>
+	<InGameActions>
+		<!-- 在所有文明（包括其他 MOD 文明）加载之后再执行，以便收集全部特色项目 -->
+		<UpdateDatabase id="CivConquest_Gameplay" criteria="CivConquest_Mode">
+			<Properties>
+				<LoadOrder>20000</LoadOrder>
+			</Properties>
+			<File>Data/CivConquest_Gameplay.sql</File>
+		</UpdateDatabase>
+		<UpdateIcons id="CivConquest_Icons" criteria="CivConquest_Mode">
+			<File>Data/CivConquest_Icons.xml</File>
+		</UpdateIcons>
+		<UpdateText id="CivConquest_Text" criteria="CivConquest_Mode">
+			<File>Text/CivConquest_Text.xml</File>
+		</UpdateText>
+		<ImportFiles id="CivConquest_Imports" criteria="CivConquest_Mode">
+			<File>Scripts/CivConquest_Common.lua</File>
+			<File>UI/CivConquestPanel.lua</File>
+			<File>UI/CivConquestPanel.xml</File>
+		</ImportFiles>
+		<AddGameplayScripts id="CivConquest_Scripts" criteria="CivConquest_Mode">
+			<File>Scripts/CivConquest_Gameplay.lua</File>
+		</AddGameplayScripts>
+		<AddUserInterfaces id="CivConquest_UI" criteria="CivConquest_Mode">
+			<Properties>
+				<Context>InGame</Context>
+			</Properties>
+			<File>UI/CivConquestPanel.xml</File>
+		</AddUserInterfaces>
+	</InGameActions>
+	<Files>
+		<File>Data/CivConquest_Config.xml</File>
+		<File>Data/CivConquest_Icons.xml</File>
+		<File>Data/CivConquest_Gameplay.sql</File>
+		<File>Scripts/CivConquest_Common.lua</File>
+		<File>Scripts/CivConquest_Gameplay.lua</File>
+		<File>UI/CivConquestPanel.lua</File>
+		<File>UI/CivConquestPanel.xml</File>
+		<File>Text/CivConquest_Text.xml</File>
+	</Files>
+</Mod>

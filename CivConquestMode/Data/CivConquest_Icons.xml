@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameInfo>
+	<IconDefinitions>
+		<!-- 复用本体“统治胜利”图标作为模式图标 -->
+		<Row Name="ICON_GAMEMODE_CIV_CONQUEST" Atlas="ICON_ATLAS_VICTORIES" Index="3"/>
+		<!-- 开局设置界面按 "ICON_" .. ParameterId 查找图标 -->
+		<Row Name="ICON_GameMode_CivConquest" Atlas="ICON_ATLAS_VICTORIES" Index="3"/>
+	</IconDefinitions>
+</GameInfo>

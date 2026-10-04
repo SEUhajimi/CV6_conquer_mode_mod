@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<LocalizedText>
+		<!-- ================================================================ -->
+		<!-- English                                                          -->
+		<!-- ================================================================ -->
+		<Row Tag="LOC_CQ_MOD_TITLE" Language="en_US"><Text>Civilization Conquest Mode</Text></Row>
+		<Row Tag="LOC_CQ_MOD_TEASER" Language="en_US"><Text>Capture a rival's original capital to adopt their civilization and leader abilities and unique units, buildings, districts and improvements.</Text></Row>
+		<Row Tag="LOC_CQ_MOD_DESCRIPTION" Language="en_US"><Text>Adds the Civilization Conquest game mode. When a civilization's original capital is under your control, you may activate that civilization's ability, its leader's ability and its unique units, buildings, districts and improvements from a new Launch Bar screen.</Text></Row>
+
+		<Row Tag="LOC_GAMEMODE_CIV_CONQUEST_NAME" Language="en_US"><Text>Civilization Conquest Mode</Text></Row>
+		<Row Tag="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Language="en_US"><Text>Conquer to inherit. Capturing a major civilization's original capital lets you activate its civilization ability, leader ability and unique units, buildings, districts and improvements. Open the Conquest screen from the Launch Bar at the top left.</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_AI_AUTO_NAME" Language="en_US"><Text>Conquest: AI Auto-Activates</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Language="en_US"><Text>When an AI captures an original capital, it automatically activates everything from that civilization.</Text></Row>
+
+		<Row Tag="LOC_CQ_LAUNCHBAR_TOOLTIP" Language="en_US"><Text>Civilization Conquest</Text></Row>
+		<Row Tag="LOC_CQ_LAUNCHBAR_ALERT_TOOLTIP" Language="en_US"><Text>You have conquered abilities waiting to be activated.</Text></Row>
+		<Row Tag="LOC_CQ_PANEL_TITLE" Language="en_US"><Text>CIVILIZATION CONQUEST</Text></Row>
+		<Row Tag="LOC_CQ_TAB_IN_GAME" Language="en_US"><Text>Leaders in This Game</Text></Row>
+		<Row Tag="LOC_CQ_TAB_ALL" Language="en_US"><Text>All Leaders</Text></Row>
+		<Row Tag="LOC_CQ_HINT" Language="en_US"><Text>[ICON_Capital] Capture a civilization's original capital to unlock activation.</Text></Row>
+		<Row Tag="LOC_CQ_SELECT_LEADER" Language="en_US"><Text>Select a leader on the left.</Text></Row>
+		<Row Tag="LOC_CQ_UNMET_LEADER" Language="en_US"><Text>Unmet Civilization</Text></Row>
+		<Row Tag="LOC_CQ_UNMET_DETAIL" Language="en_US"><Text>You have not met this civilization yet.</Text></Row>
+
+		<Row Tag="LOC_CQ_CATEGORY_CIV_ABILITY" Language="en_US"><Text>CIVILIZATION ABILITY</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_LEADER_ABILITY" Language="en_US"><Text>LEADER ABILITY</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_UNIT" Language="en_US"><Text>UNIQUE UNIT</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_BUILDING" Language="en_US"><Text>UNIQUE BUILDING</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_DISTRICT" Language="en_US"><Text>UNIQUE DISTRICT</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_IMPROVEMENT" Language="en_US"><Text>UNIQUE IMPROVEMENT</Text></Row>
+		<Row Tag="LOC_CQ_REPLACES" Language="en_US"><Text>Replaces: {1_Name}</Text></Row>
+		<Row Tag="LOC_CQ_DISTRICT_NOTE" Language="en_US"><Text>Build a {1_Name}; once completed it is converted into this district at the start of your turn. The plot must meet this district's own placement rules (e.g. hills only); otherwise it stays a {1_Name}.</Text></Row>
+
+		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="en_US"><Text>This unit cannot be trained. It is obtained through its civilization's or leader's ability (activate that ability to gain it).</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_ALL" Language="en_US"><Text>Activate All</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_TOOLTIP" Language="en_US"><Text>Adopt this ability for your civilization.</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_ALL_TOOLTIP" Language="en_US"><Text>Adopt every ability of this leader that you do not have yet.</Text></Row>
+		<Row Tag="LOC_CQ_ALL_ACTIVE_TOOLTIP" Language="en_US"><Text>Everything has already been activated.</Text></Row>
+		<Row Tag="LOC_CQ_LOCKED_TOOLTIP" Language="en_US"><Text>Capture this civilization's original capital first.</Text></Row>
+
+		<Row Tag="LOC_CQ_STATE_NATIVE" Language="en_US"><Text>[COLOR_LIGHTBLUE]Your own[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_ACTIVE" Language="en_US"><Text>[ICON_CheckSuccess] [COLOR_GREEN]Activated[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_LOCKED" Language="en_US"><Text>[COLOR_Grey]Locked[ENDCOLOR]</Text></Row>
+
+		<Row Tag="LOC_CQ_STATUS_SELF" Language="en_US"><Text>[COLOR_LIGHTBLUE]This is your own leader.[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_UNLOCKED_DETAIL" Language="en_US"><Text>[ICON_Capital] [COLOR_GREEN]Original capital conquered - abilities can be activated.[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_LOCKED_DETAIL" Language="en_US"><Text>[COLOR_Grey]Capture this civilization's original capital to unlock.[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="en_US"><Text>[COLOR_Grey]This leader is not in the current game.[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_SELF_SHORT" Language="en_US"><Text>[COLOR_LIGHTBLUE]You[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_UNLOCKED_SHORT" Language="en_US"><Text>[COLOR_GREEN]{1_Owned}/{2_Total}[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_LOCKED_SHORT" Language="en_US"><Text>[COLOR_Grey]Locked[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_SHORT" Language="en_US"><Text>[COLOR_Grey]-[ENDCOLOR]</Text></Row>
+
+		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_TITLE" Language="en_US"><Text>Conquest Unlocked</Text></Row>
+		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_BODY" Language="en_US"><Text>By holding {2_City} you may now activate the abilities of {1_Leader}. Open the Civilization Conquest screen from the Launch Bar.</Text></Row>
+
+		<!-- ================================================================ -->
+		<!-- 简体中文                                                         -->
+		<!-- ================================================================ -->
+		<Row Tag="LOC_CQ_MOD_TITLE" Language="zh_Hans_CN"><Text>文明征服模式</Text></Row>
+		<Row Tag="LOC_CQ_MOD_TEASER" Language="zh_Hans_CN"><Text>占领对手的原始首都，即可获得其文明特性、领袖能力以及特色单位、建筑、区域和改良设施。</Text></Row>
+		<Row Tag="LOC_CQ_MOD_DESCRIPTION" Language="zh_Hans_CN"><Text>新增“文明征服模式”游戏模式。当你控制某个文明的原始首都后，可以在左上角工具栏的新界面中激活该文明的文明特性、领袖能力及其特色单位、建筑、区域和改良设施。</Text></Row>
+
+		<Row Tag="LOC_GAMEMODE_CIV_CONQUEST_NAME" Language="zh_Hans_CN"><Text>文明征服模式</Text></Row>
+		<Row Tag="LOC_GAMEMODE_CIV_CONQUEST_DESCRIPTION" Language="zh_Hans_CN"><Text>征服即继承。占领主要文明的原始首都后，你可以激活该文明的文明特性、领袖能力以及特色单位、建筑、区域和改良设施。可从左上角工具栏打开“文明征服”界面。</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_AI_AUTO_NAME" Language="zh_Hans_CN"><Text>文明征服：AI 自动激活</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Language="zh_Hans_CN"><Text>AI 占领原始首都后，会自动激活该文明的全部内容。</Text></Row>
+
+		<Row Tag="LOC_CQ_LAUNCHBAR_TOOLTIP" Language="zh_Hans_CN"><Text>文明征服</Text></Row>
+		<Row Tag="LOC_CQ_LAUNCHBAR_ALERT_TOOLTIP" Language="zh_Hans_CN"><Text>有已解锁但尚未激活的能力。</Text></Row>
+		<Row Tag="LOC_CQ_PANEL_TITLE" Language="zh_Hans_CN"><Text>文明征服</Text></Row>
+		<Row Tag="LOC_CQ_TAB_IN_GAME" Language="zh_Hans_CN"><Text>本局领袖</Text></Row>
+		<Row Tag="LOC_CQ_TAB_ALL" Language="zh_Hans_CN"><Text>所有领袖</Text></Row>
+		<Row Tag="LOC_CQ_HINT" Language="zh_Hans_CN"><Text>[ICON_Capital] 占领该文明的原始首都后即可激活。</Text></Row>
+		<Row Tag="LOC_CQ_SELECT_LEADER" Language="zh_Hans_CN"><Text>请在左侧选择一位领袖。</Text></Row>
+		<Row Tag="LOC_CQ_UNMET_LEADER" Language="zh_Hans_CN"><Text>未遇见的文明</Text></Row>
+		<Row Tag="LOC_CQ_UNMET_DETAIL" Language="zh_Hans_CN"><Text>你尚未遇见该文明。</Text></Row>
+
+		<Row Tag="LOC_CQ_CATEGORY_CIV_ABILITY" Language="zh_Hans_CN"><Text>文明特性</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_LEADER_ABILITY" Language="zh_Hans_CN"><Text>领袖能力</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_UNIT" Language="zh_Hans_CN"><Text>特色单位</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_BUILDING" Language="zh_Hans_CN"><Text>特色建筑</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_DISTRICT" Language="zh_Hans_CN"><Text>特色区域</Text></Row>
+		<Row Tag="LOC_CQ_CATEGORY_IMPROVEMENT" Language="zh_Hans_CN"><Text>特色改良设施</Text></Row>
+		<Row Tag="LOC_CQ_REPLACES" Language="zh_Hans_CN"><Text>取代：{1_Name}</Text></Row>
+		<Row Tag="LOC_CQ_DISTRICT_NOTE" Language="zh_Hans_CN"><Text>请建造{1_Name}；建成后在你的回合开始时自动转换为该特色区域。地块必须满足该特色区域自身的放置条件（例如只能建在丘陵上），否则保留为{1_Name}。</Text></Row>
+
+		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="zh_Hans_CN"><Text>该单位无法训练，需通过其文明/领袖能力获得（激活对应能力后按原机制获得）。</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_ALL" Language="zh_Hans_CN"><Text>全部激活</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_TOOLTIP" Language="zh_Hans_CN"><Text>让你的文明获得此项能力。</Text></Row>
+		<Row Tag="LOC_CQ_ACTIVATE_ALL_TOOLTIP" Language="zh_Hans_CN"><Text>激活该领袖所有你尚未拥有的能力。</Text></Row>
+		<Row Tag="LOC_CQ_ALL_ACTIVE_TOOLTIP" Language="zh_Hans_CN"><Text>全部内容均已激活。</Text></Row>
+		<Row Tag="LOC_CQ_LOCKED_TOOLTIP" Language="zh_Hans_CN"><Text>需要先占领该文明的原始首都。</Text></Row>
+
+		<Row Tag="LOC_CQ_STATE_NATIVE" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]本方原有[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_ACTIVE" Language="zh_Hans_CN"><Text>[ICON_CheckSuccess] [COLOR_GREEN]已激活[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_LOCKED" Language="zh_Hans_CN"><Text>[COLOR_Grey]未解锁[ENDCOLOR]</Text></Row>
+
+		<Row Tag="LOC_CQ_STATUS_SELF" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]这是你自己的领袖。[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_UNLOCKED_DETAIL" Language="zh_Hans_CN"><Text>[ICON_Capital] [COLOR_GREEN]已占领其原始首都，可以激活。[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_LOCKED_DETAIL" Language="zh_Hans_CN"><Text>[COLOR_Grey]占领该文明的原始首都后解锁。[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="zh_Hans_CN"><Text>[COLOR_Grey]该领袖不在本局游戏中。[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_SELF_SHORT" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]本方[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_UNLOCKED_SHORT" Language="zh_Hans_CN"><Text>[COLOR_GREEN]{1_Owned}/{2_Total}[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_LOCKED_SHORT" Language="zh_Hans_CN"><Text>[COLOR_Grey]未解锁[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_SHORT" Language="zh_Hans_CN"><Text>[COLOR_Grey]-[ENDCOLOR]</Text></Row>
+
+		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_TITLE" Language="zh_Hans_CN"><Text>征服解锁</Text></Row>
+		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_BODY" Language="zh_Hans_CN"><Text>你已控制{2_City}，现在可以激活{1_Leader}的能力。请从左上角工具栏打开“文明征服”界面。</Text></Row>
+	</LocalizedText>
+</GameData>

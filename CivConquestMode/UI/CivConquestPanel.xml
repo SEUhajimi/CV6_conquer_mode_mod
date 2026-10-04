@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context Name="CivConquestPanel" ColorSet="Beige_Black" FontStyle="Shadow" Hidden="1">
+
+	<Container Style="FullScreenVignetteConsumer"/>
+
+	<Grid ID="DropShadow" Size="1140,720" Anchor="C,C" Style="DropShadow2" Color="255,255,255,200" ConsumeMouse="1">
+		<Grid ID="Window" Size="1100,680" Anchor="C,C" Style="WindowFrameTitle">
+
+			<!-- 标题栏 -->
+			<Container Size="parent,38" Offset="0,4">
+				<Label ID="TitleText" Style="WindowHeader" Anchor="C,C" String="LOC_CQ_PANEL_TITLE"/>
+			</Container>
+			<Button ID="CloseButton" Anchor="R,T" Offset="-1,-1" Style="CloseButtonLarge"/>
+
+			<!-- 标签页：本局领袖 / 所有领袖 -->
+			<Stack ID="TabStack" Anchor="L,T" Offset="24,52" StackGrowth="Right" Padding="4">
+				<GridButton ID="TabInGame" Size="200,34" Style="TabButton" String="LOC_CQ_TAB_IN_GAME">
+					<Grid ID="TabInGameSelected" Size="parent,parent" Style="TabButtonSelectedInnerGlow" Hidden="1"/>
+				</GridButton>
+				<GridButton ID="TabAll" Size="200,34" Style="TabButton" String="LOC_CQ_TAB_ALL">
+					<Grid ID="TabAllSelected" Size="parent,parent" Style="TabButtonSelectedInnerGlow" Hidden="1"/>
+				</GridButton>
+			</Stack>
+			<Label ID="HintLabel" Anchor="R,T" Offset="28,62" Style="FontNormal14" Color="200,190,160,255" String="LOC_CQ_HINT"/>
+
+			<!-- 左侧：领袖列表 -->
+			<Grid Anchor="L,T" Offset="20,92" Size="320,566" Style="SubContainer4" Color="0,0,0,120">
+				<ScrollPanel ID="LeaderScroll" Anchor="L,T" Offset="4,6" Size="296,554" Style="ScrollPanelWithRightBar">
+					<Stack ID="LeaderStack" StackGrowth="Bottom" Padding="2"/>
+				</ScrollPanel>
+			</Grid>
+
+			<!-- 右侧：领袖详情 -->
+			<Grid Anchor="L,T" Offset="352,92" Size="728,566" Style="SubContainer4" Color="0,0,0,120">
+				<Container ID="DetailHeader" Anchor="L,T" Size="parent,100">
+					<Image ID="LeaderPortrait" Anchor="L,C" Offset="12,0" Size="80,80"/>
+					<Image ID="CivIcon" Anchor="L,C" Offset="70,24" Size="36,36"/>
+					<Stack Anchor="L,C" Offset="112,0" StackGrowth="Bottom" Padding="2">
+						<Label ID="DetailLeaderName" Style="FontFlair22" Color="230,210,160,255" String="$Leader$"/>
+						<Label ID="DetailCivName" Style="FontNormal16" String="$Civ$"/>
+						<Label ID="DetailStatus" Style="FontNormal14" String="$Status$"/>
+					</Stack>
+					<GridButton ID="ActivateAllButton" Anchor="R,C" Offset="16,0" Size="190,41" Style="MainButton" String="LOC_CQ_ACTIVATE_ALL"/>
+				</Container>
+				<Line Start="12,100" End="716,100" Width="2" Color="190,170,120,120"/>
+
+				<ScrollPanel ID="DetailScroll" Anchor="L,T" Offset="10,108" Size="694,450" Style="ScrollPanelWithRightBar">
+					<Stack ID="DetailStack" StackGrowth="Bottom" Padding="6"/>
+				</ScrollPanel>
+				<Label ID="EmptyLabel" Anchor="C,C" Style="FontNormal18" Color="200,190,160,255" String="LOC_CQ_SELECT_LEADER" Hidden="1"/>
+			</Grid>
+		</Grid>
+	</Grid>
+
+	<!-- =================================================================== -->
+	<!--	实例																   -->
+	<!-- =================================================================== -->
+
+	<!-- 左侧领袖列表行 -->
+	<Instance Name="LeaderRowInstance">
+		<GridButton ID="Button" Size="280,58" Style="ButtonControl">
+			<Grid ID="SelectedGlow" Size="parent,parent" Style="TabButtonSelectedInnerGlow" Hidden="1"/>
+			<Image ID="LeaderIcon" Anchor="L,C" Offset="6,0" Size="45,45"/>
+			<Label ID="LeaderName" Anchor="L,C" Offset="58,-9" Style="FontNormal16" String="$Leader$" TruncateWidth="160"/>
+			<Label ID="CivName" Anchor="L,C" Offset="58,10" Style="FontNormal12" Color="200,190,160,255" String="$Civ$" TruncateWidth="160"/>
+			<Label ID="StatusLabel" Anchor="R,C" Offset="8,0" Style="FontNormal12" String="$Status$"/>
+		</GridButton>
+	</Instance>
+
+	<!-- 右侧单个特性/特色项目 -->
+	<Instance Name="TraitRowInstance">
+		<Grid ID="Root" Size="680,90" Style="SubContainer4" Color="40,40,40,220" AutoSize="V" AutoSizePadding="0,10">
+			<Image ID="Icon" Anchor="L,T" Offset="10,12" Size="64,64"/>
+			<Stack ID="TextStack" Anchor="L,T" Offset="86,8" StackGrowth="Bottom" Padding="2">
+				<Label ID="Category" Style="FontNormal12" Color="190,170,120,255" String="$Category$"/>
+				<Label ID="Name" Style="FontNormal16" Color="240,230,200,255" String="$Name$"/>
+				<Label ID="Description" Style="FontNormal14" WrapWidth="420" String="$Description$"/>
+			</Stack>
+			<GridButton ID="ActivateButton" Anchor="R,T" Offset="12,12" Size="140,36" Style="MainButtonSmall" String="LOC_CQ_ACTIVATE"/>
+			<Label ID="StateLabel" Anchor="R,T" Offset="20,22" Style="FontNormal14" String="$State$"/>
+		</Grid>
+	</Instance>
+
+	<!-- LaunchBar 上的入口按钮（运行时挂到 /InGame/LaunchBar/ButtonStack） -->
+	<Instance Name="CQLaunchBarItem">
+		<Button ID="LaunchItemButton" Anchor="L,C" Size="49,49" Texture="LaunchBar_Hook_GovernmentButton" Style="ButtonNormalText" StateOffsetIncrement="0,49">
+			<Image ID="LaunchItemIcon" Anchor="C,C" Offset="0,-2" Size="40,40"/>
+			<Label ID="AlertIndicator" String="[ICON_New]" Anchor="R,T" AnchorSide="O,O" Offset="-18,-18" Hidden="1"/>
+		</Button>
+	</Instance>
+
+	<Instance Name="CQLaunchBarPin">
+		<Image ID="Pin" Anchor="L,C" Offset="0,-2" Size="7,7" Texture="LaunchBar_TrackPip" Color="255,255,255,200"/>
+	</Instance>
+</Context>
