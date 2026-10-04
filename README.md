@@ -19,11 +19,21 @@
 
 ### 安装
 
-1. 把 `CivConquestMode` 文件夹复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\`。
+1. 把 `CivConquestMode` 文件夹复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\`。只需要这一个文件夹，仓库里的其他内容（`tools/`、`README.md`、`LICENSE`）不用放进游戏。
 2. 在游戏主菜单的「附加内容」中启用「文明征服模式」。
 3. 创建游戏时，在「游戏模式」里勾选「文明征服模式」。
 
 支持标准规则、迭起兴衰、风云变幻三种规则集。
+
+### 开发
+
+`tools/gen_landmarks.py` 是开发用脚本，游戏运行时不需要。它生成的 `CivConquestMode/ArtDefs/Landmarks.artdef` 已经包含在仓库里。只有在游戏更新或新增 DLC 后，才需要重新运行（需要 Python 3.9+）：
+
+```
+python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilization VI"
+```
+
+参数是游戏安装目录，省略时使用脚本中的默认路径。
 
 ### 实现方式
 
@@ -72,11 +82,21 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 
 ### Installation
 
-1. Copy the `CivConquestMode` folder to `Documents\My Games\Sid Meier's Civilization VI\Mods\`.
+1. Copy the `CivConquestMode` folder to `Documents\My Games\Sid Meier's Civilization VI\Mods\`. That folder is all the game needs; the rest of the repository (`tools/`, `README.md`, `LICENSE`) stays out of the game.
 2. Enable **Civilization Conquest Mode** under **Additional Content** in the main menu.
 3. When creating a game, tick **Civilization Conquest Mode** under **Game Modes**.
 
 Works with the Standard, Rise and Fall, and Gathering Storm rulesets.
+
+### Development
+
+`tools/gen_landmarks.py` is a development script and isn't needed at runtime. The file it generates, `CivConquestMode/ArtDefs/Landmarks.artdef`, is already committed. Re-run it only after a game update or a new DLC (requires Python 3.9+):
+
+```
+python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilization VI"
+```
+
+The argument is the game install directory; without it the script uses the default path set inside it.
 
 ### How it works
 
