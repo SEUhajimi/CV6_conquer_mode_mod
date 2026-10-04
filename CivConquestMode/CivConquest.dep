@@ -21,7 +21,11 @@
 		<Element>
 			<ArtDefPath text="Landmarks.artdef"/>
 			<ArtDefDependencyPaths>
+				<Element text="CityGenerators.artdef"/>
+				<Element text="Eras.artdef"/>
 				<Element text="Cultures.artdef"/>
+				<Element text="Landmarks.artdef"/>
+				<Element text="Buildings.artdef"/>
 				<Element text="Civilizations.artdef"/>
 			</ArtDefDependencyPaths>
 		</Element>

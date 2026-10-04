@@ -45,7 +45,7 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 | 特色建筑 | 去掉 `TraitType`，改为 `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING`（结社模式建筑的做法）；原文明通过自身 Trait 照常获得 |
 | 特色区域 | 引擎没有对应的解锁效果：先建造被取代的基础区域，建成后在回合开始时由脚本（`WorldBuilder.CityManager`）转换为特色区域，并保留其中的建筑 |
 
-部分特色改良的模型只登记了原文明（如努比亚金字塔、波斯天堂花园、荷兰圩田、苏格兰高尔夫球场、克里 Mekewap），其他文明建造时会显示红色感叹号。`tools/gen_landmarks.py` 扫描本体与 DLC 的 `Landmarks.artdef`，为这些地标生成 `Culture = DEFAULT` 的同模型版本。
+部分特色改良、区域和建筑的模型只登记了原文明（如努比亚金字塔、波斯天堂花园、荷兰圩田、苏格兰高尔夫球场、克里 Mekewap、日本电子厂、蒙古 Ordu、马其顿 Basilikoi Paides、巴比伦 Palgum、刚果 Mbanza、越南 Thanh），其他文明建造时会显示红色感叹号。`tools/gen_landmarks.py` 扫描本体与 DLC 的 `Landmarks.artdef`（包括 `Landmarks` 与 `Districts` 两类集合），为这些变体生成 `Culture = DEFAULT` 的同模型版本。
 
 UI 通过 `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)` 发送激活请求，由 Gameplay 脚本校验并执行，因此联机同步安全。状态保存在玩家属性中（`CQ_UNLOCK_<Leader>`、`CQ_TRAIT_<Trait>`），随存档保存。
 
@@ -108,7 +108,7 @@ The argument is the game install directory; without it the script uses the defau
 | Unique buildings | `TraitType` is cleared and replaced by `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING` (as Secret Societies buildings do); the original civilization still gets them through its own trait |
 | Unique districts | The engine has no effect that unlocks districts per player. Build the district it replaces; once completed, a script (`WorldBuilder.CityManager`) converts it into the unique district at the start of your turn, keeping its buildings |
 
-Some unique improvements register their model only for the original civilization (Nubian Pyramid, Persian Pairidaeza, Dutch Polder, Scottish Golf Course, Cree Mekewap), so other civilizations building them see a red exclamation mark. `tools/gen_landmarks.py` scans the base game and DLC `Landmarks.artdef` files and generates a `Culture = DEFAULT` copy of those landmarks using the same model.
+Some unique improvements, districts and buildings register their model only for the original civilization (Nubian Pyramid, Persian Pairidaeza, Dutch Polder, Scottish Golf Course, Cree Mekewap, Japanese Electronics Factory, Mongolian Ordu, Macedonian Basilikoi Paides, Babylonian Palgum, Kongolese Mbanza, Vietnamese Thanh), so other civilizations building them see a red exclamation mark. `tools/gen_landmarks.py` scans the base game and DLC `Landmarks.artdef` files (both the `Landmarks` and `Districts` collections) and generates a `Culture = DEFAULT` copy of those variants using the same model.
 
 The UI sends activation requests through `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)`, and the gameplay script validates and applies them, so multiplayer stays in sync. State is stored as player properties (`CQ_UNLOCK_<Leader>`, `CQ_TRAIT_<Trait>`) and is saved with the game.
 
@@ -137,7 +137,7 @@ tools/gen_landmarks.py               生成 ArtDefs/Landmarks.artdef · generate
 CivConquestMode/
 ├─ CivConquestMode.modinfo           模式定义、加载条件 · mode definition, load criteria
 ├─ CivConquest.dep                   美术依赖 · art dependency file
-├─ ArtDefs/Landmarks.artdef          特色地标的通用文化模型 · DEFAULT-culture models for civ-only landmarks
+├─ ArtDefs/Landmarks.artdef          特色地标/区域/建筑的通用文化模型 · DEFAULT-culture models for civ-only landmarks, districts, buildings
 ├─ Data/CivConquest_Config.xml       开局设置 · game setup: mode toggle, AI option
 ├─ Data/CivConquest_Icons.xml        模式图标 · mode icon (reuses Domination victory icon)
 ├─ Data/CivConquest_Gameplay.sql     特性映射与解锁修改器 · trait/item mapping, unlock modifiers
