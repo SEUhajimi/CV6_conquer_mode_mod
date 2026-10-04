@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<AssetObjects..GameDependencyData>
+	<ID>
+		<name text="CivConquest"/>
+		<id text="83acb1cf-5a5e-4e9e-91eb-5799add5706a"/>
+	</ID>
+	<RequiredGameArtIDs/>
+	<SystemDependencies>
+		<Element>
+			<ConsumerName text="Landmarks"/>
+			<ArtDefDependencyPaths>
+				<Element text="Landmarks.artdef"/>
+			</ArtDefDependencyPaths>
+			<LibraryDependencies>
+				<Element text="TileBase"/>
+			</LibraryDependencies>
+			<LoadsLibraries>false</LoadsLibraries>
+		</Element>
+	</SystemDependencies>
+	<ArtDefDependencies>
+		<Element>
+			<ArtDefPath text="Landmarks.artdef"/>
+			<ArtDefDependencyPaths>
+				<Element text="Cultures.artdef"/>
+				<Element text="Civilizations.artdef"/>
+			</ArtDefDependencyPaths>
+		</Element>
+	</ArtDefDependencies>
+	<LibraryDependencies/>
+</AssetObjects..GameDependencyData>

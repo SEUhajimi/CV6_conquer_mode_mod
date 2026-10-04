@@ -32,6 +32,10 @@
 		</UpdateText>
 	</FrontEndActions>
 	<InGameActions>
+		<!-- 给只登记了原文明的特色地标补一个通用文化版本（tools/gen_landmarks.py 生成） -->
+		<UpdateArt id="CivConquest_Art" criteria="CivConquest_Mode">
+			<File>CivConquest.dep</File>
+		</UpdateArt>
 		<!-- 在所有文明（包括其他 MOD 文明）加载之后再执行，以便收集全部特色项目 -->
 		<UpdateDatabase id="CivConquest_Gameplay" criteria="CivConquest_Mode">
 			<Properties>
@@ -61,6 +65,8 @@
 		</AddUserInterfaces>
 	</InGameActions>
 	<Files>
+		<File>CivConquest.dep</File>
+		<File>ArtDefs/Landmarks.artdef</File>
 		<File>Data/CivConquest_Config.xml</File>
 		<File>Data/CivConquest_Icons.xml</File>
 		<File>Data/CivConquest_Gameplay.sql</File>
