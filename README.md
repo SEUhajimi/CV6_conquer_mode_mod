@@ -40,7 +40,7 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 | 内容 | 机制 |
 | --- | --- |
 | 文明特性 / 领袖能力 | Gameplay 脚本把该 Trait 的所有 `TraitModifiers` 通过 `Player:AttachModifierByID` 挂到玩家身上 |
-| 特色单位 | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD`（结社模式「邪教徒」使用的同一机制） |
+| 特色单位 | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD`（结社模式「邪教徒」使用的同一机制）；对原文明不生效，否则被取代的基础单位会重新可造（如拜占庭能造骑士） |
 | 特色改良 | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT`（城邦宗主独特改良使用的同一机制） |
 | 特色建筑 | 去掉 `TraitType`，改为 `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING`（结社模式建筑的做法）；原文明通过自身 Trait 照常获得 |
 | 特色区域 | 引擎没有对应的解锁效果：先建造被取代的基础区域，建成后在回合开始时由脚本（`WorldBuilder.CityManager`）转换为特色区域，并保留其中的建筑 |
@@ -104,7 +104,7 @@ The argument is the game install directory; without it the script uses the defau
 | Item | Mechanism |
 | --- | --- |
 | Civilization / leader abilities | A gameplay script attaches every `TraitModifiers` entry of the trait to the player via `Player:AttachModifierByID` |
-| Unique units | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD` (the same mechanism Secret Societies uses for the Cultist) |
+| Unique units | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD` (the same mechanism Secret Societies uses for the Cultist); disabled for the original civilization, otherwise the replaced base unit becomes buildable again (e.g. Byzantium could build Knights) |
 | Unique improvements | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT` (the same mechanism city-state suzerain improvements use) |
 | Unique buildings | `TraitType` is cleared and replaced by `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING` (as Secret Societies buildings do); the original civilization still gets them through its own trait |
 | Unique districts | The engine has no effect that unlocks districts per player. Build the district it replaces; once completed, a script (`WorldBuilder.CityManager`) converts it into the unique district at the start of your turn, keeping its buildings |

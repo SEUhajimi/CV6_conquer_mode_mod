@@ -99,6 +99,31 @@ INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementI
 UPDATE Modifiers SET SubjectRequirementSetId = 'CQ_REQSET_NEVER'
 	WHERE ModifierId IN (SELECT 'CQ_VALID_' || UnitType FROM CQ_UntrainableUnits);
 
+-- 原文明不需要 VALID_UNIT_BUILD（特色单位的 TraitType 未改动，原文明本来就能训练），
+-- 而对原文明生效时会让被取代的基础单位重新可造（如拜占庭能造骑士、跑马场送骑士）。
+-- 因此加条件：玩家本身拥有该特性时不生效；征服者通过激活获得时照常生效。旧存档读档后同样适用。
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse)
+	SELECT DISTINCT 'CQ_REQ_NOT_NATIVE_' || TraitType, 'REQUIREMENT_PLAYER_HAS_CIVILIZATION_OR_LEADER_TRAIT', 1
+	FROM CQ_TraitItems WHERE ItemKind = 'UNIT';
+
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+	SELECT DISTINCT 'CQ_REQ_NOT_NATIVE_' || TraitType, 'TraitType', TraitType
+	FROM CQ_TraitItems WHERE ItemKind = 'UNIT';
+
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+	SELECT DISTINCT 'CQ_REQSET_NOT_NATIVE_' || TraitType, 'REQUIREMENTSET_TEST_ALL'
+	FROM CQ_TraitItems WHERE ItemKind = 'UNIT';
+
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+	SELECT DISTINCT 'CQ_REQSET_NOT_NATIVE_' || TraitType, 'CQ_REQ_NOT_NATIVE_' || TraitType
+	FROM CQ_TraitItems WHERE ItemKind = 'UNIT';
+
+UPDATE Modifiers SET SubjectRequirementSetId = (
+		SELECT 'CQ_REQSET_NOT_NATIVE_' || ti.TraitType FROM CQ_TraitItems ti
+		WHERE ti.ItemKind = 'UNIT' AND 'CQ_VALID_' || ti.ItemType = Modifiers.ModifierId)
+	WHERE ModifierId IN (SELECT 'CQ_VALID_' || ItemType FROM CQ_TraitItems WHERE ItemKind = 'UNIT')
+		AND ModifierId NOT IN (SELECT 'CQ_VALID_' || UnitType FROM CQ_UntrainableUnits);
+
 -- -----------------------------------------------------------------------------
 -- 特色改良
 -- -----------------------------------------------------------------------------
