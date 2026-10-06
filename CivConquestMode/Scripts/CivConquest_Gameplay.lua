@@ -352,14 +352,10 @@ local function Initialize()
 	GameEvents[CQ.SCRIPT_ACTIVATE].Add(OnActivateRequest);
 	GameEvents[CQ.SCRIPT_RECORD_CAPITAL].Add(OnRecordCapitalRequest);
 
-	-- GameEvents 访问时会自动创建，无法用 nil 判断是否存在；两种回合事件都订阅，处理函数可重复执行
+	-- 只用 GameEvents 修改游戏状态：它在游戏逻辑中按固定顺序触发，各客户端一致。
+	-- 不要在 Events.*（如 PlayerTurnActivated）里改状态：Events 由各客户端各自派发，时机不同，联机会不同步。
 	GameEvents.CityConquered.Add(OnCityConquered);
 	GameEvents.PlayerTurnStarted.Add(OnPlayerTurnStarted);
-	if Events ~= nil and Events.PlayerTurnActivated ~= nil then
-		Events.PlayerTurnActivated.Add(function(playerID, isFirstTime)
-			if isFirstTime then OnPlayerTurnStarted(playerID); end
-		end);
-	end
 
 	-- 读档/开局时补扫一次
 	RecordOriginalCapitals();
