@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssetObjects::GameDependencyData>
+  <ID>
+    <name text="Communist_PeoplesWar" />
+    <id text="60c2b04d-ec02-47fc-a023-b6563719c02f" />
+  </ID>
+  <RequiredGameArtIDs>
+    <Element>
+      <name text="Civ6" />
+      <id text="cb2f71b7-843e-4af3-9ca7-992acda9c195" />
+    </Element>
+  </RequiredGameArtIDs>
+  <SystemDependencies>
+    <Element>
+      <ConsumerName text="Units" />
+      <ArtDefDependencyPaths>
+        <Element text="Units.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Civilizations" />
+      <ArtDefDependencyPaths>
+        <Element text="Civilizations.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Leaders" />
+      <ArtDefDependencyPaths>
+        <Element text="Leaders.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="LeaderFallback" />
+      <ArtDefDependencyPaths>
+        <Element text="FallbackLeaders.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Districts" />
+      <ArtDefDependencyPaths>
+        <Element text="Districts.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Landmarks" />
+      <ArtDefDependencyPaths>
+        <Element text="Landmarks.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+  </SystemDependencies>
+  <ArtDefDependencies>
+    <Element>
+      <ArtDefPath text="Units.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Units.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Civilizations.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Civilizations.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Leaders.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Leaders.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="FallbackLeaders.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="FallbackLeaders.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Districts.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Districts.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Landmarks.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Landmarks.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+  </ArtDefDependencies>
+  <LibraryDependencies />
+</AssetObjects::GameDependencyData>

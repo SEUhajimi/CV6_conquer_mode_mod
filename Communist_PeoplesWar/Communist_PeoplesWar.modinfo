@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Mod id="60c2b04d-ec02-47fc-a023-b6563719c02f" version="7">
+  <Properties>
+    <Name>共产党 — 神秘的红色领袖：人民战争 [v0.7]</Name>
+    <Description>Gathering Storm. +1 Production per citizen; Qin-style builder charges and Ancient/Classical wonder rushing; native offensive spy bonus +2; pillage bonus and population loss; direct loyalty flips; Red Army replaces Musketman. Runtime validation pending. Units fully heal after successful pillage.</Description>
+    <Authors>Haohan Li / Codex</Authors>
+    <CompatibleVersions>2.0</CompatibleVersions>
+    <AffectsSavedGames>1</AffectsSavedGames>
+  </Properties>
+  <ActionCriteria>
+    <Criteria id="GS">
+      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
+    </Criteria>
+  </ActionCriteria>
+  <FrontEndActions>
+    <UpdateDatabase id="MaoConfig">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Config.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="MaoTextFront">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Text.xml</File>
+    </UpdateText>
+    <UpdateIcons id="MaoIconsFront">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Icons.sql</File>
+    </UpdateIcons>
+    <UpdateArt id="CommunistArtFront">
+      <File>Communist_PeoplesWar.dep</File>
+    </UpdateArt>
+  </FrontEndActions>
+  <InGameActions>
+    <UpdateDatabase id="MaoGameplay">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Gameplay.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="MaoTextGame">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Text.xml</File>
+    </UpdateText>
+    <UpdateColors id="MaoColors">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Colors.xml</File>
+    </UpdateColors>
+    <UpdateIcons id="MaoIconsGame">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Icons.sql</File>
+    </UpdateIcons>
+    <AddGameplayScripts id="MaoDiagnostics">
+      <Criteria>GS</Criteria>
+      <File>Scripts/Diagnostics.lua</File>
+    </AddGameplayScripts>
+    <AddGameplayScripts id="CommunistPillage">
+      <Criteria>GS</Criteria>
+      <File>Scripts/PillagePopulation.lua</File>
+    </AddGameplayScripts>
+    <UpdateArt id="CommunistArtGame">
+      <File>Communist_PeoplesWar.dep</File>
+    </UpdateArt>
+  </InGameActions>
+  <Files>
+    <File>Data/Colors.xml</File>
+    <File>Data/Config.sql</File>
+    <File>Data/Gameplay.sql</File>
+    <File>Data/Icons.sql</File>
+    <File>Data/Text.xml</File>
+    <File>Scripts/Diagnostics.lua</File>
+    <File>Scripts/PillagePopulation.lua</File>
+    <File>Communist_PeoplesWar.dep</File>
+    <File>ArtDefs/Units.artdef</File>
+    <File>ArtDefs/Civilizations.artdef</File>
+    <File>ArtDefs/Leaders.artdef</File>
+    <File>ArtDefs/FallbackLeaders.artdef</File>
+    <File>ArtDefs/Districts.artdef</File>
+    <File>ArtDefs/Landmarks.artdef</File>
+  </Files>
+</Mod>

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    "base-schema gameplay SQL executes",
+    "Musketman cloning retains stats, tech and cost",
+    "four military ability modifiers",
+    "wounded opponent requirement reused",
+    "resource maintenance copied in simulated GS table",
+    "XML and modinfo file references",
+    "independent Communist civilization and exclusive red-army trait",
+    "loyalty flip attached to civilization, not leader",
+    "offensive spy bonus +2 uses native modifier",
+    "+100% plunder bonus attached to civilization",
+    "Red Army replaces Musketman",
+    "heal-after-action native modifier attached to Red Army",
+    "configuration database SQL executes",
+    "icon database mappings execute",
+    "art XML and dependency paths valid",
+    "localization tags unique",
+    "14 Lua pillage mock cases passed",
+    "v0.4 SQL executes against reference schema",
+    "Qin original modifiers grant +1 builder charge and 15% wonder progress",
+    "population production modifier Amount=1, YieldType=YIELD_PRODUCTION, no governor requirement",
+    "v0.4 manifest and XML references valid",
+    "7 full-heal Lua mock cases pass, alongside 14 population cases",
+    "Campus district replacement and original adjacency rules",
+    "faith and production use native Science adjacency mirroring",
+    "retained scientist and added prophet/engineer points",
+    "Campus models mapped through Districts and Landmarks artdefs",
+    "Industrial Zone adjacency adds +2 Science per tile",
+    "displayed leader name changed to The Mysterious Red Leader; internal IDs retained"
+  ],
+  "limits": [
+    "GS resources and SKIP_FREE_CITY tested with fixtures; not an installed GS gameplay database",
+    "Civ6 runtime, UI, art loading, AI and multiplayer have not been tested"
+  ],
+  "original_reference_rows_loaded": 23104,
+  "version": "0.7"
+}

@@ -4,7 +4,7 @@
 
 ## 仓库结构
 
-- `CivConquestMode/`：**唯一进游戏的文件夹**，复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\` 使用。
+- `CivConquestMode/`：本模式**唯一进游戏的文件夹**，复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\` 使用。
   - `CivConquestMode.modinfo`：加载入口。所有 InGame 动作都带 `criteria="CivConquest_Mode"`，只在勾选该模式时加载。新增文件时要同时登记到对应 Action 和 `<Files>`。
   - `Data/CivConquest_Gameplay.sql`：`LoadOrder` 为 20000，在其他文明 mod 之后执行，用来收集所有特色项目，包括 mod 文明的。
     - 解锁修改器挂在原特性的 `TraitModifiers` 上，原文明也会拿到。特色单位的 `VALID_UNIT_BUILD` 对原文明生效时，会让被取代的基础单位重新可造（拜占庭能造骑士、跑马场送骑士），所以加了“玩家本身没有该特性”的条件（`CQ_REQSET_NOT_NATIVE_*`）。新增类似的解锁修改器时要考虑对原文明的副作用。
@@ -12,6 +12,7 @@
     - Gameplay 脚本里也只能在 `GameEvents.*` 回调中改游戏状态。`Events.*`（如 `PlayerTurnActivated`）由各客户端各自派发，时机不一致，在里面改状态会导致联机不同步（OOS）。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。
+- `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
 
 ## 红色感叹号（模型缺失）问题
 

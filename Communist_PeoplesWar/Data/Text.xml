@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='utf-8'?>
+<GameData>
+  <LocalizedText>
+    <Row Tag="LOC_LEADER_MAO_ZEDONG_NAME" Language="zh_Hans_CN">
+      <Text>神秘的红色领袖</Text>
+    </Row>
+    <Row Tag="LOC_LEADER_MAO_ZEDONG_NAME" Language="en_US">
+      <Text>The Mysterious Red Leader</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_MAO_NAME" Language="zh_Hans_CN">
+      <Text>人民战争</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_MAO_NAME" Language="en_US">
+      <Text>People’s War</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_MAO_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>近战和抗骑兵单位+1移动力；己方领土内+5战斗力；对受损单位+5战斗力；战斗经验+50%。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_MAO_DESCRIPTION" Language="en_US">
+      <Text>Melee and anti-cavalry units gain +1 Movement, +5 Combat Strength in friendly territory, +5 against wounded units and +50% combat experience.</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_MAO_RED_ARMY_NAME" Language="zh_Hans_CN">
+      <Text>工农红军</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_MAO_RED_ARMY_NAME" Language="en_US">
+      <Text>Workers’ and Peasants’ Red Army</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_MAO_RED_ARMY_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>共产党的特色文艺复兴近战单位，替代火枪手。基础移动力比火枪手+1，可与人民战争的移动力加成叠加。击败敌方单位后恢复20生命值。在任何领土均可按回合恢复生命值，即使已移动或执行行动。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_MAO_RED_ARMY_DESCRIPTION" Language="en_US">
+      <Text>Unique Renaissance melee unit of the Communist Party, replacing the Musketman. +1 base Movement, stacking with People’s War. Heals 20 HP after defeating an enemy unit. Can heal each turn in any territory, even after moving or acting.</Text>
+    </Row>
+    <Row Tag="LOC_MAO_HOME_PREVIEW" Language="zh_Hans_CN">
+      <Text>人民战争：己方领土</Text>
+    </Row>
+    <Row Tag="LOC_MAO_HOME_PREVIEW" Language="en_US">
+      <Text>People’s War: friendly territory</Text>
+    </Row>
+    <Row Tag="LOC_MAO_WOUNDED_PREVIEW" Language="zh_Hans_CN">
+      <Text>人民战争：受损敌军</Text>
+    </Row>
+    <Row Tag="LOC_MAO_WOUNDED_PREVIEW" Language="en_US">
+      <Text>People’s War: wounded enemy</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_NAME" Language="zh_Hans_CN">
+      <Text>共产党</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_NAME" Language="en_US">
+      <Text>Communist Party</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>共产党文明</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_DESCRIPTION" Language="en_US">
+      <Text>Communist civilization</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_ADJECTIVE" Language="zh_Hans_CN">
+      <Text>共产党</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_COMMUNIST_ADJECTIVE" Language="en_US">
+      <Text>Communist</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_NAME" Language="zh_Hans_CN">
+      <Text>星星之火</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_NAME" Language="en_US">
+      <Text>A Single Spark</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每座城市每有1人口，额外获得1生产力。建造者+1使用次数，并可消耗使用次数完成远古和古典时代奇观原始建造成本的15%。[NEWLINE]所有单位劫掠收益+100%。成功劫掠敌方城市所属的改良设施或区域时，使该城市人口减少1，最低降至1。间谍执行进攻任务时视为高2个等级。因忠诚度下降而脱离其他文明的城市，在来自本文明的忠诚压力最高时，跳过自由城市阶段直接加入本文明。[NEWLINE]成功劫掠改良设施或区域后，执行单位恢复全部生命值。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_DESCRIPTION" Language="en_US">
+      <Text>Cities gain +1 Production per citizen. Builders gain +1 build charge and can spend charges to complete 15% of the original Production cost of Ancient and Classical wonders.[NEWLINE]All units gain +100% pillage yields. Successfully pillaging an enemy city’s improvement or district reduces its population by 1, to a minimum of 1. Spies operate at 2 levels higher on offensive missions. Cities rebelling due to loyalty join this civilization directly when its loyalty pressure is highest.[NEWLINE]Units restore all HP after successfully pillaging an improvement or district.</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_RUIJIN" Language="zh_Hans_CN">
+      <Text>瑞金</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_RUIJIN" Language="en_US">
+      <Text>Ruijin</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANAN" Language="zh_Hans_CN">
+      <Text>延安</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANAN" Language="en_US">
+      <Text>Yan’an</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_JINGGANGSHAN" Language="zh_Hans_CN">
+      <Text>井冈山</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_JINGGANGSHAN" Language="en_US">
+      <Text>Jinggangshan</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_XIBAIPO" Language="zh_Hans_CN">
+      <Text>西柏坡</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_XIBAIPO" Language="en_US">
+      <Text>Xibaipo</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_WAYAOBAO" Language="zh_Hans_CN">
+      <Text>瓦窑堡</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_WAYAOBAO" Language="en_US">
+      <Text>Wayaobao</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_XINGGUO" Language="zh_Hans_CN">
+      <Text>兴国</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_XINGGUO" Language="en_US">
+      <Text>Xingguo</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YUDU" Language="zh_Hans_CN">
+      <Text>于都</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YUDU" Language="en_US">
+      <Text>Yudu</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_HUICHANG" Language="zh_Hans_CN">
+      <Text>会昌</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_HUICHANG" Language="en_US">
+      <Text>Huichang</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_NINGDU" Language="zh_Hans_CN">
+      <Text>宁都</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_NINGDU" Language="en_US">
+      <Text>Ningdu</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YONGXIN" Language="zh_Hans_CN">
+      <Text>永新</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YONGXIN" Language="en_US">
+      <Text>Yongxin</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_CHANGTING" Language="zh_Hans_CN">
+      <Text>长汀</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_CHANGTING" Language="en_US">
+      <Text>Changting</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_SHANGHANG" Language="zh_Hans_CN">
+      <Text>上杭</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_SHANGHANG" Language="en_US">
+      <Text>Shanghang</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_ZUNYI" Language="zh_Hans_CN">
+      <Text>遵义</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_ZUNYI" Language="en_US">
+      <Text>Zunyi</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_WUQI" Language="zh_Hans_CN">
+      <Text>吴起</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_WUQI" Language="en_US">
+      <Text>Wuqi</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_BAOAN" Language="zh_Hans_CN">
+      <Text>保安</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_BAOAN" Language="en_US">
+      <Text>Bao’an</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_NANNIWAN" Language="zh_Hans_CN">
+      <Text>南泥湾</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_NANNIWAN" Language="en_US">
+      <Text>Nanniwan</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANCHUAN" Language="zh_Hans_CN">
+      <Text>延川</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANCHUAN" Language="en_US">
+      <Text>Yanchuan</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANCHANG" Language="zh_Hans_CN">
+      <Text>延长</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_YANCHANG" Language="en_US">
+      <Text>Yanchang</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_GANQUAN" Language="zh_Hans_CN">
+      <Text>甘泉</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_GANQUAN" Language="en_US">
+      <Text>Ganquan</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_FUXIAN" Language="zh_Hans_CN">
+      <Text>富县</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_COMMUNIST_FUXIAN" Language="en_US">
+      <Text>Fuxian</Text>
+    </Row>
+    <Row Tag="LOC_DISTRICT_MARX_INSTITUTE_NAME" Language="zh_Hans_CN">
+      <Text>马克思理工学院</Text>
+    </Row>
+    <Row Tag="LOC_DISTRICT_MARX_INSTITUTE_NAME" Language="en_US">
+      <Text>Marx Institute of Technology</Text>
+    </Row>
+    <Row Tag="LOC_DISTRICT_MARX_INSTITUTE_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>共产党的特色区域，替代学院。学院的相邻加成科技值同时提供等额信仰和生产力。保留大科学家点数，每回合额外提供1大预言家点数和1大工程师点数。每相邻一个工业区，额外获得2科技相邻加成，同时提供等额信仰和生产力。</Text>
+    </Row>
+    <Row Tag="LOC_DISTRICT_MARX_INSTITUTE_DESCRIPTION" Language="en_US">
+      <Text>A unique district of the Communist Party, replacing the Campus. Its Science adjacency bonus also grants equal Faith and Production. Retains Great Scientist points and additionally provides +1 Great Prophet point and +1 Great Engineer point per turn.Each adjacent Industrial Zone grants an additional +2 Science adjacency bonus, mirrored as Faith and Production.</Text>
+    </Row>
+    <Row Tag="LOC_MARX_INDUSTRIAL_ZONE_ADJACENCY" Language="zh_Hans_CN">
+      <Text>+{1_num} 科技来自相邻工业区。</Text>
+    </Row>
+    <Row Tag="LOC_MARX_INDUSTRIAL_ZONE_ADJACENCY" Language="en_US">
+      <Text>+{1_num} Science from adjacent Industrial Zones.</Text>
+    </Row>
+  </LocalizedText>
+</GameData>
