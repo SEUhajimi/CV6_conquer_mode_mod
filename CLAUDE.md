@@ -10,6 +10,8 @@
     - 解锁修改器挂在原特性的 `TraitModifiers` 上，原文明也会拿到。特色单位的 `VALID_UNIT_BUILD` 对原文明生效时，会让被取代的基础单位重新可造（拜占庭能造骑士、跑马场送骑士），所以加了“玩家本身没有该特性”的条件（`CQ_REQSET_NOT_NATIVE_*`）。新增类似的解锁修改器时要考虑对原文明的副作用。
   - `Scripts/`、`UI/`：Lua。UI 通过 `UI.RequestPlayerOperation(... EXECUTE_SCRIPT ...)` 发请求，由 Gameplay 脚本校验执行，以保证联机同步。不要在 UI 侧直接改游戏状态。
     - Gameplay 脚本里也只能在 `GameEvents.*` 回调中改游戏状态。`Events.*`（如 `PlayerTurnActivated`）由各客户端各自派发，时机不一致，在里面改状态会导致联机不同步（OOS）。
+    - 脚本加载时（`Initialize()` 里）也不能改状态：联机重新同步时只有被同步的那台电脑会重新加载脚本。读档后的补扫放在 `GameEvents.PlayerTurnStarted` 里做。
+    - 会改状态的循环不要依赖 `pairs` 的遍历顺序，先排序。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。
 - `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
@@ -38,6 +40,7 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 - `Lua.log`：搜索 `[CivConquest]` 或 `Runtime Error`。
   - `CQ.DEBUG_LOG`（`Scripts/CivConquest_Common.lua`）开启时，`UI/CivConquestDebug.lua` 会在单位训练/购买时写 `[CivConquest] Debug: turn N player P trained|purchased(<purchaseType>) UNIT_X in City | culture +Δ | CIVIC_Y 进度`。Δ 是与上一次快照（回合开始或上一条记录）的市政进度差；换了市政时显示 `?`。回合开始的快照不含当回合文化产出，所以每回合第一条会附带 `(net ... after turn yield ...)`，看 net 即可。
   - 这段放在 UI 环境：`PlayerCulture:GetProgressingCivic()` / `GetCulturalProgress()` 在 Gameplay 脚本里不可用，实测会失败。
+  - 每个玩家回合开始时，Gameplay 脚本会写 `[CivConquest] Sync turn N player P unlocks=... traits=...`（只写有解锁或激活的玩家）。联机不同步时，对比两台电脑同一回合的这一行，不一样就是本模式的状态分叉了。
 - 修改 `.modinfo` 后需要重启游戏（或在「附加内容」里重新启用 mod）才会生效；只改 Lua / SQL 时重新读档即可。
 - `Database.log`、`Modding.log`：数据和 mod 加载问题。
 
