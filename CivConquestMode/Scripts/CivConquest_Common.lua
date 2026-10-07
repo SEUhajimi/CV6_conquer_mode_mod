@@ -139,6 +139,11 @@ function CQ.GetAllUniqueDistricts()
 			end
 		end
 	end
+	-- pairs 的遍历顺序没有保证；Gameplay 端按此顺序改状态，排序后各客户端一致
+	table.sort(list, function(a, b)
+		if a.TraitType ~= b.TraitType then return a.TraitType < b.TraitType; end
+		return a.Type < b.Type;
+	end);
 	return list;
 end
 

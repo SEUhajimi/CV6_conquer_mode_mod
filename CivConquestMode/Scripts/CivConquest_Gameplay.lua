@@ -174,11 +174,17 @@ local function ConvertDistrictsForPlayer(playerID:number)
 	local map = GetDistrictReplacements(playerID);
 	if next(map) == nil then return; end
 
+	-- 按基础区域 Index 排序，保证各客户端转换顺序一致（pairs 的遍历顺序没有保证）
+	local bases = {};
+	for eBase, _ in pairs(map) do table.insert(bases, eBase); end
+	table.sort(bases);
+
 	-- Gameplay 端的城市区域对象没有 Members()，只能按区域类型查询
 	for _, pCity in pPlayer:GetCities():Members() do
 		local pCityDistricts = pCity:GetDistricts();
 		local toConvert = {};
-		for eBase, eUnique in pairs(map) do
+		for _, eBase in ipairs(bases) do
+			local eUnique = map[eBase];
 			local district = FindCompletedDistrict(pCityDistricts, eBase);
 			if district ~= nil and not IsNoConvert(district.X, district.Y) then
 				local uniqueType = GameInfo.Districts[eUnique].DistrictType;
@@ -335,10 +341,32 @@ local function OnCityConquered(capturerID:number, ownerID:number, cityID:number,
 	ScanUnlocks(capturerID);
 end
 
+--	联机排查用：把该玩家的本模式状态写进 Lua.log。
+--	不同步时对比两台电脑同一回合的这一行，不一样就说明本模式的状态分叉了。
+local function LogSyncState(playerID:number)
+	local pPlayer = Players[playerID];
+	if pPlayer == nil or not pPlayer:IsMajor() then return; end
+	local unlocks, traits = {}, {};
+	for _, leaderType in ipairs(CQ.GetAllLeaders()) do
+		if pPlayer:GetProperty(CQ.PROP_UNLOCK .. leaderType) == 1 then table.insert(unlocks, leaderType); end
+	end
+	if GameInfo.CQ_Traits ~= nil then
+		for row in GameInfo.CQ_Traits() do
+			if pPlayer:GetProperty(CQ.PROP_TRAIT .. row.TraitType) == 1 then table.insert(traits, row.TraitType); end
+		end
+	end
+	if #unlocks == 0 and #traits == 0 then return; end
+	table.sort(unlocks);
+	table.sort(traits);
+	Log("Sync turn", Game.GetCurrentGameTurn(), "player", playerID,
+		"unlocks=" .. table.concat(unlocks, ","), "traits=" .. table.concat(traits, ","));
+end
+
 local function OnPlayerTurnStarted(playerID:number)
 	RecordOriginalCapitals();
 	ScanUnlocks(playerID);
 	ConvertDistrictsForPlayer(playerID);
+	LogSyncState(playerID);
 end
 
 -- ===========================================================================
@@ -357,11 +385,9 @@ local function Initialize()
 	GameEvents.CityConquered.Add(OnCityConquered);
 	GameEvents.PlayerTurnStarted.Add(OnPlayerTurnStarted);
 
-	-- 读档/开局时补扫一次
-	RecordOriginalCapitals();
-	for _, info in ipairs(CQ.GetMajorPlayersInGame()) do
-		ScanUnlocks(info.PlayerID);
-	end
+	-- 这里（脚本加载时）不要改游戏状态：联机重新同步时只有被同步的客户端会重新加载脚本，
+	-- 在这里补扫解锁、挂修改器会只发生在那一台电脑上，导致再次不同步。
+	-- 读档后的补扫交给各玩家回合开始时的 OnPlayerTurnStarted。
 	Log("Initialized");
 end
 Initialize();
