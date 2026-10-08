@@ -232,11 +232,14 @@ end);
 | 不依赖 `pairs` 的遍历顺序 | 哈希表顺序在不同电脑上可能不同，先排序再循环 | — |
 | 不用 `math.random` | 各电脑的随机种子不同；需要随机时用 `Game.GetRandNum(100, "说明")`，官方剧本就是这样用的 | — |
 | UI 不直接改状态 | UI 只在本地运行，必须走 `EXECUTE_SCRIPT` | — |
+| 处理 UI 请求先校验参数 | `EXECUTE_SCRIPT` 的参数来自网络，类型不对时脚本报错会中断处理 | — |
+| 不在 `CityConquered` 里做重活 | 占城回调发生在城市易手的处理过程中，此时挂大量修改器、用 `WorldBuilder` 改区域风险大；先记标记，留到 `PlayerTurnStarted` 处理 | AI 占城后立即自动激活（改于 d83a94c，改到它的下一回合开始） |
 | 所有玩家 mod 文件完全一致 | 数据库不同，计算结果必然不同 | 朋友解压时多了一层文件夹，导致 mod 重复、多出几百个 DynamicModifiers |
 
 ### 排查不同步
 
-1. 先确认 mod 一致：联机时加载的是主机的 mod 列表，看主机 `Modding.log` 里的 “Target Mods”。创意工坊的 mod 版本不同也会导致分叉。
+1. 先确认 mod 一致。联机房间只核对 mod 的 ID 和版本号，不核对文件内容，所以本模式读档后会对整个 Gameplay 数据库算指纹并互相比对：不一致时游戏内会弹窗，`Lua.log` 里有 `[CivConquest] Mod mismatch!`。也可以直接对比两台电脑 `Lua.log` 里的 `[CivConquest] Fingerprint XXXXXX (full: ...)` 行（`partial` 表示退回到了只算核心表的后备算法）。指纹只覆盖数据库，各 mod 的 Lua 脚本不同查不出来。
+   要找出是哪个 mod：联机时加载的是主机的 mod 列表，看主机 `Modding.log` 里的 “Target Mods”。创意工坊的 mod 版本不同也会导致分叉。
 2. 对比两台电脑 `Lua.log` 里同一回合的 `[CivConquest] Sync turn N ...` 行。不一样就是本模式的状态分叉了。
 3. 在 `net_message_debug.log` 里逐项对比 `local/remote values`：数量不同是内容不同（如多了修改器），数量相同、值不同是数值分叉。偶尔一两条 `AI::CityBuild` 不一致会自己恢复，属于正常现象。
 
