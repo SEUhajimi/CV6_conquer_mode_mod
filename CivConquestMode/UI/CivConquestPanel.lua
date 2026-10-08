@@ -112,7 +112,8 @@ local function CountActivatable(playerID:number, leaderType:string)
 	local total, owned = 0, 0;
 	for _, entry in ipairs(CQ.GetLeaderTraitEntries(leaderType)) do
 		total = total + 1;
-		if CQ.IsTraitOwned(playerID, entry.TraitType) then
+		-- 和已有特色区域冲突的不能激活，也算作“无需处理”
+		if CQ.IsTraitOwned(playerID, entry.TraitType) or CQ.GetTraitConflict(playerID, entry.TraitType) ~= nil then
 			owned = owned + 1;
 		end
 	end
@@ -143,6 +144,123 @@ end
 -- ===========================================================================
 --	右侧详情
 -- ===========================================================================
+-- ===========================================================================
+--	特色区域：激活者实际获得的效果（加到基础区域上，见 SQL 的 CQ_DistrictBonusInfo），
+--	以及无法继承的部分。返回多行文字。
+-- ===========================================================================
+local BONUS_KIND_ORDER :table = {
+	COST = 1, YIELD = 2, ADJ_DISTRICT = 3, NEXT_TO_DISTRICT = 4, ADJ_IMPROVEMENT = 5, ADJ_FEATURE = 6,
+	ADJ_TERRAIN = 7, ADJ_RIVER = 8, NEXT_TO_RESOURCE = 9, GREAT_PERSON = 10, HOUSING = 11, AMENITY = 12, SPECIAL = 13,
+};
+
+local function Signed(amount)
+	amount = tonumber(amount) or 0;
+	return (amount > 0 and "+" or "") .. tostring(amount);
+end
+
+local function YieldIcon(yieldType)
+	local info = yieldType and GameInfo.Yields[yieldType];
+	return info ~= nil and info.IconString or "";
+end
+
+local function TypeName(tableName:string, typeName)
+	local info = typeName and GameInfo[tableName] and GameInfo[tableName][typeName];
+	return LookupOr(info and info.Name, typeName or "");
+end
+
+local function DescribeBonus(row:table, baseName:string)
+	local amount = Signed(row.Amount);
+	local yield = YieldIcon(row.YieldType);
+	local kind = row.Kind;
+	if kind == "COST" then
+		return Locale.Lookup("LOC_CQ_DB_COST", baseName, amount);
+	elseif kind == "YIELD" then
+		return Locale.Lookup("LOC_CQ_DB_YIELD", amount, yield);
+	elseif kind == "ADJ_DISTRICT" then
+		return Locale.Lookup("LOC_CQ_DB_ADJ_DISTRICT", amount, yield);
+	elseif kind == "NEXT_TO_DISTRICT" then
+		return Locale.Lookup("LOC_CQ_DB_NEXT_TO", TypeName("Districts", row.Target), amount, yield);
+	elseif kind == "ADJ_IMPROVEMENT" or kind == "ADJ_FEATURE" or kind == "ADJ_TERRAIN" then
+		local tableName = (kind == "ADJ_IMPROVEMENT") and "Improvements" or ((kind == "ADJ_FEATURE") and "Features" or "Terrains");
+		local tiles = tonumber(row.TilesRequired) or 1;
+		if tiles > 1 then
+			return Locale.Lookup("LOC_CQ_DB_ADJ_TILES", tiles, TypeName(tableName, row.Target), amount, yield);
+		end
+		return Locale.Lookup("LOC_CQ_DB_ADJ_EACH", TypeName(tableName, row.Target), amount, yield);
+	elseif kind == "ADJ_RIVER" then
+		return Locale.Lookup("LOC_CQ_DB_ADJ_RIVER", amount, yield);
+	elseif kind == "NEXT_TO_RESOURCE" then
+		return Locale.Lookup("LOC_CQ_DB_NEXT_TO_RESOURCE", Locale.Lookup("LOC_CQ_" .. tostring(row.Target)), amount, yield);
+	elseif kind == "GREAT_PERSON" then
+		local info = row.Target and GameInfo.GreatPersonClasses[row.Target];
+		return Locale.Lookup("LOC_CQ_DB_GREAT_PERSON", amount, info and info.IconString or "", LookupOr(info and info.Name, row.Target));
+	elseif kind == "HOUSING" then
+		return Locale.Lookup("LOC_CQ_DB_HOUSING", amount);
+	elseif kind == "AMENITY" then
+		return Locale.Lookup("LOC_CQ_DB_AMENITY", amount);
+	end
+	return nil;
+end
+
+local function BuildDistrictBonusText(uniqueType:string, baseType:string)
+	local baseName = TypeName("Districts", baseType);
+	local rows = {};
+	local special = false;
+	if GameInfo.CQ_DistrictBonusInfo ~= nil then
+		for row in GameInfo.CQ_DistrictBonusInfo() do
+			if row.DistrictType == uniqueType then
+				if row.Kind == "SPECIAL" then
+					special = true;
+				else
+					table.insert(rows, row);
+				end
+			end
+		end
+	end
+	table.sort(rows, function(a, b)
+		local oa, ob = BONUS_KIND_ORDER[a.Kind] or 99, BONUS_KIND_ORDER[b.Kind] or 99;
+		if oa ~= ob then return oa < ob; end
+		return a.ModifierId < b.ModifierId;
+	end);
+
+	local lines = { Locale.Lookup("LOC_CQ_DB_HEADER", baseName) };
+	for _, row in ipairs(rows) do
+		local text = DescribeBonus(row, baseName);
+		if text ~= nil then table.insert(lines, "[ICON_Bullet]" .. text); end
+	end
+	if special then
+		table.insert(lines, "[ICON_Bullet]" .. Locale.Lookup("LOC_CQ_DB_SPECIAL"));
+	end
+
+	-- 无法继承的部分：按两种区域的数据比较得出
+	local lost = { Locale.Lookup("LOC_CQ_DB_LOST_MODEL", baseName) };
+	local u, b = GameInfo.Districts[uniqueType], GameInfo.Districts[baseType];
+	if u ~= nil and b ~= nil then
+		if b.RequiresPopulation and not u.RequiresPopulation then
+			table.insert(lost, Locale.Lookup("LOC_CQ_DB_LOST_POPULATION"));
+		end
+		if u.PrereqTech ~= b.PrereqTech or u.PrereqCivic ~= b.PrereqCivic then
+			table.insert(lost, Locale.Lookup("LOC_CQ_DB_LOST_UNLOCK"));
+		end
+		if (u.ZOC and not b.ZOC) or ((u.HitPoints or 0) > (b.HitPoints or 0)) then
+			table.insert(lost, Locale.Lookup("LOC_CQ_DB_LOST_DEFENSE"));
+		end
+	end
+	local hasPlacement = false;
+	for _, tbl in ipairs({ "District_ValidTerrains", "District_RequiredFeatures" }) do
+		if GameInfo[tbl] ~= nil then
+			for row in GameInfo[tbl]() do
+				if row.DistrictType == uniqueType then hasPlacement = true; break; end
+			end
+		end
+	end
+	if hasPlacement then
+		table.insert(lost, Locale.Lookup("LOC_CQ_DB_LOST_PLACEMENT"));
+	end
+	table.insert(lines, "[COLOR_Grey]" .. Locale.Lookup("LOC_CQ_DB_LOST", table.concat(lost, Locale.Lookup("LOC_CQ_DB_LIST_SEPARATOR"))) .. "[ENDCOLOR]");
+	return table.concat(lines, "[NEWLINE]");
+end
+
 local function BuildEntryTexts(entry:table)
 	local name, description, iconName;
 
@@ -169,7 +287,10 @@ local function BuildEntryTexts(entry:table)
 				local replacedName = LookupOr(replacedInfo and replacedInfo.Name, item.Replaces);
 				itemDesc = Locale.Lookup("LOC_CQ_REPLACES", replacedName) .. "[NEWLINE]" .. itemDesc;
 				if item.Kind == "DISTRICT" then
-					itemDesc = itemDesc .. "[NEWLINE][COLOR_Civ6Yellow]" .. Locale.Lookup("LOC_CQ_DISTRICT_NOTE", replacedName) .. "[ENDCOLOR]";
+					-- 先写原版能力（也方便查看对手的能力），再写激活后实际获得的效果（加到基础区域上）
+					itemDesc = Locale.Lookup("LOC_CQ_REPLACES", replacedName) .. "[NEWLINE]"
+						.. Locale.Lookup("LOC_CQ_DB_ORIGINAL", LookupOr(info and info.Description, "")) .. "[NEWLINE][NEWLINE]"
+						.. BuildDistrictBonusText(item.Type, item.Replaces);
 				end
 			end
 			if item.Kind == "UNIT" and info ~= nil and info.CanTrain == false then
@@ -245,6 +366,7 @@ local function RefreshDetail()
 
 		local isNative = CQ.HasTraitNatively(playerID, entry.TraitType);
 		local isActive = CQ.IsTraitActivated(playerID, entry.TraitType);
+		local conflict = (not isNative and not isActive) and CQ.GetTraitConflict(playerID, entry.TraitType) or nil;
 
 		inst.ActivateButton:SetHide(true);
 		inst.StateLabel:SetHide(false);
@@ -252,6 +374,9 @@ local function RefreshDetail()
 			inst.StateLabel:SetText(Locale.Lookup("LOC_CQ_STATE_NATIVE"));
 		elseif isActive then
 			inst.StateLabel:SetText(Locale.Lookup("LOC_CQ_STATE_ACTIVE"));
+		elseif conflict ~= nil then
+			local info = (conflict.Kind == "DISTRICT") and GameInfo.Districts[conflict.Type] or GameInfo.Buildings[conflict.Type];
+			inst.StateLabel:SetText(Locale.Lookup("LOC_CQ_STATE_CONFLICT", info ~= nil and info.Name or conflict.Type));
 		elseif isUnlocked then
 			anyActivatable = true;
 			inst.StateLabel:SetHide(true);
@@ -645,7 +770,7 @@ function Initialize()
 		if not CQ.IsLeaderUnlocked(playerID, m_SelectedLeader) then return; end
 		local count = 0;
 		for _, entry in ipairs(CQ.GetLeaderTraitEntries(m_SelectedLeader)) do
-			if not CQ.IsTraitOwned(playerID, entry.TraitType) then
+			if not CQ.IsTraitOwned(playerID, entry.TraitType) and CQ.GetTraitConflict(playerID, entry.TraitType) == nil then
 				OnRequestActivate(m_SelectedLeader, entry.TraitType);
 				count = count + 1;
 			end

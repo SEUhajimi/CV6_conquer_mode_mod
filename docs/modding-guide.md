@@ -146,7 +146,7 @@ SQL 更灵活，可以用 `INSERT ... SELECT` 批量生成。我们的 `CivConqu
 - `Permanent`：条件不再满足时效果也不撤销。
 - `NewOnly`：只对之后新加入集合的对象生效。
 - 效果没有文档。参数名（`Amount`、`YieldType`……）只能从官方已有用法里照抄。先在数据库里 `SELECT * FROM ModifierArguments WHERE ModifierId IN (SELECT ModifierId FROM Modifiers WHERE ModifierType='你想用的类型')`。
-- 副作用要单独考虑。我们就踩过：`VALID_UNIT_BUILD` 挂在拜占庭特性上时，让拜占庭重新能造被取代的骑士，最后用 `CQ_REQSET_NOT_NATIVE_*` 条件集排除了原文明。
+- 副作用要单独考虑。我们就踩过：`VALID_UNIT_BUILD` 挂在拜占庭特性上时，让拜占庭重新能造被取代的骑士。先试了给修改器加“玩家本身没有该特性”的条件集，实测仍然能造骑士；最后改成不挂到原特性上，只在征服者激活时由 Lua 挂上（`CQ_ActivationModifiers` 表）。
 
 ## 文明、领袖与特色项目：一切都挂在 Trait 上
 
