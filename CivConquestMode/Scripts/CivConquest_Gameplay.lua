@@ -240,9 +240,33 @@ end
 -- ===========================================================================
 --	UI 请求：UI.RequestPlayerOperation(..., EXECUTE_SCRIPT, {OnStart="CQ_ActivateTrait", ...})
 -- ===========================================================================
+--	请求来自网络，参数先校验类型，避免脚本报错中断处理
+local function IsValidRequester(playerID:number)
+	local pPlayer = Players[playerID];
+	return pPlayer ~= nil and pPlayer:IsMajor() and pPlayer:IsAlive();
+end
+
 local function OnActivateRequest(playerID:number, params:table)
-	if params == nil or params.LeaderType == nil then return; end
-	ActivateLeader(playerID, params.LeaderType, params.TraitType);
+	if not IsValidRequester(playerID) or params == nil then return; end
+	if type(params.LeaderType) ~= "string" or GameInfo.Leaders[params.LeaderType] == nil then return; end
+	local traitType = params.TraitType;
+	if traitType ~= nil and type(traitType) ~= "string" then return; end
+	ActivateLeader(playerID, params.LeaderType, traitType);
+end
+
+-- ===========================================================================
+--	UI 请求：上报本机数据库指纹（见 CQ.GetFingerprint）
+--	指纹作为操作参数同步到所有电脑，各电脑写入的值相同，不会造成不同步。
+--	比较由各电脑的 UI 完成；序号用来区分本次进入游戏后的上报和存档里留下的旧值。
+-- ===========================================================================
+local function OnReportFingerprint(playerID:number, params:table)
+	local pPlayer = Players[playerID];
+	if pPlayer == nil or params == nil or type(params.Fingerprint) ~= "number" then return; end
+	local seq = (Game:GetProperty(CQ.PROP_FINGERPRINT_SEQ) or 0) + 1;
+	Game:SetProperty(CQ.PROP_FINGERPRINT_SEQ, seq);
+	pPlayer:SetProperty(CQ.PROP_FINGERPRINT_SEQ, seq);
+	pPlayer:SetProperty(CQ.PROP_FINGERPRINT, params.Fingerprint);
+	Log("Player", playerID, "reported fingerprint", CQ.FormatFingerprint(params.Fingerprint));
 end
 
 -- ===========================================================================
@@ -299,12 +323,17 @@ end
 
 -- UI 端（有 IsOriginalCapital）上报的原始首都位置，用于补全旧存档
 local function OnRecordCapitalRequest(playerID:number, params:table)
-	if params == nil or params.OwnerID == nil or params.PlotIndex == nil then return; end
+	if Players[playerID] == nil or params == nil then return; end
+	if type(params.OwnerID) ~= "number" or type(params.PlotIndex) ~= "number" then return; end
+	local pOwner = Players[params.OwnerID];
+	if pOwner == nil or not pOwner:IsMajor() then return; end
 	local pPlot = Map.GetPlotByIndex(params.PlotIndex);
 	if pPlot == nil then return; end
 	local pCity = CityManager.GetCityAt(pPlot:GetX(), pPlot:GetY());
 	SetOriginalCapital(params.OwnerID, pCity);
 end
+
+local PROP_AUTO_PENDING = "CQ_AUTO_";	-- 玩家属性：CQ_AUTO_<LeaderType> = 1  AI 已解锁、待自动激活
 
 -- ===========================================================================
 --	检查某玩家当前持有的原始首都，记录新的解锁
@@ -328,9 +357,29 @@ local function ScanUnlocks(playerID:number)
 					if pPlayer:IsHuman() then
 						SendUnlockNotification(playerID, leaderType, pCity);
 					elseif IsAIAutoActivate() then
-						ActivateLeader(playerID, leaderType, nil);
+						-- 不在这里激活，留到该 AI 的回合开始（见 AutoActivateForAI）
+						pPlayer:SetProperty(PROP_AUTO_PENDING .. leaderType, 1);
 					end
 				end
+			end
+		end
+	end
+end
+
+-- ===========================================================================
+--	AI 自动激活：占城时只记下待激活标记，到该 AI 的回合开始再统一激活。
+--	不在 CityConquered 里激活：占城回调发生在城市易手的处理过程中，
+--	此时给玩家挂大量修改器、用 WorldBuilder 重建区域（被占的城市本身也会被转换）风险大。
+--	标记只在 AI 占城时设置，因此人类玩家掉线由 AI 接管时不会被自动激活。
+-- ===========================================================================
+local function AutoActivateForAI(playerID:number)
+	local pPlayer = Players[playerID];
+	if pPlayer == nil or not pPlayer:IsMajor() then return; end
+	for _, leaderType in ipairs(CQ.GetAllLeaders()) do		-- 数据库顺序，各电脑一致
+		if pPlayer:GetProperty(PROP_AUTO_PENDING .. leaderType) == 1 then
+			pPlayer:SetProperty(PROP_AUTO_PENDING .. leaderType, 0);
+			if not pPlayer:IsHuman() then
+				ActivateLeader(playerID, leaderType, nil);
 			end
 		end
 	end
@@ -355,16 +404,19 @@ local function LogSyncState(playerID:number)
 			if pPlayer:GetProperty(CQ.PROP_TRAIT .. row.TraitType) == 1 then table.insert(traits, row.TraitType); end
 		end
 	end
-	if #unlocks == 0 and #traits == 0 then return; end
+	local fp = pPlayer:GetProperty(CQ.PROP_FINGERPRINT);
+	if #unlocks == 0 and #traits == 0 and fp == nil then return; end
 	table.sort(unlocks);
 	table.sort(traits);
 	Log("Sync turn", Game.GetCurrentGameTurn(), "player", playerID,
-		"unlocks=" .. table.concat(unlocks, ","), "traits=" .. table.concat(traits, ","));
+		"unlocks=" .. table.concat(unlocks, ","), "traits=" .. table.concat(traits, ","),
+		"fp=" .. (fp ~= nil and CQ.FormatFingerprint(fp) or "-"));
 end
 
 local function OnPlayerTurnStarted(playerID:number)
 	RecordOriginalCapitals();
 	ScanUnlocks(playerID);
+	AutoActivateForAI(playerID);
 	ConvertDistrictsForPlayer(playerID);
 	LogSyncState(playerID);
 end
@@ -379,6 +431,7 @@ local function Initialize()
 
 	GameEvents[CQ.SCRIPT_ACTIVATE].Add(OnActivateRequest);
 	GameEvents[CQ.SCRIPT_RECORD_CAPITAL].Add(OnRecordCapitalRequest);
+	GameEvents[CQ.SCRIPT_REPORT_FINGERPRINT].Add(OnReportFingerprint);
 
 	-- 只用 GameEvents 修改游戏状态：它在游戏逻辑中按固定顺序触发，各客户端一致。
 	-- 不要在 Events.*（如 PlayerTurnActivated）里改状态：Events 由各客户端各自派发，时机不同，联机会不同步。

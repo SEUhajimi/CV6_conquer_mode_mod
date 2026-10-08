@@ -15,7 +15,7 @@
 - 右侧显示选中领袖的 **文明特性、领袖能力、特色单位 / 建筑 / 区域 / 改良设施**。
 - **占领**某个主要文明的**原始首都**后，可以逐项「激活」或「全部激活」。占领即永久解锁，之后丢失该城市也不影响。
 - 有已解锁但还没激活的内容时，工具栏按钮上会出现提示标记。
-- 高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后会自动激活全部内容。
+- 高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后，会在它的下一个回合开始时自动激活全部内容。
 
 ### 安装
 
@@ -30,6 +30,8 @@
 仓库里还附带两个和本模式一起联机使用的独立 mod：`Zhanguo_V3`（战国地图）和 `Communist_PeoplesWar`（共产党文明）。需要时把它们和 `CivConquestMode` 一起复制到 `Mods\`，并先删除同名旧文件夹。
 
 联机时所有玩家的 mod 文件必须完全一致，否则从第一回合起就会不同步（OOS）并反复掉线。手动安装的 mod 不会像创意工坊那样自动更新，每次更新后都要重新分发给所有玩家。
+
+联机房间只核对 mod 的 ID，不核对文件内容。本模式进入游戏后会对游戏数据库算一个指纹并互相比对；不一致时会弹窗提示，并在 `Lua.log` 里写 `[CivConquest] Mod mismatch!`。看到提示就说明各电脑加载的内容不同（任何 mod 都可能是原因，不只是本模式），先统一 mod 文件再继续。
 
 ### 开发
 
@@ -85,7 +87,7 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 - The right side shows the selected leader's **civilization ability, leader ability and unique units / buildings / districts / improvements**.
 - Once you **capture** a major civilization's **original capital**, you can activate its items one by one or with **Activate All**. The unlock is permanent, even if you lose the city later.
 - The Launch Bar button shows a marker when something is unlocked but not yet activated.
-- Advanced option **Conquest: AI Auto-Activates** (on by default): when an AI captures an original capital, it activates everything from that civilization automatically.
+- Advanced option **Conquest: AI Auto-Activates** (on by default): when an AI captures an original capital, it activates everything from that civilization automatically at the start of its next turn.
 
 ### Installation
 
@@ -100,6 +102,8 @@ Works with the Standard, Rise and Fall, and Gathering Storm rulesets.
 The repository also carries two standalone mods played together with this mode in multiplayer: `Zhanguo_V3` (Warring States China map) and `Communist_PeoplesWar` (Communist civilization). When needed, copy them to `Mods\` along with `CivConquestMode`, deleting any old folders of the same name first.
 
 In multiplayer every player's mod files must match exactly; otherwise the game goes out of sync (OOS) from the first turn and keeps disconnecting. Manually installed mods don't update automatically like Workshop mods, so redistribute them to every player after each update.
+
+The multiplayer lobby only checks mod IDs, not file contents. Once in game, this mode computes a fingerprint of the game database on each computer and compares them; on a mismatch it shows a popup and writes `[CivConquest] Mod mismatch!` to `Lua.log`. That means the computers loaded different content (any mod can be the cause, not just this one); make the mod files identical before playing on.
 
 ### Development
 

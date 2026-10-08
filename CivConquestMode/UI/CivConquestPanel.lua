@@ -5,6 +5,7 @@
 --	* 占领该领袖原始首都后可逐项或一键激活
 -- =============================================================================
 include("InstanceManager");
+include("PopupDialog");
 include("CivConquest_Common");
 include("CivConquestDebug");
 
@@ -386,7 +387,7 @@ end
 --	把原始首都位置上报给 Gameplay 端（Gameplay 的城市对象没有 IsOriginalCapital，
 --	对于开启记录前就已易手的首都需要由 UI 补全）
 -- ===========================================================================
-local m_ReportedCapitals :table = {};
+local m_ReportedCapitals :table = {};	-- OwnerID -> 上报时的回合（请求可能被丢弃，下一回合仍未记录就重发）
 
 local function ReportOriginalCapitals()
 	local playerID = GetLocalPlayerID();
@@ -399,8 +400,9 @@ local function ReportOriginalCapitals()
 					local originalOwner = pCity:GetOriginalOwner();
 					local recorded = nil;
 					pcall(function() recorded = Game:GetProperty(CQ.PROP_ORIGINAL_CAPITAL .. originalOwner); end);
-					if recorded == nil and not m_ReportedCapitals[originalOwner] then
-						m_ReportedCapitals[originalOwner] = true;
+					local turn = Game.GetCurrentGameTurn();
+					if recorded == nil and m_ReportedCapitals[originalOwner] ~= turn then
+						m_ReportedCapitals[originalOwner] = turn;
 						local kParameters = {};
 						kParameters.OnStart		= CQ.SCRIPT_RECORD_CAPITAL;
 						kParameters.OwnerID		= originalOwner;
@@ -411,6 +413,66 @@ local function ReportOriginalCapitals()
 			end
 		end
 	end
+end
+
+-- ===========================================================================
+--	联机一致性检查：上报本机数据库指纹，并和其他人类玩家上报的比较（见 CQ.GetFingerprint）。
+--	只读状态 + 经 EXECUTE_SCRIPT 上报，不在 UI 侧改游戏状态。
+--	存档里会留下上一次进入游戏时的指纹，用全局上报序号区分：
+--	只比较序号大于本次进入游戏时的 m_SessionFpSeq 的（本次上报的）值，避免把旧值当成不一致。
+-- ===========================================================================
+local m_SessionFpSeq	:number = 0;
+local m_FpReportTurn	:number = -1;
+local m_FpWarned		:table = {};	-- PlayerID -> 已提示过的指纹
+
+local function IsFreshFingerprint(pPlayer:table)
+	local seq = pPlayer:GetProperty(CQ.PROP_FINGERPRINT_SEQ);
+	return seq ~= nil and seq > m_SessionFpSeq;
+end
+
+local function ReportFingerprint(isLoad:boolean)
+	local playerID = GetLocalPlayerID();
+	if playerID == nil then return; end
+	local pPlayer = Players[playerID];
+	local fp = CQ.GetFingerprint();
+	if IsFreshFingerprint(pPlayer) and pPlayer:GetProperty(CQ.PROP_FINGERPRINT) == fp then return; end
+	-- 读档时的请求可能在回合开始前被丢弃，之后每回合开始最多重发一次
+	if not isLoad then
+		local turn = Game.GetCurrentGameTurn();
+		if m_FpReportTurn == turn then return; end
+		m_FpReportTurn = turn;
+	end
+	print("[CivConquest] Local fingerprint " .. CQ.FormatFingerprint(fp));
+	local kParameters = {};
+	kParameters.OnStart		= CQ.SCRIPT_REPORT_FINGERPRINT;
+	kParameters.Fingerprint	= fp;
+	UI.RequestPlayerOperation(playerID, PlayerOperations.EXECUTE_SCRIPT, kParameters);
+end
+
+local function CheckFingerprints()
+	local localID = GetLocalPlayerID();
+	if localID == nil then return; end
+	local fp = CQ.GetFingerprint();
+	local lines = {};
+	for _, info in ipairs(CQ.GetMajorPlayersInGame()) do
+		local pPlayer = Players[info.PlayerID];
+		if info.PlayerID ~= localID and pPlayer:IsHuman() and IsFreshFingerprint(pPlayer) then
+			local remote = pPlayer:GetProperty(CQ.PROP_FINGERPRINT);
+			if remote ~= fp and m_FpWarned[info.PlayerID] ~= remote then
+				m_FpWarned[info.PlayerID] = remote;
+				local name = PlayerConfigurations[info.PlayerID]:GetPlayerName() or tostring(info.PlayerID);
+				table.insert(lines, name .. ": " .. CQ.FormatFingerprint(remote));
+			end
+		end
+	end
+	if #lines == 0 then return; end
+	print("[CivConquest] Mod mismatch! local " .. CQ.FormatFingerprint(fp) .. " vs " .. table.concat(lines, ", "));
+	local text = Locale.Lookup("LOC_CQ_MOD_MISMATCH_BODY", CQ.FormatFingerprint(fp), table.concat(lines, "[NEWLINE]"));
+	local popup = PopupDialogInGame:new("CivConquestModMismatch");
+	popup:AddTitle(Locale.Lookup("LOC_CQ_MOD_MISMATCH_TITLE"));
+	popup:AddText(text);
+	popup:AddDefaultButton(Locale.Lookup("LOC_OK"), nil);
+	popup:Open();
 end
 
 -- ===========================================================================
@@ -520,10 +582,13 @@ end
 -- ===========================================================================
 local function OnLoadGameViewStateDone()
 	AttachLaunchBarButton();
+	ReportFingerprint(true);
 	ReportOriginalCapitals();
 end
 
 local function OnTurnBegin()
+	ReportFingerprint(false);
+	CheckFingerprints();
 	ReportOriginalCapitals();
 	UpdateLaunchBarAlert();
 	RefreshAll();
@@ -591,10 +656,14 @@ function Initialize()
 
 	Events.LoadGameViewStateDone.Add(OnLoadGameViewStateDone);
 	Events.LocalPlayerTurnBegin.Add(OnTurnBegin);
+	Events.LocalPlayerTurnEnd.Add(CheckFingerprints);	-- 结束回合时再查一次：其他人的上报可能在回合开始之后才到
 	Events.CityAddedToMap.Add(OnCityChanged);
 	Events.LocalPlayerChanged.Add(OnLocalPlayerChanged);
 
 	LuaEvents.CivConquest_Toggle.Add(Toggle);
+
+	-- 记下进入游戏时的全局上报序号，此后到达的才是本次的上报
+	pcall(function() m_SessionFpSeq = Game:GetProperty(CQ.PROP_FINGERPRINT_SEQ) or 0; end);
 
 	CQ.InitDebugLog();
 end

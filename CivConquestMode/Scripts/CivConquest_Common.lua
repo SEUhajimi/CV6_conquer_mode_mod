@@ -8,6 +8,13 @@ CQ.PROP_UNLOCK		= "CQ_UNLOCK_";		-- 玩家属性：CQ_UNLOCK_<LeaderType> = 1  �
 CQ.PROP_TRAIT		= "CQ_TRAIT_";		-- 玩家属性：CQ_TRAIT_<TraitType>  = 1  已激活该特性
 CQ.SCRIPT_ACTIVATE	= "CQ_ActivateTrait";	-- EXECUTE_SCRIPT 的 GameEvent 名
 CQ.SCRIPT_RECORD_CAPITAL = "CQ_RecordCapital";	-- UI 上报原始首都位置
+CQ.SCRIPT_REPORT_FINGERPRINT = "CQ_ReportFingerprint";	-- UI 上报本机数据库指纹（联机一致性检查）
+
+CQ.PROP_FINGERPRINT		= "CQ_FP";		-- 玩家属性：该玩家电脑上报的指纹
+CQ.PROP_FINGERPRINT_SEQ	= "CQ_FP_SEQ";	-- 玩家属性：上报时的序号；Game 属性：全局上报计数
+
+-- 本模式脚本版本，计入指纹。改了 Lua 后加 1：只改 Lua 时数据库不变，靠它发现两边脚本不一致
+CQ.VERSION			= 1;
 
 CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
 
@@ -129,7 +136,10 @@ end
 -- ===========================================================================
 --	所有“特色区域”条目：{ TraitType, Type, Replaces }
 -- ===========================================================================
+local m_UniqueDistricts :table = nil;
+
 function CQ.GetAllUniqueDistricts()
+	if m_UniqueDistricts ~= nil then return m_UniqueDistricts; end
 	BuildCache();
 	local list = {};
 	for traitType, items in pairs(m_TraitItems) do
@@ -144,6 +154,7 @@ function CQ.GetAllUniqueDistricts()
 		if a.TraitType ~= b.TraitType then return a.TraitType < b.TraitType; end
 		return a.Type < b.Type;
 	end);
+	m_UniqueDistricts = list;	-- 只依赖数据库，算一次即可（每个玩家回合开始都会用到）
 	return list;
 end
 
@@ -255,4 +266,83 @@ function CQ.IsLeaderUnlocked(playerID:number, leaderType:string)
 	if CQ.GetPlayerLeaderType(playerID) == leaderType then return false; end
 	if pPlayer:GetProperty(CQ.PROP_UNLOCK .. leaderType) == 1 then return true; end
 	return CQ.FindHeldOriginalCapital(playerID, leaderType) ~= nil;
+end
+
+-- ===========================================================================
+--	联机一致性检查：数据库指纹
+--	引擎在联机房间里只核对 mod 的 ID 和版本号，不核对文件内容。两台电脑的 mod 文件不同时
+--	（旧版本、重复安装、创意工坊版本不同），数据库就不同，修改器和各表的 Index 会对不上，
+--	游戏会反复不同步。这里对与玩法相关的表算一个指纹，两边不同就说明加载的内容不一样。
+--	GameInfo 按数据库行顺序遍历，行顺序（也就是 Index）不同也会体现在指纹里。
+--	只读数据库，UI 和 Gameplay 环境都可用。
+-- ===========================================================================
+local FINGERPRINT_TABLES :table = {
+	{ "Modifiers", "ModifierId", "ModifierType", "RunOnce", "Permanent", "OwnerRequirementSetId", "SubjectRequirementSetId" },
+	{ "ModifierArguments", "ModifierId", "Name", "Value" },
+	{ "DynamicModifiers", "ModifierType", "CollectionType", "EffectType" },
+	{ "Requirements", "RequirementId", "RequirementType", "Inverse" },
+	{ "RequirementArguments", "RequirementId", "Name", "Value" },
+	{ "RequirementSets", "RequirementSetId", "RequirementSetType" },
+	{ "RequirementSetRequirements", "RequirementSetId", "RequirementId" },
+	{ "TraitModifiers", "TraitType", "ModifierId" },
+	{ "Civilizations", "CivilizationType" },
+	{ "Leaders", "LeaderType" },
+	{ "Units", "UnitType", "Cost", "Combat", "RangedCombat", "Bombard", "Range", "BaseMoves", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Buildings", "BuildingType", "Cost", "PrereqDistrict", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Building_YieldChanges", "BuildingType", "YieldType", "YieldChange" },
+	{ "Districts", "DistrictType", "Cost", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Improvements", "ImprovementType", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Improvement_YieldChanges", "ImprovementType", "YieldType", "YieldChange" },
+	{ "Resources", "ResourceType", "ResourceClassType", "Frequency" },
+	{ "Resource_YieldChanges", "ResourceType", "YieldType", "YieldChange" },
+	{ "Features", "FeatureType", "Removable", "Impassable" },
+	{ "Feature_YieldChanges", "FeatureType", "YieldType", "YieldChange" },
+	{ "Terrains", "TerrainType" },
+	{ "Technologies", "TechnologyType", "Cost" },
+	{ "Civics", "CivicType", "Cost" },
+	{ "Policies", "PolicyType", "GovernmentSlotType" },
+	{ "Beliefs", "BeliefType", "BeliefClassType" },
+	{ "Projects", "ProjectType", "Cost" },
+	{ "GlobalParameters", "Name", "Value" },
+};
+
+-- 取模用小于 2^31 的质数：h * 31 + 255 不超过 2^53，double 运算保持精确，各电脑结果一致
+local HASH_MOD :number = 2147483629;
+
+local function HashString(h:number, s:string)
+	for i = 1, #s do
+		h = (h * 31 + string.byte(s, i)) % HASH_MOD;
+	end
+	return (h * 31 + 1) % HASH_MOD;	-- 分隔符：避免 "ab"+"c" 与 "a"+"bc" 相同
+end
+
+local m_Fingerprint :number = nil;
+
+--	返回数字指纹（属性里存数字比存字符串稳妥）；结果缓存，只在第一次调用时遍历数据库
+function CQ.GetFingerprint()
+	if m_Fingerprint ~= nil then return m_Fingerprint; end
+	local h = HashString(0, tostring(CQ.VERSION));
+	for _, spec in ipairs(FINGERPRINT_TABLES) do
+		h = HashString(h, spec[1]);
+		local ok, tbl = pcall(function() return GameInfo[spec[1]]; end);
+		if ok and tbl ~= nil then
+			local count = 0;
+			for row in tbl() do
+				count = count + 1;
+				for i = 2, #spec do
+					h = HashString(h, tostring(row[spec[i]]));
+				end
+			end
+			h = HashString(h, tostring(count));
+		end
+	end
+	-- 指纹要经 EXECUTE_SCRIPT 参数传输，不确定引擎按整数还是单精度浮点序列化，
+	-- 压到 2^24 以内，两种情况下都能精确传递
+	m_Fingerprint = h % 16777213;
+	return m_Fingerprint;
+end
+
+function CQ.FormatFingerprint(fp)
+	if type(fp) ~= "number" then return tostring(fp); end
+	return string.format("%06X", fp);
 end
