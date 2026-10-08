@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Mod id="60c2b04d-ec02-47fc-a023-b6563719c02f" version="7">
+<Mod id="60c2b04d-ec02-47fc-a023-b6563719c02f" version="8">
   <Properties>
-    <Name>共产党 — 神秘的红色领袖：人民战争 [v0.7]</Name>
+    <Name>共产党 — 神秘的红色领袖：长征游龙 [v0.8]</Name>
     <Description>Gathering Storm. +1 Production per citizen; Qin-style builder charges and Ancient/Classical wonder rushing; native offensive spy bonus +2; pillage bonus and population loss; direct loyalty flips; Red Army replaces Musketman. Runtime validation pending. Units fully heal after successful pillage.</Description>
     <Authors>Haohan Li / Codex</Authors>
     <CompatibleVersions>2.0</CompatibleVersions>

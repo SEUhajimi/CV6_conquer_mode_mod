@@ -21,9 +21,13 @@ assert arg('COMMUNIST_PRODUCTION_PER_POPULATION','Amount')=='1'
 assert arg('COMMUNIST_PRODUCTION_PER_POPULATION','YieldType')=='YIELD_PRODUCTION'
 assert db.execute("SELECT SubjectRequirementSetId FROM Modifiers WHERE ModifierId='COMMUNIST_PRODUCTION_PER_POPULATION'").fetchone()[0] is None
 assert arg('COMMUNIST_FOOD_PER_POPULATION','YieldType')=='YIELD_FOOD' and float(arg('COMMUNIST_FOOD_PER_POPULATION','Amount'))==0.5
-for m,a in [('TRAIT_ADJUST_BUILDER_CHARGES','1'),('TRAIT_BUILDER_WONDER_PERCENT','15'),('COMMUNIST_OFFENSIVE_SPY_BONUS','2'),('COMMUNIST_DOUBLE_PLUNDER','100')]:
+for t,m,a in [('TRAIT_COMMUNIST_HARDWORK','TRAIT_ADJUST_BUILDER_CHARGES','1'),('TRAIT_COMMUNIST_HARDWORK','TRAIT_BUILDER_WONDER_PERCENT','15'),('TRAIT_COMMUNIST_SPARK','COMMUNIST_OFFENSIVE_SPY_BONUS','2'),('TRAIT_COMMUNIST_SPARK','COMMUNIST_DOUBLE_PLUNDER','100')]:
  assert arg(m,'Amount')==a
- assert db.execute("SELECT count(*) FROM TraitModifiers WHERE TraitType='TRAIT_COMMUNIST_SPARK' AND ModifierId=?",(m,)).fetchone()[0]==1
+ assert db.execute("SELECT count(*) FROM TraitModifiers WHERE TraitType=? AND ModifierId=?",(t,m)).fetchone()[0]==1
+for m in ['COMMUNIST_PRODUCTION_PER_POPULATION','COMMUNIST_FOOD_PER_POPULATION']:
+ assert db.execute("SELECT TraitType FROM TraitModifiers WHERE ModifierId=?",(m,)).fetchone()[0]=='TRAIT_COMMUNIST_HARDWORK'
+assert arg('MAO_STRENGTH','Amount')=='5' and arg('MAO_XP','Amount')=='100' and arg('MAO_MOVE','Amount')=='1'
+assert db.execute("SELECT group_concat(Tag) FROM TypeTags WHERE Type='ABILITY_MAO_PEOPLES_WAR'").fetchone()[0]=='CLASS_MELEE'
 assert db.execute("SELECT CivilizationType FROM CivilizationLeaders WHERE LeaderType='LEADER_MAO_ZEDONG'").fetchone()[0]=='CIVILIZATION_COMMUNIST'
 original=db.execute("SELECT BaseMoves,Combat,Cost,PrereqTech FROM Units WHERE UnitType='UNIT_MUSKETMAN'").fetchone()
 red=db.execute("SELECT BaseMoves,Combat,Cost,PrereqTech FROM Units WHERE UnitType='UNIT_MAO_RED_ARMY'").fetchone()
@@ -32,10 +36,10 @@ assert db.execute("SELECT RangedCombat,Range,PromotionClass FROM Units WHERE Uni
 assert db.execute("SELECT ReplacesUnitType FROM UnitReplaces WHERE CivUniqueUnitType='UNIT_MAO_RED_ARMY'").fetchone()[0]=='UNIT_MUSKETMAN'
 d=sqlite3.connect(':memory:');d.executescript(Path('reference/Base/Assets/Configuration/Data/Schema/AdditionalTables.sql').read_text());d.executescript((p/'Data/Config.sql').read_text());assert d.execute('SELECT CivilizationType FROM Players').fetchone()[0]=='CIVILIZATION_COMMUNIST'
 for f in list(p.rglob('*.xml'))+list(p.glob('ArtDefs/*.artdef')):E.parse(f)
-r=E.parse(p/'Communist_PeoplesWar.modinfo').getroot();assert r.get('version')=='7'
+r=E.parse(p/'Communist_PeoplesWar.modinfo').getroot();assert r.get('version')=='8'
 for f in r.findall('./Files/File'):assert (p/f.text).is_file()
-assert db.execute("SELECT count(*) FROM CivilizationTraits WHERE CivilizationType='CIVILIZATION_COMMUNIST'").fetchone()[0]==3
-print('PASS: v0.7 SQL, Qin modifiers +1 charge / 15% wonder, unrestricted +1 production per population, existing civ and unit setup, XML and manifest.')
+assert db.execute("SELECT count(*) FROM CivilizationTraits WHERE CivilizationType='CIVILIZATION_COMMUNIST'").fetchone()[0]==4
+print('PASS: v0.8 SQL, Qin modifiers +1 charge / 15% wonder, unrestricted +1 production per population, existing civ and unit setup, XML and manifest.')
 
 assert db.execute("SELECT ReplacesDistrictType FROM DistrictReplaces WHERE CivUniqueDistrictType='DISTRICT_COMMUNIST_MARX_INSTITUTE'").fetchone()[0]=='DISTRICT_CAMPUS'
 for gp in ['PROPHET','ENGINEER','SCIENTIST']:

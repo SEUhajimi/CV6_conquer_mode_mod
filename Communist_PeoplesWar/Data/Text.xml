@@ -8,16 +8,16 @@
       <Text>The Mysterious Red Leader</Text>
     </Row>
     <Row Tag="LOC_TRAIT_MAO_NAME" Language="zh_Hans_CN">
-      <Text>人民战争</Text>
+      <Text>长征游龙</Text>
     </Row>
     <Row Tag="LOC_TRAIT_MAO_NAME" Language="en_US">
-      <Text>People’s War</Text>
+      <Text>Long March</Text>
     </Row>
     <Row Tag="LOC_TRAIT_MAO_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>近战和抗骑兵单位+1移动力；己方领土内+5战斗力；对受损单位+5战斗力；战斗经验+50%。</Text>
+      <Text>近战单位+1移动力，+5战斗力，战斗经验+100%。</Text>
     </Row>
     <Row Tag="LOC_TRAIT_MAO_DESCRIPTION" Language="en_US">
-      <Text>Melee and anti-cavalry units gain +1 Movement, +5 Combat Strength in friendly territory, +5 against wounded units and +50% combat experience.</Text>
+      <Text>Melee units gain +1 Movement, +5 Combat Strength and +100% combat experience.</Text>
     </Row>
     <Row Tag="LOC_UNIT_MAO_RED_ARMY_NAME" Language="zh_Hans_CN">
       <Text>工农红军</Text>
@@ -26,22 +26,40 @@
       <Text>Workers’ and Peasants’ Red Army</Text>
     </Row>
     <Row Tag="LOC_UNIT_MAO_RED_ARMY_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>共产党的特色文艺复兴近战单位，替代火枪手。与长生军一样兼具远程攻击：远程攻击力比近战战斗力低10，射程2，仍属于近战单位。基础移动力比火枪手+1，可与人民战争的移动力加成叠加。击败敌方单位后恢复20生命值。在任何领土均可按回合恢复生命值，即使已移动或执行行动。</Text>
+      <Text>共产党的特色文艺复兴近战单位，替代火枪手。与长生军一样兼具远程攻击：远程攻击力比近战战斗力低10，射程2，仍属于近战单位。基础移动力比火枪手+1，可与长征游龙的移动力加成叠加。击败敌方单位后恢复20生命值。在任何领土均可按回合恢复生命值，即使已移动或执行行动。</Text>
     </Row>
     <Row Tag="LOC_UNIT_MAO_RED_ARMY_DESCRIPTION" Language="en_US">
-      <Text>Unique Renaissance melee unit of the Communist Party, replacing the Musketman. Like the Immortal it also has a ranged attack (Ranged Strength 10 below its Combat Strength, Range 2) while remaining a melee unit. +1 base Movement, stacking with People’s War. Heals 20 HP after defeating an enemy unit. Can heal each turn in any territory, even after moving or acting.</Text>
+      <Text>Unique Renaissance melee unit of the Communist Party, replacing the Musketman. Like the Immortal it also has a ranged attack (Ranged Strength 10 below its Combat Strength, Range 2) while remaining a melee unit. +1 base Movement, stacking with Long March. Heals 20 HP after defeating an enemy unit. Can heal each turn in any territory, even after moving or acting.</Text>
     </Row>
-    <Row Tag="LOC_MAO_HOME_PREVIEW" Language="zh_Hans_CN">
-      <Text>人民战争：己方领土</Text>
+    <Row Tag="LOC_TRAIT_COMMUNIST_HARDWORK_NAME" Language="zh_Hans_CN">
+      <Text>吃苦耐劳</Text>
     </Row>
-    <Row Tag="LOC_MAO_HOME_PREVIEW" Language="en_US">
-      <Text>People’s War: friendly territory</Text>
+    <Row Tag="LOC_TRAIT_COMMUNIST_HARDWORK_NAME" Language="en_US">
+      <Text>Hard Work and Endurance</Text>
     </Row>
-    <Row Tag="LOC_MAO_WOUNDED_PREVIEW" Language="zh_Hans_CN">
-      <Text>人民战争：受损敌军</Text>
+    <Row Tag="LOC_TRAIT_COMMUNIST_HARDWORK_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每座城市每有1人口，额外获得1生产力，且每人口消耗的粮食减少0.5（以每人口+0.5粮食的形式返还）。建造者+1使用次数，并可消耗使用次数完成远古和古典时代奇观原始建造成本的15%。</Text>
     </Row>
-    <Row Tag="LOC_MAO_WOUNDED_PREVIEW" Language="en_US">
-      <Text>People’s War: wounded enemy</Text>
+    <Row Tag="LOC_TRAIT_COMMUNIST_HARDWORK_DESCRIPTION" Language="en_US">
+      <Text>Cities gain +1 Production per citizen, and each citizen eats 0.5 less Food (refunded as +0.5 Food per citizen). Builders gain +1 build charge and can spend charges to complete 15% of the original Production cost of Ancient and Classical wonders.</Text>
+    </Row>
+    <Row Tag="LOC_COMMUNIST_SETUP_ABILITY_NAME" Language="zh_Hans_CN">
+      <Text>吃苦耐劳 / 共产主义</Text>
+    </Row>
+    <Row Tag="LOC_COMMUNIST_SETUP_ABILITY_NAME" Language="en_US">
+      <Text>Hard Work and Endurance / Communism</Text>
+    </Row>
+    <Row Tag="LOC_COMMUNIST_SETUP_ABILITY_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>吃苦耐劳：每座城市每有1人口，额外获得1生产力，且每人口消耗的粮食减少0.5（以每人口+0.5粮食的形式返还）。建造者+1使用次数，并可消耗使用次数完成远古和古典时代奇观原始建造成本的15%。[NEWLINE][NEWLINE]共产主义：所有单位劫掠收益+100%。成功劫掠敌方城市所属的改良设施或区域时，使该城市人口减少1，最低降至1；执行单位恢复全部生命值。因忠诚度下降而脱离其他文明的城市，在来自本文明的忠诚压力最高时，跳过自由城市阶段直接加入本文明。间谍执行进攻任务时视为高2个等级。</Text>
+    </Row>
+    <Row Tag="LOC_COMMUNIST_SETUP_ABILITY_DESCRIPTION" Language="en_US">
+      <Text>Hard Work and Endurance: Cities gain +1 Production per citizen, and each citizen eats 0.5 less Food (refunded as +0.5 Food per citizen). Builders gain +1 build charge and can spend charges to complete 15% of the original Production cost of Ancient and Classical wonders.[NEWLINE][NEWLINE]Communism: All units gain +100% pillage yields. Successfully pillaging an enemy city’s improvement or district reduces its population by 1, to a minimum of 1, and restores all HP of the pillaging unit. Cities rebelling due to loyalty join this civilization directly when its loyalty pressure is highest. Spies operate at 2 levels higher on offensive missions.</Text>
+    </Row>
+    <Row Tag="LOC_MAO_STRENGTH_PREVIEW" Language="zh_Hans_CN">
+      <Text>长征游龙</Text>
+    </Row>
+    <Row Tag="LOC_MAO_STRENGTH_PREVIEW" Language="en_US">
+      <Text>Long March</Text>
     </Row>
     <Row Tag="LOC_CIVILIZATION_COMMUNIST_NAME" Language="zh_Hans_CN">
       <Text>共产党</Text>
@@ -62,16 +80,16 @@
       <Text>Communist</Text>
     </Row>
     <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_NAME" Language="zh_Hans_CN">
-      <Text>星星之火</Text>
+      <Text>共产主义</Text>
     </Row>
     <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_NAME" Language="en_US">
-      <Text>A Single Spark</Text>
+      <Text>Communism</Text>
     </Row>
     <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>每座城市每有1人口，额外获得1生产力，且每人口消耗的粮食减少0.5（以每人口+0.5粮食的形式返还）。建造者+1使用次数，并可消耗使用次数完成远古和古典时代奇观原始建造成本的15%。[NEWLINE]所有单位劫掠收益+100%。成功劫掠敌方城市所属的改良设施或区域时，使该城市人口减少1，最低降至1。间谍执行进攻任务时视为高2个等级。因忠诚度下降而脱离其他文明的城市，在来自本文明的忠诚压力最高时，跳过自由城市阶段直接加入本文明。[NEWLINE]成功劫掠改良设施或区域后，执行单位恢复全部生命值。</Text>
+      <Text>所有单位劫掠收益+100%。成功劫掠敌方城市所属的改良设施或区域时，使该城市人口减少1，最低降至1；执行单位恢复全部生命值。因忠诚度下降而脱离其他文明的城市，在来自本文明的忠诚压力最高时，跳过自由城市阶段直接加入本文明。间谍执行进攻任务时视为高2个等级。</Text>
     </Row>
     <Row Tag="LOC_TRAIT_COMMUNIST_SPARK_DESCRIPTION" Language="en_US">
-      <Text>Cities gain +1 Production per citizen, and each citizen eats 0.5 less Food (refunded as +0.5 Food per citizen). Builders gain +1 build charge and can spend charges to complete 15% of the original Production cost of Ancient and Classical wonders.[NEWLINE]All units gain +100% pillage yields. Successfully pillaging an enemy city’s improvement or district reduces its population by 1, to a minimum of 1. Spies operate at 2 levels higher on offensive missions. Cities rebelling due to loyalty join this civilization directly when its loyalty pressure is highest.[NEWLINE]Units restore all HP after successfully pillaging an improvement or district.</Text>
+      <Text>All units gain +100% pillage yields. Successfully pillaging an enemy city’s improvement or district reduces its population by 1, to a minimum of 1, and restores all HP of the pillaging unit. Cities rebelling due to loyalty join this civilization directly when its loyalty pressure is highest. Spies operate at 2 levels higher on offensive missions.</Text>
     </Row>
     <Row Tag="LOC_CITY_NAME_COMMUNIST_RUIJIN" Language="zh_Hans_CN">
       <Text>瑞金</Text>
