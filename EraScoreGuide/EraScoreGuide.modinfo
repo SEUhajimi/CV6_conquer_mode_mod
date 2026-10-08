@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="39a9c8c7-f733-4807-9780-c6809817f15b" version="1">
+	<Properties>
+		<Name>LOC_ESG_MOD_TITLE</Name>
+		<Teaser>LOC_ESG_MOD_TEASER</Teaser>
+		<Description>LOC_ESG_MOD_DESCRIPTION</Description>
+		<Authors>nyumshhl</Authors>
+		<CompatibleVersions>2.0</CompatibleVersions>
+		<!-- 纯界面 MOD，不改游戏数据，可以随时加入或移除 -->
+		<AffectsSavedGames>0</AffectsSavedGames>
+	</Properties>
+	<ActionCriteria>
+		<!-- 时代分只在迭起兴衰 / 风云变幻规则下存在 -->
+		<Criteria id="ESG_Eras">
+			<RuleSetInUse>RULESET_EXPANSION_1,RULESET_EXPANSION_2</RuleSetInUse>
+		</Criteria>
+	</ActionCriteria>
+	<LocalizedText>
+		<File>Text/EraScoreGuide_Text.xml</File>
+	</LocalizedText>
+	<FrontEndActions>
+		<UpdateText id="ESG_ConfigText">
+			<File>Text/EraScoreGuide_Text.xml</File>
+		</UpdateText>
+	</FrontEndActions>
+	<InGameActions>
+		<UpdateText id="ESG_Text" criteria="ESG_Eras">
+			<File>Text/EraScoreGuide_Text.xml</File>
+		</UpdateText>
+		<ImportFiles id="ESG_Imports" criteria="ESG_Eras">
+			<File>UI/EraScoreGuide.lua</File>
+			<File>UI/EraScoreGuide.xml</File>
+		</ImportFiles>
+		<!-- 不替换游戏的时代面板：运行时把速查内容挂到面板里（/InGame/PartialScreens/EraProgressPanel） -->
+		<AddUserInterfaces id="ESG_UI" criteria="ESG_Eras">
+			<Properties>
+				<Context>InGame</Context>
+			</Properties>
+			<File>UI/EraScoreGuide.xml</File>
+		</AddUserInterfaces>
+	</InGameActions>
+	<Files>
+		<File>Text/EraScoreGuide_Text.xml</File>
+		<File>UI/EraScoreGuide.lua</File>
+		<File>UI/EraScoreGuide.xml</File>
+	</Files>
+</Mod>

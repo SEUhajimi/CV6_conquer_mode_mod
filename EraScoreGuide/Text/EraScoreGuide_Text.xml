@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+	<LocalizedText>
+		<!-- ================================================================== -->
+		<!--	English																-->
+		<!-- ================================================================== -->
+		<Replace Tag="LOC_ESG_MOD_TITLE" Language="en_US">
+			<Text>Era Score Guide</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_MOD_TEASER" Language="en_US">
+			<Text>See how to earn Era Score right in the Era panel.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_MOD_DESCRIPTION" Language="en_US">
+			<Text>Adds a "How to earn Era Score" section to the Era Progress panel (bottom right). Lists every historic moment that gives Era Score, how much it gives, which ones you can still earn this era, which ones you already earned, and which world firsts were already taken by others. Also lists this era's dedications. UI only: safe to add to or remove from existing saves.</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_HEADER" Language="en_US">
+			<Text>How to earn Era Score</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_GOLDEN" Language="en_US">
+			<Text>You have reached the Golden Age threshold. Keep going for a Heroic Age if you are in a Dark Age.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_NORMAL" Language="en_US">
+			<Text>[COLOR_Civ6Yellow]{1_Num}[ENDCOLOR] more Era Score for a Golden Age.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_DARK" Language="en_US">
+			<Text>[COLOR_Red]{1_Num}[ENDCOLOR] more Era Score to avoid a Dark Age, [COLOR_Civ6Yellow]{2_Num}[ENDCOLOR] more for a Golden Age.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_HINT" Language="en_US">
+			<Text>Click a category to expand it. Yellow scores can still be earned this era.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_FILTER_AVAILABLE" Language="en_US">
+			<Text>Showing: still earnable (click to show all)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_FILTER_ALL" Language="en_US">
+			<Text>Showing: all (click to show earnable only)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_COUNT" Language="en_US">
+			<Text>{1_Num} / {2_Num} earnable</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_GROUP_EXPLORE" Language="en_US">
+			<Text>Exploration and Settling</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_RELIGION" Language="en_US">
+			<Text>Religion</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_MILITARY" Language="en_US">
+			<Text>Military</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_BUILD" Language="en_US">
+			<Text>Cities and Construction</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_SCIENCE" Language="en_US">
+			<Text>Science, Culture and Great People</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_DIPLO" Language="en_US">
+			<Text>Diplomacy, Economy and Espionage</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_OTHER" Language="en_US">
+			<Text>Other</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_DEDICATION" Language="en_US">
+			<Text>Dedications of this era</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_DEDICATION_NOTE" Language="en_US">
+			<Text>[COLOR_Grey]Chosen when a new era starts. In a Normal or Dark Age most of them give extra Era Score for the actions below.[ENDCOLOR]</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_TAG_WORLD_FIRST" Language="en_US">
+			<Text>[World first]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EARNED" Language="en_US">
+			<Text>(earned x{1_Num})</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EARNED_THIS_ERA" Language="en_US">
+			<Text>(earned this era)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_TAKEN" Language="en_US">
+			<Text>(taken by another civ)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_FROM_ERA" Language="en_US">
+			<Text>(from the {1_Era})</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_UNTIL_ERA" Language="en_US">
+			<Text>(until the end of the {1_Era})</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EXPIRED" Language="en_US">
+			<Text>(expired: only until the end of the {1_Era})</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_CHOSEN" Language="en_US">
+			<Text>(chosen)</Text>
+		</Replace>
+
+		<!-- ================================================================== -->
+		<!--	简体中文															-->
+		<!-- ================================================================== -->
+		<Replace Tag="LOC_ESG_MOD_TITLE" Language="zh_Hans_CN">
+			<Text>时代分速查</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_MOD_TEASER" Language="zh_Hans_CN">
+			<Text>在时代面板里直接查看怎么获得时代分。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_MOD_DESCRIPTION" Language="zh_Hans_CN">
+			<Text>在右下角的时代进度面板里加入“如何获得时代分”：列出所有能给时代分的历史时刻和分值，标出本时代还能拿的、你已经拿过的、已被其他文明抢先的世界首次，并列出本时代可选的致辞。纯界面 MOD，可以随时加入或移出已有存档。</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_HEADER" Language="zh_Hans_CN">
+			<Text>如何获得时代分</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_GOLDEN" Language="zh_Hans_CN">
+			<Text>已达到黄金时代的分数线。如果你正处于黑暗时代，下个时代将是英雄时代。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_NORMAL" Language="zh_Hans_CN">
+			<Text>再获得 [COLOR_Civ6Yellow]{1_Num}[ENDCOLOR] 时代分即可进入黄金时代。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_DARK" Language="zh_Hans_CN">
+			<Text>再获得 [COLOR_Red]{1_Num}[ENDCOLOR] 时代分可避免黑暗时代，再获得 [COLOR_Civ6Yellow]{2_Num}[ENDCOLOR] 分可进入黄金时代。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_SUMMARY_HINT" Language="zh_Hans_CN">
+			<Text>点击分类展开。黄色分值表示本时代还能获得。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_FILTER_AVAILABLE" Language="zh_Hans_CN">
+			<Text>当前：只看还能拿的（点击显示全部）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_FILTER_ALL" Language="zh_Hans_CN">
+			<Text>当前：显示全部（点击只看还能拿的）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_COUNT" Language="zh_Hans_CN">
+			<Text>可拿 {1_Num} / 共 {2_Num}</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_GROUP_EXPLORE" Language="zh_Hans_CN">
+			<Text>探索与建城</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_RELIGION" Language="zh_Hans_CN">
+			<Text>宗教</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_MILITARY" Language="zh_Hans_CN">
+			<Text>军事</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_BUILD" Language="zh_Hans_CN">
+			<Text>城市与建设</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_SCIENCE" Language="zh_Hans_CN">
+			<Text>科技、文化与伟人</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_DIPLO" Language="zh_Hans_CN">
+			<Text>外交、经济与间谍</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_OTHER" Language="zh_Hans_CN">
+			<Text>其他</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_GROUP_DEDICATION" Language="zh_Hans_CN">
+			<Text>本时代可选的致辞</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_DEDICATION_NOTE" Language="zh_Hans_CN">
+			<Text>[COLOR_Grey]新时代开始时选择。在普通或黑暗时代，大部分致辞会让下面这些行动额外给时代分。[ENDCOLOR]</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_TAG_WORLD_FIRST" Language="zh_Hans_CN">
+			<Text>[世界首次]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EARNED" Language="zh_Hans_CN">
+			<Text>（已获得 {1_Num} 次）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EARNED_THIS_ERA" Language="zh_Hans_CN">
+			<Text>（本时代已获得）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_TAKEN" Language="zh_Hans_CN">
+			<Text>（已被其他文明抢先）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_FROM_ERA" Language="zh_Hans_CN">
+			<Text>（{1_Era}起）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_UNTIL_ERA" Language="zh_Hans_CN">
+			<Text>（{1_Era}结束前）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_EXPIRED" Language="zh_Hans_CN">
+			<Text>（已过期：仅限{1_Era}结束前）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_STATE_CHOSEN" Language="zh_Hans_CN">
+			<Text>（已选择）</Text>
+		</Replace>
+	</LocalizedText>
+</GameData>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 本 Context 自己不显示任何东西，只负责把下面的实例挂进游戏的时代面板 -->
+<Context Name="EraScoreGuide">
+
+	<!-- 整个速查区块（挂到 EraProgressPanel 的 ThresholdStack 末尾） -->
+	<Instance Name="GuideInstance">
+		<Stack ID="Root" Anchor="C,T" StackGrowth="Bottom" StackPadding="6">
+			<Line Color="150,150,150,100" Anchor="C,T" Start="0,0" End="440,0" Width="2"/>
+			<Label Anchor="C,T" String="LOC_ESG_HEADER" Style="HalfScreenHeader"/>
+			<Line Color="150,150,150,100" Anchor="C,T" Start="0,0" End="440,0" Width="2"/>
+			<Label ID="Summary" Anchor="C,T" Style="FontNormal14" WrapWidth="430" Align="Center"/>
+			<GridButton ID="FilterButton" Anchor="C,T" Size="300,30" Style="ButtonControl">
+				<Label ID="FilterLabel" Anchor="C,C" Style="FontNormal14"/>
+			</GridButton>
+			<Stack ID="GroupStack" Anchor="C,T" StackGrowth="Bottom" StackPadding="4"/>
+		</Stack>
+	</Instance>
+
+	<!-- 一个分类：点击标题展开/收起 -->
+	<Instance Name="GroupInstance">
+		<Stack ID="Root" Anchor="C,T" StackGrowth="Bottom" StackPadding="2">
+			<GridButton ID="Header" Anchor="C,T" Size="440,32" Style="ButtonControl">
+				<Label ID="HeaderLabel" Anchor="L,C" Offset="12,0" Style="FontFlair14" Color="230,210,160,255"/>
+				<Label ID="HeaderCount" Anchor="R,C" Offset="12,0" Style="FontNormal14"/>
+			</GridButton>
+			<Label ID="Body" Anchor="L,T" Offset="14,4" Style="FontNormal14" WrapWidth="416" Hidden="1"/>
+		</Stack>
+	</Instance>
+
+</Context>
