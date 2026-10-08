@@ -30,7 +30,30 @@
 		<Row Tag="LOC_CQ_CATEGORY_DISTRICT" Language="en_US"><Text>UNIQUE DISTRICT</Text></Row>
 		<Row Tag="LOC_CQ_CATEGORY_IMPROVEMENT" Language="en_US"><Text>UNIQUE IMPROVEMENT</Text></Row>
 		<Row Tag="LOC_CQ_REPLACES" Language="en_US"><Text>Replaces: {1_Name}</Text></Row>
-		<Row Tag="LOC_CQ_DISTRICT_NOTE" Language="en_US"><Text>Build a {1_Name}; once completed it is converted into this district at the start of your turn. The plot must meet this district's own placement rules (e.g. hills only); otherwise it stays a {1_Name}.</Text></Row>
+		<Row Tag="LOC_CQ_DB_HEADER" Language="en_US"><Text>[COLOR_Civ6Yellow]What you actually get when activated (you don't build this district; every {1_Base} you own gets):[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_DB_COST" Language="en_US"><Text>{2_Amount}% [ICON_Production] Production toward {1_Base}</Text></Row>
+		<Row Tag="LOC_CQ_DB_YIELD" Language="en_US"><Text>{1_Amount} {2_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_DISTRICT" Language="en_US"><Text>{1_Amount} {2_Icon} for each adjacent district</Text></Row>
+		<Row Tag="LOC_CQ_DB_NEXT_TO" Language="en_US"><Text>{2_Amount} {3_Icon} when next to a {1_Name}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_EACH" Language="en_US"><Text>{2_Amount} {3_Icon} for each adjacent {1_Name}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_TILES" Language="en_US"><Text>{3_Amount} {4_Icon} for every {1_Num} adjacent {2_Name}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_RIVER" Language="en_US"><Text>{1_Amount} {2_Icon} when next to a river</Text></Row>
+		<Row Tag="LOC_CQ_DB_NEXT_TO_RESOURCE" Language="en_US"><Text>{2_Amount} {3_Icon} when next to any {1_Class} resource (counted once per resource type class)</Text></Row>
+		<Row Tag="LOC_CQ_DB_GREAT_PERSON" Language="en_US"><Text>{1_Amount} {2_Icon} {3_Name} point(s) per turn</Text></Row>
+		<Row Tag="LOC_CQ_DB_HOUSING" Language="en_US"><Text>{1_Amount} [ICON_Housing] Housing</Text></Row>
+		<Row Tag="LOC_CQ_DB_AMENITY" Language="en_US"><Text>{1_Amount} [ICON_Amenities] Amenity</Text></Row>
+		<Row Tag="LOC_CQ_DB_SPECIAL" Language="en_US"><Text>The district's special effects described above</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST" Language="en_US"><Text>Not inherited: {1_List}</Text></Row>
+		<Row Tag="LOC_CQ_DB_LIST_SEPARATOR" Language="en_US"><Text>; </Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_MODEL" Language="en_US"><Text>its look (it stays a {1_Base} on the map)</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_POPULATION" Language="en_US"><Text>not counting toward the district limit</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_UNLOCK" Language="en_US"><Text>earlier unlock</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_DEFENSE" Language="en_US"><Text>defenses / zone of control</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_PLACEMENT" Language="en_US"><Text>its placement rules</Text></Row>
+		<Row Tag="LOC_CQ_DB_ORIGINAL" Language="en_US"><Text>Original ability: {1_Desc}</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_BONUS" Language="en_US"><Text>bonus</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="en_US"><Text>strategic</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="en_US"><Text>luxury</Text></Row>
 
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="en_US"><Text>This unit cannot be trained. It is obtained through its civilization's or leader's ability (activate that ability to gain it).</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
@@ -42,6 +65,7 @@
 
 		<Row Tag="LOC_CQ_STATE_NATIVE" Language="en_US"><Text>[COLOR_LIGHTBLUE]Your own[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATE_ACTIVE" Language="en_US"><Text>[ICON_CheckSuccess] [COLOR_GREEN]Activated[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_CONFLICT" Language="en_US"><Text>[COLOR_Grey]You already have {1_Name}[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATE_LOCKED" Language="en_US"><Text>[COLOR_Grey]Locked[ENDCOLOR]</Text></Row>
 
 		<Row Tag="LOC_CQ_STATUS_SELF" Language="en_US"><Text>[COLOR_LIGHTBLUE]This is your own leader.[ENDCOLOR]</Text></Row>
@@ -87,7 +111,30 @@
 		<Row Tag="LOC_CQ_CATEGORY_DISTRICT" Language="zh_Hans_CN"><Text>特色区域</Text></Row>
 		<Row Tag="LOC_CQ_CATEGORY_IMPROVEMENT" Language="zh_Hans_CN"><Text>特色改良设施</Text></Row>
 		<Row Tag="LOC_CQ_REPLACES" Language="zh_Hans_CN"><Text>取代：{1_Name}</Text></Row>
-		<Row Tag="LOC_CQ_DISTRICT_NOTE" Language="zh_Hans_CN"><Text>请建造{1_Name}；建成后在你的回合开始时自动转换为该特色区域。地块必须满足该特色区域自身的放置条件（例如只能建在丘陵上），否则保留为{1_Name}。</Text></Row>
+		<Row Tag="LOC_CQ_DB_HEADER" Language="zh_Hans_CN"><Text>[COLOR_Civ6Yellow]激活后实际获得（不建造该区域，效果加到你的每个{1_Base}上）：[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_DB_COST" Language="zh_Hans_CN"><Text>建造{1_Base}时 {2_Amount}% [ICON_Production]生产力</Text></Row>
+		<Row Tag="LOC_CQ_DB_YIELD" Language="zh_Hans_CN"><Text>{1_Amount} {2_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_DISTRICT" Language="zh_Hans_CN"><Text>每相邻一个区域 {1_Amount} {2_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_NEXT_TO" Language="zh_Hans_CN"><Text>与{1_Name}相邻时 {2_Amount} {3_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_EACH" Language="zh_Hans_CN"><Text>每相邻一个{1_Name} {2_Amount} {3_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_TILES" Language="zh_Hans_CN"><Text>每相邻{1_Num}个{2_Name} {3_Amount} {4_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_ADJ_RIVER" Language="zh_Hans_CN"><Text>与河流相邻时 {1_Amount} {2_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_NEXT_TO_RESOURCE" Language="zh_Hans_CN"><Text>旁边有{1_Class}资源时 {2_Amount} {3_Icon}（每类资源只算一次）</Text></Row>
+		<Row Tag="LOC_CQ_DB_GREAT_PERSON" Language="zh_Hans_CN"><Text>每回合 {1_Amount} {2_Icon}{3_Name}点数</Text></Row>
+		<Row Tag="LOC_CQ_DB_HOUSING" Language="zh_Hans_CN"><Text>{1_Amount} [ICON_Housing]住房</Text></Row>
+		<Row Tag="LOC_CQ_DB_AMENITY" Language="zh_Hans_CN"><Text>{1_Amount} [ICON_Amenities]宜居度</Text></Row>
+		<Row Tag="LOC_CQ_DB_SPECIAL" Language="zh_Hans_CN"><Text>上述原版能力中该区域自带的特殊效果</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST" Language="zh_Hans_CN"><Text>未继承：{1_List}</Text></Row>
+		<Row Tag="LOC_CQ_DB_LIST_SEPARATOR" Language="zh_Hans_CN"><Text>、</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_MODEL" Language="zh_Hans_CN"><Text>外观（地图上仍是{1_Base}）</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_POPULATION" Language="zh_Hans_CN"><Text>不占区域人口上限</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_UNLOCK" Language="zh_Hans_CN"><Text>更早解锁</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_DEFENSE" Language="zh_Hans_CN"><Text>城防 / 区域控制</Text></Row>
+		<Row Tag="LOC_CQ_DB_LOST_PLACEMENT" Language="zh_Hans_CN"><Text>放置限制</Text></Row>
+		<Row Tag="LOC_CQ_DB_ORIGINAL" Language="zh_Hans_CN"><Text>原版能力：{1_Desc}</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_BONUS" Language="zh_Hans_CN"><Text>加成</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="zh_Hans_CN"><Text>战略</Text></Row>
+		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="zh_Hans_CN"><Text>奢侈</Text></Row>
 
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="zh_Hans_CN"><Text>该单位无法训练，需通过其文明/领袖能力获得（激活对应能力后按原机制获得）。</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>
@@ -99,6 +146,7 @@
 
 		<Row Tag="LOC_CQ_STATE_NATIVE" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]本方原有[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATE_ACTIVE" Language="zh_Hans_CN"><Text>[ICON_CheckSuccess] [COLOR_GREEN]已激活[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATE_CONFLICT" Language="zh_Hans_CN"><Text>[COLOR_Grey]已有{1_Name}[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATE_LOCKED" Language="zh_Hans_CN"><Text>[COLOR_Grey]未解锁[ENDCOLOR]</Text></Row>
 
 		<Row Tag="LOC_CQ_STATUS_SELF" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]这是你自己的领袖。[ENDCOLOR]</Text></Row>

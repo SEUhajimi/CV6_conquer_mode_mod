@@ -54,6 +54,8 @@
 			<File>UI/CivConquestPanel.lua</File>
 			<File>UI/CivConquestPanel.xml</File>
 			<File>UI/CivConquestDebug.lua</File>
+			<!-- TechAndCivicUnlockables.lua 会自动 include 同前缀的文件：科技树只显示玩家拥有的特色建筑 -->
+			<File>UI/TechAndCivicUnlockables_CivConquest.lua</File>
 		</ImportFiles>
 		<AddGameplayScripts id="CivConquest_Scripts" criteria="CivConquest_Mode">
 			<File>Scripts/CivConquest_Gameplay.lua</File>
@@ -76,6 +78,7 @@
 		<File>UI/CivConquestPanel.lua</File>
 		<File>UI/CivConquestPanel.xml</File>
 		<File>UI/CivConquestDebug.lua</File>
+		<File>UI/TechAndCivicUnlockables_CivConquest.lua</File>
 		<File>Text/CivConquest_Text.xml</File>
 	</Files>
 </Mod>

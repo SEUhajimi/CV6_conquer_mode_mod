@@ -7,7 +7,9 @@
 - `CivConquestMode/`：本模式**唯一进游戏的文件夹**，复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\` 使用。
   - `CivConquestMode.modinfo`：加载入口。所有 InGame 动作都带 `criteria="CivConquest_Mode"`，只在勾选该模式时加载。新增文件时要同时登记到对应 Action 和 `<Files>`。
   - `Data/CivConquest_Gameplay.sql`：`LoadOrder` 为 20000，在其他文明 mod 之后执行，用来收集所有特色项目，包括 mod 文明的。
-    - 解锁修改器挂在原特性的 `TraitModifiers` 上，原文明也会拿到。特色单位的 `VALID_UNIT_BUILD` 对原文明生效时，会让被取代的基础单位重新可造（拜占庭能造骑士、跑马场送骑士），所以加了“玩家本身没有该特性”的条件（`CQ_REQSET_NOT_NATIVE_*`）。新增类似的解锁修改器时要考虑对原文明的副作用。
+    - 建筑、改良的解锁修改器挂在原特性的 `TraitModifiers` 上，原文明也会拿到。特色单位的 `VALID_UNIT_BUILD` 对原文明生效时，会让被取代的基础单位重新可造（巴西尔的拜占庭在马镫就能造骑士、跑马场送骑士），所以单位解锁修改器只登记在 `CQ_ActivationModifiers` 表，由 Gameplay 脚本在激活时挂上，不进 `TraitModifiers`。曾用“玩家本身没有该特性”的条件集排除原文明，实测无效。新增类似的解锁修改器时要考虑对原文明的副作用。
+    - 同一个基础区域 / 基础建筑只能有一个特色版本（`CQ.GetTraitConflict`，Gameplay 激活时校验，UI 显示“已有 X”）：引擎的取代映射只保证一个。
+    - 特色区域：引擎只把原文明的特色区域当成基础区域（建筑的 `PrereqDistrict` 只认原文明；实测转换来的、甚至去掉 `TraitType` 的 Thanh 里都造不了兵营，`WorldBuilder` 放建筑报 `NeededDistrict`，副本建筑、标记建筑、`GRANT_BUILDING_IN_CITY_IGNORE` 都试过不行）。所以激活者不建造特色区域，效果由 `CQ_DistrictBonuses` 生成的修改器加到基础区域上（自定义 `MODIFIER_CQ_PLAYER_DISTRICTS_ATTACH_MODIFIER` 挂区域自带修改器），走 `CQ_ActivationModifiers`。旧版本转换出来的特色区域由 `RevertConvertedDistricts` 还原。激活修改器挂上后记玩家属性 `CQ_AM_<ModifierId>`，回合开始时对已激活的特性补挂缺的。科技树由 `UI/TechAndCivicUnlockables_CivConquest.lua` 重写 `GetFilteredUnlockableItems`，只显示玩家拥有的特色建筑。
   - `Scripts/`、`UI/`：Lua。UI 通过 `UI.RequestPlayerOperation(... EXECUTE_SCRIPT ...)` 发请求，由 Gameplay 脚本校验执行，以保证联机同步。不要在 UI 侧直接改游戏状态。
     - Gameplay 脚本里也只能在 `GameEvents.*` 回调中改游戏状态。`Events.*`（如 `PlayerTurnActivated`）由各客户端各自派发，时机不一致，在里面改状态会导致联机不同步（OOS）。
     - 脚本加载时（`Initialize()` 里）也不能改状态：联机重新同步时只有被同步的那台电脑会重新加载脚本。读档后的补扫放在 `GameEvents.PlayerTurnStarted` 里做。

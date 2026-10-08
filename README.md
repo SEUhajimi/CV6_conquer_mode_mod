@@ -12,7 +12,7 @@
 
 - 左上角工具栏（科技树、市政树……）末尾多出一个「文明征服」按钮。
 - 左侧列出领袖，可在 **本局领袖 / 所有领袖** 之间切换；本局中未遇见的文明会隐藏身份。
-- 右侧显示选中领袖的 **文明特性、领袖能力、特色单位 / 建筑 / 区域 / 改良设施**。
+- 右侧显示选中领袖的 **文明特性、领袖能力、特色单位 / 建筑 / 区域 / 改良设施**。特色区域条目先列出原版能力，再列出激活后实际获得的效果和未继承的部分，也可以用来查看对手的能力。
 - **占领**某个主要文明的**原始首都**后，可以逐项「激活」或「全部激活」。占领即永久解锁，之后丢失该城市也不影响。
 - 有已解锁但还没激活的内容时，工具栏按钮上会出现提示标记。
 - 高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后，会在它的下一个回合开始时自动激活全部内容。
@@ -48,10 +48,10 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 | 内容 | 机制 |
 | --- | --- |
 | 文明特性 / 领袖能力 | Gameplay 脚本把该 Trait 的所有 `TraitModifiers` 通过 `Player:AttachModifierByID` 挂到玩家身上 |
-| 特色单位 | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD`（结社模式「邪教徒」使用的同一机制）；对原文明不生效，否则被取代的基础单位会重新可造（如拜占庭能造骑士） |
+| 特色单位 | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD`（结社模式「邪教徒」使用的同一机制），只在征服者激活时由脚本挂上；不挂到原特性上，否则原文明会重新能造被取代的基础单位（如巴西尔的拜占庭能造骑士） |
 | 特色改良 | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT`（城邦宗主独特改良使用的同一机制） |
 | 特色建筑 | 去掉 `TraitType`，改为 `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING`（结社模式建筑的做法）；原文明通过自身 Trait 照常获得 |
-| 特色区域 | 引擎没有对应的解锁效果：先建造被取代的基础区域，建成后在回合开始时由脚本（`WorldBuilder.CityManager`）转换为特色区域，并保留其中的建筑 |
+| 特色区域 | 引擎只把原文明的特色区域当成基础区域（激活者的特色区域里造不了任何基础区域建筑），所以激活者不建造特色区域，而是把特色区域的效果以修改器的形式加到自己的基础区域上：区域自带修改器、相邻加成、自身产出、伟人点数、住房、宜居度、造价减半（建造该基础区域时生产力 +100%） |
 
 部分特色改良、区域和建筑的模型只登记了原文明（如努比亚金字塔、波斯天堂花园、荷兰圩田、苏格兰高尔夫球场、克里 Mekewap、日本电子厂、蒙古 Ordu、马其顿 Basilikoi Paides、巴比伦 Palgum、刚果 Mbanza、越南 Thanh），其他文明建造时会显示红色感叹号。`tools/gen_landmarks.py` 扫描本体与 DLC 的 `Landmarks.artdef`（包括 `Landmarks` 与 `Districts` 两类集合），为这些变体生成 `Culture = DEFAULT` 的同模型版本。
 
@@ -64,6 +64,8 @@ UI 通过 `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)`
 - 少数能力是在游戏核心（DLL）里按 Trait 硬编码判定的，而不是通过修改器实现，这类能力激活后可能不生效或只部分生效。
 - 特色区域无法直接在生产列表中选择（引擎没有按玩家解锁区域的效果），需要建造被取代的基础区域，建成后在回合开始时转换。
 - 转换前会检查特色区域自身的地形 / 地貌要求（如书院、卫城只能在丘陵，蒙巴扎需要树林 / 雨林）；不满足则保留基础区域，且该地块不再尝试转换。
+- 同一个基础区域 / 基础建筑只能有一个特色版本：已拥有（原生或激活）书院时不能再激活天文台，已拥有 Prasat 时不能再激活木板教堂（都取代寺庙）。面板上会显示“已有 X”。
+- 激活得来的特色区域没有自己的模型和放置限制，地图上仍是基础区域。相邻资源加成、专家和贸易路线产出、城防 / 区域控制、不占人口上限等效果无法迁移；基础区域原有的相邻加成会保留。旧版本转换出来的特色区域，会在回合开始时还原为基础区域（保留其中的建筑）。
 - 原本不可训练的特色单位（如大哥伦比亚的总指挥）不会解锁生产，只能通过激活对应能力按原机制获得。
 - 修改器里如果带有「玩家拥有某 Trait」的需求条件，通过激活获得时该条件不满足。
 
@@ -84,7 +86,7 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 
 - A **Civilization Conquest** button is added to the end of the top-left Launch Bar (Tech Tree, Civics Tree, …).
 - The left side lists leaders, switchable between **Leaders in This Game** and **All Leaders**. Civilizations you haven't met in this game stay hidden.
-- The right side shows the selected leader's **civilization ability, leader ability and unique units / buildings / districts / improvements**.
+- The right side shows the selected leader's **civilization ability, leader ability and unique units / buildings / districts / improvements**. Unique district entries list the original ability first, then what you actually get when activated and what is not inherited, so the panel also works as a quick look at your opponents' abilities.
 - Once you **capture** a major civilization's **original capital**, you can activate its items one by one or with **Activate All**. The unlock is permanent, even if you lose the city later.
 - The Launch Bar button shows a marker when something is unlocked but not yet activated.
 - Advanced option **Conquest: AI Auto-Activates** (on by default): when an AI captures an original capital, it activates everything from that civilization automatically at the start of its next turn.
@@ -120,10 +122,10 @@ The argument is the game install directory; without it the script uses the defau
 | Item | Mechanism |
 | --- | --- |
 | Civilization / leader abilities | A gameplay script attaches every `TraitModifiers` entry of the trait to the player via `Player:AttachModifierByID` |
-| Unique units | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD` (the same mechanism Secret Societies uses for the Cultist); disabled for the original civilization, otherwise the replaced base unit becomes buildable again (e.g. Byzantium could build Knights) |
+| Unique units | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD` (the same mechanism Secret Societies uses for the Cultist), attached by the script only when a conqueror activates the trait; it is not attached to the original trait, otherwise the original civilization could build the replaced base unit again (e.g. Basil's Byzantium could build Knights) |
 | Unique improvements | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT` (the same mechanism city-state suzerain improvements use) |
 | Unique buildings | `TraitType` is cleared and replaced by `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING` (as Secret Societies buildings do); the original civilization still gets them through its own trait |
-| Unique districts | The engine has no effect that unlocks districts per player. Build the district it replaces; once completed, a script (`WorldBuilder.CityManager`) converts it into the unique district at the start of your turn, keeping its buildings |
+| Unique districts | The engine only treats the original civilization's unique districts as their base district (no base-district building can be built in an activated one), so you don't build the unique district; its effects are added to your base districts as modifiers: the district's own modifiers, adjacency bonuses, base yields, Great Person points, housing, amenities, and the halved cost (+100% production toward that base district) |
 
 Some unique improvements, districts and buildings register their model only for the original civilization (Nubian Pyramid, Persian Pairidaeza, Dutch Polder, Scottish Golf Course, Cree Mekewap, Japanese Electronics Factory, Mongolian Ordu, Macedonian Basilikoi Paides, Babylonian Palgum, Kongolese Mbanza, Vietnamese Thanh), so other civilizations building them see a red exclamation mark. `tools/gen_landmarks.py` scans the base game and DLC `Landmarks.artdef` files (both the `Landmarks` and `Districts` collections) and generates a `Culture = DEFAULT` copy of those variants using the same model.
 
@@ -136,6 +138,8 @@ The gameplay SQL runs with `LoadOrder` 20000, after other civilization mods, so 
 - A few abilities are hard-coded against the trait in the game core (DLL) instead of being implemented through modifiers; they may not work, or only partly work, when activated.
 - Unique districts can't be picked directly from the production list (the engine has no per-player district unlock effect). Build the district they replace; it is converted at the start of your turn.
 - Before converting, the unique district's own terrain / feature rules are checked (e.g. Seowon and Acropolis need hills, Mbanza needs woods / rainforest). If the plot doesn't qualify, the base district is kept and that plot is not tried again.
+- Each base district / base building can have only one unique version: once you have the Seowon (your own or activated) you can't activate the Observatory, and once you have the Prasat you can't activate the Stave Church (both replace the Temple). The panel shows "You already have X".
+- Activated unique districts have no model or placement rules of their own; on the map they remain the base district. Resource adjacency, specialist and trade route yields, city defense / zone of control and not counting toward the population limit can't be carried over, and the base district keeps its own adjacency bonuses. Unique districts converted by older versions are turned back into the base district at the start of your turn, keeping their buildings.
 - Unique units that can't normally be trained (e.g. Gran Colombia's Comandante General) are not opened for production; you get them through the original mechanism by activating the matching ability.
 - Modifiers that require "player has trait X" won't have that requirement met when the ability is gained through activation.
 

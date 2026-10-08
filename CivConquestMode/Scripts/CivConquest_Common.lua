@@ -14,7 +14,7 @@ CQ.PROP_FINGERPRINT		= "CQ_FP";		-- 玩家属性：该玩家电脑上报的指�
 CQ.PROP_FINGERPRINT_SEQ	= "CQ_FP_SEQ";	-- 玩家属性：上报时的序号；Game 属性：全局上报计数
 
 -- 本模式脚本版本，计入指纹。改了 Lua 后加 1：只改 Lua 时数据库不变，靠它发现两边脚本不一致
-CQ.VERSION			= 2;
+CQ.VERSION			= 3;
 
 CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
 
@@ -192,6 +192,50 @@ end
 
 function CQ.IsTraitOwned(playerID:number, traitType:string)
 	return CQ.IsTraitActivated(playerID, traitType) or CQ.HasTraitNatively(playerID, traitType);
+end
+
+-- ===========================================================================
+--	同一个被取代的对象只能有一个特色版本：
+--	  * 区域：书院、天文台都取代学院，只能选一个；
+--	  * 建筑：Prasat、木板教堂都取代寺庙，只能选一个（引擎的取代映射只保证一个）。
+--	traitType 带有这类特色区域 / 建筑，且玩家已拥有（原生或激活）另一个取代同一对象的特性时，
+--	返回冲突的条目 { TraitType, Kind, Type, Replaces }，否则返回 nil。
+-- ===========================================================================
+local m_ReplacingItems :table = nil;	-- { {TraitType, Kind, Type, Replaces}, ... }，已排序
+
+local function GetReplacingItems()
+	if m_ReplacingItems ~= nil then return m_ReplacingItems; end
+	BuildCache();
+	local list = {};
+	for traitType, items in pairs(m_TraitItems) do
+		for _, item in ipairs(items) do
+			if (item.Kind == "DISTRICT" or item.Kind == "BUILDING") and item.Replaces ~= nil then
+				table.insert(list, { TraitType = traitType, Kind = item.Kind, Type = item.Type, Replaces = item.Replaces });
+			end
+		end
+	end
+	-- pairs 的遍历顺序没有保证；Gameplay 端按结果拒绝激活，排序后各客户端一致
+	table.sort(list, function(a, b)
+		if a.TraitType ~= b.TraitType then return a.TraitType < b.TraitType; end
+		return a.Type < b.Type;
+	end);
+	m_ReplacingItems = list;
+	return list;
+end
+
+function CQ.GetTraitConflict(playerID:number, traitType:string)
+	local list = GetReplacingItems();
+	for _, mine in ipairs(list) do
+		if mine.TraitType == traitType then
+			for _, other in ipairs(list) do
+				if other.TraitType ~= traitType and other.Kind == mine.Kind and other.Replaces == mine.Replaces
+					and CQ.IsTraitOwned(playerID, other.TraitType) then
+					return other;
+				end
+			end
+		end
+	end
+	return nil;
 end
 
 -- ===========================================================================
