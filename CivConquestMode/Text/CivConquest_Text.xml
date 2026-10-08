@@ -56,7 +56,7 @@
 		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_TITLE" Language="en_US"><Text>Conquest Unlocked</Text></Row>
 		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_BODY" Language="en_US"><Text>By holding {2_City} you may now activate the abilities of {1_Leader}. Open the Civilization Conquest screen from the Launch Bar.</Text></Row>
 		<Row Tag="LOC_CQ_MOD_MISMATCH_TITLE" Language="en_US"><Text>Mod Files Do Not Match</Text></Row>
-		<Row Tag="LOC_CQ_MOD_MISMATCH_BODY" Language="en_US"><Text>The game data loaded on this computer differs from other players' (fingerprint shown below). The lobby only checks mod IDs, not file contents, so this game will keep going out of sync.[NEWLINE][NEWLINE]This computer: {1_Local}[NEWLINE]{2_Others}[NEWLINE][NEWLINE]Make sure everyone has exactly the same mod folders (delete old or duplicate copies, update Workshop mods to the same version), then restart the game and load again.</Text></Row>
+		<Row Tag="LOC_CQ_MOD_MISMATCH_BODY" Language="en_US"><Text>The game database loaded on this computer differs from other players' (fingerprints shown below). The lobby only checks mod IDs, not file contents. Differences in rules will make the game go out of sync repeatedly; differences only in descriptive text are harmless, but still mean the mod files are not identical.[NEWLINE][NEWLINE]This computer: {1_Local}[NEWLINE]{2_Others}[NEWLINE][NEWLINE]Make sure everyone has exactly the same mod folders (delete old or duplicate copies, update Workshop mods to the same version), then restart the game and load again.</Text></Row>
 
 		<!-- ================================================================ -->
 		<!-- 简体中文                                                         -->
@@ -113,6 +113,6 @@
 		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_TITLE" Language="zh_Hans_CN"><Text>征服解锁</Text></Row>
 		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_BODY" Language="zh_Hans_CN"><Text>你已控制{2_City}，现在可以激活{1_Leader}的能力。请从左上角工具栏打开“文明征服”界面。</Text></Row>
 		<Row Tag="LOC_CQ_MOD_MISMATCH_TITLE" Language="zh_Hans_CN"><Text>mod 文件不一致</Text></Row>
-		<Row Tag="LOC_CQ_MOD_MISMATCH_BODY" Language="zh_Hans_CN"><Text>本机加载的游戏数据和其他玩家不同（指纹见下）。联机房间只核对 mod 的 ID，不核对文件内容，这局游戏会反复不同步。[NEWLINE][NEWLINE]本机：{1_Local}[NEWLINE]{2_Others}[NEWLINE][NEWLINE]请确认所有人的 mod 文件夹完全一致（删除旧版本或重复的副本，创意工坊 mod 更新到同一版本），然后重启游戏再读档。</Text></Row>
+		<Row Tag="LOC_CQ_MOD_MISMATCH_BODY" Language="zh_Hans_CN"><Text>本机加载的游戏数据库和其他玩家不同（指纹见下）。联机房间只核对 mod 的 ID，不核对文件内容。如果不同之处涉及规则，游戏会反复不同步；只是说明文字不同则无妨，但也说明两边的 mod 文件不完全一样。[NEWLINE][NEWLINE]本机：{1_Local}[NEWLINE]{2_Others}[NEWLINE][NEWLINE]请确认所有人的 mod 文件夹完全一致（删除旧版本或重复的副本，创意工坊 mod 更新到同一版本），然后重启游戏再读档。</Text></Row>
 	</LocalizedText>
 </GameData>
