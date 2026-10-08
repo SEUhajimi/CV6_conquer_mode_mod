@@ -66,8 +66,9 @@ INSERT INTO ModifierStrings(ModifierId,Context,Text) VALUES
 ('MAO_HOME','Preview','LOC_MAO_HOME_PREVIEW'),('MAO_WOUNDED','Preview','LOC_MAO_WOUNDED_PREVIEW');
 
 -- Copy current Musketman stats; preserve tech, cost, maintenance, resource and upgrade conditions.
+-- Like the Immortal: keeps the melee promotion class but also gets a ranged attack (Combat - 10, Range 2).
 INSERT INTO Units(UnitType,Name,BaseSightRange,BaseMoves,Combat,RangedCombat,Range,Bombard,Domain,FormationClass,Cost,PopulationCost,FoundCity,FoundReligion,MakeTradeRoute,EvangelizeBelief,LaunchInquisition,RequiresInquisition,BuildCharges,ReligiousStrength,ReligionEvictPercent,SpreadCharges,ReligiousHealCharges,ExtractsArtifacts,Description,Flavor,CanCapture,CanRetreatWhenCaptured,TraitType,AllowBarbarians,CostProgressionModel,CostProgressionParam1,PromotionClass,InitialLevel,NumRandomChoices,PrereqTech,PrereqCivic,PrereqDistrict,PrereqPopulation,LeaderType,CanTrain,StrategicResource,PurchaseYield,MustPurchase,Maintenance,Stackable,AirSlots,CanTargetAir,PseudoYieldType,ZoneOfControl,AntiAirCombat,Spy,WMDCapable,ParkCharges,IgnoreMoves,TeamVisibility,ObsoleteTech,ObsoleteCivic,MandatoryObsoleteTech,MandatoryObsoleteCivic,AdvisorType,EnabledByReligion,TrackReligion,DisasterCharges,UseMaxMeleeTrainedStrength,ImmediatelyName,CanEarnExperience)
-SELECT 'UNIT_MAO_RED_ARMY','LOC_UNIT_MAO_RED_ARMY_NAME',BaseSightRange,BaseMoves + 1,Combat,RangedCombat,Range,Bombard,Domain,FormationClass,Cost,PopulationCost,FoundCity,FoundReligion,MakeTradeRoute,EvangelizeBelief,LaunchInquisition,RequiresInquisition,BuildCharges,ReligiousStrength,ReligionEvictPercent,SpreadCharges,ReligiousHealCharges,ExtractsArtifacts,'LOC_UNIT_MAO_RED_ARMY_DESCRIPTION',Flavor,CanCapture,CanRetreatWhenCaptured,'TRAIT_MAO_RED_ARMY',AllowBarbarians,CostProgressionModel,CostProgressionParam1,PromotionClass,InitialLevel,NumRandomChoices,PrereqTech,PrereqCivic,PrereqDistrict,PrereqPopulation,LeaderType,CanTrain,StrategicResource,PurchaseYield,MustPurchase,Maintenance,Stackable,AirSlots,CanTargetAir,PseudoYieldType,ZoneOfControl,AntiAirCombat,Spy,WMDCapable,ParkCharges,IgnoreMoves,TeamVisibility,ObsoleteTech,ObsoleteCivic,MandatoryObsoleteTech,MandatoryObsoleteCivic,AdvisorType,EnabledByReligion,TrackReligion,DisasterCharges,UseMaxMeleeTrainedStrength,ImmediatelyName,CanEarnExperience FROM Units WHERE UnitType='UNIT_MUSKETMAN';
+SELECT 'UNIT_MAO_RED_ARMY','LOC_UNIT_MAO_RED_ARMY_NAME',BaseSightRange,BaseMoves + 1,Combat,Combat - 10,2,Bombard,Domain,FormationClass,Cost,PopulationCost,FoundCity,FoundReligion,MakeTradeRoute,EvangelizeBelief,LaunchInquisition,RequiresInquisition,BuildCharges,ReligiousStrength,ReligionEvictPercent,SpreadCharges,ReligiousHealCharges,ExtractsArtifacts,'LOC_UNIT_MAO_RED_ARMY_DESCRIPTION',Flavor,CanCapture,CanRetreatWhenCaptured,'TRAIT_MAO_RED_ARMY',AllowBarbarians,CostProgressionModel,CostProgressionParam1,PromotionClass,InitialLevel,NumRandomChoices,PrereqTech,PrereqCivic,PrereqDistrict,PrereqPopulation,LeaderType,CanTrain,StrategicResource,PurchaseYield,MustPurchase,Maintenance,Stackable,AirSlots,CanTargetAir,PseudoYieldType,ZoneOfControl,AntiAirCombat,Spy,WMDCapable,ParkCharges,IgnoreMoves,TeamVisibility,ObsoleteTech,ObsoleteCivic,MandatoryObsoleteTech,MandatoryObsoleteCivic,AdvisorType,EnabledByReligion,TrackReligion,DisasterCharges,UseMaxMeleeTrainedStrength,ImmediatelyName,CanEarnExperience FROM Units WHERE UnitType='UNIT_MUSKETMAN';
 INSERT INTO TypeTags(Type,Tag) SELECT 'UNIT_MAO_RED_ARMY',Tag FROM TypeTags WHERE Type='UNIT_MUSKETMAN';
 INSERT INTO UnitAiInfos(UnitType,AiType) SELECT 'UNIT_MAO_RED_ARMY',AiType FROM UnitAiInfos WHERE UnitType='UNIT_MUSKETMAN';
 INSERT INTO UnitReplaces(CivUniqueUnitType,ReplacesUnitType) VALUES('UNIT_MAO_RED_ARMY','UNIT_MUSKETMAN');
@@ -125,6 +126,16 @@ INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
 ('COMMUNIST_PRODUCTION_PER_POPULATION','Amount',1);
 INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
 ('TRAIT_COMMUNIST_SPARK','COMMUNIST_PRODUCTION_PER_POPULATION');
+
+-- Lower food consumption per citizen (2 -> 1.5). The engine has no per-player consumption modifier
+-- (CITY_FOOD_CONSUMPTION_PER_POPULATION is global), so refund +0.5 Food per citizen instead.
+INSERT INTO Modifiers(ModifierId,ModifierType) VALUES
+('COMMUNIST_FOOD_PER_POPULATION','MODIFIER_PLAYER_CITIES_ADJUST_CITY_YIELD_PER_POPULATION');
+INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
+('COMMUNIST_FOOD_PER_POPULATION','YieldType','YIELD_FOOD'),
+('COMMUNIST_FOOD_PER_POPULATION','Amount',0.5);
+INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
+('TRAIT_COMMUNIST_SPARK','COMMUNIST_FOOD_PER_POPULATION');
 
 -- v0.6: Marx Institute replaces Campus, at the original Campus cost.
 INSERT INTO Types(Type,Kind) VALUES

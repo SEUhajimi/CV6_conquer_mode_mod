@@ -20,6 +20,7 @@ def arg(mod,name):return db.execute('SELECT Value FROM ModifierArguments WHERE M
 assert arg('COMMUNIST_PRODUCTION_PER_POPULATION','Amount')=='1'
 assert arg('COMMUNIST_PRODUCTION_PER_POPULATION','YieldType')=='YIELD_PRODUCTION'
 assert db.execute("SELECT SubjectRequirementSetId FROM Modifiers WHERE ModifierId='COMMUNIST_PRODUCTION_PER_POPULATION'").fetchone()[0] is None
+assert arg('COMMUNIST_FOOD_PER_POPULATION','YieldType')=='YIELD_FOOD' and float(arg('COMMUNIST_FOOD_PER_POPULATION','Amount'))==0.5
 for m,a in [('TRAIT_ADJUST_BUILDER_CHARGES','1'),('TRAIT_BUILDER_WONDER_PERCENT','15'),('COMMUNIST_OFFENSIVE_SPY_BONUS','2'),('COMMUNIST_DOUBLE_PLUNDER','100')]:
  assert arg(m,'Amount')==a
  assert db.execute("SELECT count(*) FROM TraitModifiers WHERE TraitType='TRAIT_COMMUNIST_SPARK' AND ModifierId=?",(m,)).fetchone()[0]==1
@@ -27,6 +28,7 @@ assert db.execute("SELECT CivilizationType FROM CivilizationLeaders WHERE Leader
 original=db.execute("SELECT BaseMoves,Combat,Cost,PrereqTech FROM Units WHERE UnitType='UNIT_MUSKETMAN'").fetchone()
 red=db.execute("SELECT BaseMoves,Combat,Cost,PrereqTech FROM Units WHERE UnitType='UNIT_MAO_RED_ARMY'").fetchone()
 assert red==(original[0]+1,*original[1:])
+assert db.execute("SELECT RangedCombat,Range,PromotionClass FROM Units WHERE UnitType='UNIT_MAO_RED_ARMY'").fetchone()==(original[1]-10,2,'PROMOTION_CLASS_MELEE')
 assert db.execute("SELECT ReplacesUnitType FROM UnitReplaces WHERE CivUniqueUnitType='UNIT_MAO_RED_ARMY'").fetchone()[0]=='UNIT_MUSKETMAN'
 d=sqlite3.connect(':memory:');d.executescript(Path('reference/Base/Assets/Configuration/Data/Schema/AdditionalTables.sql').read_text());d.executescript((p/'Data/Config.sql').read_text());assert d.execute('SELECT CivilizationType FROM Players').fetchone()[0]=='CIVILIZATION_COMMUNIST'
 for f in list(p.rglob('*.xml'))+list(p.glob('ArtDefs/*.artdef')):E.parse(f)
