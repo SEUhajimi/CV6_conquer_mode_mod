@@ -14,7 +14,7 @@ CQ.PROP_FINGERPRINT		= "CQ_FP";		-- 玩家属性：该玩家电脑上报的指�
 CQ.PROP_FINGERPRINT_SEQ	= "CQ_FP_SEQ";	-- 玩家属性：上报时的序号；Game 属性：全局上报计数
 
 -- 本模式脚本版本，计入指纹。改了 Lua 后加 1：只改 Lua 时数据库不变，靠它发现两边脚本不一致
-CQ.VERSION			= 1;
+CQ.VERSION			= 2;
 
 CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
 
@@ -272,39 +272,9 @@ end
 --	联机一致性检查：数据库指纹
 --	引擎在联机房间里只核对 mod 的 ID 和版本号，不核对文件内容。两台电脑的 mod 文件不同时
 --	（旧版本、重复安装、创意工坊版本不同），数据库就不同，修改器和各表的 Index 会对不上，
---	游戏会反复不同步。这里对与玩法相关的表算一个指纹，两边不同就说明加载的内容不一样。
---	GameInfo 按数据库行顺序遍历，行顺序（也就是 Index）不同也会体现在指纹里。
---	只读数据库，UI 和 Gameplay 环境都可用。
+--	游戏会反复不同步。这里对整个 Gameplay 数据库算一个指纹，两边不同就说明加载的内容不一样。
+--	只在 UI 环境调用（读档时算一次并缓存）；Gameplay 脚本只存储上报的数字。
 -- ===========================================================================
-local FINGERPRINT_TABLES :table = {
-	{ "Modifiers", "ModifierId", "ModifierType", "RunOnce", "Permanent", "OwnerRequirementSetId", "SubjectRequirementSetId" },
-	{ "ModifierArguments", "ModifierId", "Name", "Value" },
-	{ "DynamicModifiers", "ModifierType", "CollectionType", "EffectType" },
-	{ "Requirements", "RequirementId", "RequirementType", "Inverse" },
-	{ "RequirementArguments", "RequirementId", "Name", "Value" },
-	{ "RequirementSets", "RequirementSetId", "RequirementSetType" },
-	{ "RequirementSetRequirements", "RequirementSetId", "RequirementId" },
-	{ "TraitModifiers", "TraitType", "ModifierId" },
-	{ "Civilizations", "CivilizationType" },
-	{ "Leaders", "LeaderType" },
-	{ "Units", "UnitType", "Cost", "Combat", "RangedCombat", "Bombard", "Range", "BaseMoves", "PrereqTech", "PrereqCivic", "TraitType" },
-	{ "Buildings", "BuildingType", "Cost", "PrereqDistrict", "PrereqTech", "PrereqCivic", "TraitType" },
-	{ "Building_YieldChanges", "BuildingType", "YieldType", "YieldChange" },
-	{ "Districts", "DistrictType", "Cost", "PrereqTech", "PrereqCivic", "TraitType" },
-	{ "Improvements", "ImprovementType", "PrereqTech", "PrereqCivic", "TraitType" },
-	{ "Improvement_YieldChanges", "ImprovementType", "YieldType", "YieldChange" },
-	{ "Resources", "ResourceType", "ResourceClassType", "Frequency" },
-	{ "Resource_YieldChanges", "ResourceType", "YieldType", "YieldChange" },
-	{ "Features", "FeatureType", "Removable", "Impassable" },
-	{ "Feature_YieldChanges", "FeatureType", "YieldType", "YieldChange" },
-	{ "Terrains", "TerrainType" },
-	{ "Technologies", "TechnologyType", "Cost" },
-	{ "Civics", "CivicType", "Cost" },
-	{ "Policies", "PolicyType", "GovernmentSlotType" },
-	{ "Beliefs", "BeliefType", "BeliefClassType" },
-	{ "Projects", "ProjectType", "Cost" },
-	{ "GlobalParameters", "Name", "Value" },
-};
 
 -- 取模用小于 2^31 的质数：h * 31 + 255 不超过 2^53，double 运算保持精确，各电脑结果一致
 local HASH_MOD :number = 2147483629;
@@ -316,13 +286,77 @@ local function HashString(h:number, s:string)
 	return (h * 31 + 1) % HASH_MOD;	-- 分隔符：避免 "ab"+"c" 与 "a"+"bc" 相同
 end
 
-local m_Fingerprint :number = nil;
+-- 长文本（说明、百科）只取首尾各 48 个字符和长度，控制耗时；ID、数值这类短值完整计入
+local LONG_VALUE :number = 96;
 
---	返回数字指纹（属性里存数字比存字符串稳妥）；结果缓存，只在第一次调用时遍历数据库
-function CQ.GetFingerprint()
-	if m_Fingerprint ~= nil then return m_Fingerprint; end
-	local h = HashString(0, tostring(CQ.VERSION));
-	for _, spec in ipairs(FINGERPRINT_TABLES) do
+local function HashValue(h:number, value)
+	local s = tostring(value);
+	local n = #s;
+	if n > LONG_VALUE then
+		s = string.sub(s, 1, 48) .. string.sub(s, -48) .. "#" .. n;
+	end
+	return HashString(h, s);
+end
+
+--	全库版本：用 DB.Query 列出所有表，逐行计入。
+--	行按 SELECT 的默认顺序（rowid，即插入顺序）依次计入，行顺序不同也会体现出来；
+--	一行内的各列用加法合并，与 pairs 的遍历顺序无关。值为 NULL 的列不出现在行里，两边一致。
+--	返回 指纹, 表数, 行数；DB.Query 不可用或查不到表时返回 nil。
+local function FingerprintAllTables()
+	if DB == nil or DB.Query == nil then return nil; end
+	local ok, tables = pcall(DB.Query,
+		"SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name");
+	if not ok or tables == nil or #tables == 0 then return nil; end
+
+	local h = HashString(0, "ALL");
+	local rowCount = 0;
+	for _, t in ipairs(tables) do
+		local name = t.name;
+		h = HashString(h, name);
+		local okRows, rows = pcall(DB.Query, 'SELECT * FROM "' .. name .. '"');
+		if okRows and rows ~= nil then
+			for _, row in ipairs(rows) do
+				local rowHash = 0;
+				for column, value in pairs(row) do
+					rowHash = (rowHash + HashValue(HashString(0, column), value)) % HASH_MOD;
+				end
+				h = (h * 31 + rowHash) % HASH_MOD;
+			end
+			rowCount = rowCount + #rows;
+			h = HashString(h, tostring(#rows));
+		else
+			h = HashString(h, "?");
+		end
+	end
+	return h, #tables, rowCount;
+end
+
+--	后备：DB.Query 不可用时，只对与玩法最相关的几张表的关键列计算
+local FALLBACK_TABLES :table = {
+	{ "Modifiers", "ModifierId", "ModifierType", "RunOnce", "Permanent", "OwnerRequirementSetId", "SubjectRequirementSetId" },
+	{ "ModifierArguments", "ModifierId", "Name", "Value" },
+	{ "DynamicModifiers", "ModifierType", "CollectionType", "EffectType" },
+	{ "Requirements", "RequirementId", "RequirementType", "Inverse" },
+	{ "RequirementArguments", "RequirementId", "Name", "Value" },
+	{ "RequirementSets", "RequirementSetId", "RequirementSetType" },
+	{ "RequirementSetRequirements", "RequirementSetId", "RequirementId" },
+	{ "TraitModifiers", "TraitType", "ModifierId" },
+	{ "Units", "UnitType", "Cost", "Combat", "RangedCombat", "Bombard", "Range", "BaseMoves", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Buildings", "BuildingType", "Cost", "PrereqDistrict", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Districts", "DistrictType", "Cost", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Improvements", "ImprovementType", "PrereqTech", "PrereqCivic", "TraitType" },
+	{ "Resources", "ResourceType", "ResourceClassType", "Frequency" },
+	{ "Resource_Harvests", "ResourceType", "YieldType", "Amount", "PrereqTech" },
+	{ "Features", "FeatureType", "Removable", "Impassable" },
+	{ "Technologies", "TechnologyType", "Cost" },
+	{ "Civics", "CivicType", "Cost" },
+	{ "GlobalParameters", "Name", "Value" },
+};
+
+local function FingerprintFallbackTables()
+	local h = HashString(0, "PARTIAL");
+	local rowCount = 0;
+	for _, spec in ipairs(FALLBACK_TABLES) do
 		h = HashString(h, spec[1]);
 		local ok, tbl = pcall(function() return GameInfo[spec[1]]; end);
 		if ok and tbl ~= nil then
@@ -330,15 +364,39 @@ function CQ.GetFingerprint()
 			for row in tbl() do
 				count = count + 1;
 				for i = 2, #spec do
-					h = HashString(h, tostring(row[spec[i]]));
+					h = HashValue(h, row[spec[i]]);
 				end
 			end
+			rowCount = rowCount + count;
 			h = HashString(h, tostring(count));
 		end
 	end
+	return h, #FALLBACK_TABLES, rowCount;
+end
+
+local m_Fingerprint :number = nil;
+
+--	返回数字指纹（属性里存数字比存字符串稳妥）；结果缓存，每次进入游戏只遍历一次数据库
+function CQ.GetFingerprint()
+	if m_Fingerprint ~= nil then return m_Fingerprint; end
+	local clock = (os ~= nil and os.clock ~= nil) and os.clock or nil;
+	local startTime = clock and clock();
+
+	local mode = "full";
+	local ok, h, tableCount, rowCount = pcall(FingerprintAllTables);
+	if not ok or h == nil then
+		mode = "partial";
+		h, tableCount, rowCount = FingerprintFallbackTables();
+	end
+	h = HashString(h, tostring(CQ.VERSION));
+
 	-- 指纹要经 EXECUTE_SCRIPT 参数传输，不确定引擎按整数还是单精度浮点序列化，
 	-- 压到 2^24 以内，两种情况下都能精确传递
 	m_Fingerprint = h % 16777213;
+
+	local elapsed = startTime and string.format(" in %.2fs", clock() - startTime) or "";
+	print(string.format("[CivConquest] Fingerprint %06X (%s: %d tables, %d rows%s)",
+		m_Fingerprint, mode, tableCount or 0, rowCount or 0, elapsed));
 	return m_Fingerprint;
 end
 

@@ -14,7 +14,7 @@
     - 会改状态的循环不要依赖 `pairs` 的遍历顺序，先排序。
     - 处理 UI 请求的 GameEvents 回调要先校验参数类型：参数来自网络。
     - 不要在 `GameEvents.CityConquered` 里做重活（挂修改器、`WorldBuilder` 改区域），记个标记，留到 `PlayerTurnStarted` 处理（AI 自动激活就是这样做的）。
-    - 联机一致性检查：UI 对数据库算指纹（`CQ.GetFingerprint()`，表清单在 `CivConquest_Common.lua`），经 `EXECUTE_SCRIPT` 上报到玩家属性，各电脑的 UI 互相比对，不一致时弹窗。**改了 Lua 后把 `CQ.VERSION` 加 1**：只改 Lua 时数据库不变，靠它发现两边脚本版本不同。
+    - 联机一致性检查：UI 读档时用 `DB.Query` 遍历整个 Gameplay 数据库算指纹（`CQ.GetFingerprint()`，每次进入游戏算一次并缓存；`DB.Query` 不可用时退回到 `GameInfo` 的几张核心表），经 `EXECUTE_SCRIPT` 上报到玩家属性，各电脑的 UI 互相比对，不一致时弹窗。**改了 Lua 后把 `CQ.VERSION` 加 1**：只改 Lua 时数据库不变，靠它发现两边脚本版本不同。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。
 - `docs/modding-guide.md`：文明六 mod 机制新手教程（数据库、修改器、Lua 两个环境、联机同步、modinfo、ArtDef、调试），不进游戏。
@@ -45,7 +45,7 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
   - `CQ.DEBUG_LOG`（`Scripts/CivConquest_Common.lua`）开启时，`UI/CivConquestDebug.lua` 会在单位训练/购买时写 `[CivConquest] Debug: turn N player P trained|purchased(<purchaseType>) UNIT_X in City | culture +Δ | CIVIC_Y 进度`。Δ 是与上一次快照（回合开始或上一条记录）的市政进度差；换了市政时显示 `?`。回合开始的快照不含当回合文化产出，所以每回合第一条会附带 `(net ... after turn yield ...)`，看 net 即可。
   - 这段放在 UI 环境：`PlayerCulture:GetProgressingCivic()` / `GetCulturalProgress()` 在 Gameplay 脚本里不可用，实测会失败。
   - 每个玩家回合开始时，Gameplay 脚本会写 `[CivConquest] Sync turn N player P unlocks=... traits=...`（只写有解锁、激活或上报过指纹的玩家），末尾的 `fp=` 是该玩家电脑上报的数据库指纹。联机不同步时，对比两台电脑同一回合的这一行，不一样就是本模式的状态分叉了。
-  - `[CivConquest] Local fingerprint X` 是本机指纹；`[CivConquest] Mod mismatch!` 表示有玩家的指纹和本机不同，即两边加载的 mod 内容不一样。
+  - `[CivConquest] Fingerprint X (full|partial: N tables, M rows in Ts)` 是本机指纹和计算耗时，`partial` 表示退回到了后备算法；`[CivConquest] Mod mismatch!` 表示有玩家的指纹和本机不同，即两边加载的 mod 内容不一样。
 - 修改 `.modinfo` 后需要重启游戏（或在「附加内容」里重新启用 mod）才会生效；只改 Lua / SQL 时重新读档即可。
 - `Database.log`、`Modding.log`：数据和 mod 加载问题。
 

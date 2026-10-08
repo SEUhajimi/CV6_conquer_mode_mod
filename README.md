@@ -31,7 +31,7 @@
 
 联机时所有玩家的 mod 文件必须完全一致，否则从第一回合起就会不同步（OOS）并反复掉线。手动安装的 mod 不会像创意工坊那样自动更新，每次更新后都要重新分发给所有玩家。
 
-联机房间只核对 mod 的 ID，不核对文件内容。本模式进入游戏后会对游戏数据库算一个指纹并互相比对；不一致时会弹窗提示，并在 `Lua.log` 里写 `[CivConquest] Mod mismatch!`。看到提示就说明各电脑加载的内容不同（任何 mod 都可能是原因，不只是本模式），先统一 mod 文件再继续。
+联机房间只核对 mod 的 ID，不核对文件内容。本模式读档后会对整个游戏数据库（所有表、所有行）算一个指纹并互相比对；不一致时会弹窗提示，并在 `Lua.log` 里写 `[CivConquest] Mod mismatch!`。看到提示就说明各电脑加载的内容不同（任何 mod 都可能是原因，不只是本模式），先统一 mod 文件再继续。
 
 ### 开发
 
@@ -103,7 +103,7 @@ The repository also carries two standalone mods played together with this mode i
 
 In multiplayer every player's mod files must match exactly; otherwise the game goes out of sync (OOS) from the first turn and keeps disconnecting. Manually installed mods don't update automatically like Workshop mods, so redistribute them to every player after each update.
 
-The multiplayer lobby only checks mod IDs, not file contents. Once in game, this mode computes a fingerprint of the game database on each computer and compares them; on a mismatch it shows a popup and writes `[CivConquest] Mod mismatch!` to `Lua.log`. That means the computers loaded different content (any mod can be the cause, not just this one); make the mod files identical before playing on.
+The multiplayer lobby only checks mod IDs, not file contents. After loading, this mode computes a fingerprint of the entire game database (every table and row) on each computer and compares them; on a mismatch it shows a popup and writes `[CivConquest] Mod mismatch!` to `Lua.log`. That means the computers loaded different content (any mod can be the cause, not just this one); make the mod files identical before playing on.
 
 ### Development
 
