@@ -21,6 +21,17 @@ local GROUPS = {
 	{ Key = "OTHER",	Patterns = {} },
 };
 
+-- 古典进黄金路线：远古时代按顺序做的几步，Patterns 用来统计这一步本时代已拿的分
+local ROUTE_STEPS = {
+	{ Key = "SCOUT",	Patterns = { "MOMENT_GOODY_HUT_TRIGGERED", "MOMENT_FIND_NATURAL_WONDER", "MOMENT_PLAYER_MET_" } },
+	{ Key = "BARB",		Patterns = { "MOMENT_BARBARIAN_CAMP_DESTROYED" } },
+	{ Key = "UNIQUE",	Patterns = { "_FIRST_UNIQUE" } },
+	{ Key = "WONDER",	Patterns = { "_ERA_WONDER" } },
+	{ Key = "FAITH",	Patterns = { "MOMENT_PANTHEON_FOUNDED", "MOMENT_RELIGION_FOUNDED" } },
+	{ Key = "ADJ",		Patterns = { "_HIGH_ADJACENCY_" } },
+	{ Key = "MISC",		Patterns = { "MOMENT_CITY_BUILT_", "_IN_ERA_FIRST", "MOMENT_CITY_SIZE_", "MOMENT_GREAT_PERSON_CREATED_", "BECAME_SUZERAIN" } },
+};
+
 local m_Guide		= nil;		-- 挂进面板的 GuideInstance
 local m_GroupIM		= nil;
 local m_ShowAll		= false;	-- false：只显示当前时代还能拿的
@@ -230,6 +241,33 @@ local function DedicationText(localPlayerID)
 	return Locale.Lookup("LOC_ESG_DEDICATION_NOTE") .. "[NEWLINE][NEWLINE]" .. table.concat(lines, "[NEWLINE][NEWLINE]"), count;
 end
 
+-- 古典进黄金：远古时代显示每一步本时代已拿的基础分，其他时代只当参考
+local function RouteText(localPlayerID, isAncient)
+	local mine = isAncient and CollectMoments(localPlayerID, Game.GetEras():GetCurrentEra()) or {};
+	local lines = { Locale.Lookup(isAncient and "LOC_ESG_ROUTE_INTRO" or "LOC_ESG_ROUTE_INTRO_LATER") };
+	local total = 0;
+	for i, step in ipairs(ROUTE_STEPS) do
+		local earned = 0;
+		for momentType, entry in pairs(mine) do
+			for _, pattern in ipairs(step.Patterns) do
+				if string.find(momentType, pattern, 1, true) then
+					local row = GameInfo.Moments[momentType];
+					if row and row.EraScore then earned = earned + row.EraScore * entry.ThisEra; end
+					break;
+				end
+			end
+		end
+		total = total + earned;
+		local line = "[COLOR_Civ6Yellow]" .. i .. ". " .. Locale.Lookup("LOC_ESG_ROUTE_" .. step.Key .. "_TITLE") .. "[ENDCOLOR]";
+		if isAncient then
+			line = line .. "  " .. Locale.Lookup(earned > 0 and "LOC_ESG_ROUTE_EARNED" or "LOC_ESG_ROUTE_NONE", earned);
+		end
+		table.insert(lines, line .. "[NEWLINE]" .. Locale.Lookup("LOC_ESG_ROUTE_" .. step.Key .. "_BODY"));
+	end
+	table.insert(lines, Locale.Lookup("LOC_ESG_ROUTE_TIPS"));
+	return table.concat(lines, "[NEWLINE][NEWLINE]"), total;
+end
+
 local function SummaryText(localPlayerID)
 	local pEras = Game.GetEras();
 	local score = pEras:GetPlayerCurrentScore(localPlayerID);
@@ -287,6 +325,15 @@ local function Refresh()
 	m_Guide.FilterLabel:SetText(Locale.Lookup(m_ShowAll and "LOC_ESG_FILTER_ALL" or "LOC_ESG_FILTER_AVAILABLE"));
 
 	m_GroupIM:ResetInstances();
+
+	-- 古典进黄金放最上面；远古时代默认展开（玩家手动收起后保持收起）
+	local ancient = GameInfo.Eras["ERA_ANCIENT"];
+	local isAncient = ancient ~= nil and Game.GetEras():GetCurrentEra() == ancient.Index;
+	if m_Expanded.ROUTE == nil then m_Expanded.ROUTE = isAncient; end
+	local routeText, routeTotal = RouteText(localPlayerID, isAncient);
+	AddGroup("ROUTE", Locale.Lookup("LOC_ESG_GROUP_ROUTE"), routeText,
+		isAncient and Locale.Lookup("LOC_ESG_ROUTE_COUNT", routeTotal) or Locale.Lookup("LOC_ESG_ROUTE_COUNT_LATER"));
+
 	local groups = BuildEntries(localPlayerID);
 	for _, group in ipairs(GROUPS) do
 		local list = groups[group.Key];

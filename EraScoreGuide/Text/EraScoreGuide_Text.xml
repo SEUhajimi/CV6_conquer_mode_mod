@@ -92,6 +92,74 @@
 			<Text>(chosen)</Text>
 		</Replace>
 
+		<Replace Tag="LOC_ESG_GROUP_ROUTE" Language="en_US">
+			<Text>★ Golden Age into the Classical Era</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_COUNT" Language="en_US">
+			<Text>{1_Num} from the route</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_COUNT_LATER" Language="en_US">
+			<Text>Ancient Era reference</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_INTRO" Language="en_US">
+			<Text>To enter the Classical Era in a Golden Age, you need enough Era Score during the [COLOR_Civ6Yellow]Ancient Era[ENDCOLOR]. The Golden Age threshold starts at [COLOR_Civ6Yellow]28[ENDCOLOR] and [COLOR_Red]goes up by 1 for every city you own[ENDCOLOR]. The green number after each step is the base Era Score you earned from it this era. No single moment is worth much, so work on several steps at once.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_INTRO_LATER" Language="en_US">
+			<Text>[COLOR_Grey]This is the route for a Golden Age out of the Ancient Era. You are past that era, so it is for reference only. Later eras work the same way: grab this era's firsts and work on several fronts at once.[ENDCOLOR]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_EARNED" Language="en_US">
+			<Text>[COLOR_Green]{1_Num} earned[ENDCOLOR]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_NONE" Language="en_US">
+			<Text>[COLOR_Grey]none yet[ENDCOLOR]</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_ROUTE_SCOUT_TITLE" Language="en_US">
+			<Text>Explore with two Scouts (about 8-12)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_SCOUT_BODY" Language="en_US">
+			<Text>· Tribal Village +1 each, [COLOR_Red]Ancient Era only[ENDCOLOR], so the earlier the better[NEWLINE]· Discover a natural wonder +1, first in the world +3[NEWLINE]· Meet a major civ +1 each; meet all of them +3, first in the world +5[NEWLINE]Open with a Scout and send the second one the other way.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_BARB_TITLE" Language="en_US">
+			<Text>Clear Barbarian Outposts (2-3 each)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_BARB_BODY" Language="en_US">
+			<Text>· Destroy a Barbarian Outpost +2, +3 if it is near your city, Ancient through Medieval Era[NEWLINE]Once a Scout finds an outpost, send 2 Warriors or Slingers. Kill barbarian scouts first: if one finds your city and gets back to its outpost, the outpost starts sending raiders. 3-4 outposts are worth 8-12.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_UNIQUE_TITLE" Language="en_US">
+			<Text>Build your unique unit / building / district / improvement early (4 each)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_UNIQUE_BODY" Language="en_US">
+			<Text>· The first of each unique item +4, the biggest single moment in the Ancient Era[NEWLINE]Build one of each unique you can unlock early. In Civilization Conquest Mode, uniques activated from other civs should count too (not tested yet).</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_WONDER_TITLE" Language="en_US">
+			<Text>Build an Ancient wonder (4)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_WONDER_BODY" Language="en_US">
+			<Text>· A wonder of the current era +4, of a past era +3[NEWLINE]Pick one Ancient wonder such as Stonehenge, the Pyramids or the Hanging Gardens and chop into it in your capital. In multiplayer, check what the others are building first.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_FAITH_TITLE" Language="en_US">
+			<Text>Get a pantheon early (1-2, a religion +2-3 more)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_FAITH_BODY" Language="en_US">
+			<Text>· Found a pantheon +1, first in the world +2[NEWLINE]· Found a religion +2, first in the world +3[NEWLINE]25 Faith is enough for a pantheon; your first Holy Site can also earn step 6.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_ADJ_TITLE" Language="en_US">
+			<Text>First high-adjacency district (3 each)</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_ADJ_BODY" Language="en_US">
+			<Text>· The first of each district type with a starting adjacency bonus of [COLOR_Civ6Yellow]+3 or more[ENDCOLOR] +3: Holy Site, Campus, Commercial Hub, Theater Square, Harbor, Industrial Zone[NEWLINE]Place your first Holy Site or Campus next to mountains, rainforest or a natural wonder, and check that the adjacency shows +3 before you place it.</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_MISC_TITLE" Language="en_US">
+			<Text>Small extras along the way</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_MISC_BODY" Language="en_US">
+			<Text>· First tech / first civic of the era +1, first in the world +2[NEWLINE]· Settle next to a natural wonder +3; on desert, tundra, snow, near a volcano or a floodable river +1[NEWLINE]· A city reaching a new size tier for the first time +1, first in the world +2[NEWLINE]· Recruit a Great Person +1; first in the world to become suzerain of a city-state +2</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_TIPS" Language="en_US">
+			<Text>[COLOR_Civ6Yellow]Reminders[ENDCOLOR][NEWLINE]· Every city raises the threshold, so pace your expansion with your score[NEWLINE]· Era Score is tallied the moment the new era starts; once the global era countdown appears, catch up fast[NEWLINE]· Remember to pick a dedication when the Golden Age starts</Text>
+		</Replace>
+
 		<!-- ================================================================== -->
 		<!--	简体中文															-->
 		<!-- ================================================================== -->
@@ -181,6 +249,74 @@
 		</Replace>
 		<Replace Tag="LOC_ESG_STATE_CHOSEN" Language="zh_Hans_CN">
 			<Text>（已选择）</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_GROUP_ROUTE" Language="zh_Hans_CN">
+			<Text>★ 古典进黄金路线</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_COUNT" Language="zh_Hans_CN">
+			<Text>路线已拿 {1_Num} 分</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_COUNT_LATER" Language="zh_Hans_CN">
+			<Text>远古时代参考</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_INTRO" Language="zh_Hans_CN">
+			<Text>想进入古典时代时是黄金时代，就要在[COLOR_Civ6Yellow]远古时代[ENDCOLOR]内攒够分。黄金时代门槛基础 [COLOR_Civ6Yellow]28[ENDCOLOR] 分，[COLOR_Red]每多一座城门槛 +1[ENDCOLOR]。下面每一步后面的绿色数字是这一步本时代已经拿到的基础分。单项分都不高，要几条线同时推进。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_INTRO_LATER" Language="zh_Hans_CN">
+			<Text>[COLOR_Grey]下面是远古时代冲黄金的路线，当前已不在远古时代，只当参考。之后每个时代思路也类似：抢本时代首次，多线并进。[ENDCOLOR]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_EARNED" Language="zh_Hans_CN">
+			<Text>[COLOR_Green]已拿 {1_Num} 分[ENDCOLOR]</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_NONE" Language="zh_Hans_CN">
+			<Text>[COLOR_Grey]还没拿[ENDCOLOR]</Text>
+		</Replace>
+
+		<Replace Tag="LOC_ESG_ROUTE_SCOUT_TITLE" Language="zh_Hans_CN">
+			<Text>开局双侦察兵探图（约 8～12 分）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_SCOUT_BODY" Language="zh_Hans_CN">
+			<Text>· 部落村庄 +1 / 个，[COLOR_Red]只在远古时代给分[ENDCOLOR]，越早吃越多[NEWLINE]· 发现自然奇观 +1，世界首个发现 +3[NEWLINE]· 遇到主要文明 +1 / 个；遇齐所有主要文明 +3，世界首个遇齐 +5[NEWLINE]首发可以先出侦察兵，第二个侦察兵往反方向走。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_BARB_TITLE" Language="zh_Hans_CN">
+			<Text>清蛮族营地（每个 2～3 分）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_BARB_BODY" Language="zh_Hans_CN">
+			<Text>· 摧毁蛮族营地 +2，营地在自己城市附近 +3，远古到中世纪都有效[NEWLINE]侦察兵发现营地后，派 2 个勇士或投石兵去打；看到蛮族侦察兵要先打掉，它发现你的城市后跑回营地，营地就会开始刷兵来打你。打掉 3～4 个就是 8～12 分。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_UNIQUE_TITLE" Language="zh_Hans_CN">
+			<Text>尽早造出特色单位 / 建筑 / 区域 / 改良（每种 4 分）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_UNIQUE_BODY" Language="zh_Hans_CN">
+			<Text>· 每种特色项目第一次造出 +4，是远古单项最高的分[NEWLINE]开局就能造的特色单位，或远古科技解锁的特色建筑、改良，要优先造一个。文明征服模式里，激活其他文明的特色项目后第一次造出，按规则应该也算（还没实测）。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_WONDER_TITLE" Language="zh_Hans_CN">
+			<Text>造一个远古奇观（4 分）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_WONDER_BODY" Language="zh_Hans_CN">
+			<Text>· 本时代的奇观 +4，之前时代的奇观 +3[NEWLINE]巨石阵、金字塔、空中花园等远古奇观选一个，首都用砍树加速。联机时先看别人有没有在造，别撞车。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_FAITH_TITLE" Language="zh_Hans_CN">
+			<Text>抢万神殿（1～2 分，能建宗教再 +2～3）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_FAITH_BODY" Language="zh_Hans_CN">
+			<Text>· 建立万神殿 +1，世界首个 +2[NEWLINE]· 创立宗教 +2，世界首个 +3[NEWLINE]攒够 25 信仰就能立万神殿；第一座圣地同时还能拿下面第 6 步的分。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_ADJ_TITLE" Language="zh_Hans_CN">
+			<Text>首个高相邻区域（每种 3 分）</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_ADJ_BODY" Language="zh_Hans_CN">
+			<Text>· 每种区域第一座起始相邻加成 [COLOR_Civ6Yellow]≥ +3[ENDCOLOR] 时 +3：圣地、学院、商业中心、剧院广场、港口、工业区[NEWLINE]第一座圣地或学院不要随手放，选靠山脉、雨林、自然奇观的位置，放下去时看一下相邻数字有没有 +3。</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_MISC_TITLE" Language="zh_Hans_CN">
+			<Text>顺手拿的零碎分</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_MISC_BODY" Language="zh_Hans_CN">
+			<Text>· 本时代首个科技 / 首个市政 +1，世界首个 +2[NEWLINE]· 城市建在自然奇观旁 +3；建在沙漠、冻土、雪地、火山或会泛滥的河边 +1[NEWLINE]· 城市人口第一次达到某个档位 +1，世界首个 +2[NEWLINE]· 招募伟人 +1；世界首个成为城邦宗主国 +2</Text>
+		</Replace>
+		<Replace Tag="LOC_ESG_ROUTE_TIPS" Language="zh_Hans_CN">
+			<Text>[COLOR_Civ6Yellow]提醒[ENDCOLOR][NEWLINE]· 多铺城会抬高门槛，铺城要和拿分节奏搭配[NEWLINE]· 时代分在进入新时代那一刻结算，看到全局时代倒计时就要赶紧补分[NEWLINE]· 进了黄金时代后，新时代开始时记得选致辞</Text>
 		</Replace>
 	</LocalizedText>
 </GameData>
