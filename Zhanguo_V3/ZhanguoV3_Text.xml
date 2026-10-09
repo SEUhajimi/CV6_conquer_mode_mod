@@ -9,8 +9,8 @@
 		<Row Tag="LOC_ZHANGUOV3_MOD_DESC" Language="en_US"><Text>Fixed-terrain Warring States China (Huge, 106x66). Major rivers are coast tiles; passes are gaps in mountain ranges.</Text></Row>
 		<Row Tag="LOC_MAP_ZHANGUOV3_NAME" Language="zh_Hans_CN"><Text>战国七雄 V3</Text></Row>
 		<Row Tag="LOC_MAP_ZHANGUOV3_NAME" Language="en_US"><Text>Warring States China V3</Text></Row>
-		<Row Tag="LOC_MAP_ZHANGUOV3_DESC" Language="zh_Hans_CN"><Text>秦、楚、齐、燕、韩、赵、魏与周。关中四塞，蜀道，三峡夷陵，太行八陉。（V3.22 · 2026-10-09）</Text></Row>
-		<Row Tag="LOC_MAP_ZHANGUOV3_DESC" Language="en_US"><Text>Qin, Chu, Qi, Yan, Han, Zhao, Wei and Zhou, with the famous passes of ancient China. (V3.22, 2026-10-09)</Text></Row>
+		<Row Tag="LOC_MAP_ZHANGUOV3_DESC" Language="zh_Hans_CN"><Text>秦、楚、齐、燕、韩、赵、魏与周。关中四塞，蜀道，三峡夷陵，太行八陉。（V3.23 · 2026-10-09）</Text></Row>
+		<Row Tag="LOC_MAP_ZHANGUOV3_DESC" Language="en_US"><Text>Qin, Chu, Qi, Yan, Han, Zhao, Wei and Zhou, with the famous passes of ancient China. (V3.23, 2026-10-09)</Text></Row>
 			<Replace Tag="LOC_BUILDING_PANAMA_CANAL_NAME" Language="zh_Hans_CN"><Text>京杭大运河</Text></Replace>
 		<Replace Tag="LOC_BUILDING_PANAMA_CANAL_NAME" Language="zh_Hant_TW"><Text>京杭大運河</Text></Replace>
 		<Replace Tag="LOC_BUILDING_PANAMA_CANAL_NAME" Language="en_US"><Text>Grand Canal</Text></Replace>
