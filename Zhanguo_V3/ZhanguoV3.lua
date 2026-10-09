@@ -1,4 +1,4 @@
--- 战国七雄 / Warring States China  V3.20 (2026-10-09)
+-- 战国七雄 / Warring States China  V3.21 (2026-10-09)
 -- 106 x 66 (Huge) fixed-terrain map.  Rows are listed north -> south.
 -- Terrain legend:  ~ ocean   c coast (rivers)   g grass  G grass hills   p plains  P plains hills
 --                  d desert  D desert hills     M mountain   S snow mountain
@@ -4451,7 +4451,7 @@ local function TI(name) local t = GameInfo.Terrains[name]; if t then return t.In
 local function FI(name) local f = GameInfo.Features[name]; if f then return f.Index end; return nil end
 
 function GenerateMap()
-	print("Generating Warring States China map V3.20 (2026-10-09)")
+	print("Generating Warring States China map V3.21 (2026-10-09)")
 	g_iW, g_iH = Map.GetGridSize()
 	local W, H = g_iW, g_iH
 	pcall(function() g_iFlags = TerrainBuilder.GetFractalFlags() end)
@@ -4574,10 +4574,11 @@ function GenerateMap()
 
 	-- 3b. natural wonders (the game picks suitable spots), then keep passes and city sites clear of them
 	pcall(function()
-		local n = 14
+		-- twice the old count (default + 6): the map is mostly land
+		local n = 28
 		pcall(function()
 			local info = GameInfo.Maps[Map.GetMapSize()]
-			if info ~= nil and info.NumNaturalWonders ~= nil then n = info.NumNaturalWonders + 6 end
+			if info ~= nil and info.NumNaturalWonders ~= nil then n = (info.NumNaturalWonders + 6) * 2 end
 		end)
 		NaturalWonderGenerator.Create({ numberToPlace = n })
 	end)
@@ -4591,6 +4592,12 @@ function GenerateMap()
 				if t ~= nil then TerrainBuilder.SetTerrainType(p, t) end
 			end
 		end
+		local nw = 0
+		for k = 0, W * H - 1 do
+			local p = Map.GetPlotByIndex(k)
+			if p ~= nil and p:IsNaturalWonder() then nw = nw + 1 end
+		end
+		print("Natural wonders: " .. tostring(nw) .. " plots after clearing passes and city sites")
 	end)
 
 	-- 4. resources
@@ -4810,21 +4817,25 @@ function GenerateMap()
 		local hutInfo = GameInfo.Improvements["IMPROVEMENT_GOODY_HUT"]
 		local hutIdx = nil
 		if hutInfo ~= nil then hutIdx = hutInfo.Index end
-		local function CountHuts()
-			local n = 0
+		-- respect the "No Tribal Villages" game option (AddGoodies already checks it, our top-up must too)
+		if GameConfiguration.GetValue("GAME_NO_GOODY_HUTS") == true then print("Goodies: game set to no tribal villages"); return end
+		local placed = {}
+		local function FindHuts()
+			placed = {}
 			if hutIdx == nil then return 0 end
 			for k = 0, W * H - 1 do
 				local p = Map.GetPlotByIndex(k)
-				if p ~= nil and p:GetImprovementType() == hutIdx then n = n + 1 end
+				if p ~= nil and p:GetImprovementType() == hutIdx then placed[#placed + 1] = { x = p:GetX(), y = p:GetY() } end
 			end
-			return n
+			return #placed
 		end
 		local okg, errg = pcall(function() AddGoodies(g_iW, g_iH) end)
 		print("Goodies: AddGoodies ok=" .. tostring(okg) .. " err=" .. tostring(errg))
-		local have = CountHuts()
+		local have = FindHuts()
 		print("Goodies: tribal villages after AddGoodies = " .. tostring(have))
 		if hutIdx == nil then print("Goodies: IMPROVEMENT_GOODY_HUT not found"); return end
-		-- our own placement: about one village per 70 land tiles, at least 7 tiles from every start, 5 tiles apart
+		-- our own placement: about one village per 35 land tiles (twice the old density, the map is mostly land),
+		-- at least 7 tiles from every start, 3 tiles from any other village
 		local keep = {}
 		for _, c in ipairs(KEEP_CELLS) do keep[c.y * W + c.x] = true end
 		local cand = {}
@@ -4842,20 +4853,19 @@ function GenerateMap()
 				if ok then cand[#cand + 1] = k end
 			end
 		end
-		local target = math.floor(landCount / 70)
+		local target = math.floor(landCount / 35)
 		if have >= target then print("Goodies: enough villages already"); return end
 		for i = #cand, 2, -1 do
 			local j = TerrainBuilder.GetRandomNumber(i, "Hut shuffle") + 1
 			cand[i], cand[j] = cand[j], cand[i]
 		end
-		local placed = {}
 		local made = 0
 		for _, k in ipairs(cand) do
 			if have + made >= target then break end
 			local p = Map.GetPlotByIndex(k)
 			local far = true
 			for _, q in ipairs(placed) do
-				if Map.GetPlotDistance(p:GetX(), p:GetY(), q.x, q.y) < 5 then far = false; break end
+				if Map.GetPlotDistance(p:GetX(), p:GetY(), q.x, q.y) < 3 then far = false; break end
 			end
 			if far then
 				local okp = pcall(function() ImprovementBuilder.SetImprovementType(p, hutIdx, -1) end)
