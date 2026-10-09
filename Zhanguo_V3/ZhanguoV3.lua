@@ -1,4 +1,4 @@
--- 战国七雄 / Warring States China  V3.25 (2026-10-09)
+-- 战国七雄 / Warring States China  V3.26 (2026-10-09)
 -- 106 x 66 (Huge) fixed-terrain map.  Rows are listed north -> south.
 -- Terrain legend:  ~ ocean   c coast (rivers)   g grass  G grass hills   p plains  P plains hills
 --                  d desert  D desert hills     M mountain   S snow mountain
@@ -4470,7 +4470,7 @@ local function TI(name) local t = GameInfo.Terrains[name]; if t then return t.In
 local function FI(name) local f = GameInfo.Features[name]; if f then return f.Index end; return nil end
 
 function GenerateMap()
-	print("Generating Warring States China map V3.25 (2026-10-09)")
+	print("Generating Warring States China map V3.26 (2026-10-09)")
 	g_iW, g_iH = Map.GetGridSize()
 	local W, H = g_iW, g_iH
 	pcall(function() g_iFlags = TerrainBuilder.GetFractalFlags() end)
@@ -4883,7 +4883,7 @@ function GenerateMap()
 
 	-- 5b. even out the major starts: bring the bonus resources within 3 tiles of each start to a target,
 	--     a little higher where the start has little usable land (luxuries and strategics are left alone)
-	local BONUS_TARGET, BONUS_MAX_EXTRA = 5, 2
+	local BONUS_TARGET, BONUS_MAX_EXTRA = 5, 1
 	local BONUS_NAMES = { "WHEAT", "RICE", "MAIZE", "CATTLE", "SHEEP", "DEER", "BANANAS", "STONE", "COPPER", "FISH", "CRABS" }
 	local function ResInfo(plot)
 		local r = plot:GetResourceType()
@@ -4962,6 +4962,44 @@ function GenerateMap()
 		end
 	end)
 	if not okb then print("StartBalance error: " .. tostring(errb)) end
+
+	-- 5c. every major start gets at least one of each strategic resource within 8 tiles (the guaranteed list only
+	--     covers the original starts, so newer ones could end up with none)
+	local STRATEGIC_NAMES = { "HORSES", "IRON", "NITER", "COAL", "OIL", "ALUMINUM", "URANIUM" }
+	local STRATEGIC_RANGE = 8
+	local oks2, errs2 = pcall(function()
+		for _, pid in ipairs(PlayerManager.GetAliveMajorIDs()) do
+			local sp = Players[pid]:GetStartingPlot()
+			if sp then
+				local around = PlotsAround(sp:GetX(), sp:GetY(), 1, STRATEGIC_RANGE)
+				local have = {}
+				for _, p in ipairs(around) do
+					local info = ResInfo(p)
+					if info then have[info.ResourceType] = true end
+				end
+				local spots = PlotsAround(sp:GetX(), sp:GetY(), 3, STRATEGIC_RANGE)
+				Shuffle(spots, "Start strategic spots")
+				local added = {}
+				for _, nm in ipairs(STRATEGIC_NAMES) do
+					local info = GameInfo.Resources["RESOURCE_" .. nm]
+					if info and not have[info.ResourceType] then
+						for _, p in ipairs(spots) do
+							if p:GetResourceType() < 0 and not p:IsWater() and not p:IsNaturalWonder()
+								and ResourceBuilder.CanHaveResource(p, info.Index) then
+								ResourceBuilder.SetResourceType(p, info.Index, 1)
+								added[#added + 1] = nm
+								break
+							end
+						end
+					end
+				end
+				if #added > 0 then
+					print("StartBalance: player " .. tostring(pid) .. " added strategic " .. table.concat(added, ", "))
+				end
+			end
+		end
+	end)
+	if not oks2 then print("StartBalance strategic error: " .. tostring(errs2)) end
 
 	-- 6. tribal villages ("mushrooms"): randomised every game, kept away from every start position
 	pcall(function()
