@@ -1,4 +1,4 @@
--- 战国七雄 / Warring States China  V3.23 (2026-10-09)
+-- 战国七雄 / Warring States China  V3.24 (2026-10-09)
 -- 106 x 66 (Huge) fixed-terrain map.  Rows are listed north -> south.
 -- Terrain legend:  ~ ocean   c coast (rivers)   g grass  G grass hills   p plains  P plains hills
 --                  d desert  D desert hills     M mountain   S snow mountain
@@ -15,7 +15,7 @@ include "AssignStartingPlots"
 
 local MAP_W, MAP_H = 106, 66
 local USE_FIXED_STARTS = true
-local USE_SITE_RESOURCES = true  -- set true to force the nine Warring States start positions
+local USE_SITE_RESOURCES = true  -- place the fixed resource lists below (city sites, guaranteed, scatter)
 -- the fixed resource lists below are placed on top of the game's own resources, so keep them light
 local USE_SCATTER_RESOURCES = false  -- regional scatter list (~350 extra resources all over the map)
 local GUAR_RESOURCES_STEP = 2        -- thin the guaranteed list: keep every Nth spot of each run of the same resource
@@ -174,7 +174,10 @@ local START_POSITIONS = {
 	{ name = "Xuzhou", x = 79, y = 32 },
 	{ name = "Chongqing", x = 24, y = 11 },
 	{ name = "Nanjing", x = 87, y = 20 },
-	{ name = "Kuaiji", x = 93, y = 11 }
+	{ name = "Kuaiji", x = 93, y = 11 },
+	{ name = "Hanzhong", x = 29, y = 25 },
+	{ name = "Jiangling", x = 52, y = 15 },
+	{ name = "Daliang", x = 66, y = 33 }
 }
 
 -- Leader bindings: a leader whose type name contains `match` always gets one of its preferred start positions (in order)
@@ -553,36 +556,43 @@ local RES_ALTS = {
 
 local HUMAN_SAFEST = false  -- (off) when true, the human player is put on one of the most isolated of the chosen start positions
 local START_DIST = {
-	["Handan"] = { ["Handan"] = 0, ["Jinyang"] = 14, ["Xianyang"] = 35, ["Luoyang"] = 19, ["Xiangyang"] = 27, ["Chengdu"] = 69, ["Hefei"] = 42, ["Anyi"] = 21, ["Ji"] = 19, ["Linzi"] = 22, ["Xuzhou"] = 19, ["Chongqing"] = 63, ["Nanjing"] = 33, ["Kuaiji"] = 44 },
-	["Jinyang"] = { ["Handan"] = 14, ["Jinyang"] = 0, ["Xianyang"] = 29, ["Luoyang"] = 20, ["Xiangyang"] = 31, ["Chengdu"] = 63, ["Hefei"] = 50, ["Anyi"] = 16, ["Ji"] = 24, ["Linzi"] = 32, ["Xuzhou"] = 32, ["Chongqing"] = 57, ["Nanjing"] = 46, ["Kuaiji"] = 57 },
-	["Xianyang"] = { ["Handan"] = 35, ["Jinyang"] = 29, ["Xianyang"] = 0, ["Luoyang"] = 19, ["Xiangyang"] = 23, ["Chengdu"] = 34, ["Hefei"] = 50, ["Anyi"] = 15, ["Ji"] = 52, ["Linzi"] = 54, ["Xuzhou"] = 46, ["Chongqing"] = 28, ["Nanjing"] = 57, ["Kuaiji"] = 68 },
-	["Luoyang"] = { ["Handan"] = 19, ["Jinyang"] = 20, ["Xianyang"] = 19, ["Luoyang"] = 0, ["Xiangyang"] = 11, ["Chengdu"] = 53, ["Hefei"] = 31, ["Anyi"] = 9, ["Ji"] = 36, ["Linzi"] = 35, ["Xuzhou"] = 27, ["Chongqing"] = 47, ["Nanjing"] = 39, ["Kuaiji"] = 50 },
-	["Xiangyang"] = { ["Handan"] = 27, ["Jinyang"] = 31, ["Xianyang"] = 23, ["Luoyang"] = 11, ["Xiangyang"] = 0, ["Chengdu"] = 46, ["Hefei"] = 28, ["Anyi"] = 20, ["Ji"] = 44, ["Linzi"] = 43, ["Xuzhou"] = 35, ["Chongqing"] = 37, ["Nanjing"] = 35, ["Kuaiji"] = 46 },
-	["Chengdu"] = { ["Handan"] = 69, ["Jinyang"] = 63, ["Xianyang"] = 34, ["Luoyang"] = 53, ["Xiangyang"] = 46, ["Chengdu"] = 0, ["Hefei"] = 74, ["Anyi"] = 49, ["Ji"] = 86, ["Linzi"] = 88, ["Xuzhou"] = 80, ["Chongqing"] = 15, ["Nanjing"] = 77, ["Kuaiji"] = 83 },
-	["Hefei"] = { ["Handan"] = 42, ["Jinyang"] = 50, ["Xianyang"] = 50, ["Luoyang"] = 31, ["Xiangyang"] = 28, ["Chengdu"] = 74, ["Hefei"] = 0, ["Anyi"] = 39, ["Ji"] = 59, ["Linzi"] = 58, ["Xuzhou"] = 50, ["Chongqing"] = 65, ["Nanjing"] = 8, ["Kuaiji"] = 19 },
-	["Anyi"] = { ["Handan"] = 21, ["Jinyang"] = 16, ["Xianyang"] = 15, ["Luoyang"] = 9, ["Xiangyang"] = 20, ["Chengdu"] = 49, ["Hefei"] = 39, ["Anyi"] = 0, ["Ji"] = 38, ["Linzi"] = 42, ["Xuzhou"] = 34, ["Chongqing"] = 43, ["Nanjing"] = 46, ["Kuaiji"] = 57 },
-	["Ji"] = { ["Handan"] = 19, ["Jinyang"] = 24, ["Xianyang"] = 52, ["Luoyang"] = 36, ["Xiangyang"] = 44, ["Chengdu"] = 86, ["Hefei"] = 59, ["Anyi"] = 38, ["Ji"] = 0, ["Linzi"] = 17, ["Xuzhou"] = 29, ["Chongqing"] = 80, ["Nanjing"] = 39, ["Kuaiji"] = 48 },
-	["Linzi"] = { ["Handan"] = 22, ["Jinyang"] = 32, ["Xianyang"] = 54, ["Luoyang"] = 35, ["Xiangyang"] = 43, ["Chengdu"] = 88, ["Hefei"] = 58, ["Anyi"] = 42, ["Ji"] = 17, ["Linzi"] = 0, ["Xuzhou"] = 14, ["Chongqing"] = 80, ["Nanjing"] = 24, ["Kuaiji"] = 33 },
-	["Xuzhou"] = { ["Handan"] = 19, ["Jinyang"] = 32, ["Xianyang"] = 46, ["Luoyang"] = 27, ["Xiangyang"] = 35, ["Chengdu"] = 80, ["Hefei"] = 50, ["Anyi"] = 34, ["Ji"] = 29, ["Linzi"] = 14, ["Xuzhou"] = 0, ["Chongqing"] = 72, ["Nanjing"] = 14, ["Kuaiji"] = 25 },
-	["Chongqing"] = { ["Handan"] = 63, ["Jinyang"] = 57, ["Xianyang"] = 28, ["Luoyang"] = 47, ["Xiangyang"] = 37, ["Chengdu"] = 15, ["Hefei"] = 65, ["Anyi"] = 43, ["Ji"] = 80, ["Linzi"] = 80, ["Xuzhou"] = 72, ["Chongqing"] = 0, ["Nanjing"] = 67, ["Kuaiji"] = 69 },
-	["Nanjing"] = { ["Handan"] = 33, ["Jinyang"] = 46, ["Xianyang"] = 57, ["Luoyang"] = 39, ["Xiangyang"] = 35, ["Chengdu"] = 77, ["Hefei"] = 8, ["Anyi"] = 46, ["Ji"] = 39, ["Linzi"] = 24, ["Xuzhou"] = 14, ["Chongqing"] = 67, ["Nanjing"] = 0, ["Kuaiji"] = 11 },
-	["Kuaiji"] = { ["Handan"] = 44, ["Jinyang"] = 57, ["Xianyang"] = 68, ["Luoyang"] = 50, ["Xiangyang"] = 46, ["Chengdu"] = 83, ["Hefei"] = 19, ["Anyi"] = 57, ["Ji"] = 48, ["Linzi"] = 33, ["Xuzhou"] = 25, ["Chongqing"] = 69, ["Nanjing"] = 11, ["Kuaiji"] = 0 }
+	["Handan"] = { ["Handan"] = 0, ["Jinyang"] = 14, ["Xianyang"] = 35, ["Luoyang"] = 19, ["Xiangyang"] = 27, ["Chengdu"] = 69, ["Hefei"] = 42, ["Anyi"] = 21, ["Ji"] = 19, ["Linzi"] = 22, ["Xuzhou"] = 19, ["Chongqing"] = 63, ["Nanjing"] = 33, ["Kuaiji"] = 44, ["Hanzhong"] = 51, ["Jiangling"] = 34, ["Daliang"] = 10 },
+	["Jinyang"] = { ["Handan"] = 14, ["Jinyang"] = 0, ["Xianyang"] = 29, ["Luoyang"] = 20, ["Xiangyang"] = 31, ["Chengdu"] = 63, ["Hefei"] = 50, ["Anyi"] = 16, ["Ji"] = 24, ["Linzi"] = 32, ["Xuzhou"] = 32, ["Chongqing"] = 57, ["Nanjing"] = 46, ["Kuaiji"] = 57, ["Hanzhong"] = 45, ["Jiangling"] = 38, ["Daliang"] = 21 },
+	["Xianyang"] = { ["Handan"] = 35, ["Jinyang"] = 29, ["Xianyang"] = 0, ["Luoyang"] = 19, ["Xiangyang"] = 23, ["Chengdu"] = 34, ["Hefei"] = 50, ["Anyi"] = 15, ["Ji"] = 52, ["Linzi"] = 54, ["Xuzhou"] = 46, ["Chongqing"] = 28, ["Nanjing"] = 57, ["Kuaiji"] = 68, ["Hanzhong"] = 16, ["Jiangling"] = 30, ["Daliang"] = 33 },
+	["Luoyang"] = { ["Handan"] = 19, ["Jinyang"] = 20, ["Xianyang"] = 19, ["Luoyang"] = 0, ["Xiangyang"] = 11, ["Chengdu"] = 53, ["Hefei"] = 31, ["Anyi"] = 9, ["Ji"] = 36, ["Linzi"] = 35, ["Xuzhou"] = 27, ["Chongqing"] = 47, ["Nanjing"] = 39, ["Kuaiji"] = 50, ["Hanzhong"] = 35, ["Jiangling"] = 18, ["Daliang"] = 14 },
+	["Xiangyang"] = { ["Handan"] = 27, ["Jinyang"] = 31, ["Xianyang"] = 23, ["Luoyang"] = 11, ["Xiangyang"] = 0, ["Chengdu"] = 46, ["Hefei"] = 28, ["Anyi"] = 20, ["Ji"] = 44, ["Linzi"] = 43, ["Xuzhou"] = 35, ["Chongqing"] = 37, ["Nanjing"] = 35, ["Kuaiji"] = 46, ["Hanzhong"] = 27, ["Jiangling"] = 7, ["Daliang"] = 22 },
+	["Chengdu"] = { ["Handan"] = 69, ["Jinyang"] = 63, ["Xianyang"] = 34, ["Luoyang"] = 53, ["Xiangyang"] = 46, ["Chengdu"] = 0, ["Hefei"] = 74, ["Anyi"] = 49, ["Ji"] = 86, ["Linzi"] = 88, ["Xuzhou"] = 80, ["Chongqing"] = 15, ["Nanjing"] = 77, ["Kuaiji"] = 83, ["Hanzhong"] = 23, ["Jiangling"] = 44, ["Daliang"] = 67 },
+	["Hefei"] = { ["Handan"] = 42, ["Jinyang"] = 50, ["Xianyang"] = 50, ["Luoyang"] = 31, ["Xiangyang"] = 28, ["Chengdu"] = 74, ["Hefei"] = 0, ["Anyi"] = 39, ["Ji"] = 59, ["Linzi"] = 58, ["Xuzhou"] = 50, ["Chongqing"] = 65, ["Nanjing"] = 8, ["Kuaiji"] = 19, ["Hanzhong"] = 55, ["Jiangling"] = 35, ["Daliang"] = 37 },
+	["Anyi"] = { ["Handan"] = 21, ["Jinyang"] = 16, ["Xianyang"] = 15, ["Luoyang"] = 9, ["Xiangyang"] = 20, ["Chengdu"] = 49, ["Hefei"] = 39, ["Anyi"] = 0, ["Ji"] = 38, ["Linzi"] = 42, ["Xuzhou"] = 34, ["Chongqing"] = 43, ["Nanjing"] = 46, ["Kuaiji"] = 57, ["Hanzhong"] = 31, ["Jiangling"] = 27, ["Daliang"] = 21 },
+	["Ji"] = { ["Handan"] = 19, ["Jinyang"] = 24, ["Xianyang"] = 52, ["Luoyang"] = 36, ["Xiangyang"] = 44, ["Chengdu"] = 86, ["Hefei"] = 59, ["Anyi"] = 38, ["Ji"] = 0, ["Linzi"] = 17, ["Xuzhou"] = 29, ["Chongqing"] = 80, ["Nanjing"] = 39, ["Kuaiji"] = 48, ["Hanzhong"] = 68, ["Jiangling"] = 51, ["Daliang"] = 26 },
+	["Linzi"] = { ["Handan"] = 22, ["Jinyang"] = 32, ["Xianyang"] = 54, ["Luoyang"] = 35, ["Xiangyang"] = 43, ["Chengdu"] = 88, ["Hefei"] = 58, ["Anyi"] = 42, ["Ji"] = 17, ["Linzi"] = 0, ["Xuzhou"] = 14, ["Chongqing"] = 80, ["Nanjing"] = 24, ["Kuaiji"] = 33, ["Hanzhong"] = 70, ["Jiangling"] = 50, ["Daliang"] = 23 },
+	["Xuzhou"] = { ["Handan"] = 19, ["Jinyang"] = 32, ["Xianyang"] = 46, ["Luoyang"] = 27, ["Xiangyang"] = 35, ["Chengdu"] = 80, ["Hefei"] = 50, ["Anyi"] = 34, ["Ji"] = 29, ["Linzi"] = 14, ["Xuzhou"] = 0, ["Chongqing"] = 72, ["Nanjing"] = 14, ["Kuaiji"] = 25, ["Hanzhong"] = 62, ["Jiangling"] = 42, ["Daliang"] = 13 },
+	["Chongqing"] = { ["Handan"] = 63, ["Jinyang"] = 57, ["Xianyang"] = 28, ["Luoyang"] = 47, ["Xiangyang"] = 37, ["Chengdu"] = 15, ["Hefei"] = 65, ["Anyi"] = 43, ["Ji"] = 80, ["Linzi"] = 80, ["Xuzhou"] = 72, ["Chongqing"] = 0, ["Nanjing"] = 67, ["Kuaiji"] = 69, ["Hanzhong"] = 16, ["Jiangling"] = 35, ["Daliang"] = 59 },
+	["Nanjing"] = { ["Handan"] = 33, ["Jinyang"] = 46, ["Xianyang"] = 57, ["Luoyang"] = 39, ["Xiangyang"] = 35, ["Chengdu"] = 77, ["Hefei"] = 8, ["Anyi"] = 46, ["Ji"] = 39, ["Linzi"] = 24, ["Xuzhou"] = 14, ["Chongqing"] = 67, ["Nanjing"] = 0, ["Kuaiji"] = 11, ["Hanzhong"] = 60, ["Jiangling"] = 37, ["Daliang"] = 27 },
+	["Kuaiji"] = { ["Handan"] = 44, ["Jinyang"] = 57, ["Xianyang"] = 68, ["Luoyang"] = 50, ["Xiangyang"] = 46, ["Chengdu"] = 83, ["Hefei"] = 19, ["Anyi"] = 57, ["Ji"] = 48, ["Linzi"] = 33, ["Xuzhou"] = 25, ["Chongqing"] = 69, ["Nanjing"] = 11, ["Kuaiji"] = 0, ["Hanzhong"] = 71, ["Jiangling"] = 43, ["Daliang"] = 38 },
+	["Hanzhong"] = { ["Handan"] = 51, ["Jinyang"] = 45, ["Xianyang"] = 16, ["Luoyang"] = 35, ["Xiangyang"] = 27, ["Chengdu"] = 23, ["Hefei"] = 55, ["Anyi"] = 31, ["Ji"] = 68, ["Linzi"] = 70, ["Xuzhou"] = 62, ["Chongqing"] = 16, ["Nanjing"] = 60, ["Kuaiji"] = 71, ["Hanzhong"] = 0, ["Jiangling"] = 31, ["Daliang"] = 49 },
+	["Jiangling"] = { ["Handan"] = 34, ["Jinyang"] = 38, ["Xianyang"] = 30, ["Luoyang"] = 18, ["Xiangyang"] = 7, ["Chengdu"] = 44, ["Hefei"] = 35, ["Anyi"] = 27, ["Ji"] = 51, ["Linzi"] = 50, ["Xuzhou"] = 42, ["Chongqing"] = 35, ["Nanjing"] = 37, ["Kuaiji"] = 43, ["Hanzhong"] = 31, ["Jiangling"] = 0, ["Daliang"] = 29 },
+	["Daliang"] = { ["Handan"] = 10, ["Jinyang"] = 21, ["Xianyang"] = 33, ["Luoyang"] = 14, ["Xiangyang"] = 22, ["Chengdu"] = 67, ["Hefei"] = 37, ["Anyi"] = 21, ["Ji"] = 26, ["Linzi"] = 23, ["Xuzhou"] = 13, ["Chongqing"] = 59, ["Nanjing"] = 27, ["Kuaiji"] = 38, ["Hanzhong"] = 49, ["Jiangling"] = 29, ["Daliang"] = 0 }
 }
 
 -- Spread sets: for N players, every group of N start positions whose closest pair is as far apart as possible
--- (generated from START_DIST; Nanjing and Kuaiji had placeholder distances and now use straight-line distance)
+-- (generated from START_DIST: land path length with mountains blocking, or straight-line distance where no land
+--  path exists, e.g. across the Yangtze to Nanjing and Kuaiji)
 local SPREAD_SETS = {
 	[3] = { { "Chengdu", "Hefei", "Ji" }, { "Hefei", "Ji", "Chongqing" } },
 	[4] = { { "Xiangyang", "Chengdu", "Ji", "Kuaiji" } },
-	[5] = { { "Jinyang", "Xiangyang", "Chengdu", "Linzi", "Kuaiji" }, { "Jinyang", "Xiangyang", "Linzi", "Chongqing", "Kuaiji" } },
-	[6] = { { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Xuzhou" }, { "Jinyang", "Xianyang", "Chengdu", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Hefei", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Xianyang", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou" }, { "Jinyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Xiangyang", "Ji", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[7] = { { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Xianyang", "Xiangyang", "Ji", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[8] = { { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xiangyang", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[9] = { { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[10] = { { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[11] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[12] = { { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" } },
-	[13] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji" } }
+	[5] = { { "Jinyang", "Chengdu", "Hefei", "Linzi", "Jiangling" }, { "Jinyang", "Chengdu", "Hefei", "Xuzhou", "Jiangling" }, { "Jinyang", "Chengdu", "Linzi", "Kuaiji", "Jiangling" }, { "Jinyang", "Hefei", "Linzi", "Chongqing", "Jiangling" }, { "Jinyang", "Hefei", "Xuzhou", "Chongqing", "Jiangling" }, { "Jinyang", "Linzi", "Chongqing", "Kuaiji", "Jiangling" } },
+	[6] = { { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Linzi", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Xuzhou", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Linzi", "Kuaiji", "Jiangling" }, { "Xianyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Jiangling" } },
+	[7] = { { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Ji", "Xuzhou", "Kuaiji", "Jiangling" }, { "Jinyang", "Xianyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Jiangling" }, { "Jinyang", "Xianyang", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Jiangling" } },
+	[8] = { { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xianyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Jiangling" }, { "Handan", "Xianyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Jiangling" }, { "Handan", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Chengdu", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Xiangyang", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Handan", "Xiangyang", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Jiangling" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Hanzhong", "Jiangling" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Ji", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Linzi", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Chengdu", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Jiangling" }, { "Handan", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Kuaiji", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Linzi", "Kuaiji", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Ji", "Chongqing", "Kuaiji", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Linzi", "Chongqing", "Kuaiji", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Kuaiji", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Linzi", "Kuaiji", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Jiangling" }, { "Jinyang", "Xianyang", "Hefei", "Ji", "Chongqing", "Kuaiji", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Hefei", "Linzi", "Chongqing", "Kuaiji", "Jiangling", "Daliang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Linzi", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Chengdu", "Hefei", "Ji", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Chengdu", "Hefei", "Linzi", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Kuaiji", "Hanzhong", "Daliang" }, { "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Kuaiji", "Hanzhong", "Daliang" }, { "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Chengdu", "Hefei", "Anyi", "Ji", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Chengdu", "Hefei", "Anyi", "Linzi", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[9] = { { "Handan", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong" }, { "Handan", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" } },
+	[10] = { { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[11] = { { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong" }, { "Handan", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong" }, { "Handan", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xianyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[12] = { { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[13] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong" }, { "Handan", "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling" } },
+	[14] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[15] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } },
+	[16] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Jiangling", "Daliang" } }
 }
 
 local GUAR_RESOURCES = {
@@ -4456,7 +4466,7 @@ local function TI(name) local t = GameInfo.Terrains[name]; if t then return t.In
 local function FI(name) local f = GameInfo.Features[name]; if f then return f.Index end; return nil end
 
 function GenerateMap()
-	print("Generating Warring States China map V3.23 (2026-10-09)")
+	print("Generating Warring States China map V3.24 (2026-10-09)")
 	g_iW, g_iH = Map.GetGridSize()
 	local W, H = g_iW, g_iH
 	pcall(function() g_iFlags = TerrainBuilder.GetFractalFlags() end)
@@ -4867,6 +4877,88 @@ function GenerateMap()
 	end)
 	if not okf then print("FixedStarts error: " .. tostring(errf)) end
 
+	-- 5b. even out the major starts: bring the bonus resources within 3 tiles of each start to a target,
+	--     a little higher where the start has little usable land (luxuries and strategics are left alone)
+	local BONUS_TARGET, BONUS_MAX_EXTRA = 5, 2
+	local BONUS_NAMES = { "WHEAT", "RICE", "MAIZE", "CATTLE", "SHEEP", "DEER", "BANANAS", "STONE", "COPPER", "FISH", "CRABS" }
+	local function ResInfo(plot)
+		local r = plot:GetResourceType()
+		if r == nil or r < 0 then return nil end
+		return GameInfo.Resources[r]
+	end
+	local function PlotsAround(x, y, r1, r2)
+		local list = {}
+		for yy = math.max(0, y - r2), math.min(H - 1, y + r2) do
+			for xx = math.max(0, x - r2 - 1), math.min(W - 1, x + r2 + 1) do
+				local d = Map.GetPlotDistance(x, y, xx, yy)
+				if d >= r1 and d <= r2 then list[#list + 1] = Map.GetPlot(xx, yy) end
+			end
+		end
+		return list
+	end
+	local function Shuffle(t, tag)
+		for i = #t, 2, -1 do
+			local j = TerrainBuilder.GetRandomNumber(i, tag) + 1
+			t[i], t[j] = t[j], t[i]
+		end
+	end
+	local function StartInfo(sp)
+		local usable, bonus, luxTypes, strategic = 0, {}, {}, 0
+		for _, p in ipairs(PlotsAround(sp:GetX(), sp:GetY(), 1, 3)) do
+			if not p:IsWater() and not p:IsMountain() then usable = usable + 1 end
+			local info = ResInfo(p)
+			if info and info.ResourceClassType == "RESOURCECLASS_BONUS" then bonus[#bonus + 1] = p end
+		end
+		for _, p in ipairs(PlotsAround(sp:GetX(), sp:GetY(), 1, 6)) do
+			local info = ResInfo(p)
+			if info and info.ResourceClassType == "RESOURCECLASS_LUXURY" then luxTypes[info.ResourceType] = true end
+			if info and info.ResourceClassType == "RESOURCECLASS_STRATEGIC" then strategic = strategic + 1 end
+		end
+		local lux = 0
+		for _ in pairs(luxTypes) do lux = lux + 1 end
+		return usable, bonus, lux, strategic
+	end
+	local okb, errb = pcall(function()
+		for _, pid in ipairs(PlayerManager.GetAliveMajorIDs()) do
+			local sp = Players[pid]:GetStartingPlot()
+			if sp then
+				local usable, bonus = StartInfo(sp)
+				local target = BONUS_TARGET
+				if usable < 28 then target = target + 1 end
+				if usable < 24 then target = target + 1 end
+				local before = #bonus
+				if #bonus < target then
+					local spots = PlotsAround(sp:GetX(), sp:GetY(), 2, 3)
+					Shuffle(spots, "Start bonus spots")
+					for _, p in ipairs(spots) do
+						if #bonus >= target then break end
+						if p:GetResourceType() < 0 and not p:IsNaturalWonder() and not p:IsMountain() then
+							local names = {}
+							for i, nm in ipairs(BONUS_NAMES) do names[i] = nm end
+							Shuffle(names, "Start bonus pick")
+							for _, nm in ipairs(names) do
+								local info = GameInfo.Resources["RESOURCE_" .. nm]
+								if info and ResourceBuilder.CanHaveResource(p, info.Index) then
+									ResourceBuilder.SetResourceType(p, info.Index, 1)
+									bonus[#bonus + 1] = p
+									break
+								end
+							end
+						end
+					end
+				elseif #bonus > target + BONUS_MAX_EXTRA then
+					Shuffle(bonus, "Start bonus trim")
+					while #bonus > target + BONUS_MAX_EXTRA do
+						ResourceBuilder.SetResourceType(table.remove(bonus), -1)
+					end
+				end
+				print("StartBalance: player " .. tostring(pid) .. " at (" .. sp:GetX() .. "," .. sp:GetY() .. ") usable land " .. usable
+					.. ", bonus resources " .. before .. " -> " .. #bonus .. " (target " .. target .. ")")
+			end
+		end
+	end)
+	if not okb then print("StartBalance error: " .. tostring(errb)) end
+
 	-- 6. tribal villages ("mushrooms"): randomised every game, kept away from every start position
 	pcall(function()
 		local hutInfo = GameInfo.Improvements["IMPROVEMENT_GOODY_HUT"]
@@ -4939,6 +5031,26 @@ function GenerateMap()
 			end
 		end
 		print("Goodies: added " .. tostring(made) .. " tribal villages (target " .. tostring(target) .. ")")
+	end)
+	-- 7. resource summary, to judge the resource settings from Lua.log
+	pcall(function()
+		local count = { RESOURCECLASS_LUXURY = 0, RESOURCECLASS_STRATEGIC = 0, RESOURCECLASS_BONUS = 0 }
+		for k = 0, W * H - 1 do
+			local info = ResInfo(Map.GetPlotByIndex(k))
+			if info and count[info.ResourceClassType] ~= nil then
+				count[info.ResourceClassType] = count[info.ResourceClassType] + 1
+			end
+		end
+		print("Resources: luxury " .. count.RESOURCECLASS_LUXURY .. ", strategic " .. count.RESOURCECLASS_STRATEGIC
+			.. ", bonus " .. count.RESOURCECLASS_BONUS)
+		for _, pid in ipairs(PlayerManager.GetAliveMajorIDs()) do
+			local sp = Players[pid]:GetStartingPlot()
+			if sp then
+				local usable, bonus, lux, strategic = StartInfo(sp)
+				print("Resources: player " .. tostring(pid) .. " at (" .. sp:GetX() .. "," .. sp:GetY() .. ") within 3: usable land "
+					.. usable .. ", bonus " .. #bonus .. "; within 6: luxury types " .. lux .. ", strategic " .. strategic)
+			end
+		end
 	end)
 	print("Warring States map done")
 end
