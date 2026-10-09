@@ -1,4 +1,4 @@
--- 战国七雄 / Warring States China  V3.19 (2026-10-06)
+-- 战国七雄 / Warring States China  V3.20 (2026-10-09)
 -- 106 x 66 (Huge) fixed-terrain map.  Rows are listed north -> south.
 -- Terrain legend:  ~ ocean   c coast (rivers)   g grass  G grass hills   p plains  P plains hills
 --                  d desert  D desert hills     M mountain   S snow mountain
@@ -4451,7 +4451,7 @@ local function TI(name) local t = GameInfo.Terrains[name]; if t then return t.In
 local function FI(name) local f = GameInfo.Features[name]; if f then return f.Index end; return nil end
 
 function GenerateMap()
-	print("Generating Warring States China map V3.19 (2026-10-06)")
+	print("Generating Warring States China map V3.20 (2026-10-09)")
 	g_iW, g_iH = Map.GetGridSize()
 	local W, H = g_iW, g_iH
 	pcall(function() g_iFlags = TerrainBuilder.GetFractalFlags() end)
