@@ -15,6 +15,7 @@
 - 右侧显示选中领袖的 **文明特性、领袖能力、特色单位 / 建筑 / 区域 / 改良设施**。特色区域条目先列出原版能力，再列出激活后实际获得的效果和未继承的部分，也可以用来查看对手的能力。
 - **占领**某个主要文明的**原始首都**后，可以逐项「激活」或「全部激活」。占领即永久解锁，之后丢失该城市也不影响。
 - 有已解锁但还没激活的内容时，工具栏按钮上会出现提示标记。
+- 激活来的特色单位和特色改良会显示在科技树 / 市政树上对应的科技或市政里，方便看到需要研究什么才能建造（如澳大利亚的内陆牧场在「行会」）。特色区域仍显示基础区域，因为激活者建造的是基础区域。
 - 高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后，会在它的下一个回合开始时自动激活全部内容。
 
 ### 安装
@@ -89,6 +90,7 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 - The right side shows the selected leader's **civilization ability, leader ability and unique units / buildings / districts / improvements**. Unique district entries list the original ability first, then what you actually get when activated and what is not inherited, so the panel also works as a quick look at your opponents' abilities.
 - Once you **capture** a major civilization's **original capital**, you can activate its items one by one or with **Activate All**. The unlock is permanent, even if you lose the city later.
 - The Launch Bar button shows a marker when something is unlocked but not yet activated.
+- Activated unique units and improvements appear in the tech and civic trees under the tech or civic that unlocks them, so you can see what to research before building them (for example, Australia's Outback Station under Guilds). Unique districts still show as the base district, since that is what the activating player builds.
 - Advanced option **Conquest: AI Auto-Activates** (on by default): when an AI captures an original capital, it activates everything from that civilization automatically at the start of its next turn.
 
 ### Installation
