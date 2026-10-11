@@ -175,10 +175,9 @@ INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
 ('TRAIT_CIVILIZATION_HAN_TUNTIAN','HAN_TUNTIAN_FOOD'),
 ('TRAIT_CIVILIZATION_HAN_TUNTIAN','HAN_TUNTIAN_PRODUCTION');
 
--- 屯田（续）：兵营不再产出大将军点数，改为产出更多生产力。
--- 区域本身：-1 大将军点数（与征服模式去掉 Thanh 点数相同的修改器，负数抵消），+2 生产力。
--- 兵营里每座产大将军点数的建筑（兵营、马厩、军械库、军事学院，以及征服模式激活来的 Ordu / Basilikoi Paides）：
--- 扣掉它的点数（城市拥有该建筑时，同斯德哥尔摩城邦按建筑加点数的写法），+2 生产力。
+-- 屯田（续）：刘备不再获得大将军点数（见领袖部分的 -100%），兵营改为产出科技和金币。
+-- 区域本身 +2 科技、+2 金币；兵营里每座原本产大将军点数的建筑（兵营、马厩、军械库、军事学院，
+-- 以及征服模式激活来的 Ordu / Basilikoi Paides）各 +1 科技、+1 金币。按原版数据生成。
 INSERT INTO Requirements(RequirementId,RequirementType) VALUES
 ('HAN_REQ_DISTRICT_IS_ENCAMPMENT','REQUIREMENT_DISTRICT_TYPE_MATCHES');
 INSERT INTO RequirementArguments(RequirementId,Name,Value) VALUES
@@ -187,67 +186,34 @@ INSERT INTO RequirementSets(RequirementSetId,RequirementSetType) VALUES
 ('HAN_DISTRICT_IS_ENCAMPMENT','REQUIREMENTSET_TEST_ALL');
 INSERT INTO RequirementSetRequirements(RequirementSetId,RequirementId) VALUES
 ('HAN_DISTRICT_IS_ENCAMPMENT','HAN_REQ_DISTRICT_IS_ENCAMPMENT');
-INSERT INTO Modifiers(ModifierId,ModifierType,SubjectRequirementSetId) VALUES
-('HAN_TUNTIAN_ENCAMPMENT_NO_GENERAL','MODIFIER_PLAYER_DISTRICTS_ADJUST_GREAT_PERSON_POINTS','HAN_DISTRICT_IS_ENCAMPMENT'),
-('HAN_TUNTIAN_ENCAMPMENT_PRODUCTION','MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE','HAN_DISTRICT_IS_ENCAMPMENT');
-INSERT INTO ModifierArguments(ModifierId,Name,Value)
-SELECT 'HAN_TUNTIAN_ENCAMPMENT_NO_GENERAL','GreatPersonClassType','GREAT_PERSON_CLASS_GENERAL'
-UNION ALL SELECT 'HAN_TUNTIAN_ENCAMPMENT_NO_GENERAL','Amount',-PointsPerTurn FROM District_GreatPersonPoints
-	WHERE DistrictType='DISTRICT_ENCAMPMENT' AND GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
-UNION ALL SELECT 'HAN_TUNTIAN_ENCAMPMENT_PRODUCTION','YieldType','YIELD_PRODUCTION'
-UNION ALL SELECT 'HAN_TUNTIAN_ENCAMPMENT_PRODUCTION','Amount',2;
-INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
-('TRAIT_CIVILIZATION_HAN_TUNTIAN','HAN_TUNTIAN_ENCAMPMENT_NO_GENERAL'),
-('TRAIT_CIVILIZATION_HAN_TUNTIAN','HAN_TUNTIAN_ENCAMPMENT_PRODUCTION');
-
--- 兵营建筑：每座一套（需求条件 + 扣点数 + 加生产力），按原版数据生成。
-INSERT INTO Requirements(RequirementId,RequirementType)
-SELECT 'HAN_REQ_CITY_HAS_'||b.BuildingType,'REQUIREMENT_CITY_HAS_BUILDING'
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
-INSERT INTO RequirementArguments(RequirementId,Name,Value)
-SELECT 'HAN_REQ_CITY_HAS_'||b.BuildingType,'BuildingType',b.BuildingType
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
-INSERT INTO RequirementSets(RequirementSetId,RequirementSetType)
-SELECT 'HAN_CITY_HAS_'||b.BuildingType,'REQUIREMENTSET_TEST_ALL'
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
-INSERT INTO RequirementSetRequirements(RequirementSetId,RequirementId)
-SELECT 'HAN_CITY_HAS_'||b.BuildingType,'HAN_REQ_CITY_HAS_'||b.BuildingType
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
 INSERT INTO Modifiers(ModifierId,ModifierType,SubjectRequirementSetId)
-SELECT 'HAN_TUNTIAN_NO_GENERAL_'||b.BuildingType,'MODIFIER_PLAYER_CITIES_ADJUST_GREAT_PERSON_POINT','HAN_CITY_HAS_'||b.BuildingType
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
-UNION ALL
-SELECT 'HAN_TUNTIAN_PRODUCTION_'||b.BuildingType,'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE',NULL
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
+SELECT 'HAN_TUNTIAN_ENCAMPMENT_'||Y,'MODIFIER_PLAYER_DISTRICTS_ADJUST_YIELD_CHANGE','HAN_DISTRICT_IS_ENCAMPMENT'
+FROM (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD');
+INSERT INTO ModifierArguments(ModifierId,Name,Value)
+SELECT 'HAN_TUNTIAN_ENCAMPMENT_'||Y,'YieldType','YIELD_'||Y FROM (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD')
+UNION ALL SELECT 'HAN_TUNTIAN_ENCAMPMENT_'||Y,'Amount',2 FROM (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD');
+INSERT INTO TraitModifiers(TraitType,ModifierId)
+SELECT 'TRAIT_CIVILIZATION_HAN_TUNTIAN','HAN_TUNTIAN_ENCAMPMENT_'||Y FROM (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD');
+
+INSERT INTO Modifiers(ModifierId,ModifierType)
+SELECT 'HAN_TUNTIAN_'||y.Y||'_'||b.BuildingType,'MODIFIER_PLAYER_CITIES_ADJUST_BUILDING_YIELD_CHANGE'
+FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType, (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD') y
 WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
 INSERT INTO ModifierArguments(ModifierId,Name,Value)
-SELECT 'HAN_TUNTIAN_NO_GENERAL_'||b.BuildingType,'GreatPersonClassType','GREAT_PERSON_CLASS_GENERAL'
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
+SELECT 'HAN_TUNTIAN_'||y.Y||'_'||b.BuildingType,'BuildingType',b.BuildingType
+FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType, (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD') y
 WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
 UNION ALL
-SELECT 'HAN_TUNTIAN_NO_GENERAL_'||b.BuildingType,'Amount',-g.PointsPerTurn
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
+SELECT 'HAN_TUNTIAN_'||y.Y||'_'||b.BuildingType,'YieldType','YIELD_'||y.Y
+FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType, (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD') y
 WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
 UNION ALL
-SELECT 'HAN_TUNTIAN_PRODUCTION_'||b.BuildingType,'BuildingType',b.BuildingType
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
-UNION ALL
-SELECT 'HAN_TUNTIAN_PRODUCTION_'||b.BuildingType,'YieldType','YIELD_PRODUCTION'
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
-WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL'
-UNION ALL
-SELECT 'HAN_TUNTIAN_PRODUCTION_'||b.BuildingType,'Amount',2
-FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType
+SELECT 'HAN_TUNTIAN_'||y.Y||'_'||b.BuildingType,'Amount',1
+FROM Buildings b JOIN Building_GreatPersonPoints g ON g.BuildingType=b.BuildingType, (SELECT 'SCIENCE' AS Y UNION ALL SELECT 'GOLD') y
 WHERE b.PrereqDistrict='DISTRICT_ENCAMPMENT' AND g.GreatPersonClassType='GREAT_PERSON_CLASS_GENERAL';
 INSERT INTO TraitModifiers(TraitType,ModifierId)
 SELECT 'TRAIT_CIVILIZATION_HAN_TUNTIAN',ModifierId FROM Modifiers
-WHERE ModifierId LIKE 'HAN_TUNTIAN_NO_GENERAL_%' OR ModifierId LIKE 'HAN_TUNTIAN_PRODUCTION_%';
+WHERE ModifierId LIKE 'HAN_TUNTIAN_SCIENCE_%' OR ModifierId LIKE 'HAN_TUNTIAN_GOLD_%';
 
 -- ============================================================
 -- 桃园结义 · 五虎上将（领袖）
@@ -318,11 +284,13 @@ INSERT INTO RequirementSetRequirements(RequirementSetId,RequirementId) VALUES
 ('HAN_OPPONENT_FULL_HEALTH','HAN_REQ_OPPONENT_FULL_HEALTH');
 
 INSERT INTO Modifiers(ModifierId,ModifierType,SubjectRequirementSetId) VALUES
--- 关羽 · 武圣：进攻时 +5；万军丛中：无视区域控制；过五关斩六将：击杀敌方单位后恢复 20 生命值（托米丽司的同类修改器）。
+-- 关羽 · 武圣：进攻时 +5；万军丛中：无视区域控制；破城：攻击所有城墙都造成全额伤害（攻城槌授予相邻单位的同一个修改器，
+--   巴西尔二世的骑兵也是这个效果，但它按晋升类别判断，关羽有自己的晋升类别，所以直接挂在关羽身上）；过五关斩六将：击杀敌方单位后恢复 20 生命值（托米丽司的同类修改器）。
 -- 斩首（进攻后残血的敌方单位直接斩杀）原版没有修改器，由 Scripts/HanTigers.lua 在战斗事件里实现。
 ('HAN_GUAN_YU_ATTACK','MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH','HAN_UNIT_IS_ATTACKING'),
 ('HAN_GUAN_YU_KILL_HEAL','MODIFIER_PLAYER_UNIT_ADJUST_HEAL_FROM_COMBAT',NULL),
 ('HAN_GUAN_YU_IGNORE_ZOC','MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_ZOC',NULL),
+('HAN_GUAN_YU_WALL_ATTACK','MODIFIER_PLAYER_UNIT_ADJUST_ENABLE_WALL_ATTACK',NULL),
 -- 张飞 · 万人敌：防守时 +7（抗骑兵兵种本身对骑兵另有 +10）。
 ('HAN_ZHANG_FEI_DEFENSE','MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH','HAN_UNIT_IS_DEFENDING'),
 -- 赵云 · 七进七出：无视区域控制，攻击后仍可移动。
@@ -338,6 +306,7 @@ INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
 ('HAN_GUAN_YU_ATTACK','Amount',5),
 ('HAN_GUAN_YU_KILL_HEAL','Amount',20),
 ('HAN_GUAN_YU_IGNORE_ZOC','Ignore',1),
+('HAN_GUAN_YU_WALL_ATTACK','Enable',1),
 ('HAN_ZHANG_FEI_DEFENSE','Amount',7),
 ('HAN_ZHAO_YUN_IGNORE_ZOC','Ignore',1),
 ('HAN_ZHAO_YUN_MOVE_AFTER_ATTACK','CanMove',1),
@@ -351,7 +320,7 @@ INSERT INTO ModifierStrings(ModifierId,Context,Text) VALUES
 ('HAN_MA_CHAO_VS_CAVALRY','Preview','LOC_HAN_MA_CHAO_VS_CAVALRY_PREVIEW'),
 ('HAN_HUANG_ZHONG_VS_FULL_HEALTH','Preview','LOC_HAN_HUANG_ZHONG_VS_FULL_HEALTH_PREVIEW');
 INSERT INTO UnitAbilityModifiers(UnitAbilityType,ModifierId) VALUES
-('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_ATTACK'),('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_KILL_HEAL'),('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_IGNORE_ZOC'),
+('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_ATTACK'),('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_KILL_HEAL'),('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_IGNORE_ZOC'),('ABILITY_HAN_GUAN_YU','HAN_GUAN_YU_WALL_ATTACK'),
 ('ABILITY_HAN_ZHANG_FEI','HAN_ZHANG_FEI_DEFENSE'),
 ('ABILITY_HAN_ZHAO_YUN','HAN_ZHAO_YUN_IGNORE_ZOC'),('ABILITY_HAN_ZHAO_YUN','HAN_ZHAO_YUN_MOVE_AFTER_ATTACK'),
 ('ABILITY_HAN_MA_CHAO','HAN_MA_CHAO_FLANKING'),('ABILITY_HAN_MA_CHAO','HAN_MA_CHAO_VS_CAVALRY'),
@@ -524,6 +493,15 @@ INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
 ('HAN_LIU_BEI_UNIT_EXPERIENCE','Amount',100);
 INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
 ('TRAIT_LEADER_LIU_BEI_TIGERS','HAN_LIU_BEI_UNIT_EXPERIENCE');
+
+-- 领袖：不获得大将军点数（所有来源，-100%；与原版作家点数 +50% 同一个修改器，用负数）。
+INSERT INTO Modifiers(ModifierId,ModifierType) VALUES
+('HAN_LIU_BEI_NO_GREAT_GENERALS','MODIFIER_PLAYER_ADJUST_GREAT_PERSON_POINTS_PERCENT');
+INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
+('HAN_LIU_BEI_NO_GREAT_GENERALS','GreatPersonClassType','GREAT_PERSON_CLASS_GENERAL'),
+('HAN_LIU_BEI_NO_GREAT_GENERALS','Amount',-100);
+INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
+('TRAIT_LEADER_LIU_BEI_TIGERS','HAN_LIU_BEI_NO_GREAT_GENERALS');
 
 -- 厚施恩德，以收众心：城市施加的忠诚度压力 +50%（与黄金时代同一修改器，可叠加）；
 -- 叛离其他文明的城市在本文明忠诚压力最高时跳过自由城市直接归降（复用埃莉诺的 SKIP_FREE_CITY）。

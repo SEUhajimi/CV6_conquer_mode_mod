@@ -18,8 +18,8 @@ RES_ZH = '陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Stre
 RES_EN = 'Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.'
 SHU_ZH = '陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。每个相邻的山脉或丘陵为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。'
 SHU_EN = 'Land units (including civilian and support units) ignore the movement cost of Hills. Each adjacent Mountain or Hills tile provides a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.'
-TUN_ZH = '每个单位的维护费-1 [ICON_Gold] 金币。兵营及其建筑不再产出大将军点数，改为兵营+2 [ICON_Production] 生产力、其中每座建筑再+2 [ICON_Production] 生产力。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。'
-TUN_EN = 'Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments and their buildings no longer generate Great General points; instead the Encampment gains +2 [ICON_Production] Production and each of its buildings another +2 [ICON_Production] Production. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.'
+TUN_ZH = '每个单位的维护费-1 [ICON_Gold] 金币。兵营+2 [ICON_Science] 科技、+2 [ICON_Gold] 金币，其中每座兵营建筑再+1 [ICON_Science] 科技、+1 [ICON_Gold] 金币。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。'
+TUN_EN = 'Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +2 [ICON_Science] Science and +2 [ICON_Gold] Gold, and each Encampment building another +1 [ICON_Science] Science and +1 [ICON_Gold] Gold. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.'
 t('LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_NAME', '兴复汉室', 'Restore the Han')
 t('LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_DESCRIPTION', RES_ZH, RES_EN)
 t('LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_NAME', '蜀道', 'Roads of Shu')
@@ -38,9 +38,9 @@ t('LOC_HAN_SHU_ROADS_HILLS_GOLD', '+{1_num} [ICON_Gold] 金币来自相邻丘陵
 t('LOC_HAN_SHU_ROADS_HILLS_PRODUCTION', '+{1_num} [ICON_Production] 生产力来自相邻丘陵（蜀道）。', '+{1_num} [ICON_Production] Production from adjacent Hills {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).')
 t('LOC_HAN_SHU_ROADS_MOUNTAIN_PRODUCTION', '+{1_num} [ICON_Production] 生产力来自相邻山脉（蜀道）。', '+{1_num} [ICON_Production] Production from adjacent Mountain {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).')
 
-TIGERS_ZH = ('桃园结义：建立首都及研究特定科技时，五虎上将免费加入；拥有3座城市时诸葛亮加入。所有单位战斗经验+100%。[NEWLINE]'
+TIGERS_ZH = ('桃园结义：建立首都及研究特定科技时，五虎上将免费加入；拥有3座城市时诸葛亮加入。所有单位战斗经验+100%。不获得大将军点数。[NEWLINE]'
   '厚施恩德，以收众心：城市施加的忠诚度压力+50%。因忠诚度脱离其他文明的城市，在本文明施加的忠诚度压力最高时，跳过自由城市阶段直接加入本文明。')
-TIGERS_EN = ('Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched, and Zhuge Liang joins once you have 3 cities. All units gain +100% combat experience.[NEWLINE]'
+TIGERS_EN = ('Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched, and Zhuge Liang joins once you have 3 cities. All units gain +100% combat experience. Earns no Great General points.[NEWLINE]'
   'Win Hearts with Generous Virtue: cities exert +50% Loyalty pressure. Cities rebelling from other civilizations join this civilization directly, skipping the Free City stage, when its Loyalty pressure on them is highest.')
 t('LOC_TRAIT_LEADER_LIU_BEI_TIGERS_NAME', '桃园结义', 'Oath of the Peach Garden')
 t('LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION', TIGERS_ZH, TIGERS_EN)
@@ -59,8 +59,8 @@ units = [
  ('GUAN_YU', '关羽', 'Guan Yu',
   '建立首都时加入的重骑兵，远古基础34 [ICON_Strength] 战斗力，4 [ICON_Movement] 移动力。',
   'Heavy cavalry that joins when the [ICON_Capital] Capital is founded. Ancient-era base 34 [ICON_Strength] Combat Strength, 4 [ICON_Movement] Movement.',
-  '武圣：进攻时+5 [ICON_Strength] 战斗力。万军丛中：无视区域控制。斩首：进攻后，若敌方单位剩余生命值不高于20，直接将其斩杀。过五关斩六将：击杀敌方单位后恢复20生命值。',
-  'God of War: +5 [ICON_Strength] Combat Strength when attacking. Through Ten Thousand: ignores Zone of Control. Beheading: after attacking, an enemy unit left with 20 HP or less is killed outright. Five Passes, Six Generals: heals 20 HP after killing a unit.'),
+  '武圣：进攻时+5 [ICON_Strength] 战斗力。万军丛中：无视区域控制。破城：攻击所有城墙都造成全额伤害。斩首：进攻后，若敌方单位剩余生命值不高于20，直接将其斩杀。过五关斩六将：击杀敌方单位后恢复20生命值。',
+  'God of War: +5 [ICON_Strength] Combat Strength when attacking. Through Ten Thousand: ignores Zone of Control. Siege Breaker: full damage against all walls. Beheading: after attacking, an enemy unit left with 20 HP or less is killed outright. Five Passes, Six Generals: heals 20 HP after killing a unit.'),
  ('ZHANG_FEI', '张飞', 'Zhang Fei',
   '建立首都时加入的抗骑兵单位，远古基础32 [ICON_Strength] 战斗力，3 [ICON_Movement] 移动力。',
   'Anti-cavalry unit that joins when the [ICON_Capital] Capital is founded. Ancient-era base 32 [ICON_Strength] Combat Strength, 3 [ICON_Movement] Movement.',

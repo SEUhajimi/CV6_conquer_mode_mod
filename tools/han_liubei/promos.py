@@ -25,7 +25,7 @@ TREES = {
   ('单刀赴会', 'Alone to the Feast', [('def', 10)], '防守时+10 [ICON_Strength] 战斗力。', '+10 [ICON_Strength] Combat Strength when defending.'),
   ('水淹七军', 'Flooding the Seven Armies', [('district', 15)], '与城市和区域作战时+15 [ICON_Strength] 战斗力。', '+15 [ICON_Strength] Combat Strength when fighting cities and districts.'),
   ('过五关斩六将', 'Five Passes, Six Generals', [('move', 1)], '+1 [ICON_Movement] 移动力。', '+1 [ICON_Movement] Movement.'),
-  ('威震华夏', 'Awe Over China', [('attacks', 1), ('execute35', 0), ('awe', 0), ('wallattack', 0)], '每回合可攻击两次，斩首线提高到35生命值，攻击城墙造成全额伤害（同攻城槌）。每杀死一个敌方单位，9格内与你交战的城市忠诚度-20。', 'Can attack twice per turn, Beheading triggers at 35 HP or less, and full damage against walls (like a Battering Ram). Each enemy unit he kills costs enemy cities at war with you within 9 tiles 20 Loyalty.'),
+  ('威震华夏', 'Awe Over China', [('attacks', 1), ('execute35', 0), ('awe', 0)], '每回合可攻击两次，斩首线提高到35生命值。每杀死一个敌方单位，9格内与你交战的城市忠诚度-20。', 'Can attack twice per turn and Beheading triggers at 35 HP or less. Each enemy unit he kills costs enemy cities at war with you within 9 tiles 20 Loyalty.'),
  ]),
  'ZHANG_FEI': ('张飞', 'Zhang Fei', [
   ('怒鞭督邮', 'Flogging the Inspector', [('atk', 7)], '进攻时+7 [ICON_Strength] 战斗力。', '+7 [ICON_Strength] Combat Strength when attacking.'),
