@@ -56,10 +56,10 @@
       <Text>Military Farms</Text>
     </Row>
     <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>每个单位的维护费-1 [ICON_Gold] 金币。兵营+2 [ICON_Science] 科技、+2 [ICON_Gold] 金币，其中每座兵营建筑再+1 [ICON_Science] 科技、+1 [ICON_Gold] 金币。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
+      <Text>每个单位的维护费-1 [ICON_Gold] 金币。兵营+3 [ICON_Science] 科技、+3 [ICON_Gold] 金币；兵营、马厩再各+3，军械库+4，军事学院+6（科技和金币各加这么多）。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
     </Row>
     <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_DESCRIPTION" Language="en_US">
-      <Text>Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +2 [ICON_Science] Science and +2 [ICON_Gold] Gold, and each Encampment building another +1 [ICON_Science] Science and +1 [ICON_Gold] Gold. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
+      <Text>Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +3 [ICON_Science] Science and +3 [ICON_Gold] Gold; Barracks and Stables add another +3, Armories +4 and Military Academies +6 of each. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
     </Row>
     <Row Tag="LOC_HAN_SETUP_ABILITY_NAME" Language="zh_Hans_CN">
       <Text>兴复汉室 / 蜀道 / 屯田</Text>
@@ -68,10 +68,10 @@
       <Text>Restore the Han / Roads of Shu / Military Farms</Text>
     </Row>
     <Row Tag="LOC_HAN_SETUP_ABILITY_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>兴复汉室：陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。不是由本文明建立的城市每回合+3忠诚度。[NEWLINE][NEWLINE]蜀道：陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。每个相邻的山脉或丘陵为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。[NEWLINE][NEWLINE]屯田：每个单位的维护费-1 [ICON_Gold] 金币。兵营+2 [ICON_Science] 科技、+2 [ICON_Gold] 金币，其中每座兵营建筑再+1 [ICON_Science] 科技、+1 [ICON_Gold] 金币。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
+      <Text>兴复汉室：陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。不是由本文明建立的城市每回合+3忠诚度。[NEWLINE][NEWLINE]蜀道：陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。每个相邻的山脉或丘陵为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。[NEWLINE][NEWLINE]屯田：每个单位的维护费-1 [ICON_Gold] 金币。兵营+3 [ICON_Science] 科技、+3 [ICON_Gold] 金币；兵营、马厩再各+3，军械库+4，军事学院+6（科技和金币各加这么多）。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
     </Row>
     <Row Tag="LOC_HAN_SETUP_ABILITY_DESCRIPTION" Language="en_US">
-      <Text>Restore the Han: Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.[NEWLINE][NEWLINE]Roads of Shu: Land units (including civilian and support units) ignore the movement cost of Hills. Each adjacent Mountain or Hills tile provides a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.[NEWLINE][NEWLINE]Military Farms: Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +2 [ICON_Science] Science and +2 [ICON_Gold] Gold, and each Encampment building another +1 [ICON_Science] Science and +1 [ICON_Gold] Gold. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
+      <Text>Restore the Han: Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.[NEWLINE][NEWLINE]Roads of Shu: Land units (including civilian and support units) ignore the movement cost of Hills. Each adjacent Mountain or Hills tile provides a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.[NEWLINE][NEWLINE]Military Farms: Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +3 [ICON_Science] Science and +3 [ICON_Gold] Gold; Barracks and Stables add another +3, Armories +4 and Military Academies +6 of each. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
     </Row>
     <Row Tag="LOC_ABILITY_HAN_RESTORATION_DESCRIPTION" Language="zh_Hans_CN">
       <Text>迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。</Text>
@@ -463,11 +463,773 @@
     <Row Tag="LOC_HAN_MA_CHAO_CHARGE_5_PREVIEW" Language="en_US">
       <Text>+{1_Amount} Divine General: charged 5 tiles</Text>
     </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_6_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋6格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_6_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 6 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_7_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋7格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_7_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 7 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_8_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋8格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_8_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 8 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_9_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋9格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_9_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 9 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_10_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋10格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_10_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 10 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_11_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋11格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_11_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 11 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_12_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋12格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_12_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 12 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_13_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋13格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_13_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 13 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_14_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋14格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_14_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 14 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_15_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋15格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_15_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 15 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_16_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋16格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_16_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 16 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_17_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋17格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_17_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 17 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_18_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋18格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_18_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 18 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_19_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋19格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_19_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 19 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_20_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋20格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_20_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 20 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_21_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋21格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_21_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 21 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_22_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋22格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_22_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 22 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_23_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋23格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_23_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 23 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_24_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋24格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_24_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 24 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_25_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋25格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_25_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 25 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_26_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋26格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_26_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 26 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_27_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋27格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_27_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 27 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_28_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋28格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_28_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 28 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_29_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋29格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_29_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 29 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_30_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋30格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_30_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 30 tiles</Text>
+    </Row>
     <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME" Language="zh_Hans_CN">
       <Text>西凉铁骑冲锋</Text>
     </Row>
     <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME" Language="en_US">
       <Text>Xiliang Charge</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将1人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 1 kill</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_2_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将2人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_2_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 2 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_3_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将3人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_3_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 3 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_4_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将4人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_4_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 4 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_5_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将5人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_5_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 5 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_6_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将6人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_6_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 6 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_7_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将7人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_7_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 7 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_8_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将8人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_8_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 8 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_9_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将9人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_9_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 9 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_10_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将10人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_10_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 10 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_11_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将11人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_11_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 11 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_12_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将12人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_12_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 12 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_13_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将13人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_13_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 13 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_14_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将14人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_14_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 14 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_15_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将15人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_15_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 15 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_16_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将16人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_16_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 16 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_17_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将17人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_17_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 17 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_18_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将18人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_18_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 18 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_19_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将19人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_19_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 19 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_20_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将20人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_20_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 20 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_21_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将21人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_21_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 21 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_22_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将22人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_22_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 22 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_23_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将23人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_23_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 23 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_24_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将24人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_24_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 24 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_25_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将25人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_25_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 25 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_26_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将26人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_26_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 26 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_27_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将27人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_27_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 27 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_28_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将28人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_28_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 28 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_29_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将29人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_29_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 29 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_30_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将30人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_30_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 30 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_31_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将31人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_31_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 31 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_32_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将32人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_32_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 32 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_33_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将33人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_33_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 33 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_34_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将34人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_34_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 34 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_35_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将35人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_35_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 35 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_36_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将36人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_36_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 36 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_37_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将37人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_37_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 37 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_38_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将38人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_38_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 38 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_39_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将39人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_39_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 39 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_40_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将40人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_40_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 40 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_41_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将41人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_41_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 41 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_42_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将42人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_42_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 42 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_43_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将43人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_43_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 43 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_44_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将44人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_44_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 44 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_45_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将45人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_45_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 45 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_46_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将46人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_46_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 46 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_47_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将47人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_47_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 47 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_48_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将48人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_48_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 48 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_49_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将49人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_49_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 49 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_50_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将50人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_50_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 50 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_51_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将51人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_51_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 51 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_52_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将52人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_52_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 52 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_53_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将53人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_53_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 53 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_54_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将54人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_54_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 54 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_55_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将55人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_55_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 55 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_56_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将56人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_56_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 56 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_57_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将57人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_57_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 57 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_58_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将58人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_58_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 58 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_59_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将59人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_59_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 59 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_60_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将60人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_60_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 60 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_61_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将61人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_61_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 61 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_62_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将62人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_62_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 62 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_63_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将63人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_63_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 63 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_64_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将64人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_64_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 64 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_65_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将65人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_65_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 65 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_66_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将66人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_66_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 66 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_67_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将67人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_67_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 67 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_68_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将68人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_68_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 68 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_69_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将69人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_69_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 69 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_70_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将70人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_70_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 70 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_71_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将71人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_71_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 71 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_72_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将72人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_72_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 72 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_73_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将73人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_73_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 73 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_74_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将74人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_74_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 74 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_75_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将75人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_75_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 75 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_76_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将76人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_76_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 76 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_77_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将77人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_77_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 77 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_78_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将78人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_78_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 78 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_79_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将79人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_79_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 79 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_80_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将80人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_80_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 80 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_81_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将81人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_81_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 81 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_82_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将82人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_82_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 82 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_83_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将83人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_83_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 83 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_84_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将84人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_84_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 84 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_85_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将85人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_85_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 85 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_86_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将86人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_86_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 86 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_87_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将87人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_87_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 87 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_88_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将88人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_88_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 88 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_89_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将89人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_89_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 89 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_90_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将90人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_90_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 90 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_91_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将91人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_91_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 91 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_92_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将92人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_92_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 92 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_93_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将93人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_93_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 93 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_94_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将94人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_94_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 94 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_95_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将95人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_95_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 95 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_96_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将96人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_96_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 96 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_97_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将97人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_97_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 97 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_98_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将98人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_98_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 98 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_99_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将99人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_99_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 99 kills</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_100_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 过五关斩六将：斩将100人</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_KILLS_100_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Five Passes, Six Generals: 100 kills</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_KILLS_NAME" Language="zh_Hans_CN">
+      <Text>过五关斩六将</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_KILLS_NAME" Language="en_US">
+      <Text>Five Passes, Six Generals</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_KILLS_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每击杀一个敌方单位，永久+1战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_KILLS_DESCRIPTION" Language="en_US">
+      <Text>Permanently +1 Combat Strength for each enemy unit killed.</Text>
     </Row>
     <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION" Language="zh_Hans_CN">
       <Text>本回合已冲锋，进攻时战斗力提高。</Text>
@@ -698,10 +1460,10 @@
       <Text>Five Passes, Six Generals</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>+1 [ICON_Movement] 移动力。</Text>
+      <Text>每击杀一个敌方单位，永久+1 [ICON_Strength] 战斗力（不设上限，学会之前的击杀也算）。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_DESCRIPTION" Language="en_US">
-      <Text>+1 [ICON_Movement] Movement.</Text>
+      <Text>Permanently +1 [ICON_Strength] Combat Strength for each enemy unit he has killed (no cap; kills before learning this count too).</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_NAME" Language="zh_Hans_CN">
       <Text>威震华夏</Text>
@@ -710,10 +1472,10 @@
       <Text>Awe Over China</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>每回合可攻击两次，斩首线提高到35生命值。每杀死一个敌方单位，9格内与你交战的城市忠诚度-20。</Text>
+      <Text>每回合可攻击两次，斩首线提高到35生命值。每杀死一个敌方单位或攻下一座城市，9格内与你交战的城市忠诚度-20。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_DESCRIPTION" Language="en_US">
-      <Text>Can attack twice per turn and Beheading triggers at 35 HP or less. Each enemy unit he kills costs enemy cities at war with you within 9 tiles 20 Loyalty.</Text>
+      <Text>Can attack twice per turn and Beheading triggers at 35 HP or less. Each enemy unit he kills or city he captures costs enemy cities at war with you within 9 tiles 20 Loyalty.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHANG_FEI_NAME" Language="zh_Hans_CN">
       <Text>张飞</Text>
@@ -818,10 +1580,10 @@
       <Text>Serpent Spear</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>一矛贯阵：进攻并击杀敌军后，被杀者身后一格里的交战敌方作战单位也被直接刺死。</Text>
+      <Text>一矛贯阵：攻击城墙全额伤害。每次进攻，目标身后2格深的扇形区域（8格）里的敌方单位、城市和区域都受到与目标同等的伤害（城墙同样全额）。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_DESCRIPTION" Language="en_US">
-      <Text>Run Through: after killing an enemy while attacking, enemy combat units in the tile directly behind it are killed as well.</Text>
+      <Text>Run Through: full damage against walls. Every time he attacks, enemy units, cities and districts in the 2-tile-deep cone (8 tiles) behind the target take the same damage as the target (walls included, in full).</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHAO_YUN_NAME" Language="zh_Hans_CN">
       <Text>赵云</Text>
@@ -836,10 +1598,10 @@
       <Text>White Horse, Silver Spear</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>+1 [ICON_Movement] 移动力。</Text>
+      <Text>攻击吸血：进攻时对目标造成多少伤害，自己就恢复多少生命值。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_DESCRIPTION" Language="en_US">
-      <Text>+1 [ICON_Movement] Movement.</Text>
+      <Text>Lifesteal: when attacking, heals as much HP as the damage he deals to the target.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_2_NAME" Language="zh_Hans_CN">
       <Text>截江夺斗</Text>
@@ -902,10 +1664,10 @@
       <Text>Deep Strike</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>+1 [ICON_Movement] 移动力，+1视野。</Text>
+      <Text>+7 [ICON_Movement] 移动力，+1视野。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_DESCRIPTION" Language="en_US">
-      <Text>+1 [ICON_Movement] Movement and +1 Sight.</Text>
+      <Text>+7 [ICON_Movement] Movement and +1 Sight.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME" Language="zh_Hans_CN">
       <Text>七进七出</Text>
@@ -914,10 +1676,10 @@
       <Text>In and Out Seven Times</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>每回合可攻击七次。每击杀一个敌方单位，立刻恢复全部移动力。</Text>
+      <Text>每回合可攻击七次。每击杀一个敌方单位或攻下一座城市，立刻恢复全部移动力。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="en_US">
-      <Text>Can attack seven times per turn. Each enemy unit he kills restores all of his Movement.</Text>
+      <Text>Can attack seven times per turn. Each enemy unit he kills or city he captures restores all of his Movement.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_MA_CHAO_NAME" Language="zh_Hans_CN">
       <Text>马超</Text>
@@ -1016,10 +1778,10 @@
       <Text>Divine General</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>西凉铁骑冲锋：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力，最多+20。</Text>
+      <Text>西凉铁骑冲锋：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力，不设上限。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="en_US">
-      <Text>Xiliang Charge: +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn, up to +20.</Text>
+      <Text>Xiliang Charge: +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn, with no cap.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_HUANG_ZHONG_NAME" Language="zh_Hans_CN">
       <Text>黄忠</Text>

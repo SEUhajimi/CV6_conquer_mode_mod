@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Mod id="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" version="21">
+<Mod id="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" version="23">
   <Properties>
-    <Name>汉帝国 — 刘备：桃园结义 [v0.21]</Name>
+    <Name>汉帝国 — 刘备：桃园结义 [v0.23]</Name>
     <Description>Gathering Storm. Han Empire led by Liu Bei: Restore the Han, Roads of Shu and Military Farms; the Five Tiger Generals join for free at tech milestones and grow stronger every era; +50% Loyalty pressure and rebel cities join directly. Runtime validation pending.</Description>
     <Authors>Hhhajimi</Authors>
     <CompatibleVersions>2.0</CompatibleVersions>

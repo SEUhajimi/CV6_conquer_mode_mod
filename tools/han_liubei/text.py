@@ -18,8 +18,8 @@ RES_ZH = '陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Stre
 RES_EN = 'Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.'
 SHU_ZH = '陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。每个相邻的山脉或丘陵为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。'
 SHU_EN = 'Land units (including civilian and support units) ignore the movement cost of Hills. Each adjacent Mountain or Hills tile provides a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.'
-TUN_ZH = '每个单位的维护费-1 [ICON_Gold] 金币。兵营+2 [ICON_Science] 科技、+2 [ICON_Gold] 金币，其中每座兵营建筑再+1 [ICON_Science] 科技、+1 [ICON_Gold] 金币。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。'
-TUN_EN = 'Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +2 [ICON_Science] Science and +2 [ICON_Gold] Gold, and each Encampment building another +1 [ICON_Science] Science and +1 [ICON_Gold] Gold. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.'
+TUN_ZH = '每个单位的维护费-1 [ICON_Gold] 金币。兵营+3 [ICON_Science] 科技、+3 [ICON_Gold] 金币；兵营、马厩再各+3，军械库+4，军事学院+6（科技和金币各加这么多）。与兵营相邻的所有改良设施（农场、矿山、种植园、营地等）+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。'
+TUN_EN = 'Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Encampments gain +3 [ICON_Science] Science and +3 [ICON_Gold] Gold; Barracks and Stables add another +3, Armories +4 and Military Academies +6 of each. All improvements adjacent to an Encampment (Farms, Mines, Plantations, Camps and so on) gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.'
 t('LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_NAME', '兴复汉室', 'Restore the Han')
 t('LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_DESCRIPTION', RES_ZH, RES_EN)
 t('LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_NAME', '蜀道', 'Roads of Shu')
@@ -113,9 +113,13 @@ t('LOC_UNIT_HAN_ZHUGE_LIANG_DESCRIPTION',
   'Support unit that can share a tile with a Tiger General. Joins next to the [ICON_Capital] Capital once you have 3 cities (Three Visits to the Cottage); cannot be trained or purchased, never returns once killed, and has no maintenance. Strategist: Tiger Generals within 2 tiles (including this tile) heal an extra 15 HP per turn, receive +1 [ICON_Movement] Movement, and +25 [ICON_Strength] Combat Strength against air units. Gains 8 experience whenever a Tiger General within 2 tiles fights.')
 for key, zh, en in [('GUAN_YU', '关羽', 'Guan Yu'), ('ZHANG_FEI', '张飞', 'Zhang Fei'), ('ZHAO_YUN', '赵云', 'Zhao Yun'), ('MA_CHAO', '马超', 'Ma Chao'), ('HUANG_ZHONG', '黄忠', 'Huang Zhong')]:
   t('LOC_HAN_TIGER_COMMANDED_PREVIEW_' + key, '+{1_Amount} 五虎齐心：' + zh + '统率', '+{1_Amount} Five Tigers as One: ' + en)
-for k in range(1, 6):
+for k in range(1, 31):
   t('LOC_HAN_MA_CHAO_CHARGE_%d_PREVIEW' % k, '+{1_Amount} 神威天将军：冲锋%d格' % k, '+{1_Amount} Divine General: charged %d tile%s' % (k, '' if k == 1 else 's'))
 t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME', '西凉铁骑冲锋', 'Xiliang Charge')
+for k in range(1, 101):
+  t('LOC_HAN_GUAN_YU_KILLS_%d_PREVIEW' % k, '+{1_Amount} 过五关斩六将：斩将%d人' % k, '+{1_Amount} Five Passes, Six Generals: %d kill%s' % (k, '' if k == 1 else 's'))
+t('LOC_ABILITY_HAN_GUAN_YU_KILLS_NAME', '过五关斩六将', 'Five Passes, Six Generals')
+t('LOC_ABILITY_HAN_GUAN_YU_KILLS_DESCRIPTION', '每击杀一个敌方单位，永久+1战斗力。', 'Permanently +1 Combat Strength for each enemy unit killed.')
 t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION', '本回合已冲锋，进攻时战斗力提高。', 'Charging this turn: stronger when attacking.')
 t('LOC_HAN_TIGER_JOINED_MESSAGE', '{1_Name}来投', '{1_Name} has joined')
 t('LOC_HAN_TIGER_JOINED_SUMMARY', '五虎上将{1_Name}已在{2_City}旁加入你的军队。', 'Tiger General {1_Name} has joined your army near {2_City}.')

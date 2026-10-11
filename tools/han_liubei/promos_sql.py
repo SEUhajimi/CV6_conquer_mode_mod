@@ -34,7 +34,8 @@ SIMPLE = {  # 类型: (ModifierType, [(参数名, 值或 None=用数值)])
  'capturecav': ('MODIFIER_UNIT_ADJUST_COMBAT_UNIT_CAPTURE', [('CanCapture', '1')]),
  'ignoreshores': ('MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_SHORES', [('Ignore', '1')]),
  'sight': ('MODIFIER_PLAYER_UNIT_ADJUST_SIGHT', [('Amount', None)]),
- 'wallattack': ('MODIFIER_PLAYER_UNIT_ADJUST_ENABLE_WALL_ATTACK', [('Enable', '1')]),
+ # 全时代全额攻城（不用攻城槌的 ENABLE_WALL_ATTACK，它在风云变幻只对远古城墙有效）；PromotionClass 填该武将自己的晋升类别。
+ 'wallattack': ('MODIFIER_HAN_UNIT_ENABLE_WALL_ATTACK_WHOLE_GAME', [('PromotionClass', 'SELF_CLASS')]),
  'seehidden': ('MODIFIER_PLAYER_UNIT_ADJUST_SEE_HIDDEN', [('SeeHidden', '1')]),
  'zglheal': ('MODIFIER_PLAYER_UNITS_ADJUST_HEAL_PER_TURN', [('Amount', None), ('Type', 'ALL')]),
  'zglmove': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_ZGL_MOVE2')]),
@@ -57,7 +58,7 @@ for key, (zh, en, promos) in TREES.items():
         for pre in PREREQS.get(n, []):
             rows['UnitPromotionPrereqs'].append((pid, 'PROMOTION_HAN_%s_%d' % (key, pre)))
         for kind, amount in effects:
-            if kind in ('rage25', 'execute35', 'awe', 'pierce', 'volley', 'stack', 'sevenin', 'charge'):
+            if kind in ('rage25', 'execute35', 'awe', 'pierce', 'volley', 'stack', 'sevenin', 'charge', 'killstr', 'lifesteal'):
                 continue  # 纯 Lua 判断，晋升本身没有修改器
             mid = 'HAN_%s_%d_%s' % (key, n, kind.upper())
             if kind in STRENGTH_SETS:
@@ -75,6 +76,8 @@ for key, (zh, en, promos) in TREES.items():
                 mtype, args = SIMPLE[kind]
                 rows['Modifiers'].append((mid, mtype, SUBJECT_SETS.get(kind)))
                 for name, value in args:
+                    if value == 'SELF_CLASS':
+                        value = 'PROMOTION_CLASS_HAN_%s' % key
                     rows['ModifierArguments'].append((mid, name, amount if value is None else value))
             rows['UnitPromotionModifiers'].append((pid, mid))
 
