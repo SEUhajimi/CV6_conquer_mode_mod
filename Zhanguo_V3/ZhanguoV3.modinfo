@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="7c1f5a52-3b8e-4d1a-9f0a-5e2b6d8c4a31" version="27">
+<Mod id="7c1f5a52-3b8e-4d1a-9f0a-5e2b6d8c4a31" version="28">
 	<Properties>
-		<Name>Warring States China Map V3.27</Name>
+		<Name>Warring States China Map V3.28</Name>
 		<Teaser>Seven states plus Zhou, Guanzhong, Shu, Three Gorges, Taihang passes.</Teaser>
-		<Description>Fixed-terrain Warring States China map (Huge 106x66). V3.27 2026-10-10.</Description>
+		<Description>Fixed-terrain Warring States China map (Huge 106x66). V3.28 2026-10-10.</Description>
 		<Authors>Claude</Authors>
 		<CompatibleVersions>1.2,2.0</CompatibleVersions>
 		<AffectsSavedGames>1</AffectsSavedGames>
