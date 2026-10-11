@@ -1,9 +1,9 @@
-战国七雄 V3 · 版本 V3.26（2026-10-09）
+战国七雄 V3 · 版本 V3.27（2026-10-10）
 
 怎么确认自己玩的是不是这一版：
-1. 开局选图界面选“战国七雄 V3”，右侧说明末尾写着（V3.26 · 2026-10-09）。
-2. Mods 界面里这个 Mod 的名字是 Warring States China Map V3.26。
+1. 开局选图界面选“战国七雄 V3”，右侧说明末尾写着（V3.27 · 2026-10-10）。
+2. Mods 界面里这个 Mod 的名字是 Warring States China Map V3.27。
 3. 日志 %LOCALAPPDATA%\Firaxis Games\Sid Meier's Civilization VI\Logs\Lua.log 里搜 Generating Warring States China map，
-   那一行的末尾写着 V3.26 (2026-10-09)。
+   那一行的末尾写着 V3.27 (2026-10-10)。
 
 更新前请先把 Mods 文件夹里旧的 Zhanguo_V3 整个删掉，再放新的。
