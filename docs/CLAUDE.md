@@ -19,6 +19,7 @@
     - 联机一致性检查：UI 读档时用 `DB.Query` 遍历整个 Gameplay 数据库算指纹（`CQ.GetFingerprint()`，每次进入游戏算一次并缓存；`DB.Query` 不可用时退回到 `GameInfo` 的几张核心表），经 `EXECUTE_SCRIPT` 上报到玩家属性，各电脑的 UI 互相比对，不一致时弹窗。**改了 Lua 后把 `CQ.VERSION` 加 1**：只改 Lua 时数据库不变，靠它发现两边脚本版本不同。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。
+- `tools/render_map.py`：把 `Zhanguo_V3/ZhanguoV3.lua` 的地形画成 `Zhanguo_V3/地图预览/` 下的预览图（全图加七张分区图）。改了地图地形后运行 `python tools/render_map.py` 重新生成，需要 Pillow。
 - `docs/modding-guide.md`：文明六 mod 机制新手教程（数据库、修改器、Lua 两个环境、联机同步、modinfo、ArtDef、调试），不进游戏。
 - `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
 
