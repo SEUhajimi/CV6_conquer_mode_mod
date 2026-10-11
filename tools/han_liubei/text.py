@@ -36,9 +36,9 @@ t('LOC_ABILITY_HAN_SHU_ROADS_DESCRIPTION', '进入丘陵不额外消耗移动力
 t('LOC_HAN_SHU_ROADS_MOUNTAIN_GOLD', '+{1_num} [ICON_Gold] 金币来自相邻山脉（蜀道）。', '+{1_num} [ICON_Gold] Gold from adjacent Mountain {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).')
 t('LOC_HAN_SHU_ROADS_MOUNTAIN_PRODUCTION', '+{1_num} [ICON_Production] 生产力来自相邻山脉（蜀道）。', '+{1_num} [ICON_Production] Production from adjacent Mountain {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).')
 
-TIGERS_ZH = ('桃园结义：建立首都及研究特定科技时，五虎上将免费加入。[NEWLINE]'
+TIGERS_ZH = ('桃园结义：建立首都及研究特定科技时，五虎上将免费加入。所有单位战斗经验+100%。[NEWLINE]'
   '厚施恩德，以收众心：城市施加的忠诚度压力+50%。因忠诚度脱离其他文明的城市，在本文明施加的忠诚度压力最高时，跳过自由城市阶段直接加入本文明。')
-TIGERS_EN = ('Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched.[NEWLINE]'
+TIGERS_EN = ('Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched. All units gain +100% combat experience.[NEWLINE]'
   'Win Hearts with Generous Virtue: cities exert +50% Loyalty pressure. Cities rebelling from other civilizations join this civilization directly, skipping the Free City stage, when its Loyalty pressure on them is highest.')
 t('LOC_TRAIT_LEADER_LIU_BEI_TIGERS_NAME', '桃园结义', 'Oath of the Peach Garden')
 t('LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION', TIGERS_ZH, TIGERS_EN)

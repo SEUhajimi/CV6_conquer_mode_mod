@@ -110,10 +110,10 @@
       <Text>Oath of the Peach Garden</Text>
     </Row>
     <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>桃园结义：建立首都及研究特定科技时，五虎上将免费加入。[NEWLINE]厚施恩德，以收众心：城市施加的忠诚度压力+50%。因忠诚度脱离其他文明的城市，在本文明施加的忠诚度压力最高时，跳过自由城市阶段直接加入本文明。</Text>
+      <Text>桃园结义：建立首都及研究特定科技时，五虎上将免费加入。所有单位战斗经验+100%。[NEWLINE]厚施恩德，以收众心：城市施加的忠诚度压力+50%。因忠诚度脱离其他文明的城市，在本文明施加的忠诚度压力最高时，跳过自由城市阶段直接加入本文明。</Text>
     </Row>
     <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION" Language="en_US">
-      <Text>Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched.[NEWLINE]Win Hearts with Generous Virtue: cities exert +50% Loyalty pressure. Cities rebelling from other civilizations join this civilization directly, skipping the Free City stage, when its Loyalty pressure on them is highest.</Text>
+      <Text>Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched. All units gain +100% combat experience.[NEWLINE]Win Hearts with Generous Virtue: cities exert +50% Loyalty pressure. Cities rebelling from other civilizations join this civilization directly, skipping the Free City stage, when its Loyalty pressure on them is highest.</Text>
     </Row>
     <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGER_UNITS_NAME" Language="zh_Hans_CN">
       <Text>五虎上将</Text>

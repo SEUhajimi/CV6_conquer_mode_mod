@@ -414,6 +414,14 @@ INSERT INTO UnitAbilityModifiers(UnitAbilityType,ModifierId) VALUES
 ('ABILITY_HAN_TIGER_COMMANDED','HAN_TIGER_COMMANDED_STRENGTH'),
 ('ABILITY_HAN_TIGER_COMMANDED_MOVEMENT','HAN_TIGER_COMMANDED_MOVEMENT');
 
+-- 领袖：所有单位的战斗经验 +100%（政策「测量」给侦察单位用的同一个修改器，这里不加兵种条件）。
+INSERT INTO Modifiers(ModifierId,ModifierType) VALUES
+('HAN_LIU_BEI_UNIT_EXPERIENCE','MODIFIER_PLAYER_UNITS_ADJUST_UNIT_EXPERIENCE_MODIFIER');
+INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES
+('HAN_LIU_BEI_UNIT_EXPERIENCE','Amount',100);
+INSERT INTO TraitModifiers(TraitType,ModifierId) VALUES
+('TRAIT_LEADER_LIU_BEI_TIGERS','HAN_LIU_BEI_UNIT_EXPERIENCE');
+
 -- 厚施恩德，以收众心：城市施加的忠诚度压力 +50%（与黄金时代同一修改器，可叠加）；
 -- 叛离其他文明的城市在本文明忠诚压力最高时跳过自由城市直接归降（复用埃莉诺的 SKIP_FREE_CITY）。
 INSERT INTO Modifiers(ModifierId,ModifierType) VALUES
