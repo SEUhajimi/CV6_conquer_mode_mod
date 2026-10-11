@@ -1,4 +1,4 @@
--- 战国七雄 / Warring States China  V3.28 (2026-10-10)
+-- 战国七雄 / Warring States China  V3.29 (2026-10-11)
 -- 106 x 66 (Huge) fixed-terrain map.  Rows are listed north -> south.
 -- Terrain legend:  ~ ocean   c coast (rivers)   g grass  G grass hills   p plains  P plains hills
 --                  d desert  D desert hills     M mountain   S snow mountain
@@ -29,58 +29,58 @@ local TERRAIN_ROWS = {
 	"SSSMdpdPDddddddpddpMMMMMMMMMPMMMMMMMMMMMMPMMMMMMMMMMMMPPPgpgppgpppGggPPPPPpMMMPMMMMPMMMMPMGgppccc~~~~~~~~~",
 	"SSSMDDdddpdpdDdpppDdMMMMMMMMcPMMMMMMMMMMMPMMMMMMMMMMMMGPgPpgppgPPPpPpMMMMMMpPPPPGMMMPMMMMPMPPpccc~~~~~~~~~",
 	"SSSMppdddddpddddDppPPMMMDDppPPDDpDDdDPpdpPpdPdPDpgGGgPGGGGpPPggpPPpMMMMMMGpGggPGGpgGpPMMPMGPccc~~~~~~~~~~~",
-	"SSSMpdDdDpdddDddppDPdMMMDDDDddPccccccccccpcccccccMMMPPPpPGPGGPMMMpMMMMMgGgpppGgPGpppPppPPPgcccc~~~~~~~~~~~",
+	"SSSMpdDdDMdddDddppDPdMMMDDDDddPccccccccccpcccccccMMMPPPpPGPGGPMMMpMMMMMgGgpppGgPGpppPppPPPgcccc~~~~~~~~~~~",
 	"SSSMDppdddddddPdpppdDMMMDppdppcccPDppDPPPPpPPDccpMMMMPMMMMMMMMMMMPMMMMGpppppppppppPpggPPpcccc~~~~~~~~~~~~~",
-	"PPPPDPdpppddpdddpppdDMMMdDddccDdpDPPPdDpDppdddDDcMMMMMPMMMMMMMMMPPPPgggPggpGpppgpppppgppcccc~~~~~~~~~~~~~~",
-	"SSSMDDddpddppppdpddPdMMcpddcdddpddDdPpdDDDdddDDDcMMMMPMMMMPMMMMMMPMMpcpGggpppppppppggppccc~~~~~~~~~~~~~~~~",
+	"PPPPDPdpppMdpMddpppdDMMMdDddccDdpDPPPdDpDppdddDDcMMMMMPMMMMMMMMMPPPPgggPggpGpppgpppppgppcccc~~~~~~~~~~~~~~",
+	"SSSMDDddpddpppMdpddPdMMcpddcdddpddDdPpdDDDdddDDDcMMMMPMMMMPMMMMMMPMMpcpGggppMppppppggppccc~~~~~~~~~~~~~~~~",
 	"SSSMMPppddpddDdddDddPPPPPPdcpdddpDpppPPdDPPdpppDcMMMGMPMMMMPPMMGMMMMGgpcccgppPpgpcpcccccc~~~~~~~~~~~~~~~~~",
-	"SSSSMMDPDpppddpdPdpGPPPPpDcddddddDddDpdPDdpdPpPcMMMPPpGGGpMMPPpPPPPpPPgccpGppggppppccccc~~~~~~~~~~~~~~~~~~",
-	"SSSMMMMMpDddDddppddppDMMMDcDDdddddDpDDDPdDppDpDccMMMPpPpPpGPMMPPMMPPppppggcgppcpcccc~~~~~~~~~~~~~~~~~~~~~~",
-	"SSSSMMMMDPDdpPpdpddDDMMMccdDdddddPDdpPDpdpDDDDDpPPPPPPppPgGGPMMMMPpgggggppggccpppcccc~~~~~~~~~~~~~~~~~~~~~",
-	"SSSSdMMMMMDdPPPDpdpdDdMMpDPddPdddDdPpDdddDppdDDcPMMMGPpPPppPGGPpPGppppPpppcpcgpGgppcccc~~~~~~~~ccccc~~~~~~",
-	"SSSMPMMMMMPPdpDdddpdppccMDDddddPdPPDPPDPddDDDDcPdMMMgpGgpppGPPppPGgccpppppccppgpggggcccc~~~~ccccccccccc~~~",
-	"SSSMpPPcccPPMMDppDddDPcMMpDpddddpDpDDPDdDDDPPPDcPMMMPppgppgGGMMMgPPgcGggggccpGpggpgpppcccc~cccccgggccccc~~",
-	"SSScPDdDPPMMMMMMdDpdcpMMMpPdpdpdddDDdPDdPPDDdDcDPMMMGPppGPGGMMMMgGpccgggppPPgppGggppgppccccccgpGpgpgppcc~~",
+	"SSSSMMDPDpppddpdPdpGPPPPpDcddddMdDdMDpdPMdpdPpPcMMMPPpGGGpMMPPpPPPPpPPgccpGpMggppppccccc~~~~~~~~~~~~~~~~~~",
+	"SSSMMMMMpDddDddppddppDMMMDcDDdMdddDpDMDPdDppDpDccMMMPpPpPpGPMMPPMMPPppppggcgppcpcccc~~~~~~~~~~~~~~~~~~~~~~",
+	"SSSSMMMMDPDdpPpdpddDDMMMccdDdddddPDdpPDpMpDDDDDpPPPPPPppPgGGPMMMMPpgggggppggccpppcccc~~~~~~~~~~~~~~~~~~~~~",
+	"SSSSdMMMMMDdPPPDpdpdDdMMpDPddPdddDdPpDdddDppdDDcPMMMGPpPPppPGGPpPGppppPpppcpcgpGMppcccc~~~~~~~~ccccc~~~~~~",
+	"SSSMPMMMMMPPdpDdddpdppccMDDddddPdPPDPPDPddDDDDcPdMMMgpGgpppGPPppPGgccpppppccppgpgMggcccc~~~~ccccccccccc~~~",
+	"SSSMpPPcccPPMMDppDddDPcMMpDpddddpDpDDPDdDDDPPPDcPMMMPppgppgGGMMMgPPgcGMgMgccpGpggpgpppcccc~cccccgggccccc~~",
+	"SSScPDdDPPMMMMMMdDpdcpMMMpPdpdpdddDDdPDdPPMDdDcDPMMMGPppGPGGMMMMgGpccgggppPPgppGggppgppccccccgpGpgpgppcc~~",
 	"SSPPdddPPpMMMMMMMpdpccDMMMPppGpggPPPPMPGMGpPppcPppMMMMpPgpPpPMMMgPggcgpggcpgGgGppppppgppgcccggpppPPpgppcc~",
-	"PPSMDdpPPpdpMMMMPpccdPMMMPppGPGGGPPPMPPPPPPGpcpPPPPPPPpPPpGGMMMPpggccppgcgGgppggggpPggppgpgppgpgppppgpcc~~",
-	"SSSMpdDdpPdDPdPdPccpddDMMMgpggppppGgPMpPGPgpppcGpPMMMMMgGPGPMMMPPGpGcGgccgGPGgGGpggpppgpppgpgpgpPppgpppcc~",
+	"PPSMDdpPPpdpMMMMPpccdPMMMPppGPMGGPPPMPPPPPMGpcpPPPPPPPpPPpGGMMMPpggccppgcgGgppggggpPggppgpgppgpMpMppgpcc~~",
+	"SSSMpdDdpPdDPdPdPccpddDMMMgpggppMpGgPMpPGPgpppcGpPMMMMMgGPGPMMMPPGpGcGgccgGPGgGGpggpppgpppgpgpMpPppgpppcc~",
 	"SSSSGpPggppPgpPgcgpPgpMMMpGppgppgPPpMPPGPGPppcPppPPPPPPGGPpMMMgpGgggggcccPgMMMMPPPpPgGPgggppgpppgpGccccc~~",
 	"SSSSppppPgpgppcccgpgppgMMMpGgppggPPGPPPPPPPppcpgPGpPPPPPGGGPPPPPGgpgpgcggpPMMMMMGGgPpPpPppppgPggppcccccc~~",
-	"SSSSppgpgpppccgpGgpGgPGMMMGPpgpgpGGMMPpppGppcppgPPpMMMMMGpMMMMPgpppggcpGgpPMMMMMMMMpPGPPgGPggGgGcccc~~~~~~",
+	"SSSSppgpgpppccgpGgpGgPGMMMGPpgpgpGGMMPpppMppcppgPPpMMMMMGpMMMMPgpppggcpGgpPMMMMMMMMpPGPPgGPggGgGcccc~~~~~~",
 	"SSSMcccccccpcgGggpgggpPPPPPGPpppgPpPMppppPpGGcppPPgPPMMMMpGMMMpPpgPgcpppgppggMMMPgMMMPMPPppppPpcccc~~~~~~~",
-	"SSSMpgpgpgppppppgGgpPPPMMMMPGgggpPPMPPPppGpGgcPgpppPpPMMMGPPPGPPpgccGggppgggggGPGpGpGGMMMMgggcccc~~~~~~~~~",
-	"SSSSppgpppggGgppggppGppgMMMGPGGPPPMPPPPPPPPPpcpppPPpPGPMMPMMMMGgpcppgggggpgpPGgpPGPGgPpgpMMgGccc~~~~~~~~~~",
-	"SSSMgPpppgPgpggpggppppPPMMMpgpgpgpPMPpPppPPPPcpgppGPPPMMPPPPPPGccpGgGgppPppgpggggpggPPPgPGPccc~~~~~~~~~~~~",
+	"SSSMpgpgpgpppppMgGgpPPPMMMMPGgggpPPMPPPppMpGgcPgpppPpPMMMGPPPGPPpgccGggppgggggGPGpGpGGMMMMgggcccc~~~~~~~~~",
+	"SSSSppgppMgMGgppgMppGppgMMMGPGGPPPMPPPPPPPPPpcpppPPpPGPMMPMMMMGgpcppgMgggpgpPGgpPGPGgPpgpMMgGccc~~~~~~~~~~",
+	"SSSMgPpppgPgpggpggppppPPMMMpgpgpgpPMPpPppPPPPcpgppGPPPMMPPPPPPGccpGMGgppPppgpggggpggPPPgPGPccc~~~~~~~~~~~~",
 	"SSSSgpppppgppppgppPgppPGMMMpPpPpgPPPGPPPgGpPPPpGPpPPMMpMMMPMMPpcggggpgGpggpggpgppppgppgggGPccc~~~~~~~~~~~~",
 	"SSSMgpgpgPPPGppppggGpgPPMMMpGpggpGpgPppppgpMpMMMMMMMpPPppppccccgPggpgGgppGpggpgggppPgggppgcc~~~~~~~~~~~~~~",
 	"PPPPgpggPPPPGPGPpGPpppPPMMMgpppppppgPpggpppPMMMMMMMpppgpPpPPPPpppcpppgppgpPPggpgGpppggggpgcc~~~~~~~~~~~~~~",
-	"SSSSpgpPPMMMggPGpGggpgpGMMPPGpGGPGGpPppPpPPpPPPPPPPppPpGPMMMMMggcgpgGppggpppgggggppggGggGgcc~~~~~~~~~~~~~~",
-	"SSSSgGppgMMMMMMMMPPMMMMMMMGPpGppppPgpGPggpgpMMMMMMMGPpGMMPGgggPgGcpgggppppppPgPpppPppgpggpgcc~~~~~~~~~~~~~",
-	"SSSMSScSMMMMMMMMMPMMMMMMMMPMMMMPMMMMMMMpMMMMPMMMMMMPMMPGMPpccpPpccpppgpgggGpggGccggpgpgpgPgcc~~~~~~~~~~~~~",
-	"SSSMSSSMMMMMMMMMMPPMMMMMMMMPMMMPMMMMMMMMPMMMMPMMGGGGpGGPgPGpgccgpcgPGpggPggggppGpcpppggpggpgcc~~~~~~~~~~~~",
+	"SSSSpgpPPMMMggPGpGggpgpGMMPPGpGGPGGpPppPpPPpPPPPPPPppPpGPMMMMMggcgpgMppggppMgggggppMgGggGgcc~~~~~~~~~~~~~~",
+	"SSSSgGppgMMMMMMMMPPMMMMMMMGPpGppppPgpGPggpgpMMMMMMMGPpGMMPGgggPgGcpgggMpppppPgPpppPppgpggpgcc~~~~~~~~~~~~~",
+	"SSSMSScSMMMMMMMMMPMMMMMMMMPMMMMPMMMMMMMpMMMMPMMMMMMPMMPGMPpccpPpccppMgpgggGMggGccggMgpgpgMgcc~~~~~~~~~~~~~",
+	"SSSMSSSMMMMMMMMMMPPMMMMMMMMPMMMPMMMMMMMMPMMMMPMMGGGGpGGPgPGpgccgpcgPGpggPggggppGpcpppggpMgpgcc~~~~~~~~~~~~",
 	"SSSMSSSMMMMMMGgPpGGMMMMMMMPMMMMPMMMMMMMPMMMMPMMMMMMMMPPGPpgPpGccccppPggppgPgpPPppccpgpgpppPgccc~~~~~~~~~~~",
-	"SSSMSSSSMMMMMGPpPPpPgPgpggGGGpPPpgPGGpPMPPPPPPMMMMMMMMMPMMMPGggPpcccpgpgppPpgggpgpgccpccccccccccc~~~~~~~~~",
-	"SSSMSSSSMMMMGGPGpPgGGGPpccGPGPPPGGgGPPPMMMMMPMMMMMMMMMgPPMPMMPPPGgccccpgppggPggpcccccccggGgggPccc~~~~~~~~~",
+	"SSSMSSSSMMMMMGPpPPpPgPgpggGGGpPPpgPGGpPMPPPPPPMMMMMMMMMPMMMPGggPpcccpgpgppPMgggpgpgccpccccccccccc~~~~~~~~~",
+	"SSSMSSSSMMMMGGPGpPgGGGPpccGPGPPPGGgGPPPMMMMMPMMMMMMMMMgPPMPMMPPPGgccccpgpMggPggpcccccccggGgggPccc~~~~~~~~~",
 	"SSSSSSSSMMMMMMPMMpgpGPgpgccpccccccpPppgPGGpGPPpPMMMMMPpppPPMMMMPPPPppccccGppccccccggpgcgPgpgGgPgccc~~~~~~~",
-	"SSSMSSSSMMMMMPMMMMMPPPpPMgPgPpGPcccccccccccccccGGGPggPpGppgMMMMMPpGggpccccccpPgpgppGppcpGppgggggccc~~~~~~~",
-	"SSSMSSSSMMMMMMPMMMMMPMMMMMMPPPPPGGPgGcccccGgPPPcccGpPGpGgggGMMMMppccccccpgppccpgGgpgpppppppppggppgccc~~~~~",
-	"SSSMSSSSMMMMGGPMMMMPPMMMMMMPPPPMMpPGGPpPgpgMMMPPPccGgPgppPppppppppgPpGPpppPppcpgPpggggGcpPGPPGPpPpccc~~~~~",
+	"SSSMSSSSMMMMMPMMMMMPPPpPMgPgPpGPcccccccccccccccGGGPggPpGppgMMMMMPpGggpccccccpPgpgppGppcpGpMgMgggccc~~~~~~~",
+	"SSSMSSSSMMMMMMPMMMMMPMMMMMMPPPPPGGPgGcccccGgPPPcccGpPGpGgggGMMMMppccccccpgppccpgGgpMpppppppppggppgccc~~~~~",
+	"SSSMSSSSMMMMGGPMMMMPPMMMMMMPPPPMMpPGGPpPgpgMMMPPPccGgPgppPppppppppgPpGPpppPppcpgPpggMgGcpPGPPGPMPMccc~~~~~",
 	"SSSMSSSSMMMMMgGGGgMMPMMMMMMPMMMMMMMMPggGGgggMMMMMPPccpggGMMMMMMPMPMPMMMGGgGggPpggppgpggccccccccPGGGgcc~~~~",
 	"SSSMSSSSMMMMMpPGGGpGGGGpgggGGgMMMMMMMMMMGMMMMMMMMMPpccpggMMMMMMPMPMPMMMpgGgGGgccgGggpcccccccccccccPgcc~~~~",
 	"MMSSSSSSMMgcgGpgGPpgGGgpgggggPGGMMMMMMMMMMMMMMMMMMMMpccPgGPgGpGGGPMPMMMMMgGPggPpcgpPgccgggggGpccccccccc~~~",
 	"SMMSSSSSMgcgGgMMgGgPpGgggggGggPGggMMMMMMMMMMMMMMMMMgGccgPggGGgggGGMPMMMMMMMMGGGcccPGccPGpGggpcggGcccccc~~~",
-	"SSSMMSSSMMGcGGGMMGPGMggGgPGGGGPPpPgggPPPPPPPPMMMMPPPGgGccPMMggPGggPPgMMMMMMMMgpGccpgccGgGgggcccpGpgccccc~~",
-	"SSSMMMMMcgcpGgPMMPGPMGgGggGPPGPgpGGMMcccccccPPPppgGggggccccccGGgGPPGgPGMMMMMMgGgcccccGggGgpgccppggPpGcc~~~",
-	"SSSMSSSMMggcgGPPPGGGgMMPGGMPGMpPpgpcccccMMMccccccppGggggpgpgpcgGPgggPGPPgGPMMGGgcccccgggpppgggppGgpggcc~~~",
-	"SSSSSSMMpgGcpGPPPGGGGMMPpGMGMMgPgccMMMPPGGPPPPpccccGggGgPPgpgcccgPggpppPGgpgGGcccgcGgppgggGPGpcggggccc~~~~",
-	"SSSMSSMMPgggcgGGMgppGPPPPGGMGMGGgcGGpGgMMMMMMMMPMcccccggGgpgpGcccccccPpggppGPcccccgggPgGggppgggccccccc~~~~",
-	"SSSMSMMGggpcggGMMGGGGGMGGGMMGMGccgPgMMMMMMMMMMMgggcccccgPpgpgGGccccccGGGgGGccccgPpppgggPgggpcccgppGcc~~~~~",
+	"SSSMMSSSMMGcGGGMMGPGMggGgPGGGGPPpPgggPPPPPPPPMMMMPPPGgGccPMMggPGggPPgMMMMMMMMgpGccpgccGgGMggcccpGpgccccc~~",
+	"SSSMMMMMcgcpGgPMMPGPMGgGggGPPGPgpGGMMcccccccPPPppgGggggccccccGGgGPPGgPGMMMMMMgGgcccccGggGgMgccppMgPpGcc~~~",
+	"SSSMSSSMMggcgGPPPGGGgMMPGGMPGMpPpgpcccccMMMccccccppGggggpgpgpcgGPgggPGPPgGPMMGGgcccccgggpppgggppGgMggcc~~~",
+	"SSSSSSMMpgGcpGPPPGGGGMMPpGMGMMgPgccMMMPPGGPPPPpccccGggGgPPgpgcccgPggpppPGgpgGGcccgcGgppggMGPGpcggggccc~~~~",
+	"SSSMSSMMPgggcgGGMgppGPPPPGGMGMGGgcGGpGgMMMMMMMMPMcccccggGgpMpGcccccccPpggppGPcccccgggPMGggppgggccccccc~~~~",
+	"SSSMSMMGggpcggGMMGGGGGMGGGMMGMGccgPgMMMMMMMMMMMgggcccccgPMgpgGGccccccGGGgGGccccgPpppMggPMggpcccgppGcc~~~~~",
 	"SSSMSSMgPpgPcGPPPGPGgGGGGPgMGGMcggGMMMMMMMMMMMMpPggGpccccGggGGcccccPccccGGccccppgPGGpgGppPgPPgGccgggcc~~~~",
-	"SSSMSMMPpgpcgGMMMgGGgPGGpggpGccPGGMMMMMMGGMMPPgPggpgPPcccPPPGcccGGpPccccccccgpppppGpggpGggpgpppgGgggcc~~~~",
-	"SSSMSSMpppgGcpgMMMGPGGpGGcccccgGMMPMMMGGGPMMMMGPGpggGgggccccccGgGGGgGGGccccggpgggPggpgGGpgggGgPgggggGcc~~~",
-	"SSSMSMMpGggccGgMMggggPcccpppGgMMMMPMGgpgggMMMMGgGpgpGgGccccccpGgGPgpGGpPGcGppgggggpggggppggPGpgpppggPcc~~~",
-	"SSSMSSMgppgggcpGGgGggccPpGpGGMMMMMPPMGGggGGMMMMMPPGgpggcccccPPGpGPPPPMMMMPcGpGggpgpgpgGggggpggggppggggcc~~",
-	"SSSMSMMgGggggccpPccccGGgPGMMMMMMMMMPMpgGgGGMMMMMgPGgpgPccccgGggGPPMMMMMMMccGpgpggPgggpgGgggPggppGgpgggcc~~",
+	"SSSMSMMPpgpcgGMMMgGGgPGGpggpGccPGGMMMMMMGGMMPPgPggpMPPcccPPPGcccGGpPccccccccgpppppGpggpGggpgpppgGgggcc~~~~",
+	"SSSMSSMpppgGcpgMMMGPGGpGGcccccgGMMPMMMGGGPMMMMGPGpggGMggccccccGgGGGgGGGccccggpgggPggpgGGpgggGgPgggggGcc~~~",
+	"SSSMSMMpGggccGgMMggggPcccpppGgMMMMPMGgpgggMMMMGgGpgpGgGccccccMGgGPgpGGpPGcGppMggggpggggMpggPGpgpppggPcc~~~",
+	"SSSMSSMgppgggcpGGgGggccPpGpGGMMMMMPPMGGggGGMMMMMPPGgpggcccccPPGpGPPPPMMMMPcGpGggpgMgpgGggggpgggMpMggggcc~~",
+	"SSSMSMMgGggggccpPccccGGgPGMMMMMMMMMPMpgGgGGMMMMMgPGgpgPccccgMggGPPMMMMMMMccGpMpggPgMgpgMgggPgMppGgMgggcc~~",
 	"SSSSSSMpgPpgGgcccccgpPpMMMMMMMMMGgMMPMGggPGGgMMMMMpPGppGcccGGGgggPMMMMMMMcccPPgPggpggPgPggpgggpgpgGgggcc~~",
 	"SSSMSSMMGGGgccgGGMMMMMMMMMMMMMPPPPMMPPPGgPGGgPMMMMMGGggPgcggppgPPPGMMMMMGccPgggggppGpgPgggpppgggGppggcc~~~",
 	"SSSMSSSMMPcccMMMMMMMMMMMMMMMpGgGGgGPMPMGGGgGggpMMMMMgPgpgccgGgggggGGGGPGGGPPggpGgpGpggggpggggppgggpgpgcc~~",
@@ -108,7 +108,7 @@ local FEATURE_ROWS = {
 	".................................................fff....f...........m.....m....f..........................",
 	"................f....................................ff............f.............f........................",
 	".........................................................fff.f....m....f.......f..........................",
-	"................................................f.........f.f........f..f.......f.m.............f.........",
+	"................................................f.........f.f........f..........f.m.............f.........",
 	"....f.....................f..........................................mf....f........f...............f.....",
 	".................f.f....................................f.fff......m.mf...f.....f.f....f.........f........",
 	"................................................f....f.........f..m....f.....f...f...f..f.....f.....f.....",
@@ -118,7 +118,7 @@ local FEATURE_ROWS = {
 	"....f..ff....................f..........f.....f...f...........f.....f..f..f..........ff.f....f............",
 	".............ff.f......f.........f...f.............f............ff.....ff..f....f.........................",
 	"....ff...........f...f........f..f....f.f......mf.f.......f..f......f...f..........f......f.f.............",
-	"...............f.............f......f...f......ff....................f..f..f..........f...................",
+	"...............f.............f......f...f......ff.......................f..f..........f...................",
 	"....f.f..f.............f......f...f.f....f....f.........ff...f....f.......f.f.....f..f..f.................",
 	"..............f.............f.......f.f......fff.....................f...f.......f..f...f.................",
 	"..........f.f.......f.f....fff...f..fff.............f...................f......f..f.f.....................",
@@ -140,7 +140,7 @@ local FEATURE_ROWS = {
 	"...........ff......ff...f..f........................f..f.fff.m.....f..............ff......................",
 	"............f........f............f.fffff.fff....f.f........mm.........................f...f..............",
 	".........m..ff.......f.......f..............fffff.....f.........f.............f......f....................",
-	"................fff.....f.....ff..................f..fm.......mf..f.f..........f.....f...ffff...fffff.....",
+	"................fff.....f.....ff..................f..fm.......mf..f.f..........f.....f...ffff...ff.ff.....",
 	"................f......f...f..........fff..ffff.......ff...................m.........ffff........ff.......",
 	"...........m.......fff.fff........f...................mf.m...f...........f.........m...f.f................",
 	".......ff...ff...f......ff.............................m.............f..f.........f....f..f.....f.........",
@@ -148,7 +148,7 @@ local FEATURE_ROWS = {
 	".........ff.ff....f........f............f......f....ff......................f.....f.f..f.f.f.....ff.......",
 	"........f.ff......j.f...................f........f.j..f.......f...ff.jf.............f......f...jj..f......",
 	".................fj.......f.........f..j.j....fff.jf.jf....................f..f......j..fj.f..f.ff..f.....",
-	"...........fm.f.f.................f.....f........f...........f................jff...f.....ff.ff.ff..j.....",
+	"...........fm.f.f.................f.....f........f...........f................jff...f.....ff.ff.f...j.....",
 	".........................f............j.jj......j..............f.f.........f......f.ff...f.f.....f........",
 	"........f...f....................f......ff............f.....f.j..f................fj.f..j.f.j.fj.m..f.....",
 	"........f..m...................f.f...f.......f.......f.ff...................f.fjf.f.ff...f...j............",
@@ -565,14 +565,14 @@ local START_DIST = {
 	["Chengdu"] = { ["Handan"] = 69, ["Jinyang"] = 63, ["Xianyang"] = 34, ["Luoyang"] = 53, ["Xiangyang"] = 51, ["Chengdu"] = 0, ["Hefei"] = 78, ["Anyi"] = 49, ["Ji"] = 86, ["Linzi"] = 88, ["Xuzhou"] = 80, ["Chongqing"] = 14, ["Nanjing"] = 77, ["Kuaiji"] = 83, ["Hanzhong"] = 22, ["Daliang"] = 67, ["Zhongshan"] = 76, ["Wuchang"] = 56 },
 	["Hefei"] = { ["Handan"] = 42, ["Jinyang"] = 45, ["Xianyang"] = 50, ["Luoyang"] = 31, ["Xiangyang"] = 28, ["Chengdu"] = 78, ["Hefei"] = 0, ["Anyi"] = 39, ["Ji"] = 59, ["Linzi"] = 58, ["Xuzhou"] = 50, ["Chongqing"] = 71, ["Nanjing"] = 8, ["Kuaiji"] = 19, ["Hanzhong"] = 59, ["Daliang"] = 37, ["Zhongshan"] = 52, ["Wuchang"] = 17 },
 	["Anyi"] = { ["Handan"] = 21, ["Jinyang"] = 16, ["Xianyang"] = 15, ["Luoyang"] = 9, ["Xiangyang"] = 20, ["Chengdu"] = 49, ["Hefei"] = 39, ["Anyi"] = 0, ["Ji"] = 38, ["Linzi"] = 42, ["Xuzhou"] = 34, ["Chongqing"] = 43, ["Nanjing"] = 46, ["Kuaiji"] = 57, ["Hanzhong"] = 31, ["Daliang"] = 21, ["Zhongshan"] = 28, ["Wuchang"] = 30 },
-	["Ji"] = { ["Handan"] = 19, ["Jinyang"] = 24, ["Xianyang"] = 52, ["Luoyang"] = 34, ["Xiangyang"] = 44, ["Chengdu"] = 86, ["Hefei"] = 59, ["Anyi"] = 38, ["Ji"] = 0, ["Linzi"] = 17, ["Xuzhou"] = 27, ["Chongqing"] = 80, ["Nanjing"] = 39, ["Kuaiji"] = 48, ["Hanzhong"] = 68, ["Daliang"] = 26, ["Zhongshan"] = 10, ["Wuchang"] = 48 },
-	["Linzi"] = { ["Handan"] = 22, ["Jinyang"] = 32, ["Xianyang"] = 54, ["Luoyang"] = 35, ["Xiangyang"] = 43, ["Chengdu"] = 88, ["Hefei"] = 58, ["Anyi"] = 42, ["Ji"] = 17, ["Linzi"] = 0, ["Xuzhou"] = 14, ["Chongqing"] = 82, ["Nanjing"] = 24, ["Kuaiji"] = 33, ["Hanzhong"] = 70, ["Daliang"] = 23, ["Zhongshan"] = 21, ["Wuchang"] = 34 },
-	["Xuzhou"] = { ["Handan"] = 19, ["Jinyang"] = 32, ["Xianyang"] = 46, ["Luoyang"] = 27, ["Xiangyang"] = 35, ["Chengdu"] = 80, ["Hefei"] = 50, ["Anyi"] = 34, ["Ji"] = 27, ["Linzi"] = 14, ["Xuzhou"] = 0, ["Chongqing"] = 74, ["Nanjing"] = 14, ["Kuaiji"] = 25, ["Hanzhong"] = 62, ["Daliang"] = 13, ["Zhongshan"] = 24, ["Wuchang"] = 23 },
+	["Ji"] = { ["Handan"] = 19, ["Jinyang"] = 24, ["Xianyang"] = 52, ["Luoyang"] = 34, ["Xiangyang"] = 44, ["Chengdu"] = 86, ["Hefei"] = 59, ["Anyi"] = 38, ["Ji"] = 0, ["Linzi"] = 18, ["Xuzhou"] = 27, ["Chongqing"] = 80, ["Nanjing"] = 39, ["Kuaiji"] = 48, ["Hanzhong"] = 68, ["Daliang"] = 26, ["Zhongshan"] = 10, ["Wuchang"] = 48 },
+	["Linzi"] = { ["Handan"] = 22, ["Jinyang"] = 32, ["Xianyang"] = 54, ["Luoyang"] = 35, ["Xiangyang"] = 43, ["Chengdu"] = 88, ["Hefei"] = 58, ["Anyi"] = 42, ["Ji"] = 18, ["Linzi"] = 0, ["Xuzhou"] = 14, ["Chongqing"] = 82, ["Nanjing"] = 24, ["Kuaiji"] = 33, ["Hanzhong"] = 70, ["Daliang"] = 23, ["Zhongshan"] = 21, ["Wuchang"] = 34 },
+	["Xuzhou"] = { ["Handan"] = 19, ["Jinyang"] = 32, ["Xianyang"] = 46, ["Luoyang"] = 27, ["Xiangyang"] = 35, ["Chengdu"] = 80, ["Hefei"] = 50, ["Anyi"] = 34, ["Ji"] = 27, ["Linzi"] = 14, ["Xuzhou"] = 0, ["Chongqing"] = 74, ["Nanjing"] = 14, ["Kuaiji"] = 25, ["Hanzhong"] = 62, ["Daliang"] = 14, ["Zhongshan"] = 24, ["Wuchang"] = 23 },
 	["Chongqing"] = { ["Handan"] = 63, ["Jinyang"] = 57, ["Xianyang"] = 28, ["Luoyang"] = 47, ["Xiangyang"] = 44, ["Chengdu"] = 14, ["Hefei"] = 71, ["Anyi"] = 43, ["Ji"] = 80, ["Linzi"] = 82, ["Xuzhou"] = 74, ["Chongqing"] = 0, ["Nanjing"] = 67, ["Kuaiji"] = 69, ["Hanzhong"] = 15, ["Daliang"] = 61, ["Zhongshan"] = 70, ["Wuchang"] = 42 },
 	["Nanjing"] = { ["Handan"] = 33, ["Jinyang"] = 46, ["Xianyang"] = 57, ["Luoyang"] = 39, ["Xiangyang"] = 35, ["Chengdu"] = 77, ["Hefei"] = 8, ["Anyi"] = 46, ["Ji"] = 39, ["Linzi"] = 24, ["Xuzhou"] = 14, ["Chongqing"] = 67, ["Nanjing"] = 0, ["Kuaiji"] = 11, ["Hanzhong"] = 60, ["Daliang"] = 27, ["Zhongshan"] = 36, ["Wuchang"] = 36 },
 	["Kuaiji"] = { ["Handan"] = 44, ["Jinyang"] = 57, ["Xianyang"] = 68, ["Luoyang"] = 50, ["Xiangyang"] = 46, ["Chengdu"] = 83, ["Hefei"] = 19, ["Anyi"] = 57, ["Ji"] = 48, ["Linzi"] = 33, ["Xuzhou"] = 25, ["Chongqing"] = 69, ["Nanjing"] = 11, ["Kuaiji"] = 0, ["Hanzhong"] = 71, ["Daliang"] = 38, ["Zhongshan"] = 47, ["Wuchang"] = 38 },
 	["Hanzhong"] = { ["Handan"] = 51, ["Jinyang"] = 45, ["Xianyang"] = 16, ["Luoyang"] = 35, ["Xiangyang"] = 32, ["Chengdu"] = 22, ["Hefei"] = 59, ["Anyi"] = 31, ["Ji"] = 68, ["Linzi"] = 70, ["Xuzhou"] = 62, ["Chongqing"] = 15, ["Nanjing"] = 60, ["Kuaiji"] = 71, ["Hanzhong"] = 0, ["Daliang"] = 49, ["Zhongshan"] = 58, ["Wuchang"] = 44 },
-	["Daliang"] = { ["Handan"] = 10, ["Jinyang"] = 21, ["Xianyang"] = 33, ["Luoyang"] = 14, ["Xiangyang"] = 22, ["Chengdu"] = 67, ["Hefei"] = 37, ["Anyi"] = 21, ["Ji"] = 26, ["Linzi"] = 23, ["Xuzhou"] = 13, ["Chongqing"] = 61, ["Nanjing"] = 27, ["Kuaiji"] = 38, ["Hanzhong"] = 49, ["Daliang"] = 0, ["Zhongshan"] = 20, ["Wuchang"] = 22 },
+	["Daliang"] = { ["Handan"] = 10, ["Jinyang"] = 21, ["Xianyang"] = 33, ["Luoyang"] = 14, ["Xiangyang"] = 22, ["Chengdu"] = 67, ["Hefei"] = 37, ["Anyi"] = 21, ["Ji"] = 26, ["Linzi"] = 23, ["Xuzhou"] = 14, ["Chongqing"] = 61, ["Nanjing"] = 27, ["Kuaiji"] = 38, ["Hanzhong"] = 49, ["Daliang"] = 0, ["Zhongshan"] = 20, ["Wuchang"] = 22 },
 	["Zhongshan"] = { ["Handan"] = 10, ["Jinyang"] = 14, ["Xianyang"] = 42, ["Luoyang"] = 25, ["Xiangyang"] = 35, ["Chengdu"] = 76, ["Hefei"] = 52, ["Anyi"] = 28, ["Ji"] = 10, ["Linzi"] = 21, ["Xuzhou"] = 24, ["Chongqing"] = 70, ["Nanjing"] = 36, ["Kuaiji"] = 47, ["Hanzhong"] = 58, ["Daliang"] = 20, ["Zhongshan"] = 0, ["Wuchang"] = 42 },
 	["Wuchang"] = { ["Handan"] = 32, ["Jinyang"] = 38, ["Xianyang"] = 41, ["Luoyang"] = 23, ["Xiangyang"] = 19, ["Chengdu"] = 56, ["Hefei"] = 17, ["Anyi"] = 30, ["Ji"] = 48, ["Linzi"] = 34, ["Xuzhou"] = 23, ["Chongqing"] = 42, ["Nanjing"] = 36, ["Kuaiji"] = 38, ["Hanzhong"] = 44, ["Daliang"] = 22, ["Zhongshan"] = 42, ["Wuchang"] = 0 }
 }
@@ -582,20 +582,20 @@ local START_DIST = {
 -- land path with mountains blocking, or straight line across the Yangtze). The south (Nanjing, Kuaiji, Wuchang)
 -- is cut off by the Yangtze, so a group never puts a civ there alone and never puts more than half the group there.
 local SPREAD_SETS = {
-	[3] = { { "Xiangyang", "Ji", "Chongqing" }, { "Xiangyang", "Chengdu", "Ji" }, { "Xiangyang", "Xuzhou", "Chongqing" } },
+	[3] = { { "Xiangyang", "Ji", "Chongqing" }, { "Xiangyang", "Chengdu", "Ji" }, { "Xiangyang", "Xuzhou", "Chongqing" }, { "Anyi", "Hanzhong", "Zhongshan" } },
 	[4] = { { "Luoyang", "Anyi", "Ji", "Chongqing" } },
-	[5] = { { "Jinyang", "Xianyang", "Xuzhou", "Hanzhong", "Daliang" }, { "Handan", "Xianyang", "Anyi", "Hanzhong", "Zhongshan" }, { "Handan", "Xianyang", "Anyi", "Ji", "Hanzhong" }, { "Handan", "Xianyang", "Anyi", "Linzi", "Hanzhong" }, { "Jinyang", "Xianyang", "Anyi", "Xuzhou", "Hanzhong" } },
-	[6] = { { "Handan", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Zhongshan" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Zhongshan" }, { "Handan", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Zhongshan" }, { "Handan", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Daliang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing" } },
-	[7] = { { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Zhongshan" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Zhongshan" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Daliang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Daliang", "Zhongshan" } },
-	[8] = { { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Nanjing", "Daliang", "Wuchang" }, { "Handan", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" } },
-	[9] = { { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" } },
-	[10] = { { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Zhongshan" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Zhongshan" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Zhongshan" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Daliang", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Kuaiji", "Daliang" }, { "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" } },
-	[11] = { { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji" }, { "Handan", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" } },
+	[5] = { { "Jinyang", "Xianyang", "Xuzhou", "Hanzhong", "Daliang" }, { "Handan", "Xianyang", "Anyi", "Hanzhong", "Zhongshan" } },
+	[6] = { { "Handan", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Zhongshan" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Zhongshan" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing" } },
+	[7] = { { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Zhongshan" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Zhongshan" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Daliang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Daliang", "Zhongshan" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Zhongshan" } },
+	[8] = { { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Nanjing", "Daliang", "Wuchang" }, { "Handan", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" } },
+	[9] = { { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Nanjing", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" } },
+	[10] = { { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Xiangyang", "Chengdu", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Zhongshan" }, { "Jinyang", "Luoyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Zhongshan" } },
+	[11] = { { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Chongqing", "Kuaiji", "Zhongshan", "Wuchang" }, { "Handan", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" } },
 	[12] = { { "Handan", "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" }, { "Handan", "Jinyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Wuchang" } },
-	[13] = { { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
-	[14] = { { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
-	[15] = { { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
-	[16] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
+	[13] = { { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Xianyang", "Luoyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Jinyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
+	[14] = { { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
+	[15] = { { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
+	[16] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } },
 	[17] = { { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Hefei", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" }, { "Handan", "Jinyang", "Xianyang", "Luoyang", "Xiangyang", "Chengdu", "Anyi", "Ji", "Linzi", "Xuzhou", "Chongqing", "Nanjing", "Kuaiji", "Hanzhong", "Daliang", "Zhongshan", "Wuchang" } }
 }
 
@@ -3290,6 +3290,44 @@ local RES_FALLBACK = { "WHEAT", "RICE", "CATTLE", "HORSES", "SHEEP", "STONE", "D
 
 local LEY_MIN_DIST = 4
 local LEY_CANDIDATES = {
+	{ x = 93, y = 9 },
+	{ x = 88, y = 14 },
+	{ x = 82, y = 7 },
+	{ x = 76, y = 31 },
+	{ x = 70, y = 34 },
+	{ x = 42, y = 52 },
+	{ x = 13, y = 57 },
+	{ x = 83, y = 32 },
+	{ x = 82, y = 23 },
+	{ x = 30, y = 53 },
+	{ x = 96, y = 44 },
+	{ x = 42, y = 46 },
+	{ x = 91, y = 24 },
+	{ x = 88, y = 7 },
+	{ x = 77, y = 8 },
+	{ x = 57, y = 14 },
+	{ x = 31, y = 44 },
+	{ x = 70, y = 47 },
+	{ x = 16, y = 38 },
+	{ x = 68, y = 37 },
+	{ x = 36, y = 52 },
+	{ x = 97, y = 7 },
+	{ x = 96, y = 16 },
+	{ x = 88, y = 29 },
+	{ x = 76, y = 54 },
+	{ x = 74, y = 26 },
+	{ x = 84, y = 14 },
+	{ x = 41, y = 40 },
+	{ x = 69, y = 30 },
+	{ x = 62, y = 8 },
+	{ x = 67, y = 31 },
+	{ x = 9, y = 37 },
+	{ x = 8, y = 57 },
+	{ x = 89, y = 16 },
+	{ x = 82, y = 31 },
+	{ x = 52, y = 10 },
+	{ x = 96, y = 22 },
+	{ x = 94, y = 43 },
 	{ x = 65, y = 47 },
 	{ x = 64, y = 46 },
 	{ x = 64, y = 47 },
@@ -4456,7 +4494,7 @@ local function TI(name) local t = GameInfo.Terrains[name]; if t then return t.In
 local function FI(name) local f = GameInfo.Features[name]; if f then return f.Index end; return nil end
 
 function GenerateMap()
-	print("Generating Warring States China map V3.28 (2026-10-10)")
+	print("Generating Warring States China map V3.29 (2026-10-11)")
 	g_iW, g_iH = Map.GetGridSize()
 	local W, H = g_iW, g_iH
 	pcall(function() g_iFlags = TerrainBuilder.GetFractalFlags() end)
@@ -4986,6 +5024,35 @@ function GenerateMap()
 		end
 	end)
 	if not oks2 then print("StartBalance strategic error: " .. tostring(errs2)) end
+
+	-- 5d. Secret Societies: every major start gets a ley line within 2 tiles, as the engine does for its own starts
+	--     (the fixed starts replace the engine ones, so its ley lines end up elsewhere)
+	local okl, errl = pcall(function()
+		local info = GameInfo.Resources["RESOURCE_LEY_LINE"]
+		if info == nil then return end
+		for _, pid in ipairs(PlayerManager.GetAliveMajorIDs()) do
+			local sp = Players[pid]:GetStartingPlot()
+			if sp then
+				local has = false
+				for _, p in ipairs(PlotsAround(sp:GetX(), sp:GetY(), 1, 2)) do
+					if p:GetResourceType() == info.Index then has = true end
+				end
+				if not has then
+					local spots = PlotsAround(sp:GetX(), sp:GetY(), 1, 2)
+					Shuffle(spots, "Start ley line spots")
+					for _, p in ipairs(spots) do
+						if p:GetResourceType() < 0 and not p:IsWater() and not p:IsNaturalWonder()
+							and ResourceBuilder.CanHaveResource(p, info.Index) then
+							ResourceBuilder.SetResourceType(p, info.Index, 1)
+							print("StartBalance: player " .. tostring(pid) .. " added ley line at " .. p:GetX() .. "," .. p:GetY())
+							break
+						end
+					end
+				end
+			end
+		end
+	end)
+	if not okl then print("StartBalance ley line error: " .. tostring(errl)) end
 
 	-- 6. tribal villages ("mushrooms"): randomised every game, kept away from every start position
 	pcall(function()
