@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Mod id="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" version="9">
+  <Properties>
+    <Name>汉帝国 — 刘备：桃园结义 [v0.9]</Name>
+    <Description>Gathering Storm. Han Empire led by Liu Bei: Restore the Han, Roads of Shu and Military Farms; the Five Tiger Generals join for free at tech milestones and grow stronger every era; +50% Loyalty pressure and rebel cities join directly. Runtime validation pending.</Description>
+    <Authors>Hhhajimi</Authors>
+    <CompatibleVersions>2.0</CompatibleVersions>
+    <AffectsSavedGames>1</AffectsSavedGames>
+  </Properties>
+  <ActionCriteria>
+    <Criteria id="GS">
+      <RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
+    </Criteria>
+  </ActionCriteria>
+  <FrontEndActions>
+    <UpdateDatabase id="HanConfig">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Config.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="HanTextFront">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Text.xml</File>
+    </UpdateText>
+    <UpdateIcons id="HanIconsFront">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <File>Data/Icons.sql</File>
+    </UpdateIcons>
+    <UpdateArt id="HanArtFront">
+      <File>Han_LiuBei.dep</File>
+    </UpdateArt>
+  </FrontEndActions>
+  <InGameActions>
+    <UpdateDatabase id="HanGameplay">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Gameplay.sql</File>
+      <File>Data/Promotions.sql</File>
+    </UpdateDatabase>
+    <UpdateText id="HanTextGame">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Text.xml</File>
+    </UpdateText>
+    <UpdateColors id="HanColors">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Colors.xml</File>
+    </UpdateColors>
+    <UpdateIcons id="HanIconsGame">
+      <Properties>
+        <LoadOrder>1000</LoadOrder>
+      </Properties>
+      <Criteria>GS</Criteria>
+      <File>Data/Icons.sql</File>
+    </UpdateIcons>
+    <AddGameplayScripts id="HanTigers">
+      <Criteria>GS</Criteria>
+      <File>Scripts/HanTigers.lua</File>
+    </AddGameplayScripts>
+    <UpdateArt id="HanArtGame">
+      <File>Han_LiuBei.dep</File>
+    </UpdateArt>
+  </InGameActions>
+  <Files>
+    <File>Data/Colors.xml</File>
+    <File>Data/Config.sql</File>
+    <File>Data/Gameplay.sql</File>
+    <File>Data/Icons.sql</File>
+    <File>Data/Promotions.sql</File>
+    <File>Data/Text.xml</File>
+    <File>Scripts/HanTigers.lua</File>
+    <File>Han_LiuBei.dep</File>
+    <File>ArtDefs/Units.artdef</File>
+    <File>ArtDefs/Civilizations.artdef</File>
+    <File>ArtDefs/Leaders.artdef</File>
+    <File>ArtDefs/FallbackLeaders.artdef</File>
+  </Files>
+</Mod>

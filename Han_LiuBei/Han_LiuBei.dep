@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssetObjects::GameDependencyData>
+  <ID>
+    <name text="Han_LiuBei" />
+    <id text="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" />
+  </ID>
+  <RequiredGameArtIDs>
+    <Element>
+      <name text="Civ6" />
+      <id text="cb2f71b7-843e-4af3-9ca7-992acda9c195" />
+    </Element>
+  </RequiredGameArtIDs>
+  <SystemDependencies>
+    <Element>
+      <ConsumerName text="Units" />
+      <ArtDefDependencyPaths>
+        <Element text="Units.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Civilizations" />
+      <ArtDefDependencyPaths>
+        <Element text="Civilizations.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="Leaders" />
+      <ArtDefDependencyPaths>
+        <Element text="Leaders.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+    <Element>
+      <ConsumerName text="LeaderFallback" />
+      <ArtDefDependencyPaths>
+        <Element text="FallbackLeaders.artdef" />
+      </ArtDefDependencyPaths>
+      <LibraryDependencies />
+      <LoadsLibraries>false</LoadsLibraries>
+    </Element>
+  </SystemDependencies>
+  <ArtDefDependencies>
+    <Element>
+      <ArtDefPath text="Units.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Units.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Civilizations.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Civilizations.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="Leaders.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="Leaders.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+    <Element>
+      <ArtDefPath text="FallbackLeaders.artdef" />
+      <ArtDefDependencyPaths>
+        <Element text="FallbackLeaders.artdef" />
+      </ArtDefDependencyPaths>
+    </Element>
+  </ArtDefDependencies>
+  <LibraryDependencies />
+</AssetObjects::GameDependencyData>

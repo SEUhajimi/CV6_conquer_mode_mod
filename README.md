@@ -27,7 +27,7 @@
 
 ### 联机附带 mod
 
-仓库里还附带两个和本模式一起联机使用的独立 mod：`Zhanguo_V3`（战国地图）和 `Communist_PeoplesWar`（共产党文明）。需要时把它们和 `CivConquestMode` 一起复制到 `Mods\`，并先删除同名旧文件夹。
+仓库里还附带三个和本模式一起联机使用的独立 mod：`Zhanguo_V3`（战国地图）、`Communist_PeoplesWar`（共产党文明）和 `Han_LiuBei`（汉帝国 · 刘备）。需要时把它们和 `CivConquestMode` 一起复制到 `Mods\`，并先删除同名旧文件夹。
 
 联机时所有玩家的 mod 文件必须完全一致，否则从第一回合起就会不同步（OOS）并反复掉线。手动安装的 mod 不会像创意工坊那样自动更新，每次更新后都要重新分发给所有玩家。
 
@@ -101,7 +101,7 @@ Works with the Standard, Rise and Fall, and Gathering Storm rulesets.
 
 ### Bundled multiplayer mods
 
-The repository also carries two standalone mods played together with this mode in multiplayer: `Zhanguo_V3` (Warring States China map) and `Communist_PeoplesWar` (Communist civilization). When needed, copy them to `Mods\` along with `CivConquestMode`, deleting any old folders of the same name first.
+The repository also carries three standalone mods played together with this mode in multiplayer: `Zhanguo_V3` (Warring States China map), `Communist_PeoplesWar` (Communist civilization) and `Han_LiuBei` (Han Empire led by Liu Bei). When needed, copy them to `Mods\` along with `CivConquestMode`, deleting any old folders of the same name first.
 
 In multiplayer every player's mod files must match exactly; otherwise the game goes out of sync (OOS) from the first turn and keeps disconnecting. Manually installed mods don't update automatically like Workshop mods, so redistribute them to every player after each update.
 
@@ -170,6 +170,7 @@ CivConquestMode/
 └─ Text/CivConquest_Text.xml         英文 / 简体中文 · English / Simplified Chinese text
 Zhanguo_V3/                          联机附带：战国地图 · bundled: Warring States China map
 Communist_PeoplesWar/                联机附带：共产党文明 · bundled: Communist civilization
+Han_LiuBei/                          联机附带：汉帝国 · 刘备 · bundled: Han Empire (Liu Bei)
 ```
 
 ## 许可 · License

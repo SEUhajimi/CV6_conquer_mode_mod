@@ -1,0 +1,989 @@
+<?xml version='1.0' encoding='utf-8'?>
+<GameData>
+  <LocalizedText>
+    <Row Tag="LOC_CIVILIZATION_HAN_NAME" Language="zh_Hans_CN">
+      <Text>汉帝国</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_HAN_NAME" Language="en_US">
+      <Text>Han Empire</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_HAN_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>汉帝国</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_HAN_DESCRIPTION" Language="en_US">
+      <Text>Han Empire</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_HAN_ADJECTIVE" Language="zh_Hans_CN">
+      <Text>汉</Text>
+    </Row>
+    <Row Tag="LOC_CIVILIZATION_HAN_ADJECTIVE" Language="en_US">
+      <Text>Han</Text>
+    </Row>
+    <Row Tag="LOC_LEADER_LIU_BEI_NAME" Language="zh_Hans_CN">
+      <Text>刘备</Text>
+    </Row>
+    <Row Tag="LOC_LEADER_LIU_BEI_NAME" Language="en_US">
+      <Text>Liu Bei</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_NAME" Language="zh_Hans_CN">
+      <Text>兴复汉室</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_NAME" Language="en_US">
+      <Text>Restore the Han</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。不是由本文明建立的城市每回合+3忠诚度。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_RESTORATION_DESCRIPTION" Language="en_US">
+      <Text>Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_NAME" Language="zh_Hans_CN">
+      <Text>蜀道</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_NAME" Language="en_US">
+      <Text>Roads of Shu</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。山脉为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_DESCRIPTION" Language="en_US">
+      <Text>Land units (including civilian and support units) ignore the movement cost of Hills. Mountains provide a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_NAME" Language="zh_Hans_CN">
+      <Text>屯田</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_NAME" Language="en_US">
+      <Text>Military Farms</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每个单位的维护费-1 [ICON_Gold] 金币。与兵营相邻的农场和矿山+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_DESCRIPTION" Language="en_US">
+      <Text>Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Farms and Mines adjacent to an Encampment gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SETUP_ABILITY_NAME" Language="zh_Hans_CN">
+      <Text>兴复汉室 / 蜀道 / 屯田</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SETUP_ABILITY_NAME" Language="en_US">
+      <Text>Restore the Han / Roads of Shu / Military Farms</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SETUP_ABILITY_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>兴复汉室：陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。不是由本文明建立的城市每回合+3忠诚度。[NEWLINE][NEWLINE]蜀道：陆地单位（含平民和支援单位）进入丘陵不额外消耗移动力。山脉为商业中心提供+1 [ICON_Gold] 金币、为工业区提供+1 [ICON_Production] 生产力的标准相邻加成。[NEWLINE][NEWLINE]屯田：每个单位的维护费-1 [ICON_Gold] 金币。与兵营相邻的农场和矿山+1 [ICON_Food] 粮食、+1 [ICON_Production] 生产力。</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SETUP_ABILITY_DESCRIPTION" Language="en_US">
+      <Text>Restore the Han: Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.[NEWLINE][NEWLINE]Roads of Shu: Land units (including civilian and support units) ignore the movement cost of Hills. Mountains provide a standard adjacency bonus of +1 [ICON_Gold] Gold to Commercial Hubs and +1 [ICON_Production] Production to Industrial Zones.[NEWLINE][NEWLINE]Military Farms: Unit maintenance costs are reduced by 1 [ICON_Gold] Gold per unit. Farms and Mines adjacent to an Encampment gain +1 [ICON_Food] Food and +1 [ICON_Production] Production.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_RESTORATION_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_RESTORATION_DESCRIPTION" Language="en_US">
+      <Text>+5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_RESTORATION_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 兴复汉室：迎战更强的单位</Text>
+    </Row>
+    <Row Tag="LOC_HAN_RESTORATION_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Restore the Han: fighting a stronger unit</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_SHU_ROADS_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进入丘陵不额外消耗移动力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_SHU_ROADS_DESCRIPTION" Language="en_US">
+      <Text>Ignores the movement cost of Hills.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SHU_ROADS_MOUNTAIN_GOLD" Language="zh_Hans_CN">
+      <Text>+{1_num} [ICON_Gold] 金币来自相邻山脉（蜀道）。</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SHU_ROADS_MOUNTAIN_GOLD" Language="en_US">
+      <Text>+{1_num} [ICON_Gold] Gold from adjacent Mountain {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SHU_ROADS_MOUNTAIN_PRODUCTION" Language="zh_Hans_CN">
+      <Text>+{1_num} [ICON_Production] 生产力来自相邻山脉（蜀道）。</Text>
+    </Row>
+    <Row Tag="LOC_HAN_SHU_ROADS_MOUNTAIN_PRODUCTION" Language="en_US">
+      <Text>+{1_num} [ICON_Production] Production from adjacent Mountain {1_Num : plural 1?tile; other?tiles;} (Roads of Shu).</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_NAME" Language="zh_Hans_CN">
+      <Text>桃园结义</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_NAME" Language="en_US">
+      <Text>Oath of the Peach Garden</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>桃园结义：建立首都及研究特定科技时，五虎上将免费加入。[NEWLINE]厚施恩德，以收众心：城市施加的忠诚度压力+50%。因忠诚度脱离其他文明的城市，在本文明施加的忠诚度压力最高时，跳过自由城市阶段直接加入本文明。</Text>
+    </Row>
+    <Row Tag="LOC_TRAIT_LEADER_LIU_BEI_TIGERS_DESCRIPTION" Language="en_US">
+      <Text>Oath of the Peach Garden: the Five Tiger Generals join for free when the [ICON_Capital] Capital is founded and as certain technologies are researched.[NEWLINE]Win Hearts with Generous Virtue: cities exert +50% Loyalty pressure. Cities rebelling from other civilizations join this civilization directly, skipping the Free City stage, when its Loyalty pressure on them is highest.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_ERA_NAME" Language="zh_Hans_CN">
+      <Text>随时代成长</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_ERA_NAME" Language="en_US">
+      <Text>Veteran of the Ages</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_ERA_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>本文明每进入一个新时代+8 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_ERA_DESCRIPTION" Language="en_US">
+      <Text>+8 [ICON_Strength] Combat Strength for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_CLASSICAL" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：古典时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_CLASSICAL" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Classical Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_MEDIEVAL" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：中世纪时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_MEDIEVAL" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Medieval Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_RENAISSANCE" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：文艺复兴时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_RENAISSANCE" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Renaissance Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_INDUSTRIAL" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：工业时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_INDUSTRIAL" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Industrial Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_MODERN" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：现代时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_MODERN" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Modern Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_ATOMIC" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：原子能时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_ATOMIC" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Atomic Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_INFORMATION" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：信息时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_INFORMATION" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Information Era</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_FUTURE" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 五虎上将：未来时代</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_STRENGTH_PREVIEW_ERA_FUTURE" Language="en_US">
+      <Text>+{1_Amount} Five Tigers: Future Era</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_GUAN_YU_NAME" Language="zh_Hans_CN">
+      <Text>关羽</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_GUAN_YU_NAME" Language="en_US">
+      <Text>Guan Yu</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_GUAN_YU_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>建立首都时加入的重骑兵，远古基础34 [ICON_Strength] 战斗力，4 [ICON_Movement] 移动力。武圣：进攻时+5 [ICON_Strength] 战斗力。过五关斩六将：击杀敌方单位后恢复20生命值。[NEWLINE]五虎上将之一：达成加入条件后在首都旁免费加入，不能训练或购买，阵亡后不再出现。统率：如同大将军，2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，与大将军不叠加。没有维护费，可以获得经验和晋升，但不能升级。本文明每进入一个新时代+8 [ICON_Strength] 战斗力（远程攻击同样生效）。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_GUAN_YU_DESCRIPTION" Language="en_US">
+      <Text>Heavy cavalry that joins when the [ICON_Capital] Capital is founded. Ancient-era base 34 [ICON_Strength] Combat Strength, 4 [ICON_Movement] Movement. God of War: +5 [ICON_Strength] Combat Strength when attacking. Five Passes, Six Generals: heals 20 HP after killing a unit.[NEWLINE]One of the Five Tiger Generals: joins for free next to the [ICON_Capital] Capital once its condition is met; cannot be trained or purchased and never returns once killed. Command: acts as a Great General, giving friendly land combat units within 2 tiles (including this unit) +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement; does not stack with Great Generals. No maintenance; earns experience and promotions but cannot upgrade. +8 [ICON_Strength] Combat Strength (ranged attacks included) for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>武圣：进攻时+5 [ICON_Strength] 战斗力。过五关斩六将：击杀敌方单位后恢复20生命值。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_GUAN_YU_DESCRIPTION" Language="en_US">
+      <Text>God of War: +5 [ICON_Strength] Combat Strength when attacking. Five Passes, Six Generals: heals 20 HP after killing a unit.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_ATTACK_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 武圣：进攻</Text>
+    </Row>
+    <Row Tag="LOC_HAN_GUAN_YU_ATTACK_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} God of War: attacking</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHANG_FEI_NAME" Language="zh_Hans_CN">
+      <Text>张飞</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHANG_FEI_NAME" Language="en_US">
+      <Text>Zhang Fei</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHANG_FEI_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>建立首都时加入的抗骑兵单位，远古基础32 [ICON_Strength] 战斗力，3 [ICON_Movement] 移动力。万人敌：越战越勇，生命值低于50时+7 [ICON_Strength] 战斗力，低于25时再+7。[NEWLINE]五虎上将之一：达成加入条件后在首都旁免费加入，不能训练或购买，阵亡后不再出现。统率：如同大将军，2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，与大将军不叠加。没有维护费，可以获得经验和晋升，但不能升级。本文明每进入一个新时代+8 [ICON_Strength] 战斗力（远程攻击同样生效）。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHANG_FEI_DESCRIPTION" Language="en_US">
+      <Text>Anti-cavalry unit that joins when the [ICON_Capital] Capital is founded. Ancient-era base 32 [ICON_Strength] Combat Strength, 3 [ICON_Movement] Movement. Match for Ten Thousand: +7 [ICON_Strength] Combat Strength below 50 HP, and another +7 below 25 HP.[NEWLINE]One of the Five Tiger Generals: joins for free next to the [ICON_Capital] Capital once its condition is met; cannot be trained or purchased and never returns once killed. Command: acts as a Great General, giving friendly land combat units within 2 tiles (including this unit) +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement; does not stack with Great Generals. No maintenance; earns experience and promotions but cannot upgrade. +8 [ICON_Strength] Combat Strength (ranged attacks included) for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>万人敌：越战越勇，生命值低于50时+7 [ICON_Strength] 战斗力，低于25时再+7。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_DESCRIPTION" Language="en_US">
+      <Text>Match for Ten Thousand: +7 [ICON_Strength] Combat Strength below 50 HP, and another +7 below 25 HP.</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHAO_YUN_NAME" Language="zh_Hans_CN">
+      <Text>赵云</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHAO_YUN_NAME" Language="en_US">
+      <Text>Zhao Yun</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHAO_YUN_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>研究骑术时加入的轻骑兵，远古基础30 [ICON_Strength] 战斗力，5 [ICON_Movement] 移动力。七进七出：无视区域控制，攻击后仍可移动。[NEWLINE]五虎上将之一：达成加入条件后在首都旁免费加入，不能训练或购买，阵亡后不再出现。统率：如同大将军，2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，与大将军不叠加。没有维护费，可以获得经验和晋升，但不能升级。本文明每进入一个新时代+8 [ICON_Strength] 战斗力（远程攻击同样生效）。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_ZHAO_YUN_DESCRIPTION" Language="en_US">
+      <Text>Light cavalry that joins with Horseback Riding. Ancient-era base 30 [ICON_Strength] Combat Strength, 5 [ICON_Movement] Movement. In and Out Seven Times: ignores Zone of Control and can move after attacking.[NEWLINE]One of the Five Tiger Generals: joins for free next to the [ICON_Capital] Capital once its condition is met; cannot be trained or purchased and never returns once killed. Command: acts as a Great General, giving friendly land combat units within 2 tiles (including this unit) +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement; does not stack with Great Generals. No maintenance; earns experience and promotions but cannot upgrade. +8 [ICON_Strength] Combat Strength (ranged attacks included) for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHAO_YUN_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>七进七出：无视区域控制，攻击后仍可移动。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHAO_YUN_DESCRIPTION" Language="en_US">
+      <Text>In and Out Seven Times: ignores Zone of Control and can move after attacking.</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_MA_CHAO_NAME" Language="zh_Hans_CN">
+      <Text>马超</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_MA_CHAO_NAME" Language="en_US">
+      <Text>Ma Chao</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_MA_CHAO_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>研究马镫时加入的轻骑兵，远古基础32 [ICON_Strength] 战斗力，5 [ICON_Movement] 移动力。西凉铁骑：侧翼加成+100%。锦马超：对骑兵类单位+5 [ICON_Strength] 战斗力。[NEWLINE]五虎上将之一：达成加入条件后在首都旁免费加入，不能训练或购买，阵亡后不再出现。统率：如同大将军，2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，与大将军不叠加。没有维护费，可以获得经验和晋升，但不能升级。本文明每进入一个新时代+8 [ICON_Strength] 战斗力（远程攻击同样生效）。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_MA_CHAO_DESCRIPTION" Language="en_US">
+      <Text>Light cavalry that joins with Stirrups. Ancient-era base 32 [ICON_Strength] Combat Strength, 5 [ICON_Movement] Movement. Xiliang Cavalry: +100% flanking bonus. Splendid Ma Chao: +5 [ICON_Strength] Combat Strength against cavalry.[NEWLINE]One of the Five Tiger Generals: joins for free next to the [ICON_Capital] Capital once its condition is met; cannot be trained or purchased and never returns once killed. Command: acts as a Great General, giving friendly land combat units within 2 tiles (including this unit) +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement; does not stack with Great Generals. No maintenance; earns experience and promotions but cannot upgrade. +8 [ICON_Strength] Combat Strength (ranged attacks included) for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>西凉铁骑：侧翼加成+100%。锦马超：对骑兵类单位+5 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_DESCRIPTION" Language="en_US">
+      <Text>Xiliang Cavalry: +100% flanking bonus. Splendid Ma Chao: +5 [ICON_Strength] Combat Strength against cavalry.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_VS_CAVALRY_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 锦马超：对骑兵</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_VS_CAVALRY_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Splendid Ma Chao: vs. cavalry</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_HUANG_ZHONG_NAME" Language="zh_Hans_CN">
+      <Text>黄忠</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_HUANG_ZHONG_NAME" Language="en_US">
+      <Text>Huang Zhong</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_HUANG_ZHONG_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>研究机械时加入的远程单位，远古基础22 [ICON_Strength] 战斗力、32 [ICON_Ranged] 远程攻击力，射程2，3 [ICON_Movement] 移动力。老当益壮：受伤不降低战斗力。定军山：对满生命值的单位+5 [ICON_Strength] 战斗力。[NEWLINE]五虎上将之一：达成加入条件后在首都旁免费加入，不能训练或购买，阵亡后不再出现。统率：如同大将军，2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，与大将军不叠加。没有维护费，可以获得经验和晋升，但不能升级。本文明每进入一个新时代+8 [ICON_Strength] 战斗力（远程攻击同样生效）。</Text>
+    </Row>
+    <Row Tag="LOC_UNIT_HAN_HUANG_ZHONG_DESCRIPTION" Language="en_US">
+      <Text>Ranged unit that joins with Machinery. Ancient-era base 22 [ICON_Strength] Combat Strength, 32 [ICON_Ranged] Ranged Strength, Range 2, 3 [ICON_Movement] Movement. Old but Vigorous: does not lose Combat Strength when damaged. Mount Dingjun: +5 [ICON_Strength] Combat Strength against units at full health.[NEWLINE]One of the Five Tiger Generals: joins for free next to the [ICON_Capital] Capital once its condition is met; cannot be trained or purchased and never returns once killed. Command: acts as a Great General, giving friendly land combat units within 2 tiles (including this unit) +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement; does not stack with Great Generals. No maintenance; earns experience and promotions but cannot upgrade. +8 [ICON_Strength] Combat Strength (ranged attacks included) for each new era this civilization enters.</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_HUANG_ZHONG_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>老当益壮：受伤不降低战斗力。定军山：对满生命值的单位+5 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_HUANG_ZHONG_DESCRIPTION" Language="en_US">
+      <Text>Old but Vigorous: does not lose Combat Strength when damaged. Mount Dingjun: +5 [ICON_Strength] Combat Strength against units at full health.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_HUANG_ZHONG_VS_FULL_HEALTH_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 定军山：对满生命值单位</Text>
+    </Row>
+    <Row Tag="LOC_HAN_HUANG_ZHONG_VS_FULL_HEALTH_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Mount Dingjun: vs. full-health unit</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_COMMAND_NAME" Language="zh_Hans_CN">
+      <Text>统率</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_COMMAND_NAME" Language="en_US">
+      <Text>Command</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_COMMAND_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>如同大将军：2格内（含自身）的己方陆地作战单位+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力，不受时代限制；与大将军不叠加。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_TIGER_COMMAND_DESCRIPTION" Language="en_US">
+      <Text>Acts as a Great General: friendly land combat units within 2 tiles (including this unit) receive +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement, with no era limit. Does not stack with Great Generals.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_25_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 万人敌：生命值低于75</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_25_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Match for Ten Thousand: below 75 HP</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_50_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 万人敌：生命值低于50</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_50_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Match for Ten Thousand: below 50 HP</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_75_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 万人敌：生命值低于25</Text>
+    </Row>
+    <Row Tag="LOC_HAN_ZHANG_FEI_RAGE_75_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Match for Ten Thousand: below 25 HP</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_RAGE_NAME" Language="zh_Hans_CN">
+      <Text>万人敌</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_RAGE_NAME" Language="en_US">
+      <Text>Match for Ten Thousand</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_RAGE_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>残血加成生效中。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_ZHANG_FEI_RAGE_DESCRIPTION" Language="en_US">
+      <Text>Low-health bonus active.</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_JOINED_MESSAGE" Language="zh_Hans_CN">
+      <Text>{1_Name}来投</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_JOINED_MESSAGE" Language="en_US">
+      <Text>{1_Name} has joined</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_JOINED_SUMMARY" Language="zh_Hans_CN">
+      <Text>五虎上将{1_Name}已在{2_City}旁加入你的军队。</Text>
+    </Row>
+    <Row Tag="LOC_HAN_TIGER_JOINED_SUMMARY" Language="en_US">
+      <Text>Tiger General {1_Name} has joined your army near {2_City}.</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_CHENGDU" Language="zh_Hans_CN">
+      <Text>成都</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_CHENGDU" Language="en_US">
+      <Text>Chengdu</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_HANZHONG" Language="zh_Hans_CN">
+      <Text>汉中</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_HANZHONG" Language="en_US">
+      <Text>Hanzhong</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANGLING" Language="zh_Hans_CN">
+      <Text>江陵</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANGLING" Language="en_US">
+      <Text>Jiangling</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANGZHOU" Language="zh_Hans_CN">
+      <Text>江州</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANGZHOU" Language="en_US">
+      <Text>Jiangzhou</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_ZHUOXIAN" Language="zh_Hans_CN">
+      <Text>涿县</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_ZHUOXIAN" Language="en_US">
+      <Text>Zhuoxian</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XINYE" Language="zh_Hans_CN">
+      <Text>新野</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XINYE" Language="en_US">
+      <Text>Xinye</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XIAOPEI" Language="zh_Hans_CN">
+      <Text>小沛</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XIAOPEI" Language="en_US">
+      <Text>Xiaopei</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XIAPI" Language="zh_Hans_CN">
+      <Text>下邳</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_XIAPI" Language="en_US">
+      <Text>Xiapi</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_GONGAN" Language="zh_Hans_CN">
+      <Text>公安</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_GONGAN" Language="en_US">
+      <Text>Gong'an</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YONGAN" Language="zh_Hans_CN">
+      <Text>永安</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YONGAN" Language="en_US">
+      <Text>Yong'an</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_MIANZHU" Language="zh_Hans_CN">
+      <Text>绵竹</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_MIANZHU" Language="en_US">
+      <Text>Mianzhu</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_ZITONG" Language="zh_Hans_CN">
+      <Text>梓潼</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_ZITONG" Language="en_US">
+      <Text>Zitong</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_LANGZHONG" Language="zh_Hans_CN">
+      <Text>阆中</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_LANGZHONG" Language="en_US">
+      <Text>Langzhong</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_FUCHENG" Language="zh_Hans_CN">
+      <Text>涪城</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_FUCHENG" Language="en_US">
+      <Text>Fucheng</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANNING" Language="zh_Hans_CN">
+      <Text>建宁</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIANNING" Language="en_US">
+      <Text>Jianning</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YUEXI" Language="zh_Hans_CN">
+      <Text>越嶲</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YUEXI" Language="en_US">
+      <Text>Yuexi</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_WUDU" Language="zh_Hans_CN">
+      <Text>武都</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_WUDU" Language="en_US">
+      <Text>Wudu</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YINPING" Language="zh_Hans_CN">
+      <Text>阴平</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_YINPING" Language="en_US">
+      <Text>Yinping</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_BAIDI" Language="zh_Hans_CN">
+      <Text>白帝</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_BAIDI" Language="en_US">
+      <Text>Baidi</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIAMENG" Language="zh_Hans_CN">
+      <Text>葭萌</Text>
+    </Row>
+    <Row Tag="LOC_CITY_NAME_HAN_JIAMENG" Language="en_US">
+      <Text>Jiameng</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_GUAN_YU_NAME" Language="zh_Hans_CN">
+      <Text>关羽</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_GUAN_YU_NAME" Language="en_US">
+      <Text>Guan Yu</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_NAME" Language="zh_Hans_CN">
+      <Text>温酒斩华雄</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_NAME" Language="en_US">
+      <Text>Slaying Hua Xiong</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进攻时+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_DESCRIPTION" Language="en_US">
+      <Text>+7 [ICON_Strength] Combat Strength when attacking.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 温酒斩华雄</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Slaying Hua Xiong</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_2_NAME" Language="zh_Hans_CN">
+      <Text>刮骨疗毒</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_2_NAME" Language="en_US">
+      <Text>Bone Scraping</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_2_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>自身和相邻的己方单位每回合额外恢复20生命值（同医疗兵）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_2_DESCRIPTION" Language="en_US">
+      <Text>This unit and adjacent friendly units heal an extra 20 HP per turn (like a Medic).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_3_NAME" Language="zh_Hans_CN">
+      <Text>斩颜良诛文丑</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_3_NAME" Language="en_US">
+      <Text>Slaying Yan Liang</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_3_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>攻击后仍可移动。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_3_DESCRIPTION" Language="en_US">
+      <Text>Can move after attacking.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_NAME" Language="zh_Hans_CN">
+      <Text>单刀赴会</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_NAME" Language="en_US">
+      <Text>Alone to the Feast</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>防守时+10 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_DESCRIPTION" Language="en_US">
+      <Text>+10 [ICON_Strength] Combat Strength when defending.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 单刀赴会</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_4_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Alone to the Feast</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_NAME" Language="zh_Hans_CN">
+      <Text>水淹七军</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_NAME" Language="en_US">
+      <Text>Flooding the Seven Armies</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>与城市和区域作战时+10 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_DESCRIPTION" Language="en_US">
+      <Text>+10 [ICON_Strength] Combat Strength when fighting cities and districts.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 水淹七军</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_5_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Flooding the Seven Armies</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_NAME" Language="zh_Hans_CN">
+      <Text>过五关斩六将</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_NAME" Language="en_US">
+      <Text>Five Passes, Six Generals</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1 [ICON_Movement] 移动力，无视区域控制。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_6_DESCRIPTION" Language="en_US">
+      <Text>+1 [ICON_Movement] Movement and ignores Zone of Control.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_NAME" Language="zh_Hans_CN">
+      <Text>威震华夏</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_NAME" Language="en_US">
+      <Text>Awe Over China</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每回合可攻击两次。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_GUAN_YU_7_DESCRIPTION" Language="en_US">
+      <Text>Can attack twice per turn.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHANG_FEI_NAME" Language="zh_Hans_CN">
+      <Text>张飞</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHANG_FEI_NAME" Language="en_US">
+      <Text>Zhang Fei</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_NAME" Language="zh_Hans_CN">
+      <Text>丈八蛇矛</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_NAME" Language="en_US">
+      <Text>Serpent Spear</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进攻时+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_DESCRIPTION" Language="en_US">
+      <Text>+7 [ICON_Strength] Combat Strength when attacking.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 丈八蛇矛</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Serpent Spear</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_NAME" Language="zh_Hans_CN">
+      <Text>燕人张翼德</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_NAME" Language="en_US">
+      <Text>Zhang Yide of Yan</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>防守时+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_DESCRIPTION" Language="en_US">
+      <Text>+7 [ICON_Strength] Combat Strength when defending.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 燕人张翼德</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_2_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Zhang Yide of Yan</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_3_NAME" Language="zh_Hans_CN">
+      <Text>义释严颜</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_3_NAME" Language="en_US">
+      <Text>Sparing Yan Yan</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_3_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>击败敌方作战单位时将其收降，成为己方单位（同私掠船「战利品」的俘获机制）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_3_DESCRIPTION" Language="en_US">
+      <Text>Captures defeated enemy combat units, which join your army (the same capture mechanic as the Privateer Prize promotion).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_4_NAME" Language="zh_Hans_CN">
+      <Text>怒发冲冠</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_4_NAME" Language="en_US">
+      <Text>Bristling with Rage</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_4_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>受伤不降低战斗力，万人敌的残血加成全额生效。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_4_DESCRIPTION" Language="en_US">
+      <Text>Does not lose Combat Strength when damaged, so Match for Ten Thousand applies in full.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_NAME" Language="zh_Hans_CN">
+      <Text>长坂断后</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_NAME" Language="en_US">
+      <Text>Rearguard at Changban</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>统率范围内的单位再+5 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_DESCRIPTION" Language="en_US">
+      <Text>Units under his Command receive an additional +5 [ICON_Strength] Combat Strength.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 长坂断后</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_5_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Rearguard at Changban</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_6_NAME" Language="zh_Hans_CN">
+      <Text>血战不退</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_6_NAME" Language="en_US">
+      <Text>No Retreat</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_6_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>万人敌多一档：生命值低于75时也+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_6_DESCRIPTION" Language="en_US">
+      <Text>Match for Ten Thousand gains a tier: +7 [ICON_Strength] Combat Strength already below 75 HP.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_NAME" Language="zh_Hans_CN">
+      <Text>喝断当阳桥</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_NAME" Language="en_US">
+      <Text>Roar at Dangyang Bridge</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>相邻的交战敌方单位-7 [ICON_Strength] 战斗力（同毛利 Toa 的机制）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_DESCRIPTION" Language="en_US">
+      <Text>Adjacent enemy units at war with you receive -7 [ICON_Strength] Combat Strength (the same mechanic as the Maori Toa).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_PREVIEW" Language="zh_Hans_CN">
+      <Text>{1_Amount} 张飞·喝断当阳桥</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHANG_FEI_7_PREVIEW" Language="en_US">
+      <Text>{1_Amount} Zhang Fei: Roar at Dangyang Bridge</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHAO_YUN_NAME" Language="zh_Hans_CN">
+      <Text>赵云</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_ZHAO_YUN_NAME" Language="en_US">
+      <Text>Zhao Yun</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_NAME" Language="zh_Hans_CN">
+      <Text>白马银枪</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_NAME" Language="en_US">
+      <Text>White Horse, Silver Spear</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1 [ICON_Movement] 移动力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_1_DESCRIPTION" Language="en_US">
+      <Text>+1 [ICON_Movement] Movement.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_2_NAME" Language="zh_Hans_CN">
+      <Text>截江夺斗</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_2_NAME" Language="en_US">
+      <Text>Seizing the River</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_2_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>渡河、登船和上岸都不额外消耗移动力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_2_DESCRIPTION" Language="en_US">
+      <Text>No extra Movement cost to cross rivers, embark or disembark.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_NAME" Language="zh_Hans_CN">
+      <Text>一身是胆</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_NAME" Language="en_US">
+      <Text>All Courage</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进攻时+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_DESCRIPTION" Language="en_US">
+      <Text>+7 [ICON_Strength] Combat Strength when attacking.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 一身是胆</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_3_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} All Courage</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_4_NAME" Language="zh_Hans_CN">
+      <Text>长坂救主</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_4_NAME" Language="en_US">
+      <Text>Rescue at Changban</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_4_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>击杀敌方单位后恢复30生命值。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_4_DESCRIPTION" Language="en_US">
+      <Text>Heals 30 HP after killing a unit.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_5_NAME" Language="zh_Hans_CN">
+      <Text>汉水空营</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_5_NAME" Language="en_US">
+      <Text>Empty Camp at the Han</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_5_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>隐身：只有相邻的单位能看到他。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_5_DESCRIPTION" Language="en_US">
+      <Text>Stealth: only visible to adjacent units.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_NAME" Language="zh_Hans_CN">
+      <Text>长驱直入</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_NAME" Language="en_US">
+      <Text>Deep Strike</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1 [ICON_Movement] 移动力，+1视野。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_6_DESCRIPTION" Language="en_US">
+      <Text>+1 [ICON_Movement] Movement and +1 Sight.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME" Language="zh_Hans_CN">
+      <Text>虎威将军</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME" Language="en_US">
+      <Text>Tiger-Might General</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每回合可攻击两次。统率范围内的单位再+1 [ICON_Movement] 移动力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="en_US">
+      <Text>Can attack twice per turn. Units under his Command receive an additional +1 [ICON_Movement] Movement.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_MA_CHAO_NAME" Language="zh_Hans_CN">
+      <Text>马超</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_MA_CHAO_NAME" Language="en_US">
+      <Text>Ma Chao</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_NAME" Language="zh_Hans_CN">
+      <Text>渭水奔袭</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_NAME" Language="en_US">
+      <Text>Raid on the Wei</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>对骑兵类单位再+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_DESCRIPTION" Language="en_US">
+      <Text>An additional +7 [ICON_Strength] Combat Strength against cavalry.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 渭水奔袭</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Raid on the Wei</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_2_NAME" Language="zh_Hans_CN">
+      <Text>羌胡归心</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_2_NAME" Language="en_US">
+      <Text>Loyalty of the Qiang</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_2_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1 [ICON_Movement] 移动力。击败蛮族单位时将其收编（同秦始皇（一统天下）的机制）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_2_DESCRIPTION" Language="en_US">
+      <Text>+1 [ICON_Movement] Movement. Defeated barbarian units join your army (the same mechanic as Qin Shi Huang the Unifier).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_3_NAME" Language="zh_Hans_CN">
+      <Text>收服庞德</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_3_NAME" Language="en_US">
+      <Text>Winning Over Pang De</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_3_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进攻并击败骑兵类单位时将其俘获，成为己方单位（同成吉思汗的机制）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_3_DESCRIPTION" Language="en_US">
+      <Text>Captures cavalry units he defeats while attacking (the same mechanic as Genghis Khan).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_NAME" Language="zh_Hans_CN">
+      <Text>冲阵破枪</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_NAME" Language="en_US">
+      <Text>Breaking the Spear Wall</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>对抗骑兵单位+10 [ICON_Strength] 战斗力，抵消其克制。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_DESCRIPTION" Language="en_US">
+      <Text>+10 [ICON_Strength] Combat Strength against anti-cavalry units, offsetting their bonus.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 冲阵破枪</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_4_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Breaking the Spear Wall</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_5_NAME" Language="zh_Hans_CN">
+      <Text>西凉旧部</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_5_NAME" Language="en_US">
+      <Text>Xiliang Raiders</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_5_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>无视区域控制。劫掠只消耗1点移动力（同「掠夺」晋升）。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_5_DESCRIPTION" Language="en_US">
+      <Text>Ignores Zone of Control. Pillaging costs only 1 Movement (like the Depredation promotion).</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_6_NAME" Language="zh_Hans_CN">
+      <Text>冀城血战</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_6_NAME" Language="en_US">
+      <Text>Siege of Ji</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_6_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>击杀敌方单位后恢复30生命值。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_6_DESCRIPTION" Language="en_US">
+      <Text>Heals 30 HP after killing a unit.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_NAME" Language="zh_Hans_CN">
+      <Text>神威天将军</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_NAME" Language="en_US">
+      <Text>Divine General</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>对骑兵类单位再+10 [ICON_Strength] 战斗力，+1 [ICON_Movement] 移动力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="en_US">
+      <Text>An additional +10 [ICON_Strength] Combat Strength against cavalry and +1 [ICON_Movement] Movement.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_HUANG_ZHONG_NAME" Language="zh_Hans_CN">
+      <Text>黄忠</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_CLASS_HAN_HUANG_ZHONG_NAME" Language="en_US">
+      <Text>Huang Zhong</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_NAME" Language="zh_Hans_CN">
+      <Text>百步穿杨</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_NAME" Language="en_US">
+      <Text>Hundred-Pace Archery</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>进攻时+7 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_DESCRIPTION" Language="en_US">
+      <Text>+7 [ICON_Strength] Combat Strength when attacking.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 百步穿杨</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Hundred-Pace Archery</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_NAME" Language="zh_Hans_CN">
+      <Text>老将坚守</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_NAME" Language="en_US">
+      <Text>Veteran Defense</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>防守时+10 [ICON_Strength] 战斗力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_DESCRIPTION" Language="en_US">
+      <Text>+10 [ICON_Strength] Combat Strength when defending.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 老将坚守</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_2_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Veteran Defense</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_3_NAME" Language="zh_Hans_CN">
+      <Text>长沙箭术</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_3_NAME" Language="en_US">
+      <Text>Archery of Changsha</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_3_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>远程攻击城市和区域时不受惩罚。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_3_DESCRIPTION" Language="en_US">
+      <Text>No penalty when making ranged attacks against cities and districts.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_4_NAME" Language="zh_Hans_CN">
+      <Text>宝刀未老</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_4_NAME" Language="en_US">
+      <Text>Blade Not Yet Dull</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_4_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每回合额外恢复10生命值，移动或行动后也能恢复。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_4_DESCRIPTION" Language="en_US">
+      <Text>+10 HP healed per turn, even after moving or acting.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_5_NAME" Language="zh_Hans_CN">
+      <Text>神射</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_5_NAME" Language="en_US">
+      <Text>Divine Archer</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_5_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1射程。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_5_DESCRIPTION" Language="en_US">
+      <Text>+1 Range.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_6_NAME" Language="zh_Hans_CN">
+      <Text>汉升疾行</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_6_NAME" Language="en_US">
+      <Text>Swift March</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_6_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>+1 [ICON_Movement] 移动力。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_6_DESCRIPTION" Language="en_US">
+      <Text>+1 [ICON_Movement] Movement.</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_7_NAME" Language="zh_Hans_CN">
+      <Text>定军山斩夏侯渊</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_7_NAME" Language="en_US">
+      <Text>Slaying Xiahou Yuan</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_7_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>每回合可攻击两次。</Text>
+    </Row>
+    <Row Tag="LOC_PROMOTION_HAN_HUANG_ZHONG_7_DESCRIPTION" Language="en_US">
+      <Text>Can attack twice per turn.</Text>
+    </Row>
+  </LocalizedText>
+</GameData>

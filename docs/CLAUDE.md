@@ -23,7 +23,7 @@
 - `tools/start_sets.py`：按地形重算地图脚本里的开局距离表 `START_DIST` 和各人数的开局组合 `SPREAD_SETS`，不带参数只打印，`--write` 写回。需要 numpy。
 - 改了地图地形后依次运行 `python tools/start_sets.py --write` 和 `python tools/render_map.py`。
 - `docs/modding-guide.md`：文明六 mod 机制新手教程（数据库、修改器、Lua 两个环境、联机同步、modinfo、ArtDef、调试），不进游戏。
-- `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
+- `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。`Han_LiuBei/`（汉帝国 · 刘备）直接在本仓库开发，设计和验证方式见其 `README.md`。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
 
 ## 红色感叹号（模型缺失）问题
 
