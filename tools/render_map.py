@@ -1,8 +1,9 @@
 """
-把战国七雄地图（Zhanguo_V3/ZhanguoV3.lua）画成 PNG：一张全图加七张分区放大图。
+把战国七雄地图（Zhanguo_V3/ZhanguoV3.lua）画成 PNG：一张全图、七张分区放大图和一张关隘标注图。
 
 读取地图脚本里的地形、地貌、出生点、淡水河边（RIVER_PAIRS、YELLOW_EDGE_CELLS）和悬崖（CLIFF_CELLS），
 按游戏的六边形排布（奇数行右移半格）绘制。改了地形后重新运行，预览图就和游戏里生成的地图一致。
+关隘标注图（08_关隘.png）的位置取自 Zhanguo_V3/选址规划.md 末尾的“关隘坐标”表，只作参考，游戏数据里没有关隘。
 
 用法：python tools/render_map.py [地图脚本] [输出目录]
 默认读 Zhanguo_V3/ZhanguoV3.lua，输出到 Zhanguo_V3/地图预览/。需要 Pillow 和 Windows 自带的微软雅黑字体。
@@ -17,6 +18,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LUA = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "Zhanguo_V3", "ZhanguoV3.lua")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "Zhanguo_V3", "地图预览")
+PLAN = os.path.join(os.path.dirname(os.path.abspath(LUA)), "选址规划.md")
 src = open(LUA, encoding="utf-8").read()
 
 
@@ -60,7 +62,7 @@ def neighbors(x, y):
     return {k: (x + dx, y + dy) for k, (dx, dy) in d.items()}
 
 
-def render(path, x0, x1, y0, y1, R, title):
+def render(path, x0, x1, y0, y1, R, title, overlay=None):
     sq = math.sqrt(3)
     margin = int(R * 2.5)
     top = int(R * 3.2)  # 标题栏
@@ -158,12 +160,58 @@ def render(path, x0, x1, y0, y1, R, title):
         lx -= font_s.size * 1.1
         dr.rectangle([lx, top * .5 - font_s.size * .4, lx + font_s.size * .8, top * .5 + font_s.size * .4], fill=c)
         lx -= font_s.size * .9
+    if overlay:
+        overlay(dr, center, R)
     img.save(path)
     print(path, img.size)
 
 
-os.makedirs(OUT, exist_ok=True)
-render(os.path.join(OUT, "00_全图.png"), 0, W - 1, 0, H - 1, 11, "战国七雄 V3 · 全图（106×66，上北下南）")
+def read_passes():
+    """读 选址规划.md 里“关隘坐标”表的每一行：(名称, x, y)，名称去掉括号里的别名。"""
+    text = open(PLAN, encoding="utf-8").read()
+    part = text.split("## 关隘坐标", 1)
+    if len(part) < 2:
+        return []
+    rows = re.findall(r"^\| [^|]+ \| ([^|]+?) \| \((\d+), (\d+)\) \|", part[1], re.M)
+    return [(re.sub(r"（.*?）|\(.*?\)", "", n).strip(), int(x), int(y)) for n, x, y in rows]
+
+
+def draw_passes(passes):
+    def overlay(dr, center, R):
+        font = ImageFont.truetype("msyhbd.ttc", int(R * 0.95))
+        # 出生点标签已画在上方，关隘标签依次试上、下、右、左，避开已放的标签
+        placed = []
+        for _, x, y in starts:
+            cx, cy = center(x, y)
+            placed.append((cx - R * 1.2, cy - R * 2.4, cx + R * 1.2, cy - R * 1.0))
+
+        def box(cx, cy, w, h, pos):
+            if pos == "up":
+                return (cx - w / 2, cy - R * 1.0 - h, cx + w / 2, cy - R * 1.0)
+            if pos == "down":
+                return (cx - w / 2, cy + R * 1.0, cx + w / 2, cy + R * 1.0 + h)
+            if pos == "right":
+                return (cx + R * 0.9, cy - h / 2, cx + R * 0.9 + w, cy + h / 2)
+            return (cx - R * 0.9 - w, cy - h / 2, cx - R * 0.9, cy + h / 2)
+
+        hit = lambda a, b: not (a[2] < b[0] or b[2] < a[0] or a[3] < b[1] or b[3] < a[1])
+        for _, x, y in passes:
+            cx, cy = center(x, y)
+            r = R * 0.5
+            dr.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill=(255, 200, 40), outline=(0, 0, 0))
+        for name, x, y in passes:
+            cx, cy = center(x, y)
+            tw, th = dr.textlength(name, font=font), font.size * 1.1
+            for pos in ("up", "down", "right", "left"):
+                b = box(cx, cy, tw, th, pos)
+                if not any(hit(b, q) for q in placed):
+                    break
+            placed.append(b)
+            dr.text(((b[0] + b[2]) / 2, (b[1] + b[3]) / 2), name, font=font, fill=(255, 215, 90), anchor="mm",
+                    stroke_width=3, stroke_fill=(0, 0, 0))
+    return overlay
+
+
 REGIONS = [
     ("01_关中汉中.png", 20, 50, 20, 42, "关中 · 汉中 · 河东（咸阳 安邑 汉中）"),
     ("02_巴蜀.png", 0, 34, 2, 30, "巴蜀（成都 江州）"),
@@ -173,5 +221,18 @@ REGIONS = [
     ("06_荆楚.png", 34, 72, 2, 30, "荆楚（襄阳 武昌）"),
     ("07_江淮吴越.png", 66, 105, 0, 30, "江淮 · 吴越（合肥 南京 会稽 武昌）"),
 ]
-for fn, a, b, c, d, title in REGIONS:
-    render(os.path.join(OUT, fn), a, b, c, d, 24, title)
+
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    render(os.path.join(OUT, "00_全图.png"), 0, W - 1, 0, H - 1, 11, "战国七雄 V3 · 全图（106×66，上北下南）")
+    for fn, a, b, c, d, title in REGIONS:
+        render(os.path.join(OUT, fn), a, b, c, d, 24, title)
+    passes = read_passes()
+    if passes:
+        render(os.path.join(OUT, "08_关隘.png"), 0, W - 1, 0, H - 1, 15, "战国七雄 V3 · 关隘位置（仅作参考，未写入游戏数据）",
+               draw_passes(passes))
+
+
+if __name__ == "__main__":
+    main()
