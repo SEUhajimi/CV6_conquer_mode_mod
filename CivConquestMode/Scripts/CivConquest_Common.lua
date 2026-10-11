@@ -14,7 +14,7 @@ CQ.PROP_FINGERPRINT		= "CQ_FP";		-- 玩家属性：该玩家电脑上报的指�
 CQ.PROP_FINGERPRINT_SEQ	= "CQ_FP_SEQ";	-- 玩家属性：上报时的序号；Game 属性：全局上报计数
 
 -- 本模式脚本版本，计入指纹。改了 Lua 后加 1：只改 Lua 时数据库不变，靠它发现两边脚本不一致
-CQ.VERSION			= 3;
+CQ.VERSION			= 4;
 
 CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
 

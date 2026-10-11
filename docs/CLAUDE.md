@@ -9,7 +9,7 @@
   - `Data/CivConquest_Gameplay.sql`：`LoadOrder` 为 20000，在其他文明 mod 之后执行，用来收集所有特色项目，包括 mod 文明的。
     - 建筑、改良的解锁修改器挂在原特性的 `TraitModifiers` 上，原文明也会拿到。特色单位的 `VALID_UNIT_BUILD` 对原文明生效时，会让被取代的基础单位重新可造（巴西尔的拜占庭在马镫就能造骑士、跑马场送骑士），所以单位解锁修改器只登记在 `CQ_ActivationModifiers` 表，由 Gameplay 脚本在激活时挂上，不进 `TraitModifiers`。曾用“玩家本身没有该特性”的条件集排除原文明，实测无效。新增类似的解锁修改器时要考虑对原文明的副作用。
     - 同一个基础区域 / 基础建筑只能有一个特色版本（`CQ.GetTraitConflict`，Gameplay 激活时校验，UI 显示“已有 X”）：引擎的取代映射只保证一个。
-    - 特色区域：引擎只把原文明的特色区域当成基础区域（建筑的 `PrereqDistrict` 只认原文明；实测转换来的、甚至去掉 `TraitType` 的 Thanh 里都造不了兵营，`WorldBuilder` 放建筑报 `NeededDistrict`，副本建筑、标记建筑、`GRANT_BUILDING_IN_CITY_IGNORE` 都试过不行）。所以激活者不建造特色区域，效果由 `CQ_DistrictBonuses` 生成的修改器加到基础区域上（自定义 `MODIFIER_CQ_PLAYER_DISTRICTS_ATTACH_MODIFIER` 挂区域自带修改器），走 `CQ_ActivationModifiers`。旧版本转换出来的特色区域由 `RevertConvertedDistricts` 还原。激活修改器挂上后记玩家属性 `CQ_AM_<ModifierId>`，回合开始时对已激活的特性补挂缺的。科技树由 `UI/TechAndCivicUnlockables_CivConquest.lua` 重写 `GetFilteredUnlockableItems`，只显示玩家拥有的特色建筑。
+    - 特色区域：引擎只把原文明的特色区域当成基础区域（建筑的 `PrereqDistrict` 只认原文明；实测转换来的、甚至去掉 `TraitType` 的 Thanh 里都造不了兵营，`WorldBuilder` 放建筑报 `NeededDistrict`，副本建筑、标记建筑、`GRANT_BUILDING_IN_CITY_IGNORE` 都试过不行）。所以激活者不建造特色区域，效果由 `CQ_DistrictBonuses` 生成的修改器加到基础区域上（自定义 `MODIFIER_CQ_PLAYER_DISTRICTS_ATTACH_MODIFIER` 挂区域自带修改器），走 `CQ_ActivationModifiers`。旧版本转换出来的特色区域由 `RevertConvertedDistricts` 还原。激活修改器挂上后记玩家属性 `CQ_AM_<ModifierId>`，回合开始时对已激活的特性补挂缺的。科技树和市政树由 `UI/TechAndCivicUnlockables_CivConquest.lua` 包装 `GetUnlockableItems`（两棵树都从它取列表；市政树走 `GetUnlockablesForCivic`，不经过 `GetFilteredUnlockableItems`）：只留玩家拥有的特色建筑，加上激活来的特色单位和改良，特色区域不加。激活的特色单位不取代基础单位，所以在第一次取列表时包装当时生效的 `RemoveReplacedUnlockables`（埃塞俄比亚 DLC 整个重写了它，include 顺序不确定），不让它藏掉基础单位。
   - `Scripts/`、`UI/`：Lua。UI 通过 `UI.RequestPlayerOperation(... EXECUTE_SCRIPT ...)` 发请求，由 Gameplay 脚本校验执行，以保证联机同步。不要在 UI 侧直接改游戏状态。
     - Gameplay 脚本里也只能在 `GameEvents.*` 回调中改游戏状态。`Events.*`（如 `PlayerTurnActivated`）由各客户端各自派发，时机不一致，在里面改状态会导致联机不同步（OOS）。
     - 脚本加载时（`Initialize()` 里）也不能改状态：联机重新同步时只有被同步的那台电脑会重新加载脚本。读档后的补扫放在 `GameEvents.PlayerTurnStarted` 里做。
@@ -19,8 +19,11 @@
     - 联机一致性检查：UI 读档时用 `DB.Query` 遍历整个 Gameplay 数据库算指纹（`CQ.GetFingerprint()`，每次进入游戏算一次并缓存；`DB.Query` 不可用时退回到 `GameInfo` 的几张核心表），经 `EXECUTE_SCRIPT` 上报到玩家属性，各电脑的 UI 互相比对，不一致时弹窗。**改了 Lua 后把 `CQ.VERSION` 加 1**：只改 Lua 时数据库不变，靠它发现两边脚本版本不同。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。
+- `tools/render_map.py`：把 `Zhanguo_V3/ZhanguoV3.lua` 的地形画成 `Zhanguo_V3/地图预览/` 下的预览图（全图、七张分区图和关隘标注图）。关隘位置读自 `Zhanguo_V3/选址规划.md` 末尾的“关隘坐标”表，只作参考。需要 Pillow。
+- `tools/start_sets.py`：按地形重算地图脚本里的开局距离表 `START_DIST` 和各人数的开局组合 `SPREAD_SETS`，不带参数只打印，`--write` 写回。需要 numpy。
+- 改了地图地形后依次运行 `python tools/start_sets.py --write` 和 `python tools/render_map.py`。
 - `docs/modding-guide.md`：文明六 mod 机制新手教程（数据库、修改器、Lua 两个环境、联机同步、modinfo、ArtDef、调试），不进游戏。
-- `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
+- `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。`Han_LiuBei/`（汉帝国 · 刘备）直接在本仓库开发，设计和验证方式见其 `README.md`。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
 
 ## 红色感叹号（模型缺失）问题
 
