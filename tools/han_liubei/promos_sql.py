@@ -10,7 +10,8 @@ STRENGTH_SETS = {'atk': 'HAN_UNIT_IS_ATTACKING', 'def': 'HAN_UNIT_IS_DEFENDING',
                  'cav': 'ANTI_CAVALRY_OPPONENT_REQUIREMENTS', 'wounded': 'HAN_OPPONENT_WOUNDED',
                  'vsanticav': 'HAN_OPPONENT_ANTI_CAVALRY'}
 # 光环类修改器的范围需求组：统率范围 / 医疗兵（相邻含自身）
-SUBJECT_SETS = {'auraplus': 'HAN_TIGER_COMMAND_RANGE', 'moveaura': 'HAN_TIGER_COMMAND_RANGE', 'healaura': 'MEDIC_HEALING_REQUIREMENTS',
+SUBJECT_SETS = {'zglheal': 'HAN_ZGL_TIGER_IN_RANGE', 'zglmove': 'HAN_ZGL_TIGER_IN_RANGE', 'arrows': 'HAN_ZGL_TIGER_IN_RANGE',
+                'bagua': 'HAN_TIGER_COMMAND_RANGE', 'moveaura': 'HAN_TIGER_COMMAND_RANGE', 'healaura': 'MEDIC_HEALING_REQUIREMENTS',
                 'capturecav': 'ATTACKER_OPPONENT_IS_CAVALRY_UNIT_REQUIREMENTS'}
 SIMPLE = {  # 类型: (ModifierType, [(参数名, 值或 None=用数值)])
  'move': ('MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT', [('Amount', None)]),
@@ -25,7 +26,6 @@ SIMPLE = {  # 类型: (ModifierType, [(参数名, 值或 None=用数值)])
  'range': ('MODIFIER_UNIT_ADJUST_ATTACK_RANGE', [('Amount', None)]),
  'attacks': ('MODIFIER_UNIT_ADJUST_NUM_ATTACKS', [('Amount', None)]),
  'nodistrictpenalty': ('MODIFIER_PLAYER_UNIT_IGNORE_RANGED_VS_DISTRICT_PENALTY', [('Ignore', '1')]),
- 'auraplus': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_TIGER_COMMANDED_PLUS')]),
  'moveaura': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_TIGER_COMMANDED_MOVE')]),
  'healaura': ('MODIFIER_PLAYER_UNITS_ADJUST_HEAL_PER_TURN', [('Amount', None), ('Type', 'ALL')]),
  'capture': ('MODIFIER_UNIT_ADJUST_COMBAT_UNIT_CAPTURE', [('CanCapture', '1')]),
@@ -36,6 +36,11 @@ SIMPLE = {  # 类型: (ModifierType, [(参数名, 值或 None=用数值)])
  'ignoreshores': ('MODIFIER_PLAYER_UNIT_ADJUST_IGNORE_SHORES', [('Ignore', '1')]),
  'sight': ('MODIFIER_PLAYER_UNIT_ADJUST_SIGHT', [('Amount', None)]),
  'wallattack': ('MODIFIER_PLAYER_UNIT_ADJUST_ENABLE_WALL_ATTACK', [('Enable', '1')]),
+ 'seehidden': ('MODIFIER_PLAYER_UNIT_ADJUST_SEE_HIDDEN', [('SeeHidden', '1')]),
+ 'zglheal': ('MODIFIER_PLAYER_UNITS_ADJUST_HEAL_PER_TURN', [('Amount', None), ('Type', 'ALL')]),
+ 'zglmove': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_ZGL_MOVE2')]),
+ 'bagua': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_ZGL_BAGUA')]),
+ 'arrows': ('MODIFIER_PLAYER_UNITS_GRANT_ABILITY', [('AbilityType', 'ABILITY_HAN_ZGL_ARROWS')]),
 }
 
 def q(v): return "'" + str(v).replace("'", "''") + "'"
@@ -53,7 +58,7 @@ for key, (zh, en, promos) in TREES.items():
         for pre in PREREQS.get(n, []):
             rows['UnitPromotionPrereqs'].append((pid, 'PROMOTION_HAN_%s_%d' % (key, pre)))
         for kind, amount in effects:
-            if kind in ('rage25', 'execute35', 'awe'):
+            if kind in ('rage25', 'execute35', 'awe', 'pierce', 'volley', 'stack'):
                 continue  # 纯 Lua 判断，晋升本身没有修改器
             mid = 'HAN_%s_%d_%s' % (key, n, kind.upper())
             if kind in STRENGTH_SETS:
@@ -82,14 +87,6 @@ cols = {'Types': 'Type,Kind', 'UnitPromotionClasses': 'PromotionClassType,Name',
 out = ['-- 五虎上将专属晋升树：每位武将一棵，7 个晋升，层次和前置关系与原版重骑兵树相同。',
        '-- 由 tools/han_liubei/promos_sql.py 生成，不要手改；数值和说明见 README.md。武将改用各自的晋升类别（只影响晋升树；兵种克制按标签判断，不受影响）。',
        '',
-       '-- 张飞「长坂断后」：统率范围内再 +5（另一个能力，和统率的 +5 叠加；范围同统率）。',
-       "INSERT INTO Types(Type,Kind) VALUES('ABILITY_HAN_TIGER_COMMANDED_PLUS','KIND_ABILITY');",
-       "INSERT INTO UnitAbilities(UnitAbilityType,Name,Description,Inactive) VALUES('ABILITY_HAN_TIGER_COMMANDED_PLUS','LOC_PROMOTION_HAN_ZHANG_FEI_5_NAME','LOC_PROMOTION_HAN_ZHANG_FEI_5_DESCRIPTION',1);",
-       "INSERT INTO TypeTags(Type,Tag) SELECT 'ABILITY_HAN_TIGER_COMMANDED_PLUS',Tag FROM TypeTags WHERE Type='ABILITY_GREAT_GENERAL_STRENGTH';",
-       "INSERT INTO Modifiers(ModifierId,ModifierType) VALUES('HAN_TIGER_COMMANDED_PLUS_STRENGTH','MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH');",
-       "INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES('HAN_TIGER_COMMANDED_PLUS_STRENGTH','Amount',5);",
-       "INSERT INTO ModifierStrings(ModifierId,Context,Text) VALUES('HAN_TIGER_COMMANDED_PLUS_STRENGTH','Preview','LOC_PROMOTION_HAN_ZHANG_FEI_5_PREVIEW');",
-       "INSERT INTO UnitAbilityModifiers(UnitAbilityType,ModifierId) VALUES('ABILITY_HAN_TIGER_COMMANDED_PLUS','HAN_TIGER_COMMANDED_PLUS_STRENGTH');",
        '-- 赵云「虎威将军」：统率范围内 +1 移动力（同大将军的移动加成）。',
        "INSERT INTO Types(Type,Kind) VALUES('ABILITY_HAN_TIGER_COMMANDED_MOVE','KIND_ABILITY');",
        "INSERT INTO UnitAbilities(UnitAbilityType,Name,Description,Inactive) VALUES('ABILITY_HAN_TIGER_COMMANDED_MOVE','LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME','LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION',1);",
@@ -97,6 +94,17 @@ out = ['-- 五虎上将专属晋升树：每位武将一棵，7 个晋升，层�
        "INSERT INTO Modifiers(ModifierId,ModifierType) VALUES('HAN_TIGER_COMMANDED_MOVE_BONUS','MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT');",
        "INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES('HAN_TIGER_COMMANDED_MOVE_BONUS','Amount',1);",
        "INSERT INTO UnitAbilityModifiers(UnitAbilityType,ModifierId) VALUES('ABILITY_HAN_TIGER_COMMANDED_MOVE','HAN_TIGER_COMMANDED_MOVE_BONUS');",
+       '-- 诸葛亮晋升授予的能力：木牛流马（范围内五虎将 +1 移动）、八阵图（2 格内全军防守 +7）、草船借箭（范围内五虎将防远程 +10）。',
+       "INSERT INTO Types(Type,Kind) VALUES('ABILITY_HAN_ZGL_MOVE2','KIND_ABILITY'),('ABILITY_HAN_ZGL_BAGUA','KIND_ABILITY'),('ABILITY_HAN_ZGL_ARROWS','KIND_ABILITY');",
+       "INSERT INTO UnitAbilities(UnitAbilityType,Name,Description,Inactive) VALUES('ABILITY_HAN_ZGL_MOVE2','LOC_PROMOTION_HAN_ZHUGE_LIANG_2_NAME','LOC_PROMOTION_HAN_ZHUGE_LIANG_2_DESCRIPTION',1),('ABILITY_HAN_ZGL_BAGUA','LOC_PROMOTION_HAN_ZHUGE_LIANG_3_NAME','LOC_PROMOTION_HAN_ZHUGE_LIANG_3_DESCRIPTION',1),('ABILITY_HAN_ZGL_ARROWS','LOC_PROMOTION_HAN_ZHUGE_LIANG_5_NAME','LOC_PROMOTION_HAN_ZHUGE_LIANG_5_DESCRIPTION',1);",
+       "INSERT INTO TypeTags(Type,Tag) VALUES('ABILITY_HAN_ZGL_MOVE2','CLASS_HAN_TIGER'),('ABILITY_HAN_ZGL_ARROWS','CLASS_HAN_TIGER');",
+       "INSERT INTO TypeTags(Type,Tag) SELECT 'ABILITY_HAN_ZGL_BAGUA',Tag FROM TypeTags WHERE Type='ABILITY_GREAT_GENERAL_STRENGTH';",
+       "INSERT INTO RequirementSets(RequirementSetId,RequirementSetType) VALUES('HAN_DEFENDING_VS_RANGED','REQUIREMENTSET_TEST_ALL');",
+       "INSERT INTO RequirementSetRequirements(RequirementSetId,RequirementId) VALUES('HAN_DEFENDING_VS_RANGED','HAN_REQ_IS_DEFENDING'),('HAN_DEFENDING_VS_RANGED','RANGED_COMBAT_REQUIREMENTS');",
+       "INSERT INTO Modifiers(ModifierId,ModifierType,SubjectRequirementSetId) VALUES('HAN_ZGL_MOVE2_BONUS','MODIFIER_PLAYER_UNIT_ADJUST_MOVEMENT',NULL),('HAN_ZGL_BAGUA_DEFENSE','MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH','HAN_UNIT_IS_DEFENDING'),('HAN_ZGL_ARROWS_DEFENSE','MODIFIER_UNIT_ADJUST_COMBAT_STRENGTH','HAN_DEFENDING_VS_RANGED');",
+       "INSERT INTO ModifierArguments(ModifierId,Name,Value) VALUES('HAN_ZGL_MOVE2_BONUS','Amount',1),('HAN_ZGL_BAGUA_DEFENSE','Amount',7),('HAN_ZGL_ARROWS_DEFENSE','Amount',10);",
+       "INSERT INTO ModifierStrings(ModifierId,Context,Text) VALUES('HAN_ZGL_BAGUA_DEFENSE','Preview','LOC_PROMOTION_HAN_ZHUGE_LIANG_3_PREVIEW'),('HAN_ZGL_ARROWS_DEFENSE','Preview','LOC_PROMOTION_HAN_ZHUGE_LIANG_5_PREVIEW');",
+       "INSERT INTO UnitAbilityModifiers(UnitAbilityType,ModifierId) VALUES('ABILITY_HAN_ZGL_MOVE2','HAN_ZGL_MOVE2_BONUS'),('ABILITY_HAN_ZGL_BAGUA','HAN_ZGL_BAGUA_DEFENSE'),('ABILITY_HAN_ZGL_ARROWS','HAN_ZGL_ARROWS_DEFENSE');",
        '',
        '-- 晋升树用到的需求组（进攻 / 防守需求组在 Gameplay.sql 中定义）。',
        "INSERT INTO RequirementSets(RequirementSetId,RequirementSetType) VALUES('HAN_OPPONENT_IS_DISTRICT','REQUIREMENTSET_TEST_ALL'),('HAN_OPPONENT_WOUNDED','REQUIREMENTSET_TEST_ALL');",
