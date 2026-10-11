@@ -1,7 +1,7 @@
 -- 桃园结义 · 五虎上将：建立首都时关羽、张飞加入，其余武将研究到对应科技后加入，诸葛亮在拥有 3 座城市时加入，
 -- 都出现在首都旁。每位一局只送一次（送出时记玩家属性），阵亡后不再出现。
 -- 另外负责五虎将「虎将之勇」的残血加成档位、统率光环的开关（诸葛亮「五虎齐心」后改为可叠加）、诸葛亮的经验，
--- 以及关羽斩首、威震华夏，张飞丈八蛇矛，黄忠万箭齐发（见文件后半）。
+-- 以及关羽斩首、威震华夏，张飞丈八蛇矛，赵云七进七出，马超冲锋，黄忠万箭齐发（见文件后半）。
 -- 只在 GameEvents 回调里改游戏状态，联机各端时机一致；放不下或读档后由回合开始补发。
 local LEADER = "LEADER_LIU_BEI"
 -- 顺序即同一回合内的出场顺序。Tech / Cities 都没有表示有城市就送。
@@ -323,9 +323,54 @@ local function GrantZhugeLiangXP(tiger)
   end
 end
 
+-- 马超 · 神威天将军（终极晋升）：西凉铁骑冲锋。回合开始记下位置、格数清零；每次移动累加走过的距离；
+-- 按格数开 ABILITY_HAN_MA_CHAO_CHARGE_<1~5> 中的一档（各档是累计值，进攻 +4 × 格数）。
+-- 按走过的格数而不是消耗的移动力算：进入区域控制会清空移动力，不能因此吃满加成。
+local MA_CHAO = "UNIT_HAN_MA_CHAO"
+local CHARGE_PROMOTION = "PROMOTION_HAN_MA_CHAO_7"
+local CHARGE_MAX_TILES = 5
+local PROP_CHARGE_POS = "HAN_CHARGE_POS"
+local PROP_CHARGE_TILES = "HAN_CHARGE_TILES"
+
+local function UpdateChargeAbility(unit)
+  local tiles = HasPromotion(unit, CHARGE_PROMOTION) and math.min(unit:GetProperty(PROP_CHARGE_TILES) or 0, CHARGE_MAX_TILES) or 0
+  for k = 1, CHARGE_MAX_TILES do
+    SetAbility(unit, "ABILITY_HAN_MA_CHAO_CHARGE_" .. k, k == tiles)
+  end
+end
+
+local function ResetCharge(unit)
+  unit:SetProperty(PROP_CHARGE_POS, Map.GetPlot(unit:GetX(), unit:GetY()):GetIndex())
+  unit:SetProperty(PROP_CHARGE_TILES, 0)
+  UpdateChargeAbility(unit)
+end
+
+local function RecordCharge(unit)
+  local plot = Map.GetPlot(unit:GetX(), unit:GetY())
+  local last = unit:GetProperty(PROP_CHARGE_POS)
+  if last ~= nil and last ~= plot:GetIndex() then
+    local lastPlot = Map.GetPlotByIndex(last)
+    local tiles = (unit:GetProperty(PROP_CHARGE_TILES) or 0) + Map.GetPlotDistance(lastPlot:GetX(), lastPlot:GetY(), plot:GetX(), plot:GetY())
+    unit:SetProperty(PROP_CHARGE_TILES, tiles)
+  end
+  unit:SetProperty(PROP_CHARGE_POS, plot:GetIndex())
+  UpdateChargeAbility(unit)
+end
+
+-- 赵云 · 七进七出（终极晋升）：每回合可攻击七次（修改器，见 Promotions.sql）；赵云进攻并击杀敌方单位后，立刻恢复全部移动力。
+local ZHAO_YUN = "UNIT_HAN_ZHAO_YUN"
+local SEVEN_PROMOTION = "PROMOTION_HAN_ZHAO_YUN_7"
+
+local function SevenInSevenOut(zhaoYun)
+  if not HasPromotion(zhaoYun, SEVEN_PROMOTION) then return end
+  local missing = zhaoYun:GetMaxMoves() - zhaoYun:GetMovesRemaining()
+  if missing > 0 then zhaoYun:ChangeMovesRemaining(missing) end
+end
+
 local function OnUnitMoved(playerID, unitID)
   local unit = FindUnit(playerID, unitID)
   if IsUnitType(unit, ZHANG_FEI) then RecordPosition(unit) end
+  if IsUnitType(unit, MA_CHAO) then RecordCharge(unit) end
   if IsUnitType(unit, ZHUGE_LIANG) then UpdateCommand(playerID) end
 end
 
@@ -357,6 +402,9 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   elseif IsGuanYu(defender) and attackerIsUnit and IsGone(attacker) then
     AweOverChina(defender)
   end
+  if IsUnitType(attacker, ZHAO_YUN) and defenderIsUnit and IsGone(defender) then
+    SevenInSevenOut(attacker)
+  end
   -- 阵亡的武将也还能取到位置（同一次战斗里），照样给诸葛亮经验。
   GrantZhugeLiangXP(attacker)
   GrantZhugeLiangXP(defender)
@@ -375,6 +423,7 @@ local function OnPlayerTurnStarted(playerID)
   if player == nil then return end
   for _, unit in player:GetUnits():Members() do
     if IsUnitType(unit, ZHANG_FEI) then RecordPosition(unit) end
+    if IsUnitType(unit, MA_CHAO) then ResetCharge(unit) end
   end
 end
 

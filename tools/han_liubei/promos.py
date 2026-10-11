@@ -10,10 +10,11 @@ PREREQS = {3: [1, 4], 4: [2, 3], 5: [3], 6: [4], 7: [5, 6]}
 #   ignorerivers 渡河不耗移动 / killheal 击杀回血 / nowound 受伤不降战斗力 / flank 侧翼加成% / range 射程
 #   attacks 额外攻击次数 / nodistrictpenalty 远程攻城无惩罚
 #   机制：healaura 自身和相邻回血 / capture 收降击败的单位 / debuff 相邻敌军减战斗力 / stealth 隐身
-#         moveaura 统率范围 +1 移动 / convertbarb 收编蛮族 / pillage 劫掠只耗 1 移动
+#         convertbarb 收编蛮族 / pillage 劫掠只耗 1 移动
 #         capturecav 进攻击败骑兵时俘获 / vsanticav 对抗骑兵 / ignoreshores 登船上岸不耗移动 / sight 视野
 #         rage25 残血加成多一档 / execute35 关羽斩首线提高 / awe 关羽杀敌扣周围城市忠诚 / pierce 张飞刺穿身后 /
 #         volley 黄忠溅射 / stack 诸葛亮五虎齐心（都由 Scripts/HanTigers.lua 判断，没有修改器）
+#   sevenin 赵云击杀回满移动 / charge 马超按本回合移动格数加进攻（由 Scripts/HanTigers.lua 判断，没有修改器）
 #   诸葛亮：zglheal 范围内五虎将回血 / zglmove 范围内五虎将移动 / bagua 2 格内全军防守 / arrows 范围内五虎将防远程 / seehidden 看见隐身
 #         wallattack 攻击城墙不受削弱
 TREES = {
@@ -42,7 +43,7 @@ TREES = {
   ('长坂救主', 'Rescue at Changban', [('killheal', 30)], '击杀敌方单位后恢复30生命值。', 'Heals 30 HP after killing a unit.'),
   ('汉水空营', 'Empty Camp at the Han', [('stealth', 0)], '隐身：只有相邻的单位能看到他。', 'Stealth: only visible to adjacent units.'),
   ('长驱直入', 'Deep Strike', [('move', 1), ('sight', 1)], '+1 [ICON_Movement] 移动力，+1视野。', '+1 [ICON_Movement] Movement and +1 Sight.'),
-  ('虎威将军', 'Tiger-Might General', [('attacks', 1), ('moveaura', 1)], '每回合可攻击两次。统率范围内的单位再+1 [ICON_Movement] 移动力。', 'Can attack twice per turn. Units under his Command receive an additional +1 [ICON_Movement] Movement.'),
+  ('七进七出', 'In and Out Seven Times', [('attacks', 6), ('sevenin', 0)], '每回合可攻击七次。每击杀一个敌方单位，立刻恢复全部移动力。', 'Can attack seven times per turn. Each enemy unit he kills restores all of his Movement.'),
  ]),
  'MA_CHAO': ('马超', 'Ma Chao', [
   ('渭水奔袭', 'Raid on the Wei', [('cav', 7)], '对骑兵类单位再+7 [ICON_Strength] 战斗力。', 'An additional +7 [ICON_Strength] Combat Strength against cavalry.'),
@@ -51,7 +52,7 @@ TREES = {
   ('冲阵破枪', 'Breaking the Spear Wall', [('vsanticav', 10)], '对抗骑兵单位+10 [ICON_Strength] 战斗力，抵消其克制。', '+10 [ICON_Strength] Combat Strength against anti-cavalry units, offsetting their bonus.'),
   ('西凉旧部', 'Xiliang Raiders', [('ignorezoc', 0), ('pillage', 0)], '无视区域控制。劫掠只消耗1点移动力（同「掠夺」晋升）。', 'Ignores Zone of Control. Pillaging costs only 1 Movement (like the Depredation promotion).'),
   ('冀城血战', 'Siege of Ji', [('killheal', 30)], '击杀敌方单位后恢复30生命值。', 'Heals 30 HP after killing a unit.'),
-  ('神威天将军', 'Divine General', [('cav', 10), ('move', 1)], '对骑兵类单位再+10 [ICON_Strength] 战斗力，+1 [ICON_Movement] 移动力。', 'An additional +10 [ICON_Strength] Combat Strength against cavalry and +1 [ICON_Movement] Movement.'),
+  ('神威天将军', 'Divine General', [('charge', 0)], '西凉铁骑冲锋：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力，最多+20。', 'Xiliang Charge: +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn, up to +20.'),
  ]),
  'HUANG_ZHONG': ('黄忠', 'Huang Zhong', [
   ('百步穿杨', 'Hundred-Pace Archery', [('atk', 7)], '进攻时+7 [ICON_Strength] 战斗力。', '+7 [ICON_Strength] Combat Strength when attacking.'),

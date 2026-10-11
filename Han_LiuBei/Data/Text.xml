@@ -433,6 +433,48 @@
     <Row Tag="LOC_HAN_TIGER_COMMANDED_PREVIEW_HUANG_ZHONG" Language="en_US">
       <Text>+{1_Amount} Five Tigers as One: Huang Zhong</Text>
     </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_1_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋1格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_1_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 1 tile</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_2_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋2格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_2_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 2 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_3_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋3格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_3_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 3 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_4_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋4格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_4_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 4 tiles</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_5_PREVIEW" Language="zh_Hans_CN">
+      <Text>+{1_Amount} 神威天将军：冲锋5格</Text>
+    </Row>
+    <Row Tag="LOC_HAN_MA_CHAO_CHARGE_5_PREVIEW" Language="en_US">
+      <Text>+{1_Amount} Divine General: charged 5 tiles</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME" Language="zh_Hans_CN">
+      <Text>西凉铁骑冲锋</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME" Language="en_US">
+      <Text>Xiliang Charge</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION" Language="zh_Hans_CN">
+      <Text>本回合已冲锋，进攻时战斗力提高。</Text>
+    </Row>
+    <Row Tag="LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION" Language="en_US">
+      <Text>Charging this turn: stronger when attacking.</Text>
+    </Row>
     <Row Tag="LOC_HAN_TIGER_JOINED_MESSAGE" Language="zh_Hans_CN">
       <Text>{1_Name}来投</Text>
     </Row>
@@ -866,16 +908,16 @@
       <Text>+1 [ICON_Movement] Movement and +1 Sight.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME" Language="zh_Hans_CN">
-      <Text>虎威将军</Text>
+      <Text>七进七出</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_NAME" Language="en_US">
-      <Text>Tiger-Might General</Text>
+      <Text>In and Out Seven Times</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>每回合可攻击两次。统率范围内的单位再+1 [ICON_Movement] 移动力。</Text>
+      <Text>每回合可攻击七次。每击杀一个敌方单位，立刻恢复全部移动力。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_ZHAO_YUN_7_DESCRIPTION" Language="en_US">
-      <Text>Can attack twice per turn. Units under his Command receive an additional +1 [ICON_Movement] Movement.</Text>
+      <Text>Can attack seven times per turn. Each enemy unit he kills restores all of his Movement.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_MA_CHAO_NAME" Language="zh_Hans_CN">
       <Text>马超</Text>
@@ -974,16 +1016,10 @@
       <Text>Divine General</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="zh_Hans_CN">
-      <Text>对骑兵类单位再+10 [ICON_Strength] 战斗力，+1 [ICON_Movement] 移动力。</Text>
+      <Text>西凉铁骑冲锋：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力，最多+20。</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_DESCRIPTION" Language="en_US">
-      <Text>An additional +10 [ICON_Strength] Combat Strength against cavalry and +1 [ICON_Movement] Movement.</Text>
-    </Row>
-    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_PREVIEW" Language="zh_Hans_CN">
-      <Text>+{1_Amount} 神威天将军</Text>
-    </Row>
-    <Row Tag="LOC_PROMOTION_HAN_MA_CHAO_7_PREVIEW" Language="en_US">
-      <Text>+{1_Amount} Divine General</Text>
+      <Text>Xiliang Charge: +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn, up to +20.</Text>
     </Row>
     <Row Tag="LOC_PROMOTION_CLASS_HAN_HUANG_ZHONG_NAME" Language="zh_Hans_CN">
       <Text>黄忠</Text>

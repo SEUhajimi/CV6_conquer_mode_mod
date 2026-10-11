@@ -113,6 +113,10 @@ t('LOC_UNIT_HAN_ZHUGE_LIANG_DESCRIPTION',
   'Support unit that can share a tile with a Tiger General. Joins next to the [ICON_Capital] Capital once you have 3 cities (Three Visits to the Cottage); cannot be trained or purchased, never returns once killed, and has no maintenance. Strategist: Tiger Generals within 2 tiles (including this tile) heal an extra 15 HP per turn, receive +1 [ICON_Movement] Movement, and +25 [ICON_Strength] Combat Strength against air units. Gains 8 experience whenever a Tiger General within 2 tiles fights.')
 for key, zh, en in [('GUAN_YU', '关羽', 'Guan Yu'), ('ZHANG_FEI', '张飞', 'Zhang Fei'), ('ZHAO_YUN', '赵云', 'Zhao Yun'), ('MA_CHAO', '马超', 'Ma Chao'), ('HUANG_ZHONG', '黄忠', 'Huang Zhong')]:
   t('LOC_HAN_TIGER_COMMANDED_PREVIEW_' + key, '+{1_Amount} 五虎齐心：' + zh + '统率', '+{1_Amount} Five Tigers as One: ' + en)
+for k in range(1, 6):
+  t('LOC_HAN_MA_CHAO_CHARGE_%d_PREVIEW' % k, '+{1_Amount} 神威天将军：冲锋%d格' % k, '+{1_Amount} Divine General: charged %d tile%s' % (k, '' if k == 1 else 's'))
+t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_NAME', '西凉铁骑冲锋', 'Xiliang Charge')
+t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION', '本回合已冲锋，进攻时战斗力提高。', 'Charging this turn: stronger when attacking.')
 t('LOC_HAN_TIGER_JOINED_MESSAGE', '{1_Name}来投', '{1_Name} has joined')
 t('LOC_HAN_TIGER_JOINED_SUMMARY', '五虎上将{1_Name}已在{2_City}旁加入你的军队。', 'Tiger General {1_Name} has joined your army near {2_City}.')
 
