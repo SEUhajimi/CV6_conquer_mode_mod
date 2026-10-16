@@ -13,6 +13,15 @@ t('LOC_CIVILIZATION_HAN_NAME', '汉帝国', 'Han Empire')
 t('LOC_CIVILIZATION_HAN_DESCRIPTION', '汉帝国', 'Han Empire')
 t('LOC_CIVILIZATION_HAN_ADJECTIVE', '汉', 'Han')
 t('LOC_LEADER_LIU_BEI_NAME', '刘备', 'Liu Bei')
+t('LOC_LOADING_INFO_LEADER_LIU_BEI',
+  '玄德公，汉室倾颓，奸臣窃命，天下豪杰并起。您本是中山靖王之后，织席贩履，却胸怀匡扶天下之志。桃园之中，关羽、张飞与您结为兄弟，誓同生死；'
+  '此后赵云、马超、黄忠相继来投，卧龙诸葛亮亦为您三顾之诚所动，出山相助。您待人以仁、以德服人，所到之处百姓归心。'
+  '如今五虎在侧、军师在帐，正当兴复汉室、还于旧都。您能否终结这乱世，让大汉之名再次响彻天下？',
+  'Lord Xuande, the house of Han has fallen into ruin, its throne usurped by treacherous ministers, and warlords rise across the land. '
+  'A descendant of Prince Jing of Zhongshan who once wove mats and sold sandals, you have never lost your resolve to set the realm right. '
+  'In the peach garden, Guan Yu and Zhang Fei swore to live and die as your brothers; Zhao Yun, Ma Chao and Huang Zhong followed, and the Sleeping Dragon Zhuge Liang left his cottage, moved by your three visits. '
+  'You rule with benevolence and win hearts with virtue, and the people flock to your banner. With the Five Tigers at your side and your strategist in your tent, the time has come to restore the Han. '
+  'Can you end this age of chaos and make the name of Han ring out across the world once more?')
 
 RES_ZH = '陆地作战单位迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。不是由本文明建立的城市每回合+3忠诚度。'
 RES_EN = 'Land combat units receive +5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength. Cities not founded by this civilization gain +3 Loyalty per turn.'
@@ -27,9 +36,29 @@ t('LOC_TRAIT_CIVILIZATION_HAN_SHU_ROADS_DESCRIPTION', SHU_ZH, SHU_EN)
 t('LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_NAME', '屯田', 'Military Farms')
 t('LOC_TRAIT_CIVILIZATION_HAN_TUNTIAN_DESCRIPTION', TUN_ZH, TUN_EN)
 t('LOC_HAN_SETUP_ABILITY_NAME', '兴复汉室 / 蜀道 / 屯田', 'Restore the Han / Roads of Shu / Military Farms')
+# 开局选文明画面（Config.sql）用精简版，完整数值留给游戏内的特性、百科和单位说明。
 t('LOC_HAN_SETUP_ABILITY_DESCRIPTION',
-  '兴复汉室：' + RES_ZH + '[NEWLINE][NEWLINE]蜀道：' + SHU_ZH + '[NEWLINE][NEWLINE]屯田：' + TUN_ZH,
-  'Restore the Han: ' + RES_EN + '[NEWLINE][NEWLINE]Roads of Shu: ' + SHU_EN + '[NEWLINE][NEWLINE]Military Farms: ' + TUN_EN)
+  '兴复汉室：迎战更强的单位+5 [ICON_Strength] 战斗力；非本文明建立的城市每回合+3忠诚度。[NEWLINE]'
+  '蜀道：进入丘陵不额外消耗移动力；山脉和丘陵为商业中心、工业区提供相邻加成。[NEWLINE]'
+  '屯田：单位维护费-1；兵营及其建筑产出 [ICON_Food] 粮食和 [ICON_Production] 生产力，兵营旁的改良设施+1 [ICON_Food] +1 [ICON_Production]。',
+  'Restore the Han: +5 [ICON_Strength] vs. stronger units; +3 Loyalty per turn in cities you did not found.[NEWLINE]'
+  'Roads of Shu: no extra movement cost on Hills; Mountains and Hills give adjacency to Commercial Hubs and Industrial Zones.[NEWLINE]'
+  'Military Farms: -1 unit maintenance; Encampments and their buildings yield [ICON_Food] Food and [ICON_Production] Production, and improvements next to them +1 [ICON_Food] +1 [ICON_Production].')
+t('LOC_HAN_SETUP_LEADER_ABILITY_DESCRIPTION',
+  '桃园结义：五虎上将随建都和科技免费加入，拥有3座城市时诸葛亮出山；所有单位战斗经验+100%，不获得大将军点数。[NEWLINE]'
+  '厚施恩德，以收众心：忠诚度压力+150%，还能削弱18格内的敌城；因忠诚度叛离的城市直接归降。',
+  'Oath of the Peach Garden: the Five Tiger Generals join for free as you found your Capital and research technologies, and Zhuge Liang joins at 3 cities; +100% combat experience, no Great General points.[NEWLINE]'
+  'Win Hearts with Generous Virtue: +150% Loyalty pressure that also reaches enemy cities up to 18 tiles away; cities that rebel join you directly.')
+t('LOC_HAN_SETUP_TIGERS_NAME', '五虎上将', 'Five Tiger Generals')
+t('LOC_HAN_SETUP_TIGERS_DESCRIPTION',
+  '关羽、张飞、赵云、马超、黄忠随建都和科技免费加入，不能训练，阵亡后不再出现。各有专属晋升树和终极技能，每个时代变强，并统率身边的军队。',
+  'Guan Yu, Zhang Fei, Zhao Yun, Ma Chao and Huang Zhong join for free as you found your Capital and research technologies; they cannot be trained and never return once killed. Each has a unique promotion tree and ultimate, grows stronger every era and commands nearby troops.')
+t('LOC_HAN_SETUP_ZHUGE_LIANG_DESCRIPTION',
+  '拥有3座城市时出山的支援单位。为附近的五虎将回血、加速、防空袭；终极晋升「五虎齐心」让五虎将的统率光环互相叠加。',
+  'Support unit that joins at 3 cities. Heals, speeds up and shields nearby Tiger Generals from air attacks; his ultimate makes their Command auras stack.')
+t('LOC_HAN_SETUP_WUHU_DESCRIPTION',
+  '五人都学会终极技能并聚到关羽身边时，永久合为一体。可远程可近战，每回合攻击7次，攻击吸血并波及目标周围，隐身，移动和跳跃极远。',
+  'When all five have their ultimate and gather around Guan Yu, they merge for good. Ranged and melee, 7 attacks per turn, lifesteal and splash around every target, stealth, and huge movement and jump range.')
 t('LOC_ABILITY_HAN_RESTORATION_DESCRIPTION', '迎战基础战斗力更强的单位时+5 [ICON_Strength] 战斗力。', '+5 [ICON_Strength] Combat Strength when fighting a unit with higher base Combat Strength.')
 t('LOC_HAN_RESTORATION_PREVIEW', '+{1_Amount} 兴复汉室：迎战更强的单位', '+{1_Amount} Restore the Han: fighting a stronger unit')
 t('LOC_ABILITY_HAN_SHU_ROADS_DESCRIPTION', '进入丘陵不额外消耗移动力。', 'Ignores the movement cost of Hills.')

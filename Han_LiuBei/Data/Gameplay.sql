@@ -34,6 +34,10 @@ INSERT INTO Leaders(LeaderType,Name,InheritFrom,SceneLayers)
 VALUES('LEADER_LIU_BEI','LOC_LEADER_LIU_BEI_NAME','LEADER_DEFAULT',0);
 INSERT INTO CivilizationLeaders(LeaderType,CivilizationType,CapitalName)
 VALUES('LEADER_LIU_BEI','CIVILIZATION_HAN','LOC_CITY_NAME_HAN_CHENGDU');
+-- 加载画面：前景 / 背景默认按领袖名找贴图，不存在时没有立绘、背景退回罗斯福，所以借用秦始皇的；
+-- 开场旁白语音也按领袖找，刘备没有配音，关掉。
+INSERT INTO LoadingInfo(LeaderType,ForegroundImage,BackgroundImage,LeaderText,PlayDawnOfManAudio)
+VALUES('LEADER_LIU_BEI','LEADER_QIN_NEUTRAL','LEADER_QIN_BACKGROUND','LOC_LOADING_INFO_LEADER_LIU_BEI',0);
 -- 只沿用中国的市民姓名，不继承中国的能力。
 INSERT INTO CivilizationCitizenNames(CivilizationType,CitizenName,Female,Modern)
 SELECT 'CIVILIZATION_HAN',CitizenName,Female,Modern FROM CivilizationCitizenNames WHERE CivilizationType='CIVILIZATION_CHINA';
