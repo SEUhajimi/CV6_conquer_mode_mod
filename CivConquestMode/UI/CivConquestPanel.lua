@@ -107,6 +107,12 @@ local function GetInGameLeaderInfo()
 	return result;
 end
 
+-- 本局中、但本地玩家还没遇见的领袖。「所有领袖」里要把他们当成不在本局，否则能看出本局有谁
+local function IsUnmetInGame(inGame:table, leaderType)
+	local info = leaderType and inGame[leaderType];
+	return info ~= nil and not info.Met;
+end
+
 -- 某领袖还有多少可激活但未拥有的特性
 local function CountActivatable(playerID:number, leaderType:string)
 	local total, owned = 0, 0;
@@ -328,6 +334,9 @@ local function RefreshDetail()
 		Controls.EmptyLabel:SetHide(false);
 		return;
 	end
+	if IsUnmetInGame(inGame, leaderType) then
+		gameInfo = nil;
+	end
 
 	Controls.DetailHeader:SetHide(false);
 	Controls.EmptyLabel:SetHide(true);
@@ -426,7 +435,8 @@ local function RefreshLeaderList()
 		end
 	else
 		for _, leaderType in ipairs(CQ.GetAllLeaders()) do
-			table.insert(rows, { LeaderType = leaderType, Info = inGame[leaderType] });
+			local info = not IsUnmetInGame(inGame, leaderType) and inGame[leaderType] or nil;
+			table.insert(rows, { LeaderType = leaderType, Info = info });
 		end
 	end
 
@@ -753,16 +763,17 @@ function Initialize()
 
 	Controls.CloseButton:RegisterCallback(Mouse.eLClick, Close);
 	Controls.CloseButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
-	Controls.TabInGame:RegisterCallback(Mouse.eLClick, function()
-		m_CurrentTab = TAB_IN_GAME;
+	-- 切换标签时不带上未遇见领袖的选中状态：否则「本局」里选中的问号会在「所有领袖」里高亮出真身，反之亦然
+	local function SwitchTab(tab)
+		m_CurrentTab = tab;
+		if IsUnmetInGame(GetInGameLeaderInfo(), m_SelectedLeader) then
+			m_SelectedLeader = nil;
+		end
 		UI.PlaySound("Play_UI_Click");
 		RefreshAll();
-	end);
-	Controls.TabAll:RegisterCallback(Mouse.eLClick, function()
-		m_CurrentTab = TAB_ALL;
-		UI.PlaySound("Play_UI_Click");
-		RefreshAll();
-	end);
+	end
+	Controls.TabInGame:RegisterCallback(Mouse.eLClick, function() SwitchTab(TAB_IN_GAME); end);
+	Controls.TabAll:RegisterCallback(Mouse.eLClick, function() SwitchTab(TAB_ALL); end);
 	-- “全部激活”：逐个发送与单项激活相同的请求（单项激活路径已验证可用）
 	Controls.ActivateAllButton:RegisterCallback(Mouse.eLClick, function()
 		local playerID = GetLocalPlayerID();
