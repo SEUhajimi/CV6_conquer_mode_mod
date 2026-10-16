@@ -1019,7 +1019,7 @@ end
 
 -- 调试：曼丁哥市场（文明征服模式激活）和蜀道在商业中心上是否叠加。刘备回合开始时每个商业中心打一行：
 -- 金币产出、其中的相邻加成、相邻山脉 / 丘陵数、是否相邻圣地 / 修道院、是否临河。只读取，不改游戏状态。
-local DEBUG_COMMERCIAL_HUBS = true
+local DEBUG_COMMERCIAL_HUBS = false
 
 local function LogCommercialHubs(playerID)
   local config = PlayerConfigurations[playerID]
