@@ -71,7 +71,7 @@
 		<Row Tag="LOC_CQ_STATUS_SELF" Language="en_US"><Text>[COLOR_LIGHTBLUE]This is your own leader.[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_UNLOCKED_DETAIL" Language="en_US"><Text>[ICON_Capital] [COLOR_GREEN]Original capital conquered - abilities can be activated.[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_LOCKED_DETAIL" Language="en_US"><Text>[COLOR_Grey]Capture this civilization's original capital to unlock.[ENDCOLOR]</Text></Row>
-		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="en_US"><Text>[COLOR_Grey]This leader is not in the current game.[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="en_US"><Text>[COLOR_Grey]Not met yet, or not in the current game.[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_SELF_SHORT" Language="en_US"><Text>[COLOR_LIGHTBLUE]You[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_UNLOCKED_SHORT" Language="en_US"><Text>[COLOR_GREEN]{1_Owned}/{2_Total}[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_LOCKED_SHORT" Language="en_US"><Text>[COLOR_Grey]Locked[ENDCOLOR]</Text></Row>
@@ -152,7 +152,7 @@
 		<Row Tag="LOC_CQ_STATUS_SELF" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]这是你自己的领袖。[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_UNLOCKED_DETAIL" Language="zh_Hans_CN"><Text>[ICON_Capital] [COLOR_GREEN]已占领其原始首都，可以激活。[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_LOCKED_DETAIL" Language="zh_Hans_CN"><Text>[COLOR_Grey]占领该文明的原始首都后解锁。[ENDCOLOR]</Text></Row>
-		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="zh_Hans_CN"><Text>[COLOR_Grey]该领袖不在本局游戏中。[ENDCOLOR]</Text></Row>
+		<Row Tag="LOC_CQ_STATUS_NOT_IN_GAME_DETAIL" Language="zh_Hans_CN"><Text>[COLOR_Grey]尚未遇见，或不在本局游戏中。[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_SELF_SHORT" Language="zh_Hans_CN"><Text>[COLOR_LIGHTBLUE]本方[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_UNLOCKED_SHORT" Language="zh_Hans_CN"><Text>[COLOR_GREEN]{1_Owned}/{2_Total}[ENDCOLOR]</Text></Row>
 		<Row Tag="LOC_CQ_STATUS_LOCKED_SHORT" Language="zh_Hans_CN"><Text>[COLOR_Grey]未解锁[ENDCOLOR]</Text></Row>
