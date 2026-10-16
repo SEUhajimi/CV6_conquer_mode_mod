@@ -23,6 +23,7 @@
 - `tools/start_sets.py`：按地形重算地图脚本里的开局距离表 `START_DIST` 和各人数的开局组合 `SPREAD_SETS`，不带参数只打印，`--write` 写回。需要 numpy。
 - 改了地图地形后依次运行 `python tools/start_sets.py --write` 和 `python tools/render_map.py`。
 - `tools/han_liubei/`：生成汉帝国 mod 的 `Han_LiuBei/Data/Promotions.sql`（`promos_sql.py`）和 `Han_LiuBei/Data/Text.xml`（`text.py`，中英文本的唯一来源）。五虎将晋升的名称、效果、说明都在 `promos.py`。这两个文件不要手改，改脚本后运行 `python tools/han_liubei/promos_sql.py` 和 `python tools/han_liubei/text.py`。
+- `tools/build_workshop.py`：`python tools/build_workshop.py <mod 文件夹名>` 按 `.modinfo` 的 `<Files>` 把要上传的文件复制到 `dist/workshop/<mod>/`（已 gitignore），给 Mod Uploader 选用。工坊预览图（<1MB）和页面介绍（BBCode）放在 `workshop/<mod>/`，不进上传文件夹。
 - `docs/modding-guide.md`：文明六 mod 机制新手教程（数据库、修改器、Lua 两个环境、联机同步、modinfo、ArtDef、调试），不进游戏。
 - `Zhanguo_V3/`、`Communist_PeoplesWar/`：联机附带的独立 mod，从用户 `Mods\` 目录原样复制而来，和本模式无代码依赖。`Communist_PeoplesWar` 的开发源在 `E:\GitHub-Repos\leader1`，更新后要重新复制过来。`Han_LiuBei/`（汉帝国 · 刘备）直接在本仓库开发，设计和验证方式见其 `README.md`。联机时所有玩家的 mod 文件必须完全一致，否则会不同步。
 
