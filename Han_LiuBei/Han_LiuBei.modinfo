@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Mod id="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" version="24">
+<Mod id="b1193fbb-618e-44dd-b4e0-e9d59f7ab34b" version="25">
   <Properties>
-    <Name>汉帝国 — 刘备：桃园结义 [v0.24]</Name>
-    <Description>Gathering Storm. Han Empire led by Liu Bei: Restore the Han, Roads of Shu and Military Farms; the Five Tiger Generals join for free at tech milestones and grow stronger every era; +150% Loyalty pressure and rebel cities join directly.</Description>
+    <Name>汉帝国 — 刘备：桃园结义 [v0.25]</Name>
+    <Description>Gathering Storm. Han Empire led by Liu Bei: Restore the Han, Roads of Shu and Military Farms; the Five Tiger Generals join for free at tech milestones and grow stronger every era and merge into the Five Tigers United once they all have their ultimate; +150% Loyalty pressure and rebel cities join directly.</Description>
     <Authors>Hhhajimi</Authors>
     <CompatibleVersions>2.0</CompatibleVersions>
     <AffectsSavedGames>1</AffectsSavedGames>

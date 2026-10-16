@@ -121,6 +121,31 @@ for k in range(1, 101):
 t('LOC_ABILITY_HAN_GUAN_YU_KILLS_NAME', '过五关斩六将', 'Five Passes, Six Generals')
 t('LOC_ABILITY_HAN_GUAN_YU_KILLS_DESCRIPTION', '每击杀一个敌方单位，永久+1战斗力。', 'Permanently +1 Combat Strength for each enemy unit killed.')
 t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION', '本回合已冲锋，进攻时战斗力提高。', 'Charging this turn: stronger when attacking.')
+WUHU_ABILITY_ZH = ('五虎合一：无视区域控制，攻击后仍可移动，+7 [ICON_Movement] 移动力、+1视野（长驱直入），隐身，只有相邻的单位能看到（汉水空营），攻击所有城墙都造成全额伤害，可跳跃越过山脉，跳跃距离为移动力的4倍，登船时也能作战，远程攻击城市和区域无惩罚，对空+100。[NEWLINE]'
+  '青龙偃月（关羽）：进攻后，若敌方单位剩余生命值不高于35，直接将其斩杀。每杀死一个敌方单位或攻下一座城市，18格内与你交战的城市忠诚度-40。[NEWLINE]'
+  '过五关斩六将（关羽）：继承关羽的击杀数，每击杀一个敌方单位永久+1 [ICON_Strength] 战斗力。[NEWLINE]'
+  '横扫千军 · 百步穿杨（张飞、黄忠）：每次进攻（近战或远程），目标周围一格内交战方的单位、城市和区域都受到与目标同等的伤害。[NEWLINE]'
+  '七进七出（赵云）：每回合可攻击7次。每杀死一个敌方单位或攻下一座城市，立刻恢复全部移动力。[NEWLINE]'
+  '白马银枪（赵云）：攻击吸血，进攻时对目标造成多少伤害，自己就恢复多少生命值。[NEWLINE]'
+  '神威天将军（马超）：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力。')
+WUHU_ABILITY_EN = ('Five as One: ignores Zone of Control, can move after attacking, +7 [ICON_Movement] Movement and +1 sight (Deep Strike), stealth - only visible to adjacent units (Empty Camp at the Han River), deals full damage against all walls, can jump over Mountains with a jump range of 4 times its Movement, can fight while embarked, has no ranged penalty against cities and districts, and +100 anti-air.[NEWLINE]'
+  'Green Dragon Crescent Blade (Guan Yu): after attacking, an enemy unit left with 35 HP or less is killed outright. Each enemy unit killed or city taken costs enemy cities within 18 tiles 40 Loyalty.[NEWLINE]'
+  'Five Passes, Six Generals (Guan Yu): inherits Guan Yu\'s kills; permanently +1 [ICON_Strength] Combat Strength for each enemy unit killed.[NEWLINE]'
+  'Sweep and Rain of Arrows (Zhang Fei, Huang Zhong): every attack, melee or ranged, deals the same damage to enemy units, cities and districts next to the target.[NEWLINE]'
+  'In and Out Seven Times (Zhao Yun): 7 attacks per turn. Movement is fully restored after killing an enemy unit or taking a city.[NEWLINE]'
+  'White Horse, Silver Spear (Zhao Yun): lifesteal - heals as much HP as the damage dealt when attacking.[NEWLINE]'
+  'Divine General (Ma Chao): +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn.')
+t('LOC_UNIT_HAN_WUHU_NAME', '五虎神将', 'Five Tigers United')
+t('LOC_PROMOTION_CLASS_HAN_WUHU_NAME', '五虎神将', 'Five Tigers United')
+t('LOC_ABILITY_HAN_WUHU_DESCRIPTION', WUHU_ABILITY_ZH, WUHU_ABILITY_EN)
+t('LOC_ABILITY_HAN_WUHU_JUMP_NAME', '五虎合一：跳跃', 'Five as One: Jump')
+t('LOC_ABILITY_HAN_WUHU_JUMP_DESCRIPTION', '跳跃距离为移动力的4倍。', 'Jump range is 4 times Movement.')
+t('LOC_HAN_WUHU_ANTI_AIR_PREVIEW', '+{1_Amount} 五虎合一：对空', '+{1_Amount} Five as One: anti-air')
+t('LOC_UNIT_HAN_WUHU_DESCRIPTION',
+  '五位武将都学会终极晋升、都在关羽1格以内时，下回合开始永久合为一体（每局一次）。可远程也可近战：远古基础90 [ICON_Strength] 战斗力、85 [ICON_Ranged] 远程攻击力，射程3，8 [ICON_Movement] 移动力，随时代成长同五虎上将，带统率和虎将之勇。[NEWLINE]' + WUHU_ABILITY_ZH,
+  'When all five generals have learned their ultimate promotion and stand within 1 tile of Guan Yu, they permanently merge at the start of the next turn (once per game). Both ranged and melee: Ancient-era base 90 [ICON_Strength] Combat Strength, 85 [ICON_Ranged] Ranged Strength, Range 3, 8 [ICON_Movement] Movement; grows with each era like the Tiger Generals and has Command and Tiger\'s Courage.[NEWLINE]' + WUHU_ABILITY_EN)
+t('LOC_HAN_WUHU_MESSAGE', '五虎合一', 'The Five Tigers Unite')
+t('LOC_HAN_WUHU_SUMMARY', '关羽、张飞、赵云、马超、黄忠合为五虎神将。', 'Guan Yu, Zhang Fei, Zhao Yun, Ma Chao and Huang Zhong have merged into the Five Tigers United.')
 t('LOC_HAN_TIGER_JOINED_MESSAGE', '{1_Name}来投', '{1_Name} has joined')
 t('LOC_HAN_TIGER_JOINED_SUMMARY', '五虎上将{1_Name}已在{2_City}旁加入你的军队。', 'Tiger General {1_Name} has joined your army near {2_City}.')
 

@@ -1,7 +1,7 @@
 -- 桃园结义 · 五虎上将：建立首都时关羽、张飞加入，其余武将研究到对应科技后加入，诸葛亮在拥有 3 座城市时加入，
 -- 都出现在首都旁。每位一局只送一次（送出时记玩家属性），阵亡后不再出现。
 -- 另外负责五虎将「虎将之勇」的残血加成档位、统率光环的开关（诸葛亮「五虎齐心」后改为可叠加）、诸葛亮的经验，
--- 以及清零刘备的大将军点数、厚施恩德 10~18 格的远程忠诚度压力，关羽斩首、威震华夏、过五关斩六将，张飞丈八蛇矛，赵云白马银枪，赵云七进七出（含关羽、赵云破城），马超冲锋，黄忠万箭齐发（见文件后半）。
+-- 以及五虎将不编成军团 / 军队、清零刘备的大将军点数、厚施恩德 10~18 格的远程忠诚度压力，关羽斩首、威震华夏、过五关斩六将，张飞丈八蛇矛，赵云白马银枪，赵云七进七出（含关羽、赵云破城），马超冲锋，黄忠万箭齐发（见文件后半）。
 -- 只在 GameEvents 回调里改游戏状态，联机各端时机一致；放不下或读档后由回合开始补发。
 local LEADER = "LEADER_LIU_BEI"
 -- 顺序即同一回合内的出场顺序。Tech / Cities 都没有表示有城市就送。
@@ -80,7 +80,21 @@ local RAGE_TIERS = {
   { Below = 25, Ability = "ABILITY_HAN_TIGER_RAGE_75" },
 }
 
+-- 五虎神将（五人合体）：在关羽（斩首、震慑、过五关斩六将）、赵云（七进七出、白马银枪）、马超（冲锋）的判断里算作本人，
+-- 并视为学会了这几项对应的晋升；张飞的扇形和黄忠的万箭齐发不触发，改为自己的横扫千军（见 Sweep）。
+local FUSION = "UNIT_HAN_WUHU"
+local FUSION_PROMOTIONS = {
+  PROMOTION_HAN_GUAN_YU_6 = true, PROMOTION_HAN_GUAN_YU_7 = true,
+  PROMOTION_HAN_ZHAO_YUN_1 = true, PROMOTION_HAN_ZHAO_YUN_7 = true, PROMOTION_HAN_MA_CHAO_7 = true,
+}
+
+local function IsFusion(unit)
+  local unitRow = GameInfo.Units[FUSION]
+  return unit ~= nil and unitRow ~= nil and unit:GetType() == unitRow.Index and not unit:IsDead()
+end
+
 local function IsTiger(unit)
+  if IsFusion(unit) then return true end
   for _, tiger in ipairs(TIGERS) do
     local unitRow = GameInfo.Units[tiger.Unit]
     if unitRow ~= nil and unit:GetType() == unitRow.Index then return true end
@@ -89,8 +103,34 @@ local function IsTiger(unit)
 end
 
 local function HasPromotion(unit, promotionType)
+  if IsFusion(unit) and FUSION_PROMOTIONS[promotionType] then return true end
   local promotion = GameInfo.UnitPromotions[promotionType]
   return promotion ~= nil and unit:GetExperience():HasPromotion(promotion.Index)
+end
+
+local function IsUnitType(unit, unitType)
+  local unitRow = GameInfo.Units[unitType]
+  return unit ~= nil and unitRow ~= nil and unit:GetType() == unitRow.Index and not unit:IsDead()
+end
+
+-- 关羽、赵云、马超各自的脚本效果，五虎神将也算。
+local function IsGuanYu(unit) return IsUnitType(unit, "UNIT_HAN_GUAN_YU") or IsFusion(unit) end
+local function IsZhaoYunLike(unit) return IsUnitType(unit, "UNIT_HAN_ZHAO_YUN") or IsFusion(unit) end
+local function IsMaChaoLike(unit) return IsUnitType(unit, "UNIT_HAN_MA_CHAO") or IsFusion(unit) end
+
+-- 五虎神将的跳跃距离 = 当前最大移动力 × 4：按 GetMaxMoves() 开 ABILITY_HAN_WUHU_JUMP_<k>（跳 4k 格）中的一档。
+-- 移动力随统率、诸葛亮等变化，所以在回合开始、回合开始结算完和它移动后刷新。
+local JUMP_TIERS = 40
+
+local function UpdateJump(unit)
+  if not IsFusion(unit) then return end
+  local tier = math.max(1, math.min(unit:GetMaxMoves(), JUMP_TIERS))
+  local ability = unit:GetAbility()
+  for k = 1, JUMP_TIERS do
+    local want = (k == tier) and 1 or 0
+    local have = ability:GetAbilityCount("ABILITY_HAN_WUHU_JUMP_" .. k)
+    if have ~= want then ability:ChangeAbilityCount("ABILITY_HAN_WUHU_JUMP_" .. k, want - have) end
+  end
 end
 
 local function UpdateRage(unit)
@@ -123,16 +163,13 @@ end
 
 -- 关羽 · 斩首：关羽进攻后，被攻击的敌方作战单位若还活着且剩余生命值不高于斩首线，直接斩杀。
 -- 斩首线 20，晋升「威震华夏」后 35。只对单位生效，不对城市 / 区域。
-local GUAN_YU = "UNIT_HAN_GUAN_YU"
 local EXECUTE_HP = 20
 local EXECUTE_HP_PROMOTED = 35
 local EXECUTE_PROMOTION = "PROMOTION_HAN_GUAN_YU_7"
 
 -- 返回 true 表示防守方已被斩杀（之后不能再使用它）。
 local function TryExecute(attacker, defender)
-  local unitRow = GameInfo.Units[GUAN_YU]
-  if attacker == nil or defender == nil or unitRow == nil then return false end
-  if attacker:GetType() ~= unitRow.Index or attacker:IsDead() then return false end
+  if attacker == nil or defender == nil or not IsGuanYu(attacker) then return false end
   if defender:IsDead() or defender:IsDelayedDeath() or defender:GetOwner() == attacker:GetOwner() then return false end
   if defender:GetCombat() <= 0 then return false end
   local threshold = HasPromotion(attacker, EXECUTE_PROMOTION) and EXECUTE_HP_PROMOTED or EXECUTE_HP
@@ -148,12 +185,10 @@ end
 -- 以关羽所在格为中心 9 格内、与关羽所属玩家交战的城市各 -20 忠诚度。
 local AWE_RANGE = 9
 local AWE_LOYALTY = -20
+-- 五虎神将 · 青龙偃月：18 格内 -40。
+local FUSION_AWE_RANGE = 18
+local FUSION_AWE_LOYALTY = -40
 local MAX_PLAYERS = 64
-
-local function IsGuanYu(unit)
-  local unitRow = GameInfo.Units[GUAN_YU]
-  return unit ~= nil and unitRow ~= nil and unit:GetType() == unitRow.Index and not unit:IsDead()
-end
 
 local function IsGone(unit)
   return unit == nil or unit:IsDead() or unit:IsDelayedDeath()
@@ -187,28 +222,25 @@ local function AweOverChina(guanYu)
   local ownerID = guanYu:GetOwner()
   local diplomacy = Players[ownerID]:GetDiplomacy()
   local x, y = guanYu:GetX(), guanYu:GetY()
+  local range, loyalty = AWE_RANGE, AWE_LOYALTY
+  if IsFusion(guanYu) then range, loyalty = FUSION_AWE_RANGE, FUSION_AWE_LOYALTY end
   -- 按玩家编号顺序遍历，各端结果一致。
   for playerID = 0, MAX_PLAYERS - 1 do
     local player = Players[playerID]
     if player ~= nil and playerID ~= ownerID and player:IsAlive() and diplomacy:IsAtWarWith(playerID) then
       for _, city in player:GetCities():Members() do
-        if Map.GetPlotDistance(x, y, city:GetX(), city:GetY()) <= AWE_RANGE then
-          city:ChangeLoyalty(AWE_LOYALTY)
+        if Map.GetPlotDistance(x, y, city:GetX(), city:GetY()) <= range then
+          city:ChangeLoyalty(loyalty)
           print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Awe Over China: city " .. city:GetID()
-            .. " of player " .. playerID .. " loyalty " .. AWE_LOYALTY)
+            .. " of player " .. playerID .. " loyalty " .. loyalty)
           -- 飘字只是提示，失败不影响效果。
           pcall(function()
-            Game.AddWorldViewText(0, Locale.Lookup("LOC_HAN_AWE_OVER_CHINA_FLYOVER", AWE_LOYALTY), city:GetX(), city:GetY())
+            Game.AddWorldViewText(0, Locale.Lookup("LOC_HAN_AWE_OVER_CHINA_FLYOVER", loyalty), city:GetX(), city:GetY())
           end)
         end
       end
     end
   end
-end
-
-local function IsUnitType(unit, unitType)
-  local unitRow = GameInfo.Units[unitType]
-  return unit ~= nil and unitRow ~= nil and unit:GetType() == unitRow.Index and not unit:IsDead()
 end
 
 local function IsAtWar(playerID, otherID)
@@ -301,6 +333,7 @@ end
 local function IsStriker(unit)
   return (IsUnitType(unit, ZHANG_FEI) and HasPromotion(unit, PIERCE_PROMOTION))
     or (IsUnitType(unit, LIFESTEAL_UNIT) and HasPromotion(unit, LIFESTEAL_PROMOTION))
+    or IsFusion(unit)
 end
 
 -- 刷新记录。clear 时先清空；否则只覆盖还在的，已经阵亡的目标保留旧记录。
@@ -441,6 +474,28 @@ local function Lifesteal(zhaoYun, amount)
   end
 end
 
+-- plots 里交战方的作战单位和城市 / 区域各受 amount 点伤害：单位致死则阵亡，城市 / 区域先扣城墙。
+local function DamagePlots(ownerID, plots, amount, turn)
+  if amount <= 0 then return end
+  for _, plot in ipairs(plots) do
+    for _, unit in ipairs(EnemyCombatUnitsAt(plot, ownerID)) do
+      if unit:GetDamage() + amount >= unit:GetMaxDamage() then
+        print(turn .. "killed unit " .. unit:GetID() .. " of player " .. unit:GetOwner())
+        UnitManager.Kill(unit)
+      else
+        print(turn .. "hit unit " .. unit:GetID() .. " of player " .. unit:GetOwner() .. " for " .. amount)
+        unit:ChangeDamage(amount)
+        UpdateRage(unit)
+      end
+    end
+    local district = EnemyDistrictAt(plot, ownerID)
+    if district ~= nil then
+      DamageDistrict(district, amount)
+      print(turn .. "struck the defenses at " .. plot:GetX() .. "," .. plot:GetY() .. " for " .. amount)
+    end
+  end
+end
+
 local function Pierce(zhangFei, targetIndex, amount)
   if not HasPromotion(zhangFei, PIERCE_PROMOTION) then return end
   local turn = "[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Zhang Fei "
@@ -462,25 +517,29 @@ local function Pierce(zhangFei, targetIndex, amount)
   local plots = SectorPlots(fromPlot, targetPlot)
   print(turn .. "spear: from " .. fromPlot:GetX() .. "," .. fromPlot:GetY() .. " at " .. targetPlot:GetX() .. ","
     .. targetPlot:GetY() .. ", damage " .. amount .. ", " .. #plots .. " tiles")
-  if amount <= 0 then return end
-  local ownerID = zhangFei:GetOwner()
-  for _, plot in ipairs(plots) do
-    for _, unit in ipairs(EnemyCombatUnitsAt(plot, ownerID)) do
-      if unit:GetDamage() + amount >= unit:GetMaxDamage() then
-        print(turn .. "pierced unit " .. unit:GetID() .. " of player " .. unit:GetOwner())
-        UnitManager.Kill(unit)
-      else
-        print(turn .. "hit unit " .. unit:GetID() .. " of player " .. unit:GetOwner() .. " for " .. amount)
-        unit:ChangeDamage(amount)
-        UpdateRage(unit)
-      end
-    end
-    local district = EnemyDistrictAt(plot, ownerID)
-    if district ~= nil then
-      DamageDistrict(district, amount)
-      print(turn .. "struck the defenses at " .. plot:GetX() .. "," .. plot:GetY() .. " for " .. amount)
-    end
+  DamagePlots(zhangFei:GetOwner(), plots, amount, turn)
+end
+
+-- 五虎神将 · 横扫千军 / 百步穿杨：每次进攻（近战或远程，打单位或城市都算），目标相邻 6 格里交战方的作战单位和
+-- 城市 / 区域各受与目标同等的伤害（算法同丈八蛇矛，只是范围换成目标周围一圈）。
+local function Sweep(fusion, targetIndex, amount)
+  local turn = "[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Five Tigers "
+  if targetIndex == nil then
+    print(turn .. "sweep: target not found")
+    return
   end
+  if amount == nil then
+    print(turn .. "sweep: no record before the strike, using " .. STRIKE_FALLBACK_DAMAGE)
+    amount = STRIKE_FALLBACK_DAMAGE
+  end
+  local target = Map.GetPlotByIndex(targetIndex)
+  local plots = {}
+  for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1 do
+    local adjacent = Map.GetAdjacentPlot(target:GetX(), target:GetY(), direction)
+    if adjacent ~= nil then table.insert(plots, adjacent) end
+  end
+  print(turn .. "sweep: at " .. target:GetX() .. "," .. target:GetY() .. ", damage " .. amount)
+  DamagePlots(fusion:GetOwner(), plots, amount, turn)
 end
 
 -- 黄忠 · 万箭齐发（终极晋升）：黄忠远程攻击后，目标（单位、城市或区域）周围一格内与黄忠交战的
@@ -527,9 +586,10 @@ local function UpdateCommand(playerID)
   end
   for _, unit in player:GetUnits():Members() do
     if not IsGone(unit) and IsTiger(unit) then
+      -- 五虎神将算作五位武将，五虎齐心时开全部五个光环。
       for _, tiger in ipairs(TIGERS) do
         local unitRow = GameInfo.Units[tiger.Unit]
-        if unitRow ~= nil and unit:GetType() == unitRow.Index then
+        if unitRow ~= nil and (unit:GetType() == unitRow.Index or IsFusion(unit)) then
           SetAbility(unit, SHARED_COMMAND, not stacking)
           SetAbility(unit, "ABILITY_HAN_TIGER_COMMAND_" .. string.sub(tiger.Unit, 10), stacking)
         end
@@ -558,7 +618,6 @@ end
 -- 按格数开 ABILITY_HAN_MA_CHAO_CHARGE_<1~30> 中的一档（各档是累计值，进攻 +4 × 格数）。
 -- 不设上限：数据库预生成 30 档，一回合实际走不到 30 格。
 -- 按走过的格数而不是消耗的移动力算：进入区域控制会清空移动力，不能因此吃满加成。
-local MA_CHAO = "UNIT_HAN_MA_CHAO"
 local CHARGE_PROMOTION = "PROMOTION_HAN_MA_CHAO_7"
 local CHARGE_MAX_TILES = 30
 local PROP_CHARGE_POS = "HAN_CHARGE_POS"
@@ -599,12 +658,80 @@ local function SevenInSevenOut(zhaoYun)
   if missing > 0 then zhaoYun:ChangeMovesRemaining(missing) end
 end
 
+-- 五虎将不编成军团 / 军队：祖鲁 Isibongo（文明征服模式可激活）等效果会在攻下城市时把攻城单位升为军团 / 军队，
+-- 这是玩家级效果，数据里排除不了某个单位，所以在破城后和回合开始把五虎将改回单兵。
+local function KeepTigersStandard(playerID)
+  local player = Players[playerID]
+  if player == nil then return end
+  for _, unit in player:GetUnits():Members() do
+    if not IsGone(unit) and IsTiger(unit) and unit:GetMilitaryFormation() ~= MilitaryFormationTypes.STANDARD_FORMATION then
+      unit:SetMilitaryFormation(MilitaryFormationTypes.STANDARD_FORMATION)
+      print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " reset " .. GameInfo.Units[unit:GetType()].UnitType .. " to a single unit")
+    end
+  end
+end
+
+-- 五虎合体：五位武将都还活着、都学会了终极晋升、都在关羽 1 格以内时，刘备回合开始把五人永久合为五虎神将（每局一次）。
+-- 先在关羽旁放下五虎神将（同格放不下作战单位），放成功再移除五人；放不下就等下回合。
+local PROP_FUSED = "HAN_WUHU"
+local ULTIMATE = 7
+
+local function HasUltimate(unit, tigerUnit)
+  return HasPromotion(unit, "PROMOTION_HAN_" .. string.sub(tigerUnit, 10) .. "_" .. ULTIMATE)
+end
+
+local function TryFuse(playerID)
+  local config = PlayerConfigurations[playerID]
+  local player = Players[playerID]
+  if config == nil or config:GetLeaderTypeName() ~= LEADER or player == nil then return end
+  local fusionRow = GameInfo.Units[FUSION]
+  if fusionRow == nil or player:GetProperty(PROP_FUSED) ~= nil then return end
+  -- 按 TIGERS 顺序找人，各端一致。
+  local members = {}
+  for _, tiger in ipairs(TIGERS) do
+    local unitRow = GameInfo.Units[tiger.Unit]
+    local found = nil
+    for _, unit in player:GetUnits():Members() do
+      if unitRow ~= nil and not IsGone(unit) and unit:GetType() == unitRow.Index then found = unit end
+    end
+    if found == nil or not HasUltimate(found, tiger.Unit) then return end
+    table.insert(members, found)
+  end
+  local x, y = members[1]:GetX(), members[1]:GetY()
+  for _, unit in ipairs(members) do
+    if Map.GetPlotDistance(x, y, unit:GetX(), unit:GetY()) > 1 then return end
+  end
+  local before = CountUnits(player, fusionRow.Index)
+  UnitManager.InitUnitValidAdjacentHex(playerID, FUSION, x, y, 1)
+  if CountUnits(player, fusionRow.Index) <= before then
+    print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " player " .. playerID .. " could not place " .. FUSION .. ", retrying next turn")
+    return
+  end
+  -- 过五关斩六将：继承关羽一生的击杀数，之后继续累计。
+  local kills = members[1]:GetProperty(PROP_KILLS) or 0
+  for _, unit in player:GetUnits():Members() do
+    if IsFusion(unit) then
+      unit:SetProperty(PROP_KILLS, kills)
+      UpdateKillStrength(unit)
+      UpdateJump(unit)
+    end
+  end
+  for _, unit in ipairs(members) do UnitManager.Kill(unit) end
+  player:SetProperty(PROP_FUSED, Game.GetCurrentGameTurn())
+  print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " player " .. playerID .. " merged the Five Tigers into " .. FUSION)
+  -- 通知只是提示，失败不影响合体。
+  pcall(function()
+    NotificationManager.SendNotification(playerID, NotificationTypes.USER_DEFINED_1,
+      Locale.Lookup("LOC_HAN_WUHU_MESSAGE"), Locale.Lookup("LOC_HAN_WUHU_SUMMARY"), x, y)
+  end)
+end
+
 -- 破城：关羽、赵云攻下城市也算一次击杀（威震华夏 / 七进七出照常要求终极晋升）。
 -- 攻城的单位通常已站在城里；万一 CityConquered 早于前进，就看本回合打过这座城的记号。
 local PROP_SIEGE = "HAN_SIEGE"
 
 local function MarkSiege(unit, targetX, targetY)
-  if not (IsGuanYu(unit) or IsUnitType(unit, ZHAO_YUN)) then return end
+  if not (IsGuanYu(unit) or IsZhaoYunLike(unit)) then return end
   unit:SetProperty(PROP_SIEGE, Game.GetCurrentGameTurn() * 100000 + Map.GetPlot(targetX, targetY):GetIndex())
 end
 
@@ -618,13 +745,16 @@ local function OnCityConquered(capturerID, ownerID, cityID, cityX, cityY)
       if IsGuanYu(unit) then
         print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Guan Yu took city " .. cityID .. " of player " .. ownerID)
         AweOverChina(unit)
-      elseif IsUnitType(unit, ZHAO_YUN) then
+      end
+      -- 五虎神将两样都算。
+      if IsZhaoYunLike(unit) then
         print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Zhao Yun took city " .. cityID .. " of player " .. ownerID)
         SevenInSevenOut(unit)
       end
       unit:SetProperty(PROP_SIEGE, nil)
     end
   end
+  KeepTigersStandard(capturerID)
 end
 
 -- 厚施恩德的远程部分：原版忠诚度压力只到 9 格，引擎没有按玩家调范围的效果，所以由脚本补上 10~18 格。
@@ -695,12 +825,51 @@ local function ClearGeneralPoints(playerID)
   end
 end
 
+-- 调试：曼丁哥市场（文明征服模式激活）和蜀道在商业中心上是否叠加。刘备回合开始时每个商业中心打一行：
+-- 金币产出、其中的相邻加成、相邻山脉 / 丘陵数、是否相邻圣地 / 修道院、是否临河。只读取，不改游戏状态。
+local DEBUG_COMMERCIAL_HUBS = true
+
+local function LogCommercialHubs(playerID)
+  local config = PlayerConfigurations[playerID]
+  local player = Players[playerID]
+  if not DEBUG_COMMERCIAL_HUBS or config == nil or config:GetLeaderTypeName() ~= LEADER or player == nil then return end
+  local hub, gold = GameInfo.Districts["DISTRICT_COMMERCIAL_HUB"], GameInfo.Yields["YIELD_GOLD"]
+  if hub == nil or gold == nil then return end
+  local holy, lavra = GameInfo.Districts["DISTRICT_HOLY_SITE"], GameInfo.Districts["DISTRICT_LAVRA"]
+  for _, city in player:GetCities():Members() do
+    for _, district in city:GetDistricts():Members() do
+      if district:GetType() == hub.Index and district:IsComplete() then
+        local x, y = district:GetX(), district:GetY()
+        local plot = Map.GetPlot(x, y)
+        local hills, holySite = 0, false
+        for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1 do
+          local adjacent = Map.GetAdjacentPlot(x, y, direction)
+          if adjacent ~= nil then
+            if adjacent:IsHills() or adjacent:IsMountain() then hills = hills + 1 end
+            local t = adjacent:GetDistrictType()
+            if (holy ~= nil and t == holy.Index) or (lavra ~= nil and t == lavra.Index) then holySite = true end
+          end
+        end
+        local total, adjacency = "?", "?"
+        pcall(function() total = tostring(district:GetYield(gold.Index)) end)
+        pcall(function() adjacency = tostring(district:GetAdjacencyYield(gold.Index)) end)
+        print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " commercial hub " .. Locale.Lookup(city:GetName())
+          .. " at " .. x .. "," .. y .. ": gold " .. total .. " (adjacency " .. adjacency .. "), mountain/hills "
+          .. hills .. ", holy site " .. tostring(holySite) .. ", river " .. tostring(plot:IsRiver()))
+      end
+    end
+  end
+end
+
 local function OnUnitMoved(playerID, unitID)
   local unit = FindUnit(playerID, unitID)
   if IsStriker(unit) then RecordSurroundings(false) end
-  if IsUnitType(unit, MA_CHAO) then RecordCharge(unit) end
+  if IsMaChaoLike(unit) then RecordCharge(unit) end
+  UpdateJump(unit)
   if IsGuanYu(unit) then UpdateKillStrength(unit) end
   if IsUnitType(unit, ZHUGE_LIANG) then UpdateCommand(playerID) end
+  -- 破城后单位前进进城时才会被编成军团的话，也在这里改回来。
+  if unit ~= nil and IsTiger(unit) then KeepTigersStandard(playerID) end
 end
 
 local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayerID, defenderUnitID, attackerDistrictID, defenderDistrictID)
@@ -718,7 +887,7 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   end
   -- 张飞 / 赵云这一击的目标格和伤害要在其他效果（万箭齐发、斩首）改动之前算。
   local strikeIndex, strike = nil, nil
-  if IsUnitType(attacker, ZHANG_FEI) or IsUnitType(attacker, LIFESTEAL_UNIT) then
+  if IsUnitType(attacker, ZHANG_FEI) or IsUnitType(attacker, LIFESTEAL_UNIT) or IsFusion(attacker) then
     local district = defenderIsUnit and nil or FindDefendingDistrict(defenderPlayerID, defenderDistrictID)
     strikeIndex, strike = StrikeInfo(defenderPlayerID, defenderUnitID, defender, district, defenderDistrictID)
     if targetX == nil and strikeIndex ~= nil then
@@ -731,6 +900,7 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   end
   if TryExecute(attacker, defender) then defender = nil end
   if IsUnitType(attacker, ZHANG_FEI) then Pierce(attacker, strikeIndex, strike) end
+  if IsFusion(attacker) then Sweep(attacker, strikeIndex, strike) end
   if attacker ~= nil and not defenderIsUnit and targetX ~= nil then MarkSiege(attacker, targetX, targetY) end
   -- 只算单位之间的击杀（打城市 / 区域不算）。
   if IsGuanYu(attacker) and defenderIsUnit and IsGone(defender) then
@@ -740,8 +910,8 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
     CountKill(defender)
     AweOverChina(defender)
   end
-  if IsUnitType(attacker, ZHAO_YUN) then Lifesteal(attacker, strike) end
-  if IsUnitType(attacker, ZHAO_YUN) and defenderIsUnit and IsGone(defender) then
+  if IsZhaoYunLike(attacker) then Lifesteal(attacker, strike) end
+  if IsZhaoYunLike(attacker) and defenderIsUnit and IsGone(defender) then
     SevenInSevenOut(attacker)
   end
   -- 阵亡的武将也还能取到位置（同一次战斗里），照样给诸葛亮经验。
@@ -759,13 +929,19 @@ end
 local function OnPlayerTurnStarted(playerID)
   ClearGeneralPoints(playerID)
   FarPressure(playerID)
+  -- 调试日志出错不能影响后面的发放和合体。
+  local ok, err = pcall(LogCommercialHubs, playerID)
+  if not ok then print("[HanLiuBei] commercial hub log failed: " .. tostring(err)) end
+  KeepTigersStandard(playerID)
   TryGrant(playerID, nil)
+  TryFuse(playerID)
   UpdatePlayerRage(playerID)
   UpdateCommand(playerID)
   local player = Players[playerID]
   if player == nil then return end
   for _, unit in player:GetUnits():Members() do
-    if IsUnitType(unit, MA_CHAO) then ResetCharge(unit) end
+    if IsMaChaoLike(unit) then ResetCharge(unit) end
+    UpdateJump(unit)
     if IsGuanYu(unit) then UpdateKillStrength(unit) end
   end
   RecordSurroundings(true)
@@ -775,6 +951,10 @@ end
 local function OnPlayerTurnStartComplete(playerID)
   ClearGeneralPoints(playerID)
   UpdatePlayerRage(playerID)
+  local player = Players[playerID]
+  if player ~= nil then
+    for _, unit in player:GetUnits():Members() do UpdateJump(unit) end
+  end
   RecordSurroundings(false)
 end
 
