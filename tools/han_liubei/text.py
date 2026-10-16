@@ -54,8 +54,8 @@ t('LOC_HAN_SETUP_TIGERS_DESCRIPTION',
   '关羽、张飞、赵云、马超、黄忠随建都和科技免费加入，不能训练，阵亡后不再出现。各有专属晋升树和终极技能，每个时代变强，并统率身边的军队。',
   'Guan Yu, Zhang Fei, Zhao Yun, Ma Chao and Huang Zhong join for free as you found your Capital and research technologies; they cannot be trained and never return once killed. Each has a unique promotion tree and ultimate, grows stronger every era and commands nearby troops.')
 t('LOC_HAN_SETUP_ZHUGE_LIANG_DESCRIPTION',
-  '拥有3座城市时出山的支援单位。为附近的五虎将回血、加速、防空袭；终极晋升「五虎齐心」让五虎将的统率光环互相叠加。',
-  'Support unit that joins at 3 cities. Heals, speeds up and shields nearby Tiger Generals from air attacks; his ultimate makes their Command auras stack.')
+  '拥有3座城市时出山的军师，远程作战单位。借东风火攻灼烧敌军，八阵图困住附近敌军，空城计守城，七星续命起死回生；也可以和五虎一同合体。',
+  'A strategist who joins at 3 cities, fighting at range. Borrowing the East Wind sets enemies ablaze, the Eight Formations hinder nearby foes, the Empty Fort holds cities, and the Seven Stars bring him back from death; he can also join the Five Tigers\' merge.')
 t('LOC_HAN_SETUP_WUHU_DESCRIPTION',
   '五人都学会终极技能并聚到关羽身边时，永久合为一体。可远程可近战，每回合攻击7次，攻击吸血并波及目标周围，隐身，移动和跳跃极远。',
   'When all five have their ultimate and gather around Guan Yu, they merge for good. Ranged and melee, 7 attacks per turn, lifesteal and splash around every target, stealth, and huge movement and jump range.')
@@ -134,12 +134,22 @@ t('LOC_ABILITY_HAN_TIGER_RAGE_NAME', '虎将之勇', 'Tiger\'s Courage')
 t('LOC_ABILITY_HAN_TIGER_RAGE_DESCRIPTION', '残血加成生效中。', 'Low-health bonus active.')
 t('LOC_HAN_AWE_OVER_CHINA_FLYOVER', '威震华夏 {1_Amount} [ICON_PressureDown] 忠诚度', 'Awe Over China {1_Amount} [ICON_PressureDown] Loyalty')
 t('LOC_UNIT_HAN_ZHUGE_LIANG_NAME', '诸葛亮', 'Zhuge Liang')
-t('LOC_ABILITY_HAN_ZHUGE_LIANG_DESCRIPTION', '运筹帷幄：2格内（含同格）的五虎将每回合额外恢复15生命值、+1 [ICON_Movement] 移动力，对空中单位作战时+25 [ICON_Strength] 战斗力。', 'Strategist: Tiger Generals within 2 tiles (including this tile) heal an extra 15 HP per turn, receive +1 [ICON_Movement] Movement, and +25 [ICON_Strength] Combat Strength against air units.')
-t('LOC_ABILITY_HAN_ZGL_SUPPORTED_DESCRIPTION', '在诸葛亮2格范围内：+1 [ICON_Movement] 移动力，对空中单位+25 [ICON_Strength] 战斗力。', 'Within 2 tiles of Zhuge Liang: +1 [ICON_Movement] Movement and +25 [ICON_Strength] Combat Strength against air units.')
-t('LOC_HAN_ZGL_VS_AIR_PREVIEW', '+{1_Amount} 诸葛亮：防空袭', '+{1_Amount} Zhuge Liang: air defense')
+ZGL_ABILITY_ZH = ('借东风 · 火攻：远程攻击后，目标和周围一格内的敌军被点燃，接下来2回合每回合受到15伤害。[NEWLINE]'
+  '八阵图：2格内与你交战的敌方单位-5 [ICON_Strength] 战斗力。[NEWLINE]'
+  '空城计：驻守本方城市时，这座城的城墙和驻军防御每回合回满。[NEWLINE]'
+  '出师表：2格内（含同格）的五虎将每回合额外恢复15生命值、+1 [ICON_Movement] 移动力。')
+ZGL_ABILITY_EN = ('Borrowing the East Wind: after a ranged attack, enemy units on and next to the target are set ablaze and take 15 damage per turn for 2 turns.[NEWLINE]'
+  'Eight Formations: enemy units at war with you within 2 tiles receive -5 [ICON_Strength] Combat Strength.[NEWLINE]'
+  'Empty Fort: while he stands in one of your cities, its walls and garrison are fully restored every turn.[NEWLINE]'
+  'Memorial on the Expedition: Tiger Generals within 2 tiles (including this tile) heal an extra 15 HP per turn and receive +1 [ICON_Movement] Movement.')
+t('LOC_ABILITY_HAN_ZHUGE_LIANG_DESCRIPTION', ZGL_ABILITY_ZH, ZGL_ABILITY_EN)
+t('LOC_ABILITY_HAN_ZGL_SUPPORTED_DESCRIPTION', '出师表：在诸葛亮2格范围内，+1 [ICON_Movement] 移动力。', 'Memorial on the Expedition: within 2 tiles of Zhuge Liang, +1 [ICON_Movement] Movement.')
+t('LOC_HAN_ZGL_BAGUA_PREVIEW', '{1_Amount} 诸葛亮：八阵图', '{1_Amount} Zhuge Liang: Eight Formations')
 t('LOC_UNIT_HAN_ZHUGE_LIANG_DESCRIPTION',
-  '支援单位，可以和五虎将待在同一格。拥有3座城市时（三顾茅庐）在首都旁加入，不能训练或购买，阵亡后不再出现，没有维护费。运筹帷幄：2格内（含同格）的五虎将每回合额外恢复15生命值、+1 [ICON_Movement] 移动力，对空中单位作战时+25 [ICON_Strength] 战斗力。2格内的五虎将每打一仗，诸葛亮获得8点经验。',
-  'Support unit that can share a tile with a Tiger General. Joins next to the [ICON_Capital] Capital once you have 3 cities (Three Visits to the Cottage); cannot be trained or purchased, never returns once killed, and has no maintenance. Strategist: Tiger Generals within 2 tiles (including this tile) heal an extra 15 HP per turn, receive +1 [ICON_Movement] Movement, and +25 [ICON_Strength] Combat Strength against air units. Gains 8 experience whenever a Tiger General within 2 tiles fights.')
+  '军师，远程作战单位。拥有3座城市时（三顾茅庐）在首都旁加入，不能训练或购买，阵亡后不再出现，没有维护费。远古基础20 [ICON_Strength] 战斗力、30 [ICON_Ranged] 远程攻击力，射程2，3 [ICON_Movement] 移动力，随时代成长同五虎上将。[NEWLINE]' + ZGL_ABILITY_ZH
+  + '[NEWLINE]五虎合体时若诸葛亮也在关羽1格以内，会一同合入：五虎神将的统率光环变为5倍，并获得七星续命。',
+  'Strategist who fights at range. Joins next to the [ICON_Capital] Capital once you have 3 cities (Three Visits to the Cottage); cannot be trained or purchased, never returns once killed, and has no maintenance. Ancient-era base 20 [ICON_Strength] Combat Strength, 30 [ICON_Ranged] Ranged Strength, Range 2, 3 [ICON_Movement] Movement; grows with each era like the Tiger Generals.[NEWLINE]' + ZGL_ABILITY_EN
+  + '[NEWLINE]If he stands within 1 tile of Guan Yu when the Five Tigers merge, he joins them: the Five Tigers United gain a five-fold Command aura and Prolonging Life by the Seven Stars.')
 for key, zh, en in [('GUAN_YU', '关羽', 'Guan Yu'), ('ZHANG_FEI', '张飞', 'Zhang Fei'), ('ZHAO_YUN', '赵云', 'Zhao Yun'), ('MA_CHAO', '马超', 'Ma Chao'), ('HUANG_ZHONG', '黄忠', 'Huang Zhong')]:
   t('LOC_HAN_TIGER_COMMANDED_PREVIEW_' + key, '+{1_Amount} 五虎齐心：' + zh + '统率', '+{1_Amount} Five Tigers as One: ' + en)
 for k in range(1, 31):
@@ -150,20 +160,22 @@ for k in range(1, 101):
 t('LOC_ABILITY_HAN_GUAN_YU_KILLS_NAME', '过五关斩六将', 'Five Passes, Six Generals')
 t('LOC_ABILITY_HAN_GUAN_YU_KILLS_DESCRIPTION', '每击杀一个敌方单位，永久+1战斗力。', 'Permanently +1 Combat Strength for each enemy unit killed.')
 t('LOC_ABILITY_HAN_MA_CHAO_CHARGE_DESCRIPTION', '本回合已冲锋，进攻时战斗力提高。', 'Charging this turn: stronger when attacking.')
-WUHU_ABILITY_ZH = ('五虎合一：无视区域控制，攻击后仍可移动，+7 [ICON_Movement] 移动力、+1视野（长驱直入），隐身，只有相邻的单位能看到（汉水空营），攻击所有城墙都造成全额伤害，可跳跃越过山脉，跳跃距离为移动力的4倍，登船时也能作战，远程攻击城市和区域无惩罚，对空+100。[NEWLINE]'
+WUHU_ABILITY_ZH = ('五虎合一：无视区域控制，攻击后仍可移动，+1视野（长驱直入），隐身，只有相邻的单位能看到（汉水空营），攻击所有城墙都造成全额伤害，可跳跃越过山脉，跳跃距离为移动力的4倍，登船时也能作战，远程攻击城市和区域无惩罚，对空+100。[NEWLINE]'
   '青龙偃月（关羽）：进攻后，若敌方单位剩余生命值不高于35，直接将其斩杀。每杀死一个敌方单位或攻下一座城市，18格内与你交战的城市忠诚度-40。[NEWLINE]'
   '过五关斩六将（关羽）：继承关羽的击杀数，每击杀一个敌方单位永久+1 [ICON_Strength] 战斗力。[NEWLINE]'
   '横扫千军 · 百步穿杨（张飞、黄忠）：每次进攻（近战或远程），目标周围一格内交战方的单位、城市和区域都受到与目标同等的伤害。[NEWLINE]'
   '七进七出（赵云）：每回合可攻击7次。每杀死一个敌方单位或攻下一座城市，立刻恢复全部移动力。[NEWLINE]'
   '白马银枪（赵云）：攻击吸血，进攻时对目标造成多少伤害，自己就恢复多少生命值。[NEWLINE]'
   '神威天将军（马超）：本回合每移动1格，进攻时+4 [ICON_Strength] 战斗力。')
-WUHU_ABILITY_EN = ('Five as One: ignores Zone of Control, can move after attacking, +7 [ICON_Movement] Movement and +1 sight (Deep Strike), stealth - only visible to adjacent units (Empty Camp at the Han River), deals full damage against all walls, can jump over Mountains with a jump range of 4 times its Movement, can fight while embarked, has no ranged penalty against cities and districts, and +100 anti-air.[NEWLINE]'
+WUHU_ABILITY_EN = ('Five as One: ignores Zone of Control, can move after attacking, +1 sight (Deep Strike), stealth - only visible to adjacent units (Empty Camp at the Han River), deals full damage against all walls, can jump over Mountains with a jump range of 4 times its Movement, can fight while embarked, has no ranged penalty against cities and districts, and +100 anti-air.[NEWLINE]'
   'Green Dragon Crescent Blade (Guan Yu): after attacking, an enemy unit left with 35 HP or less is killed outright. Each enemy unit killed or city taken costs enemy cities within 18 tiles 40 Loyalty.[NEWLINE]'
   'Five Passes, Six Generals (Guan Yu): inherits Guan Yu\'s kills; permanently +1 [ICON_Strength] Combat Strength for each enemy unit killed.[NEWLINE]'
   'Sweep and Rain of Arrows (Zhang Fei, Huang Zhong): every attack, melee or ranged, deals the same damage to enemy units, cities and districts next to the target.[NEWLINE]'
   'In and Out Seven Times (Zhao Yun): 7 attacks per turn. Movement is fully restored after killing an enemy unit or taking a city.[NEWLINE]'
   'White Horse, Silver Spear (Zhao Yun): lifesteal - heals as much HP as the damage dealt when attacking.[NEWLINE]'
   'Divine General (Ma Chao): +4 [ICON_Strength] Combat Strength when attacking for each tile moved this turn.')
+WUHU_ZGL_ZH = '军师合体（合体时诸葛亮在关羽1格以内才有）：统率光环变为5倍，2格内友军+25 [ICON_Strength] 战斗力、+5 [ICON_Movement] 移动力；七星续命：每局一次，阵亡时在首都重新出现，生命值全满。'
+WUHU_ZGL_EN = 'With the Strategist (only if Zhuge Liang stood within 1 tile of Guan Yu at the merge): five-fold Command aura, +25 [ICON_Strength] Combat Strength and +5 [ICON_Movement] Movement to friendly units within 2 tiles; Prolonging Life by the Seven Stars: once per game, when killed, reappears in the [ICON_Capital] Capital at full health.'
 t('LOC_UNIT_HAN_WUHU_NAME', '五虎神将', 'Five Tigers United')
 t('LOC_PROMOTION_CLASS_HAN_WUHU_NAME', '五虎神将', 'Five Tigers United')
 t('LOC_ABILITY_HAN_WUHU_DESCRIPTION', WUHU_ABILITY_ZH, WUHU_ABILITY_EN)
@@ -171,9 +183,15 @@ t('LOC_ABILITY_HAN_WUHU_JUMP_NAME', '五虎合一：跳跃', 'Five as One: Jump'
 t('LOC_ABILITY_HAN_WUHU_JUMP_DESCRIPTION', '跳跃距离为移动力的4倍。', 'Jump range is 4 times Movement.')
 t('LOC_HAN_WUHU_ANTI_AIR_PREVIEW', '+{1_Amount} 五虎合一：对空', '+{1_Amount} Five as One: anti-air')
 t('LOC_UNIT_HAN_WUHU_DESCRIPTION',
-  '五位武将都学会终极晋升、都在关羽1格以内时，下回合开始永久合为一体（每局一次）。可远程也可近战：远古基础90 [ICON_Strength] 战斗力、85 [ICON_Ranged] 远程攻击力，射程3，8 [ICON_Movement] 移动力，随时代成长同五虎上将，带统率和虎将之勇。[NEWLINE]' + WUHU_ABILITY_ZH,
-  'When all five generals have learned their ultimate promotion and stand within 1 tile of Guan Yu, they permanently merge at the start of the next turn (once per game). Both ranged and melee: Ancient-era base 90 [ICON_Strength] Combat Strength, 85 [ICON_Ranged] Ranged Strength, Range 3, 8 [ICON_Movement] Movement; grows with each era like the Tiger Generals and has Command and Tiger\'s Courage.[NEWLINE]' + WUHU_ABILITY_EN)
+  '五位武将都学会终极晋升、都在关羽1格以内时，下回合开始永久合为一体（每局一次）。可远程也可近战：远古基础90 [ICON_Strength] 战斗力、85 [ICON_Ranged] 远程攻击力，射程3，15 [ICON_Movement] 移动力，随时代成长同五虎上将，带统率和虎将之勇。[NEWLINE]' + WUHU_ABILITY_ZH + '[NEWLINE]' + WUHU_ZGL_ZH,
+  'When all five generals have learned their ultimate promotion and stand within 1 tile of Guan Yu, they permanently merge at the start of the next turn (once per game). Both ranged and melee: Ancient-era base 90 [ICON_Strength] Combat Strength, 85 [ICON_Ranged] Ranged Strength, Range 3, 15 [ICON_Movement] Movement; grows with each era like the Tiger Generals and has Command and Tiger\'s Courage.[NEWLINE]' + WUHU_ABILITY_EN + '[NEWLINE]' + WUHU_ZGL_EN)
 t('LOC_HAN_WUHU_MESSAGE', '五虎合一', 'The Five Tigers Unite')
+t('LOC_ABILITY_HAN_WUHU_COMMAND_NAME', '五虎统率（军师合体）', 'Five Tigers Command (with the Strategist)')
+t('LOC_ABILITY_HAN_WUHU_COMMAND_DESCRIPTION', '2格内（含自身）的己方陆地作战单位+25 [ICON_Strength] 战斗力、+5 [ICON_Movement] 移动力。', 'Friendly land combat units within 2 tiles (including this tile) receive +25 [ICON_Strength] Combat Strength and +5 [ICON_Movement] Movement.')
+t('LOC_ABILITY_HAN_WUHU_COMMANDED_DESCRIPTION', '在五虎神将2格范围内：+25 [ICON_Strength] 战斗力、+5 [ICON_Movement] 移动力。', 'Within 2 tiles of the Five Tigers United: +25 [ICON_Strength] Combat Strength and +5 [ICON_Movement] Movement.')
+t('LOC_HAN_WUHU_COMMANDED_PREVIEW', '+{1_Amount} 五虎神将统率', '+{1_Amount} Commanded by the Five Tigers United')
+t('LOC_HAN_QIXING_MESSAGE', '{1_Name}七星续命', '{1_Name}: the Seven Stars')
+t('LOC_HAN_QIXING_SUMMARY', '{1_Name}阵亡后借七星续命，在{2_City}重新出现。', '{1_Name} fell but returned through the Seven Stars, reappearing in {2_City}.')
 t('LOC_HAN_WUHU_SUMMARY', '关羽、张飞、赵云、马超、黄忠合为五虎神将。', 'Guan Yu, Zhang Fei, Zhao Yun, Ma Chao and Huang Zhong have merged into the Five Tigers United.')
 t('LOC_HAN_TIGER_JOINED_MESSAGE', '{1_Name}来投', '{1_Name} has joined')
 t('LOC_HAN_TIGER_JOINED_SUMMARY', '五虎上将{1_Name}已在{2_City}旁加入你的军队。', 'Tiger General {1_Name} has joined your army near {2_City}.')
@@ -189,16 +207,14 @@ for k, zh, en in cities:
   t('LOC_CITY_NAME_HAN_' + k, zh, en)
 
 from promos import TREES
-STRENGTH_KINDS = {'atk', 'def', 'district', 'cav', 'wounded', 'vsanticav'}
+STRENGTH_KINDS = {'atk', 'def', 'district', 'cav', 'wounded', 'vsanticav', 'defranged'}
 for key, (zh, en, promos) in TREES.items():
   t('LOC_PROMOTION_CLASS_HAN_%s_NAME' % key, zh, en)
   for n, (pzh, pen, effects, dzh, den) in enumerate(promos, 1):
     pid = 'PROMOTION_HAN_%s_%d' % (key, n)
     t('LOC_%s_NAME' % pid, pzh, pen)
     t('LOC_%s_DESCRIPTION' % pid, dzh, den)
-    if any(k in ('bagua', 'arrows') for k, _ in effects):
-      t('LOC_%s_PREVIEW' % pid, '+{1_Amount} ' + zh + '·' + pzh, '+{1_Amount} ' + en + ': ' + pen)
-    elif any(k == 'debuff' for k, _ in effects):
+    if any(k == 'debuff' for k, _ in effects):
       t('LOC_%s_PREVIEW' % pid, '{1_Amount} ' + zh + '·' + pzh, '{1_Amount} ' + en + ': ' + pen)
     elif any(k in STRENGTH_KINDS for k, _ in effects):
       t('LOC_%s_PREVIEW' % pid, '+{1_Amount} ' + pzh, '+{1_Amount} ' + pen)

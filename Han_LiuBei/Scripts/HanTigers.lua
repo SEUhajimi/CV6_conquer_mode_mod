@@ -1,6 +1,6 @@
 -- 桃园结义 · 五虎上将：建立首都时关羽、张飞加入，其余武将研究到对应科技后加入，诸葛亮在拥有 3 座城市时加入，
 -- 都出现在首都旁。每位一局只送一次（送出时记玩家属性），阵亡后不再出现。
--- 另外负责五虎将「虎将之勇」的残血加成档位、统率光环的开关（诸葛亮「五虎齐心」后改为可叠加）、诸葛亮的经验，
+-- 另外负责五虎将「虎将之勇」的残血加成档位、统率光环的开关（诸葛亮「五虎齐心」后改为可叠加）、诸葛亮的借东风 / 空城计 / 草船借箭 / 舌战群儒 / 七星续命、五虎合体，
 -- 以及五虎将不编成军团 / 军队、清零刘备的大将军点数、厚施恩德 10~18 格的远程忠诚度压力，关羽斩首、威震华夏、过五关斩六将，张飞丈八蛇矛，赵云白马银枪，赵云七进七出（含关羽、赵云破城），马超冲锋，黄忠万箭齐发（见文件后半）。
 -- 只在 GameEvents 回调里改游戏状态，联机各端时机一致；放不下或读档后由回合开始补发。
 local LEADER = "LEADER_LIU_BEI"
@@ -569,6 +569,9 @@ end
 -- 在回合开始、送出武将、战斗（诸葛亮可能阵亡）和移动后刷新；刚选完晋升到下一次刷新之间还是旧状态。
 local SHARED_COMMAND = "ABILITY_HAN_TIGER_COMMAND"
 local STACK_PROMOTION = "PROMOTION_HAN_ZHUGE_LIANG_7"
+-- 诸葛亮一起合体的五虎神将：单位属性 HAN_WUHU_ZGL，统率 5 倍（ABILITY_HAN_WUHU_COMMAND）、七星续命。
+local PROP_WUHU_ZGL = "HAN_WUHU_ZGL"
+local FUSION_COMMAND = "ABILITY_HAN_WUHU_COMMAND"
 
 local function SetAbility(unit, abilityType, on)
   local ability = unit:GetAbility()
@@ -586,32 +589,211 @@ local function UpdateCommand(playerID)
   end
   for _, unit in player:GetUnits():Members() do
     if not IsGone(unit) and IsTiger(unit) then
-      -- 五虎神将算作五位武将，五虎齐心时开全部五个光环。
+      -- 五虎神将算作五位武将，五虎齐心时开全部五个光环；带着诸葛亮合体的改开 5 倍光环，其余都关。
+      local fiveFold = IsFusion(unit) and unit:GetProperty(PROP_WUHU_ZGL) ~= nil
+      if IsFusion(unit) then SetAbility(unit, FUSION_COMMAND, fiveFold) end
       for _, tiger in ipairs(TIGERS) do
         local unitRow = GameInfo.Units[tiger.Unit]
         if unitRow ~= nil and (unit:GetType() == unitRow.Index or IsFusion(unit)) then
-          SetAbility(unit, SHARED_COMMAND, not stacking)
-          SetAbility(unit, "ABILITY_HAN_TIGER_COMMAND_" .. string.sub(tiger.Unit, 10), stacking)
+          SetAbility(unit, SHARED_COMMAND, not stacking and not fiveFold)
+          SetAbility(unit, "ABILITY_HAN_TIGER_COMMAND_" .. string.sub(tiger.Unit, 10), stacking and not fiveFold)
         end
       end
     end
   end
 end
 
--- 诸葛亮的经验：支援单位不参与战斗，2 格内的五虎将每打一仗，诸葛亮 +8 经验。
-local ZGL_RANGE = 2
-local ZGL_XP_PER_BATTLE = 8
+-- 诸葛亮（军师，远程作战单位）。
+local ARROWS_PROMOTION = "PROMOTION_HAN_ZHUGE_LIANG_1"
+local DEBATE_PROMOTION = "PROMOTION_HAN_ZHUGE_LIANG_2"
+local FIRE_PROMOTION = "PROMOTION_HAN_ZHUGE_LIANG_6"
+local QIXING_PROMOTION = "PROMOTION_HAN_ZHUGE_LIANG_8"
 
-local function GrantZhugeLiangXP(tiger)
-  if tiger == nil or not IsTiger(tiger) then return end
-  local player = Players[tiger:GetOwner()]
-  if player == nil then return end
-  for _, unit in player:GetUnits():Members() do
-    if IsUnitType(unit, ZHUGE_LIANG)
-      and Map.GetPlotDistance(unit:GetX(), unit:GetY(), tiger:GetX(), tiger:GetY()) <= ZGL_RANGE then
-      unit:GetExperience():ChangeExperience(ZGL_XP_PER_BATTLE)
+local function IsZhugeLiang(unit) return IsUnitType(unit, ZHUGE_LIANG) end
+
+-- 借东风 · 火攻：诸葛亮远程攻击后，目标所在格和周围一格里交战方的作战单位被点燃（单位属性记剩余回合和每回合伤害），
+-- 在被点燃单位的主人回合开始时受伤，伤害致死则阵亡。15 × 2 回合，火烧博望后 25 × 3 回合；重复点燃取较大值。
+local BURN_DAMAGE, BURN_TURNS = 15, 2
+local BURN_DAMAGE_PROMOTED, BURN_TURNS_PROMOTED = 25, 3
+local PROP_BURN_TURNS = "HAN_BURN_TURNS"
+local PROP_BURN_DAMAGE = "HAN_BURN_DAMAGE"
+
+local function Ignite(zhugeLiang, targetX, targetY)
+  local fierce = HasPromotion(zhugeLiang, FIRE_PROMOTION)
+  local damage = fierce and BURN_DAMAGE_PROMOTED or BURN_DAMAGE
+  local turns = fierce and BURN_TURNS_PROMOTED or BURN_TURNS
+  local plots = { Map.GetPlot(targetX, targetY) }
+  for direction = 0, DirectionTypes.NUM_DIRECTION_TYPES - 1 do
+    table.insert(plots, Map.GetAdjacentPlot(targetX, targetY, direction))
+  end
+  for _, plot in ipairs(plots) do
+    for _, unit in ipairs(EnemyCombatUnitsAt(plot, zhugeLiang:GetOwner())) do
+      unit:SetProperty(PROP_BURN_TURNS, math.max(unit:GetProperty(PROP_BURN_TURNS) or 0, turns))
+      unit:SetProperty(PROP_BURN_DAMAGE, math.max(unit:GetProperty(PROP_BURN_DAMAGE) or 0, damage))
+      print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " East Wind: unit " .. unit:GetID() .. " of player "
+        .. unit:GetOwner() .. " burning " .. damage .. " x " .. turns)
     end
   end
+end
+
+local function TickBurns(playerID)
+  local player = Players[playerID]
+  if player == nil then return end
+  for _, unit in player:GetUnits():Members() do
+    local turns = unit:GetProperty(PROP_BURN_TURNS)
+    if turns ~= nil and turns > 0 and not IsGone(unit) then
+      local damage = unit:GetProperty(PROP_BURN_DAMAGE) or BURN_DAMAGE
+      if turns > 1 then
+        unit:SetProperty(PROP_BURN_TURNS, turns - 1)
+      else
+        unit:SetProperty(PROP_BURN_TURNS, nil)
+        unit:SetProperty(PROP_BURN_DAMAGE, nil)
+      end
+      print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " East Wind: unit " .. unit:GetID() .. " of player " .. playerID .. " burns for " .. damage)
+      if unit:GetDamage() + damage >= unit:GetMaxDamage() then
+        UnitManager.Kill(unit)
+      else
+        unit:ChangeDamage(damage)
+        UpdateRage(unit)
+      end
+    end
+  end
+end
+
+-- 空城计：刘备回合开始时，站在本方城市中心上的诸葛亮让这座城的城墙和驻军防御回满。
+local function EmptyFort(playerID)
+  local player = Players[playerID]
+  local center = GameInfo.Districts["DISTRICT_CITY_CENTER"]
+  if player == nil or center == nil then return end
+  for _, unit in player:GetUnits():Members() do
+    if IsZhugeLiang(unit) then
+      for _, district in player:GetDistricts():Members() do
+        if district:GetType() == center.Index and district:GetX() == unit:GetX() and district:GetY() == unit:GetY() then
+          for _, defense in ipairs({ DefenseTypes.DISTRICT_OUTER, DefenseTypes.DISTRICT_GARRISON }) do
+            if district:GetDamage(defense) > 0 then district:SetDamage(defense, 0) end
+          end
+        end
+      end
+    end
+  end
+end
+
+-- 舌战群儒（晋升）：刘备回合开始时，诸葛亮 6 格内城邦和自由城市（非主要文明、非蛮族）的城市各 -5 忠诚度。
+local DEBATE_RANGE = 6
+local DEBATE_LOYALTY = -5
+
+local function Debate(playerID)
+  local player = Players[playerID]
+  if player == nil then return end
+  for _, unit in player:GetUnits():Members() do
+    if IsZhugeLiang(unit) and HasPromotion(unit, DEBATE_PROMOTION) then
+      -- 按玩家编号顺序遍历，各端一致。
+      for otherID = 0, MAX_PLAYERS - 1 do
+        local other = Players[otherID]
+        if other ~= nil and otherID ~= playerID and other:IsAlive() and not other:IsMajor() and not other:IsBarbarian() then
+          for _, city in other:GetCities():Members() do
+            if Map.GetPlotDistance(unit:GetX(), unit:GetY(), city:GetX(), city:GetY()) <= DEBATE_RANGE then
+              city:ChangeLoyalty(DEBATE_LOYALTY)
+              print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Debate: city " .. city:GetID() .. " of player " .. otherID .. " loyalty " .. DEBATE_LOYALTY)
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+-- 草船借箭（晋升）：诸葛亮受到远程攻击（远程单位或城市 / 区域）后，恢复这一击造成的生命值。
+-- 战斗事件不带伤害，所以在回合开始、每次战斗后和读档时记下各诸葛亮的伤害（Lua 表，只读游戏状态）。
+local ZGL_DAMAGE = {}
+
+local function RecordZhugeLiang()
+  ZGL_DAMAGE = {}
+  for playerID = 0, MAX_PLAYERS - 1 do
+    local player = Players[playerID]
+    if player ~= nil then
+      for _, unit in player:GetUnits():Members() do
+        if IsZhugeLiang(unit) then ZGL_DAMAGE[UnitKey(playerID, unit:GetID())] = unit:GetDamage() end
+      end
+    end
+  end
+end
+
+local function BorrowArrows(zhugeLiang, attacker, attackerIsUnit)
+  if IsGone(zhugeLiang) or not HasPromotion(zhugeLiang, ARROWS_PROMOTION) then return end
+  local ranged = not attackerIsUnit
+  if attacker ~= nil then
+    local row = GameInfo.Units[attacker:GetType()]
+    ranged = row ~= nil and (row.RangedCombat > 0 or row.Bombard > 0)
+  end
+  local before = ZGL_DAMAGE[UnitKey(zhugeLiang:GetOwner(), zhugeLiang:GetID())]
+  if not ranged or before == nil then return end
+  local heal = zhugeLiang:GetDamage() - before
+  if heal > 0 then
+    zhugeLiang:ChangeDamage(-heal)
+    print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Borrowing Arrows +" .. heal)
+  end
+end
+
+-- 七星续命：诸葛亮（晋升）和带着诸葛亮合体的五虎神将，每局各一次，阵亡时在首都重新出现，生命值全满。
+-- 游戏没法阻止阵亡，所以在战斗事件里（阵亡的单位还能读到）记下经验、晋升和单位属性，在首都重建一个。
+-- 晋升用 SetPromotion 恢复；游戏没有这个接口时只恢复经验，Lua.log 会提示。
+local PROP_QIXING = "HAN_QIXING_"
+local CARRIED_PROPERTIES = { PROP_KILLS, PROP_WUHU_ZGL }
+
+local function CanProlongLife(unit)
+  if unit == nil or not IsGone(unit) then return false end
+  if IsZhugeLiang(unit) then return HasPromotion(unit, QIXING_PROMOTION) end
+  local fusionRow = GameInfo.Units[FUSION]
+  return fusionRow ~= nil and unit:GetType() == fusionRow.Index and unit:GetProperty(PROP_WUHU_ZGL) ~= nil
+end
+
+local function ProlongLife(unit)
+  if not CanProlongLife(unit) then return end
+  local playerID = unit:GetOwner()
+  local player = Players[playerID]
+  local unitRow = GameInfo.Units[unit:GetType()]
+  local key = PROP_QIXING .. unitRow.UnitType
+  if player == nil or player:GetProperty(key) ~= nil then return end
+  local capital = player:GetCities():GetCapitalCity()
+  if capital == nil then return end
+  local experience = unit:GetExperience()
+  local xp = experience:GetExperiencePoints()
+  local promotions = {}
+  for row in GameInfo.UnitPromotions() do
+    if experience:HasPromotion(row.Index) then table.insert(promotions, row.Index) end
+  end
+  local carried = {}
+  for _, name in ipairs(CARRIED_PROPERTIES) do carried[name] = unit:GetProperty(name) end
+  local existing = {}
+  for _, other in player:GetUnits():Members() do existing[other:GetID()] = true end
+  UnitManager.InitUnitValidAdjacentHex(playerID, unitRow.UnitType, capital:GetX(), capital:GetY(), 1)
+  local reborn = nil
+  for _, other in player:GetUnits():Members() do
+    if not existing[other:GetID()] and other:GetType() == unitRow.Index and not IsGone(other) then reborn = other end
+  end
+  if reborn == nil then
+    print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Seven Stars: could not place " .. unitRow.UnitType)
+    return
+  end
+  player:SetProperty(key, Game.GetCurrentGameTurn())
+  local newExperience = reborn:GetExperience()
+  local missing = xp - newExperience:GetExperiencePoints()
+  if missing > 0 then newExperience:ChangeExperience(missing) end
+  for _, index in ipairs(promotions) do
+    local ok = pcall(function() newExperience:SetPromotion(index) end)
+    if not ok then
+      print("[HanLiuBei] Seven Stars: SetPromotion is not available, promotions were not restored")
+      break
+    end
+  end
+  for name, value in pairs(carried) do reborn:SetProperty(name, value) end
+  print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Seven Stars: " .. unitRow.UnitType .. " of player " .. playerID .. " reborn in the capital")
+  pcall(function()
+    NotificationManager.SendNotification(playerID, NotificationTypes.USER_DEFINED_1,
+      Locale.Lookup("LOC_HAN_QIXING_MESSAGE", unitRow.Name), Locale.Lookup("LOC_HAN_QIXING_SUMMARY", unitRow.Name, capital:GetName()),
+      capital:GetX(), capital:GetY())
+  end)
 end
 
 -- 马超 · 神威天将军（终极晋升）：西凉铁骑冲锋。回合开始记下位置、格数清零；每次移动累加走过的距离；
@@ -649,7 +831,6 @@ local function RecordCharge(unit)
 end
 
 -- 赵云 · 七进七出（终极晋升）：每回合可攻击七次（修改器，见 Promotions.sql）；赵云进攻并击杀敌方单位后，立刻恢复全部移动力。
-local ZHAO_YUN = "UNIT_HAN_ZHAO_YUN"
 local SEVEN_PROMOTION = "PROMOTION_HAN_ZHAO_YUN_7"
 
 local function SevenInSevenOut(zhaoYun)
@@ -659,12 +840,12 @@ local function SevenInSevenOut(zhaoYun)
 end
 
 -- 五虎将不编成军团 / 军队：祖鲁 Isibongo（文明征服模式可激活）等效果会在攻下城市时把攻城单位升为军团 / 军队，
--- 这是玩家级效果，数据里排除不了某个单位，所以在破城后和回合开始把五虎将改回单兵。
+-- 这是玩家级效果，数据里排除不了某个单位，所以在破城后和回合开始把五虎将（和诸葛亮）改回单兵。
 local function KeepTigersStandard(playerID)
   local player = Players[playerID]
   if player == nil then return end
   for _, unit in player:GetUnits():Members() do
-    if not IsGone(unit) and IsTiger(unit) and unit:GetMilitaryFormation() ~= MilitaryFormationTypes.STANDARD_FORMATION then
+    if not IsGone(unit) and (IsTiger(unit) or IsUnitType(unit, ZHUGE_LIANG)) and unit:GetMilitaryFormation() ~= MilitaryFormationTypes.STANDARD_FORMATION then
       unit:SetMilitaryFormation(MilitaryFormationTypes.STANDARD_FORMATION)
       print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " reset " .. GameInfo.Units[unit:GetType()].UnitType .. " to a single unit")
     end
@@ -672,6 +853,7 @@ local function KeepTigersStandard(playerID)
 end
 
 -- 五虎合体：五位武将都还活着、都学会了终极晋升、都在关羽 1 格以内时，刘备回合开始把五人永久合为五虎神将（每局一次）。
+-- 诸葛亮也在关羽 1 格以内的话一起合入（可选）：五虎神将记 HAN_WUHU_ZGL，统率 5 倍、获得七星续命。
 -- 先在关羽旁放下五虎神将（同格放不下作战单位），放成功再移除五人；放不下就等下回合。
 local PROP_FUSED = "HAN_WUHU"
 local ULTIMATE = 7
@@ -701,6 +883,10 @@ local function TryFuse(playerID)
   for _, unit in ipairs(members) do
     if Map.GetPlotDistance(x, y, unit:GetX(), unit:GetY()) > 1 then return end
   end
+  local strategist = nil
+  for _, unit in player:GetUnits():Members() do
+    if IsZhugeLiang(unit) and not IsGone(unit) and Map.GetPlotDistance(x, y, unit:GetX(), unit:GetY()) <= 1 then strategist = unit end
+  end
   local before = CountUnits(player, fusionRow.Index)
   UnitManager.InitUnitValidAdjacentHex(playerID, FUSION, x, y, 1)
   if CountUnits(player, fusionRow.Index) <= before then
@@ -712,11 +898,17 @@ local function TryFuse(playerID)
   for _, unit in player:GetUnits():Members() do
     if IsFusion(unit) then
       unit:SetProperty(PROP_KILLS, kills)
+      if strategist ~= nil then unit:SetProperty(PROP_WUHU_ZGL, Game.GetCurrentGameTurn()) end
       UpdateKillStrength(unit)
       UpdateJump(unit)
     end
   end
   for _, unit in ipairs(members) do UnitManager.Kill(unit) end
+  if strategist ~= nil then
+    UnitManager.Kill(strategist)
+    print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " Zhuge Liang joined the merge")
+  end
+  UpdateCommand(playerID)
   player:SetProperty(PROP_FUSED, Game.GetCurrentGameTurn())
   print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " player " .. playerID .. " merged the Five Tigers into " .. FUSION)
   -- 通知只是提示，失败不影响合体。
@@ -877,6 +1069,8 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   local defender = FindUnit(defenderPlayerID, defenderUnitID)
   local defenderIsUnit = Players[defenderPlayerID] ~= nil and defenderUnitID ~= nil and defenderUnitID >= 0
   local attackerIsUnit = Players[attackerPlayerID] ~= nil and attackerUnitID ~= nil and attackerUnitID >= 0
+  -- 草船借箭要用战斗前记下的伤害，先算。
+  if IsZhugeLiang(defender) then BorrowArrows(defender, attacker, attackerIsUnit) end
   -- 目标位置：防守单位（阵亡的也还能取到）或被攻击的城市 / 区域。
   local targetX, targetY = nil, nil
   if defender ~= nil then
@@ -898,6 +1092,7 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   if IsUnitType(attacker, HUANG_ZHONG) and targetX ~= nil then
     Volley(attacker, targetX, targetY)
   end
+  if IsZhugeLiang(attacker) and targetX ~= nil then Ignite(attacker, targetX, targetY) end
   if TryExecute(attacker, defender) then defender = nil end
   if IsUnitType(attacker, ZHANG_FEI) then Pierce(attacker, strikeIndex, strike) end
   if IsFusion(attacker) then Sweep(attacker, strikeIndex, strike) end
@@ -914,21 +1109,25 @@ local function OnCombatOccurred(attackerPlayerID, attackerUnitID, defenderPlayer
   if IsZhaoYunLike(attacker) and defenderIsUnit and IsGone(defender) then
     SevenInSevenOut(attacker)
   end
-  -- 阵亡的武将也还能取到位置（同一次战斗里），照样给诸葛亮经验。
-  GrantZhugeLiangXP(attacker)
-  GrantZhugeLiangXP(defender)
+  -- 七星续命：阵亡的单位在同一次战斗事件里还能读到。
+  ProlongLife(attacker)
+  ProlongLife(defender)
   if not IsGone(attacker) then UpdateRage(attacker) end
   if not IsGone(defender) then UpdateRage(defender) end
   UpdateCommand(attackerPlayerID)
   UpdateCommand(defenderPlayerID)
   RecordSurroundings(false)
+  RecordZhugeLiang()
   ClearGeneralPoints(attackerPlayerID)
   ClearGeneralPoints(defenderPlayerID)
 end
 
 local function OnPlayerTurnStarted(playerID)
   ClearGeneralPoints(playerID)
+  TickBurns(playerID)
   FarPressure(playerID)
+  EmptyFort(playerID)
+  Debate(playerID)
   -- 调试日志出错不能影响后面的发放和合体。
   local ok, err = pcall(LogCommercialHubs, playerID)
   if not ok then print("[HanLiuBei] commercial hub log failed: " .. tostring(err)) end
@@ -956,6 +1155,7 @@ local function OnPlayerTurnStartComplete(playerID)
     for _, unit in player:GetUnits():Members() do UpdateJump(unit) end
   end
   RecordSurroundings(false)
+  RecordZhugeLiang()
 end
 
 local function OnCityBuilt(playerID, cityID, x, y)
@@ -972,4 +1172,5 @@ GameEvents.OnUnitMoved.Add(OnUnitMoved)
 GameEvents.CityConquered.Add(OnCityConquered)
 -- 读档后先记一次（只读取，不改游戏状态）。
 RecordSurroundings(true)
+RecordZhugeLiang()
 print("[HanLiuBei] HanTigers loaded")

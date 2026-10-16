@@ -1,8 +1,10 @@
 # 五虎上将专属晋升树数据，供 promos_sql.py 和 text.py 使用。改晋升后依次运行这两个脚本。
-# 每棵树 7 个晋升，位置和前置关系照原版：(层, 列)
+# 每棵树 7 个晋升（诸葛亮 8 个，见 TREE_LAYOUTS），位置和前置关系照原版：(层, 列)
 SLOTS = [(1, 1), (1, 3), (2, 1), (2, 3), (3, 1), (3, 3), (4, 2)]
 # 第 n 个晋升的前置（任意一个即可），与原版重骑兵树相同
 PREREQS = {3: [1, 4], 4: [2, 3], 5: [3], 6: [4], 7: [5, 6]}
+# 诸葛亮的树多一个终极晋升：第 4 层左右两个，都接任意一个第 3 层。
+TREE_LAYOUTS = {'ZHUGE_LIANG': (SLOTS[:6] + [(4, 1), (4, 3)], {**PREREQS, 7: [5, 6], 8: [5, 6]})}
 
 # 效果：(类型, 数值)
 #   atk 进攻 / def 防守 / district 对城市和区域 / cav 对骑兵 / wounded 对受伤单位：战斗力
@@ -15,7 +17,8 @@ PREREQS = {3: [1, 4], 4: [2, 3], 5: [3], 6: [4], 7: [5, 6]}
 #         rage25 残血加成多一档 / execute35 关羽斩首线提高 / awe 关羽杀敌扣周围城市忠诚 / pierce 张飞刺穿身后 /
 #         volley 黄忠溅射 / stack 诸葛亮五虎齐心（都由 Scripts/HanTigers.lua 判断，没有修改器）
 #   sevenin 赵云击杀回满移动 / charge 马超按本回合移动格数加进攻 / killstr 关羽按击杀数加战斗力 / lifesteal 赵云攻击吸血（由 Scripts/HanTigers.lua 判断，没有修改器）
-#   诸葛亮：zglheal 范围内五虎将回血 / zglmove 范围内五虎将移动 / bagua 2 格内全军防守 / arrows 范围内五虎将防远程 / seehidden 看见隐身
+#   诸葛亮：zglmove 范围内五虎将移动 / defranged 防守远程 / seehidden 看见隐身 /
+#         arrowsheal 受远程攻击后回血 / debate 削弱附近城邦忠诚 / fireplus 灼烧加强 / qixing 七星续命（后四个由 Scripts/HanTigers.lua 判断，没有修改器）
 #         wallattack 攻击所有时代的城墙都造成全额伤害
 TREES = {
  'GUAN_YU': ('关羽', 'Guan Yu', [
@@ -64,12 +67,13 @@ TREES = {
   ('万箭齐发', 'Ten Thousand Arrows', [('volley', 0)], '远程攻击后，目标周围一格内的交战敌方作战单位各受20点伤害（打城市和区域也算）。', 'After a ranged attack, enemy combat units within 1 tile of the target each take 20 damage (also when attacking cities and districts).'),
  ]),
  'ZHUGE_LIANG': ('诸葛亮', 'Zhuge Liang', [
-  ('隆中对', 'Longzhong Plan', [('zglheal', 10)], '范围内的五虎将每回合再恢复10生命值。', 'Tiger Generals in range heal another 10 HP per turn.'),
-  ('木牛流马', 'Wooden Oxen', [('move', 1), ('zglmove', 1)], '+1 [ICON_Movement] 移动力；范围内的五虎将再+1 [ICON_Movement] 移动力。', '+1 [ICON_Movement] Movement; Tiger Generals in range receive another +1 [ICON_Movement] Movement.'),
-  ('八阵图', 'Eight Formations', [('bagua', 7)], '2格内（含同格）的己方陆地作战单位防守时+7 [ICON_Strength] 战斗力。', 'Friendly land combat units within 2 tiles (including this tile) receive +7 [ICON_Strength] Combat Strength when defending.'),
-  ('空城计', 'Empty Fort', [('stealth', 0)], '隐身：只有相邻的单位能看到他。', 'Stealth: only visible to adjacent units.'),
-  ('草船借箭', 'Borrowing Arrows', [('arrows', 10)], '范围内的五虎将防守远程攻击时+10 [ICON_Strength] 战斗力。', 'Tiger Generals in range receive +10 [ICON_Strength] Combat Strength when defending against ranged attacks.'),
+  ('草船借箭', 'Borrowing Arrows', [('defranged', 15), ('arrowsheal', 0)], '防守远程攻击时+15 [ICON_Strength] 战斗力；受到远程攻击后，恢复这一击造成的生命值。', '+15 [ICON_Strength] Combat Strength when defending against ranged attacks; heals the damage taken from each ranged attack.'),
+  ('舌战群儒', 'Debating the Scholars', [('debate', 0)], '6格内城邦和自由城市的城市每回合-5忠诚度。', 'City-state and Free City cities within 6 tiles lose 5 Loyalty per turn.'),
+  ('木牛流马', 'Wooden Oxen', [('move', 1), ('zglmove', 1)], '+1 [ICON_Movement] 移动力；2格内的五虎将再+1 [ICON_Movement] 移动力。', '+1 [ICON_Movement] Movement; Tiger Generals within 2 tiles receive another +1 [ICON_Movement] Movement.'),
+  ('七擒孟获', 'Seven Captures of Meng Huo', [('convertbarb', 0)], '击败蛮族单位时将其收编（同秦始皇（一统天下）的机制）。', 'Converts defeated Barbarian units (like Qin Shi Huang, the Unifier).'),
   ('观星', 'Reading the Stars', [('sight', 2), ('seehidden', 0)], '+2视野，能看到隐身单位。', '+2 Sight and can see stealth units.'),
-  ('五虎齐心', 'Five Tigers as One', [('stack', 0)], '五虎将的统率光环互相叠加：每位武将的+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力分别生效。', 'The Tiger Generals\' Command auras stack: each general\'s +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement applies separately.'),
+  ('火烧博望', 'Burning Bowang', [('fireplus', 0)], '借东风的灼烧每回合伤害从15提高到25，持续3回合。', 'Borrowing the East Wind burns for 25 damage per turn instead of 15, for 3 turns.'),
+  ('五虎齐心', 'Five Tigers as One', [('stack', 0)], '五虎将的统率光环互相叠加：每位武将的+5 [ICON_Strength] 战斗力、+1 [ICON_Movement] 移动力分别生效。', "The Tiger Generals' Command auras stack: each general's +5 [ICON_Strength] Combat Strength and +1 [ICON_Movement] Movement apply separately."),
+  ('七星续命', 'Prolonging Life by the Seven Stars', [('qixing', 0)], '每局一次：阵亡时在首都重新出现，生命值全满，经验保留。', 'Once per game: when killed, reappears in the [ICON_Capital] Capital at full health, keeping his experience.'),
  ]),
 }
