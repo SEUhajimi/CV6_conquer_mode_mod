@@ -1,7 +1,7 @@
 -- 桃园结义 · 五虎上将：建立首都时关羽、张飞加入，其余武将研究到对应科技后加入，诸葛亮在拥有 3 座城市时加入，
 -- 都出现在首都旁。每位一局只送一次（送出时记玩家属性），阵亡后不再出现。
 -- 另外负责五虎将「虎将之勇」的残血加成档位、统率光环的开关（诸葛亮「五虎齐心」后改为可叠加）、诸葛亮的经验，
--- 以及清零刘备的大将军点数，关羽斩首、威震华夏、过五关斩六将，张飞丈八蛇矛，赵云白马银枪，赵云七进七出（含关羽、赵云破城），马超冲锋，黄忠万箭齐发（见文件后半）。
+-- 以及清零刘备的大将军点数、厚施恩德 10~18 格的远程忠诚度压力，关羽斩首、威震华夏、过五关斩六将，张飞丈八蛇矛，赵云白马银枪，赵云七进七出（含关羽、赵云破城），马超冲锋，黄忠万箭齐发（见文件后半）。
 -- 只在 GameEvents 回调里改游戏状态，联机各端时机一致；放不下或读档后由回合开始补发。
 local LEADER = "LEADER_LIU_BEI"
 -- 顺序即同一回合内的出场顺序。Tech / Cities 都没有表示有城市就送。
@@ -627,6 +627,44 @@ local function OnCityConquered(capturerID, ownerID, cityID, cityX, cityY)
   end
 end
 
+-- 厚施恩德的远程部分：原版忠诚度压力只到 9 格，引擎没有按玩家调范围的效果，所以由脚本补上 10~18 格。
+-- 刘备回合开始时，其他主要文明的每座城市按 10~18 格内汉城市的人口合计，每 2 人口 -1 忠诚度，每回合最多 -20（与原版每回合忠诚度变化的上限相同）。
+-- 只扣数值，不进忠诚度面板的压力明细，也不参与「压力最高时直接归降」的判断。
+local FAR_PRESSURE_MIN = 10
+local FAR_PRESSURE_MAX = 18
+local FAR_PRESSURE_POP_PER_LOYALTY = 2
+local FAR_PRESSURE_CAP = 20
+
+local function FarPressure(playerID)
+  local config = PlayerConfigurations[playerID]
+  local player = Players[playerID]
+  if config == nil or config:GetLeaderTypeName() ~= LEADER or player == nil then return end
+  local hanCities = {}
+  for _, city in player:GetCities():Members() do
+    table.insert(hanCities, { X = city:GetX(), Y = city:GetY(), Pop = city:GetPopulation() })
+  end
+  if #hanCities == 0 then return end
+  -- 按玩家编号顺序遍历，各端结果一致。
+  for otherID = 0, MAX_PLAYERS - 1 do
+    local other = Players[otherID]
+    if other ~= nil and otherID ~= playerID and other:IsAlive() and other:IsMajor() then
+      for _, city in other:GetCities():Members() do
+        local pop = 0
+        for _, han in ipairs(hanCities) do
+          local distance = Map.GetPlotDistance(han.X, han.Y, city:GetX(), city:GetY())
+          if distance >= FAR_PRESSURE_MIN and distance <= FAR_PRESSURE_MAX then pop = pop + han.Pop end
+        end
+        local amount = math.min(math.floor(pop / FAR_PRESSURE_POP_PER_LOYALTY), FAR_PRESSURE_CAP)
+        if amount > 0 then
+          city:ChangeLoyalty(-amount)
+          print("[HanLiuBei] Turn " .. Game.GetCurrentGameTurn() .. " far pressure: city " .. city:GetID()
+            .. " of player " .. otherID .. " population " .. pop .. " loyalty -" .. amount)
+        end
+      end
+    end
+  end
+end
+
 -- 刘备不获得大将军点数：特性里的 -100% 修改器挡不住所有来源（政策、奇观、按击杀给点数的特色单位等），
 -- 所以在回合开始、回合开始结算完和每次战斗后，把刘备的大将军点数直接清零，点数永远攒不到招募线。
 local GENERAL_CLASS = "GREAT_PERSON_CLASS_GENERAL"
@@ -720,6 +758,7 @@ end
 
 local function OnPlayerTurnStarted(playerID)
   ClearGeneralPoints(playerID)
+  FarPressure(playerID)
   TryGrant(playerID, nil)
   UpdatePlayerRage(playerID)
   UpdateCommand(playerID)
