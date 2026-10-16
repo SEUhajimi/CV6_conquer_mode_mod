@@ -1,0 +1,50 @@
+[h1]文明征服模式[/h1]
+新的游戏模式：[b]占领其他文明的原始首都，就能把对方的文明特性、领袖能力和特色单位 / 建筑 / 区域 / 改良设施据为己有。[/b]
+
+开局时在「游戏模式」里勾选，和结社模式、天启模式在同一处。支持标准规则、迭起兴衰、风云变幻三种规则集。
+
+[h2]玩法[/h2]
+[list]
+[*]左上角工具栏末尾多出一个「文明征服」按钮。左侧列出领袖，可在「本局领袖 / 所有领袖」之间切换；本局中未遇见的文明会隐藏身份，在「所有领袖」里也看不出他们是否在本局。
+[*]右侧显示所选领袖的文明特性、领袖能力和全部特色内容，也可以用来查看对手的能力。
+[*]占领某个主要文明的原始首都后，可以逐项「激活」或「全部激活」。占领即永久解锁，之后丢了这座城也不影响。
+[*]有已解锁但还没激活的内容时，工具栏按钮上会出现提示标记。
+[*]激活的特色单位和改良设施会显示在科技树 / 市政树上对应的位置。
+[*]高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后会自动激活全部内容。
+[/list]
+
+[h2]特色区域怎么继承[/h2]
+引擎不允许其他文明真正建造特色区域，所以激活后你照常建造基础区域，特色区域的效果会加到你的基础区域上：区域自带效果、相邻加成、产出、伟人点数、住房、宜居度，以及建造费用减半。
+
+[h2]兼容性[/h2]
+[list]
+[*]数据在其他 mod 之后加载，自定义文明 mod 的特色内容一般也能识别。
+[*]修复了部分特色改良 / 区域 / 建筑被其他文明建造时显示红色感叹号的问题（如努比亚金字塔、荷兰圩田、日本电子厂、蒙古 Ordu）。
+[*]联机同步安全：所有激活都由游戏脚本校验执行。读档时会比对各玩家加载的数据库，mod 不一致时弹窗提醒。
+[/list]
+
+[h2]已知限制[/h2]
+[list]
+[*]少数能力在游戏核心（DLL）里按文明硬编码，激活后可能不生效或只部分生效。
+[*]同一个基础区域 / 建筑只能有一个特色版本，例如已有书院就不能再激活天文台。面板上会显示「已有 X」。
+[*]激活的特色区域在地图上仍是基础区域的模型；相邻资源加成、专家和贸易路线产出、城防、不占人口上限等效果无法迁移。
+[*]原本不能训练的特色单位（如大哥伦比亚的总指挥）不会开放生产，只能通过激活对应能力、按原有机制获得。
+[*]影响存档：游戏开始后不要中途启用或停用。
+[/list]
+
+[hr][/hr]
+
+[h1]Civilization Conquest Mode[/h1]
+A new game mode: [b]capture another civilization's original capital and take over its civilization ability, leader ability and unique units, buildings, districts and improvements.[/b]
+
+Enable it under [b]Game Modes[/b] when setting up a game. Works with the Standard, Rise and Fall, and Gathering Storm rulesets.
+[list]
+[*]A new [b]Civilization Conquest[/b] button on the Launch Bar lists every leader and their abilities, so it also works as a quick reference for your opponents.
+[*]Capture a major civilization's original capital to unlock its items permanently, then activate them one by one or all at once.
+[*]Activated unique units and improvements show up in the tech and civic trees.
+[*]Advanced option: AI activates everything automatically after capturing a capital (on by default).
+[*]Unique districts: you keep building the base district, and the unique district's effects (modifiers, adjacency, yields, Great Person points, housing, amenities, half cost) are added to it.
+[*]Loads after other mods, so custom civilizations are usually supported. Fixes red exclamation marks on several civ-only landmark models.
+[*]Multiplayer safe. Compares every player's game database after loading and warns if mods don't match.
+[/list]
+Known limitations: a few abilities are hard-coded in the game DLL and may not transfer; only one unique version per base district / building; activated districts keep the base district model. Affects saved games.
