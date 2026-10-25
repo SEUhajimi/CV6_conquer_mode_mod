@@ -17,6 +17,7 @@
 - 有已解锁但还没激活的内容时，工具栏按钮上会出现提示标记。
 - 激活来的特色单位和特色改良会显示在科技树 / 市政树上对应的科技或市政里，方便看到需要研究什么才能建造（如澳大利亚的内陆牧场在「行会」）。特色区域仍显示基础区域，因为激活者建造的是基础区域。
 - 高级选项「文明征服：AI 自动激活」（默认开启）：AI 占领原始首都后，会在它的下一个回合开始时自动激活全部内容。
+- 高级选项「文明征服：负面效果」：激活无法撤销，所以有些能力的负面效果（如越南的专业区域只能建在森林、雨林或沼泽上、马里的生产力 -30%）可以选择「不激活负面效果」（默认，征服者只拿到好处）或「激活前确认」（照原样激活，激活前弹窗列出负面效果）。面板上会列出每个能力的负面效果和是否生效。
 
 ### 安装
 
@@ -26,9 +27,9 @@
 
 支持标准规则、迭起兴衰、风云变幻三种规则集。
 
-### 联机附带 mod
+### 联机常用的其他 mod
 
-仓库里还附带三个和本模式一起联机使用的独立 mod：`Zhanguo_V3`（战国地图）、`Communist_PeoplesWar`（共产党文明）和 `Han_LiuBei`（汉帝国 · 刘备）。需要时把它们和 `CivConquestMode` 一起复制到 `Mods\`，并先删除同名旧文件夹。
+和本模式一起联机使用的独立 mod 放在各自的仓库里：[战国七雄地图](https://github.com/SEUhajimi/mapzg-cv6)、[汉帝国 · 刘备](https://github.com/SEUhajimi/cv6_liubei)。
 
 联机时所有玩家的 mod 文件必须完全一致，否则从第一回合起就会不同步（OOS）并反复掉线。手动安装的 mod 不会像创意工坊那样自动更新，每次更新后都要重新分发给所有玩家。
 
@@ -92,6 +93,7 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 - The Launch Bar button shows a marker when something is unlocked but not yet activated.
 - Activated unique units and improvements appear in the tech and civic trees under the tech or civic that unlocks them, so you can see what to research before building them (for example, Australia's Outback Station under Guilds). Unique districts still show as the base district, since that is what the activating player builds.
 - Advanced option **Conquest: AI Auto-Activates** (on by default): when an AI captures an original capital, it activates everything from that civilization automatically at the start of its next turn.
+- Advanced option "Conquest: Negative Effects": activation cannot be undone, so drawbacks of some abilities (such as Vietnam's districts only on Woods, Rainforest or Marsh, or Mali's -30% Production) can be handled by "Do Not Activate Drawbacks" (default; the conqueror gets only the benefits) or "Confirm Before Activating" (abilities activate as-is, with a dialog listing the drawbacks first). The panel lists each ability's drawbacks and whether they apply.
 
 ### Installation
 
@@ -101,9 +103,9 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 
 Works with the Standard, Rise and Fall, and Gathering Storm rulesets.
 
-### Bundled multiplayer mods
+### Other mods for multiplayer
 
-The repository also carries three standalone mods played together with this mode in multiplayer: `Zhanguo_V3` (Warring States China map), `Communist_PeoplesWar` (Communist civilization) and `Han_LiuBei` (Han Empire led by Liu Bei). When needed, copy them to `Mods\` along with `CivConquestMode`, deleting any old folders of the same name first.
+Standalone mods often played together with this mode live in their own repositories: [Warring States China map](https://github.com/SEUhajimi/mapzg-cv6) and [Han Empire (Liu Bei)](https://github.com/SEUhajimi/cv6_liubei).
 
 In multiplayer every player's mod files must match exactly; otherwise the game goes out of sync (OOS) from the first turn and keeps disconnecting. Manually installed mods don't update automatically like Workshop mods, so redistribute them to every player after each update.
 
@@ -163,7 +165,7 @@ CivConquestMode/
 ├─ CivConquestMode.modinfo           模式定义、加载条件 · mode definition, load criteria
 ├─ CivConquest.dep                   美术依赖 · art dependency file
 ├─ ArtDefs/Landmarks.artdef          特色地标/区域/建筑的通用文化模型 · DEFAULT-culture models for civ-only landmarks, districts, buildings
-├─ Data/CivConquest_Config.xml       开局设置 · game setup: mode toggle, AI option
+├─ Data/CivConquest_Config.xml       开局设置 · game setup: mode toggle, AI and drawback options
 ├─ Data/CivConquest_Icons.xml        模式图标 · mode icon (reuses Domination victory icon)
 ├─ Data/CivConquest_Gameplay.sql     特性映射与解锁修改器 · trait/item mapping, unlock modifiers
 ├─ Scripts/CivConquest_Common.lua    共用逻辑 · logic shared by UI and gameplay
@@ -171,9 +173,6 @@ CivConquestMode/
 ├─ UI/CivConquestPanel.xml / .lua    工具栏按钮与领袖面板 · Launch Bar button and leader panel
 ├─ UI/CivConquestDebug.lua           调试日志 · debug logging (CQ.DEBUG_LOG)
 └─ Text/CivConquest_Text.xml         英文 / 简体中文 · English / Simplified Chinese text
-Zhanguo_V3/                          联机附带：战国地图 · bundled: Warring States China map
-Communist_PeoplesWar/                联机附带：共产党文明 · bundled: Communist civilization
-Han_LiuBei/                          联机附带：汉帝国 · 刘备 · bundled: Han Empire (Liu Bei)
 ```
 
 ## 许可 · License

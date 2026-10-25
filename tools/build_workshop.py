@@ -1,4 +1,4 @@
-# 生成创意工坊上传文件夹：python tools/build_workshop.py Han_LiuBei
+# 生成创意工坊上传文件夹：python tools/build_workshop.py CivConquestMode
 # 只复制 .modinfo 和其 <Files> 里登记的文件到 dist/workshop/<mod>/，README、开发文件不会带上。
 # workshop/<mod>/ 下的预览图和工坊介绍不进上传文件夹，上传时在 Mod Uploader 里单独选。
 import shutil
