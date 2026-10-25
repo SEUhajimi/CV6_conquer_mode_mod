@@ -10,13 +10,23 @@
 		<Row Key1="Ruleset" Key2="RULESET_STANDARD" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
 		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_1" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
 		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="CivConquest_AIAutoActivate" Name="LOC_CQ_OPTION_AI_AUTO_NAME" Description="LOC_CQ_OPTION_AI_AUTO_DESCRIPTION" Domain="bool" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_AI_AUTO" GroupId="AdvancedOptions" SortIndex="2110"/>
+
+		<!-- 附属选项：能力里的负面效果（如越南的区域只能建在特定地貌上）激活后无法撤销，开局让玩家选怎么处理 -->
+		<Row Key1="Ruleset" Key2="RULESET_STANDARD" ParameterId="CivConquest_NegativeEffects" Name="LOC_CQ_OPTION_NEGATIVE_NAME" Description="LOC_CQ_OPTION_NEGATIVE_DESCRIPTION" Domain="CivConquestNegativeEffects" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_NEGATIVE" GroupId="AdvancedOptions" SortIndex="2111"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_1" ParameterId="CivConquest_NegativeEffects" Name="LOC_CQ_OPTION_NEGATIVE_NAME" Description="LOC_CQ_OPTION_NEGATIVE_DESCRIPTION" Domain="CivConquestNegativeEffects" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_NEGATIVE" GroupId="AdvancedOptions" SortIndex="2111"/>
+		<Row Key1="Ruleset" Key2="RULESET_EXPANSION_2" ParameterId="CivConquest_NegativeEffects" Name="LOC_CQ_OPTION_NEGATIVE_NAME" Description="LOC_CQ_OPTION_NEGATIVE_DESCRIPTION" Domain="CivConquestNegativeEffects" DefaultValue="1" ConfigurationGroup="Game" ConfigurationId="GAMEOPTION_CIV_CONQUEST_NEGATIVE" GroupId="AdvancedOptions" SortIndex="2111"/>
 	</Parameters>
+	<DomainValues>
+		<Row Domain="CivConquestNegativeEffects" Value="1" Name="LOC_CQ_OPTION_NEGATIVE_SKIP_NAME" Description="LOC_CQ_OPTION_NEGATIVE_SKIP_DESCRIPTION" SortIndex="10"/>
+		<Row Domain="CivConquestNegativeEffects" Value="2" Name="LOC_CQ_OPTION_NEGATIVE_CONFIRM_NAME" Description="LOC_CQ_OPTION_NEGATIVE_CONFIRM_DESCRIPTION" SortIndex="20"/>
+	</DomainValues>
 	<ParameterCriteria>
 		<Row ParameterId="GameMode_CivConquest" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_RANDOM" Operator="NotEquals" ConfigurationValue="1"/>
 	</ParameterCriteria>
 	<ParameterDependencies>
 		<Row ParameterId="GameMode_CivConquest" ConfigurationGroup="Game" ConfigurationId="WORLD_BUILDER" Operator="NotEquals" ConfigurationValue="1"/>
 		<Row ParameterId="CivConquest_AIAutoActivate" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" Operator="Equals" ConfigurationValue="1"/>
+		<Row ParameterId="CivConquest_NegativeEffects" ConfigurationGroup="Game" ConfigurationId="GAMEMODE_CIV_CONQUEST" Operator="Equals" ConfigurationValue="1"/>
 	</ParameterDependencies>
 	<GameModeItems>
 		<!-- 立绘/背景复用本体托米丽司的资源，避免额外打包贴图 -->

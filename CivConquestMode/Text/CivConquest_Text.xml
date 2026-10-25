@@ -55,11 +55,34 @@
 		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="en_US"><Text>strategic</Text></Row>
 		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="en_US"><Text>luxury</Text></Row>
 
-		<Row Tag="LOC_CQ_NOTE_HEADER" Language="en_US"><Text>What activating this means for you:</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_REQUIRED" Language="en_US"><Text>From activation on, specialty districts you place can only go on {1_Features} tiles (non-specialty districts such as the Aqueduct and Neighborhood are not restricted).</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_SEPARATOR" Language="en_US"><Text> / </Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_EXISTING" Language="en_US"><Text>Districts you have already built, and their buildings, are kept wherever they are.</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_PERMANENT" Language="en_US"><Text>Activation cannot be undone; this restriction stays for the rest of the game.</Text></Row>
+
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_NAME" Language="en_US"><Text>Conquest: Negative Effects</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_DESCRIPTION" Language="en_US"><Text>Some abilities come with drawbacks (such as Vietnam's districts only on Woods, Rainforest or Marsh). Activation cannot be undone, so choose how drawbacks are handled.</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_SKIP_NAME" Language="en_US"><Text>Do Not Activate Drawbacks</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_SKIP_DESCRIPTION" Language="en_US"><Text>Activating an ability gives only its benefits; its drawbacks never apply to the conqueror. The original civilization keeps them.</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_NAME" Language="en_US"><Text>Confirm Before Activating</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_DESCRIPTION" Language="en_US"><Text>Abilities are activated as they are, drawbacks included. Before activating one with drawbacks, a dialog lists them and asks you to confirm.</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="en_US"><Text>Drawbacks of this ability (will NOT apply to you when activated):</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="en_US"><Text>Drawbacks of this ability (will apply to you when activated, and cannot be undone):</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_TITLE" Language="en_US"><Text>Activate abilities with drawbacks?</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_TEXT" Language="en_US"><Text>These abilities also bring the drawbacks below. Activation cannot be undone; the drawbacks stay for the rest of the game.</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE_ALL" Language="en_US"><Text>Activate All</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE_SAFE" Language="en_US"><Text>Only Those Without Drawbacks</Text></Row>
+		<Row Tag="LOC_CQ_NEG_BABYLON_SCIENCE" Language="en_US"><Text>-50% [ICON_Science] Science in all cities.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_NO_SURPRISE_WAR" Language="en_US"><Text>You cannot declare Surprise Wars.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_GAUL_NO_ADJACENT" Language="en_US"><Text>Specialty districts cannot be built next to the City Center.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_BUILDING_PRODUCTION" Language="en_US"><Text>-30% [ICON_Production] Production toward buildings (not wonders).</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_UNIT_PRODUCTION" Language="en_US"><Text>-30% [ICON_Production] Production toward units.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_MINES" Language="en_US"><Text>Mines give -1 [ICON_Production] Production.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MAORI_HARVEST" Language="en_US"><Text>Resources cannot be harvested.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MAYA_FRESH_WATER" Language="en_US"><Text>Cities get no [ICON_Housing] Housing from fresh water or coast.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_VIETNAM_FEATURES" Language="en_US"><Text>Newly placed specialty districts can only go on Woods, Rainforest or Marsh (districts already built are kept).</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MUTAL_FAR_CITIES" Language="en_US"><Text>Cities 7 or more tiles from the [ICON_Capital] Capital get -15% to all yields.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_FOREIGN_CONTINENT" Language="en_US"><Text>Cities on a continent other than your [ICON_Capital] Capital's get -15% to all yields.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_TOKUGAWA_YIELDS" Language="en_US"><Text>International [ICON_TradeRoute] Trade Routes give -25% yields.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_TOKUGAWA_TOURISM" Language="en_US"><Text>International [ICON_TradeRoute] Trade Routes give -25% [ICON_Tourism] Tourism.</Text></Row>
+		<Row Tag="LOC_CQ_NEG_JANISSARY_POPULATION" Language="en_US"><Text>Training a Janissary in a city you founded costs 1 [ICON_Citizen] Population.</Text></Row>
 
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="en_US"><Text>This unit cannot be trained. It is obtained through its civilization's or leader's ability (activate that ability to gain it).</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
@@ -142,11 +165,34 @@
 		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="zh_Hans_CN"><Text>战略</Text></Row>
 		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="zh_Hans_CN"><Text>奢侈</Text></Row>
 
-		<Row Tag="LOC_CQ_NOTE_HEADER" Language="zh_Hans_CN"><Text>激活后对你的实际影响：</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_REQUIRED" Language="zh_Hans_CN"><Text>从激活起，你新放置的专业区域只能建在{1_Features}地块上（水渠、社区等非专业区域不受限制）。</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_SEPARATOR" Language="zh_Hans_CN"><Text>、</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_FEATURE_EXISTING" Language="zh_Hans_CN"><Text>已经建好的区域及其中的建筑会原地保留，不会被移除。</Text></Row>
-		<Row Tag="LOC_CQ_NOTE_PERMANENT" Language="zh_Hans_CN"><Text>激活后无法撤销，此限制在本局游戏中一直有效。</Text></Row>
+
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_NAME" Language="zh_Hans_CN"><Text>文明征服：负面效果</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_DESCRIPTION" Language="zh_Hans_CN"><Text>有些能力带有负面效果（如越南的专业区域只能建在森林、雨林或沼泽上）。激活后无法撤销，请选择如何处理这些负面效果。</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_SKIP_NAME" Language="zh_Hans_CN"><Text>不激活负面效果</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_SKIP_DESCRIPTION" Language="zh_Hans_CN"><Text>激活能力时只获得正面效果，负面效果对征服者不生效。原文明照常拥有。</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_NAME" Language="zh_Hans_CN"><Text>激活前确认</Text></Row>
+		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_DESCRIPTION" Language="zh_Hans_CN"><Text>能力按原样激活，负面效果一并生效。激活带负面效果的能力前，会弹窗列出这些效果，确认后才激活。</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你不生效）：</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你生效，且无法撤销）：</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_TITLE" Language="zh_Hans_CN"><Text>激活带负面效果的能力？</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_TEXT" Language="zh_Hans_CN"><Text>以下能力会同时带来这些负面效果。激活后无法撤销，负面效果在本局游戏中一直有效。</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE_ALL" Language="zh_Hans_CN"><Text>全部激活</Text></Row>
+		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE_SAFE" Language="zh_Hans_CN"><Text>只激活没有负面效果的</Text></Row>
+		<Row Tag="LOC_CQ_NEG_BABYLON_SCIENCE" Language="zh_Hans_CN"><Text>所有城市 [ICON_Science] 科技值 -50%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_NO_SURPRISE_WAR" Language="zh_Hans_CN"><Text>你不能发动突袭战争。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_GAUL_NO_ADJACENT" Language="zh_Hans_CN"><Text>专业区域不能建在市中心旁边。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_BUILDING_PRODUCTION" Language="zh_Hans_CN"><Text>建造建筑（奇观除外）的 [ICON_Production] 生产力 -30%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_UNIT_PRODUCTION" Language="zh_Hans_CN"><Text>训练单位的 [ICON_Production] 生产力 -30%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MALI_MINES" Language="zh_Hans_CN"><Text>矿山 [ICON_Production] 生产力 -1。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MAORI_HARVEST" Language="zh_Hans_CN"><Text>不能收获资源。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MAYA_FRESH_WATER" Language="zh_Hans_CN"><Text>城市不再从淡水或海岸获得 [ICON_Housing] 住房。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_VIETNAM_FEATURES" Language="zh_Hans_CN"><Text>新放置的专业区域只能建在森林、雨林或沼泽上（已建好的区域原地保留）。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_MUTAL_FAR_CITIES" Language="zh_Hans_CN"><Text>距离 [ICON_Capital] 首都 7 格及以上的城市，所有产出 -15%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_FOREIGN_CONTINENT" Language="zh_Hans_CN"><Text>不在 [ICON_Capital] 首都所在大陆上的城市，所有产出 -15%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_TOKUGAWA_YIELDS" Language="zh_Hans_CN"><Text>国际 [ICON_TradeRoute] 贸易路线的产出 -25%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_TOKUGAWA_TOURISM" Language="zh_Hans_CN"><Text>国际 [ICON_TradeRoute] 贸易路线的 [ICON_Tourism] 旅游业绩 -25%。</Text></Row>
+		<Row Tag="LOC_CQ_NEG_JANISSARY_POPULATION" Language="zh_Hans_CN"><Text>在自己建立的城市训练苏丹亲兵会消耗 1 [ICON_Citizen] 人口。</Text></Row>
 
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="zh_Hans_CN"><Text>该单位无法训练，需通过其文明/领袖能力获得（激活对应能力后按原机制获得）。</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>

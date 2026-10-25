@@ -268,48 +268,26 @@ local function BuildDistrictBonusText(uniqueType:string, baseType:string)
 end
 
 -- ===========================================================================
---	文明 / 领袖能力：原版描述写不清的激活后效果。按特性挂的修改器类型识别，返回多行文字或 nil。
---	* 越南式“专业区域只能建在某些地貌上”：只限制之后新放置的区域，已建好的区域不受影响
+--	能力里的负面效果（见 SQL 的 CQ_NegativeModifiers），按开局选项说明会不会生效。没有则返回 nil。
 -- ===========================================================================
-local FEATURE_REQUIRED_MODIFIER :string = "MODIFIER_PLAYER_ADJUST_FEAUTE_REQUIRED_FOR_SPECIALTY_DISTRICTS";
-local m_TraitRequiredFeatures :table = nil;	-- TraitType -> { FeatureType, ... }
-
-local function GetTraitRequiredFeatures(traitType:string)
-	if m_TraitRequiredFeatures == nil then
-		m_TraitRequiredFeatures = {};
-		local modifierFeature = {};
-		for row in GameInfo.Modifiers() do
-			if row.ModifierType == FEATURE_REQUIRED_MODIFIER then modifierFeature[row.ModifierId] = false; end
-		end
-		for row in GameInfo.ModifierArguments() do
-			if modifierFeature[row.ModifierId] == false and row.Name == "FeatureType" then
-				modifierFeature[row.ModifierId] = row.Value;
-			end
-		end
-		for row in GameInfo.TraitModifiers() do
-			local feature = modifierFeature[row.ModifierId];
-			if feature then
-				local list = m_TraitRequiredFeatures[row.TraitType] or {};
-				table.insert(list, feature);
-				m_TraitRequiredFeatures[row.TraitType] = list;
-			end
-		end
+local function BuildNegativeLines(traitType:string)
+	local lines = {};
+	for _, tag in ipairs(CQ.GetTraitNegativeTexts(traitType)) do
+		table.insert(lines, "[ICON_Bullet]" .. Locale.Lookup(tag));
 	end
-	return m_TraitRequiredFeatures[traitType];
+	return lines;
 end
 
 local function BuildTraitNotes(traitType:string)
-	local features = GetTraitRequiredFeatures(traitType);
-	if features == nil then return nil; end
-	local names = {};
-	for _, feature in ipairs(features) do
-		table.insert(names, TypeName("Features", feature));
-	end
-	return "[COLOR_Civ6Yellow]" .. Locale.Lookup("LOC_CQ_NOTE_HEADER") .. "[ENDCOLOR]"
-		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_FEATURE_REQUIRED",
-			table.concat(names, Locale.Lookup("LOC_CQ_NOTE_FEATURE_SEPARATOR")))
-		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_FEATURE_EXISTING")
-		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_PERMANENT");
+	local lines = BuildNegativeLines(traitType);
+	if #lines == 0 then return nil; end
+	local header = (CQ.GetNegativeMode() == CQ.NEGATIVE_SKIP) and "LOC_CQ_NOTE_NEGATIVE_SKIPPED" or "LOC_CQ_NOTE_NEGATIVE_KEPT";
+	return "[COLOR_Civ6Yellow]" .. Locale.Lookup(header) .. "[ENDCOLOR][NEWLINE]" .. table.concat(lines, "[NEWLINE]");
+end
+
+--	“激活前确认”模式下，带负面效果的特性要先弹窗确认
+local function NeedsConfirm(traitType:string)
+	return CQ.GetNegativeMode() == CQ.NEGATIVE_CONFIRM and #CQ.GetTraitNegativeTexts(traitType) > 0;
 end
 
 local function BuildEntryTexts(entry:table)
@@ -319,10 +297,6 @@ local function BuildEntryTexts(entry:table)
 		local trait = GameInfo.Traits[entry.TraitType];
 		name = LookupOr(trait and trait.Name, entry.TraitType);
 		description = LookupOr(trait and trait.Description, "");
-		local notes = BuildTraitNotes(entry.TraitType);
-		if notes ~= nil then
-			description = description .. "[NEWLINE][NEWLINE]" .. notes;
-		end
 		if entry.Category == "LEADER_ABILITY" then
 			iconName = "ICON_" .. (m_SelectedLeader or "");
 		else
@@ -359,6 +333,10 @@ local function BuildEntryTexts(entry:table)
 		name = table.concat(names, " / ");
 		description = table.concat(descriptions, "[NEWLINE][NEWLINE]");
 		iconName = "ICON_" .. entry.Items[1].Type;
+	end
+	local notes = BuildTraitNotes(entry.TraitType);
+	if notes ~= nil then
+		description = description .. "[NEWLINE][NEWLINE]" .. notes;
 	end
 	return name, description, iconName;
 end
@@ -662,7 +640,7 @@ end
 -- ===========================================================================
 --	激活请求（经 EXECUTE_SCRIPT 交给 Gameplay 脚本执行，联机同步安全）
 -- ===========================================================================
-function OnRequestActivate(leaderType:string, traitType:string)
+local function SendActivate(leaderType:string, traitType:string)
 	local playerID = GetLocalPlayerID();
 	if playerID == nil then return; end
 
@@ -678,6 +656,66 @@ function OnRequestActivate(leaderType:string, traitType:string)
 	-- 属性写入是异步的，稍后刷新界面
 	m_RefreshTimer = 0.5;
 	ContextPtr:SetUpdate(OnUpdate);
+end
+
+--	负面效果一节：能力名 + 各条负面效果
+local function BuildConfirmSection(entry:table)
+	local name = BuildEntryTexts(entry);
+	return "[COLOR_Civ6Yellow]" .. name .. "[ENDCOLOR][NEWLINE]" .. table.concat(BuildNegativeLines(entry.TraitType), "[NEWLINE]");
+end
+
+--	单项激活：“激活前确认”模式下，带负面效果的先弹窗
+function OnRequestActivate(leaderType:string, traitType:string)
+	if not NeedsConfirm(traitType) then
+		SendActivate(leaderType, traitType);
+		return;
+	end
+	local text = Locale.Lookup("LOC_CQ_CONFIRM_TEXT");
+	for _, entry in ipairs(CQ.GetLeaderTraitEntries(leaderType)) do
+		if entry.TraitType == traitType then
+			text = text .. "[NEWLINE][NEWLINE]" .. BuildConfirmSection(entry);
+		end
+	end
+	local popup = PopupDialogInGame:new("CivConquestConfirmNegative");
+	popup:AddTitle(Locale.Lookup("LOC_CQ_CONFIRM_TITLE"));
+	popup:AddText(text);
+	popup:AddConfirmButton(Locale.Lookup("LOC_CQ_CONFIRM_ACTIVATE"), function() SendActivate(leaderType, traitType); end);
+	popup:AddCancelButton(Locale.Lookup("LOC_CANCEL"), nil);
+	popup:Open();
+end
+
+--	全部激活：带负面效果的能力一起列出来确认，也可以只激活没有负面效果的
+local function OnRequestActivateAll(leaderType:string)
+	local playerID = GetLocalPlayerID();
+	if playerID == nil or not CQ.IsLeaderUnlocked(playerID, leaderType) then return; end
+	local plain, risky = {}, {};
+	for _, entry in ipairs(CQ.GetLeaderTraitEntries(leaderType)) do
+		if not CQ.IsTraitOwned(playerID, entry.TraitType) and CQ.GetTraitConflict(playerID, entry.TraitType) == nil then
+			table.insert(NeedsConfirm(entry.TraitType) and risky or plain, entry);
+		end
+	end
+	local function Send(list)
+		for _, entry in ipairs(list) do SendActivate(leaderType, entry.TraitType); end
+		print("[CivConquest] Activate all " .. tostring(leaderType) .. ": " .. tostring(#list) .. " request(s)");
+	end
+	if #risky == 0 then
+		Send(plain);
+		return;
+	end
+	local sections = {};
+	for _, entry in ipairs(risky) do table.insert(sections, BuildConfirmSection(entry)); end
+	local popup = PopupDialogInGame:new("CivConquestConfirmNegative");
+	popup:AddTitle(Locale.Lookup("LOC_CQ_CONFIRM_TITLE"));
+	popup:AddText(Locale.Lookup("LOC_CQ_CONFIRM_TEXT") .. "[NEWLINE][NEWLINE]" .. table.concat(sections, "[NEWLINE][NEWLINE]"));
+	popup:AddConfirmButton(Locale.Lookup("LOC_CQ_CONFIRM_ACTIVATE_ALL"), function()
+		Send(plain);
+		Send(risky);
+	end);
+	if #plain > 0 then
+		popup:AddCustomButton(Locale.Lookup("LOC_CQ_CONFIRM_ACTIVATE_SAFE"), function() Send(plain); end);
+	end
+	popup:AddCancelButton(Locale.Lookup("LOC_CANCEL"), nil);
+	popup:Open();
 end
 
 function OnUpdate(deltaTime:number)
@@ -825,17 +863,7 @@ function Initialize()
 	Controls.TabAll:RegisterCallback(Mouse.eLClick, function() SwitchTab(TAB_ALL); end);
 	-- “全部激活”：逐个发送与单项激活相同的请求（单项激活路径已验证可用）
 	Controls.ActivateAllButton:RegisterCallback(Mouse.eLClick, function()
-		local playerID = GetLocalPlayerID();
-		if m_SelectedLeader == nil or playerID == nil then return; end
-		if not CQ.IsLeaderUnlocked(playerID, m_SelectedLeader) then return; end
-		local count = 0;
-		for _, entry in ipairs(CQ.GetLeaderTraitEntries(m_SelectedLeader)) do
-			if not CQ.IsTraitOwned(playerID, entry.TraitType) and CQ.GetTraitConflict(playerID, entry.TraitType) == nil then
-				OnRequestActivate(m_SelectedLeader, entry.TraitType);
-				count = count + 1;
-			end
-		end
-		print("[CivConquest] Activate all " .. tostring(m_SelectedLeader) .. ": " .. tostring(count) .. " request(s)");
+		if m_SelectedLeader ~= nil then OnRequestActivateAll(m_SelectedLeader); end
 	end);
 	Controls.ActivateAllButton:RegisterCallback(Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 

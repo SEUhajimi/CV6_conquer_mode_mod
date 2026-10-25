@@ -163,8 +163,14 @@ local function ActivateTrait(playerID:number, traitType:string)
 		return false;
 	end
 
+	-- 挂上的修改器卸不掉；选了“不激活负面效果”时，负面修改器直接不挂
+	local skipNegatives = CQ.GetNegativeMode() == CQ.NEGATIVE_SKIP;
 	for _, modifierId in ipairs(m_TraitModifiers[traitType] or {}) do
-		pPlayer:AttachModifierByID(modifierId);
+		if skipNegatives and CQ.IsNegativeModifier(traitType, modifierId) then
+			Log("Skipped negative", modifierId, "for player", playerID);
+		else
+			pPlayer:AttachModifierByID(modifierId);
+		end
 	end
 	for _, modifierId in ipairs(m_ActivationModifiers[traitType] or {}) do
 		pPlayer:AttachModifierByID(modifierId);

@@ -14,7 +14,7 @@ CQ.PROP_FINGERPRINT		= "CQ_FP";		-- 玩家属性：该玩家电脑上报的指�
 CQ.PROP_FINGERPRINT_SEQ	= "CQ_FP_SEQ";	-- 玩家属性：上报时的序号；Game 属性：全局上报计数
 
 -- 本模式脚本版本，计入指纹。改了 Lua 后加 1：只改 Lua 时数据库不变，靠它发现两边脚本不一致
-CQ.VERSION			= 5;
+CQ.VERSION			= 6;
 
 CQ.DEBUG_LOG		= true;				-- 调试日志：单位训练/购买时把文化进度变化写入 Lua.log
 
@@ -34,6 +34,8 @@ local m_CivTraits		:table = {};	-- CivilizationType -> { TraitType, ... }
 local m_LeaderTraits	:table = {};	-- LeaderType -> { TraitType, ... }
 local m_LeaderCiv		:table = {};	-- LeaderType -> CivilizationType
 local m_AllLeaders		:table = {};	-- { LeaderType, ... }（可游玩的主要领袖）
+local m_NegativeModifiers	:table = {};	-- TraitType -> { [ModifierId] = true }
+local m_NegativeTexts	:table = {};	-- TraitType -> { 说明文字 Tag, ... }（去重，数据库顺序）
 
 -- ===========================================================================
 local function BuildCache()
@@ -43,6 +45,21 @@ local function BuildCache()
 	if GameInfo.CQ_Traits ~= nil then
 		for row in GameInfo.CQ_Traits() do
 			m_TraitSource[row.TraitType] = row.SourceKind;
+		end
+	end
+
+	if GameInfo.CQ_NegativeModifiers ~= nil then
+		for row in GameInfo.CQ_NegativeModifiers() do
+			local set = m_NegativeModifiers[row.TraitType] or {};
+			set[row.ModifierId] = true;
+			m_NegativeModifiers[row.TraitType] = set;
+			local texts = m_NegativeTexts[row.TraitType] or {};
+			local seen = false;
+			for _, tag in ipairs(texts) do
+				if tag == row.Description then seen = true; end
+			end
+			if not seen then table.insert(texts, row.Description); end
+			m_NegativeTexts[row.TraitType] = texts;
 		end
 	end
 
@@ -192,6 +209,32 @@ end
 
 function CQ.IsTraitOwned(playerID:number, traitType:string)
 	return CQ.IsTraitActivated(playerID, traitType) or CQ.HasTraitNatively(playerID, traitType);
+end
+
+-- ===========================================================================
+--	能力里的负面效果（见 SQL 的 CQ_NegativeModifiers）。开局选项：
+--	  1 = 不激活负面效果（默认）；2 = 照常激活，激活前弹窗确认。
+--	旧存档没有这个选项，按 2 处理，保持原来的规则。
+-- ===========================================================================
+CQ.NEGATIVE_SKIP	= 1;
+CQ.NEGATIVE_CONFIRM	= 2;
+
+function CQ.GetNegativeMode()
+	local value = GameConfiguration.GetValue("GAMEOPTION_CIV_CONQUEST_NEGATIVE");
+	if value == nil then return CQ.NEGATIVE_CONFIRM; end
+	return tonumber(value) == CQ.NEGATIVE_SKIP and CQ.NEGATIVE_SKIP or CQ.NEGATIVE_CONFIRM;
+end
+
+function CQ.IsNegativeModifier(traitType:string, modifierId:string)
+	BuildCache();
+	local set = m_NegativeModifiers[traitType];
+	return set ~= nil and set[modifierId] == true;
+end
+
+--	该特性负面效果的说明文字 Tag 列表；没有则返回空表
+function CQ.GetTraitNegativeTexts(traitType:string)
+	BuildCache();
+	return m_NegativeTexts[traitType] or {};
 end
 
 -- ===========================================================================
