@@ -62,6 +62,8 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 | 特色建筑 | 去掉 `TraitType`，改为 `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING`（结社模式建筑的做法）；原文明通过自身 Trait 照常获得 |
 | 特色区域 | 引擎只把原文明的特色区域当成基础区域（激活者的特色区域里造不了任何基础区域建筑），所以激活者不建造特色区域，而是把特色区域的效果以修改器的形式加到自己的基础区域上：区域自带修改器、相邻加成、自身产出、伟人点数、住房、宜居度、造价减半（建造该基础区域时生产力 +100%） |
 
+**为什么不直接把基础区域转换成特色区域**：早期版本就是这么做的，但引擎只把原文明自己的特色区域当成基础区域（建筑的前置区域 `PrereqDistrict` 在引擎内部判定）。激活者转换得来的特色区域里造不了任何基础区域的建筑，例如转换来的越南 Thanh 里造不了兵营。试过的绕法都不行：去掉特色区域的 `TraitType`、用 `WorldBuilder` 直接放建筑（报 `NeededDistrict`）、副本建筑、标记建筑、`GRANT_BUILDING_IN_CITY_IGNORE`。所以改为建造基础区域，再把特色区域的效果以修改器的形式加上去。
+
 部分特色改良、区域和建筑的模型只登记了原文明（如努比亚金字塔、波斯天堂花园、荷兰圩田、苏格兰高尔夫球场、克里 Mekewap、日本电子厂、蒙古 Ordu、马其顿 Basilikoi Paides、巴比伦 Palgum、刚果 Mbanza、越南 Thanh），其他文明建造时会显示红色感叹号。`tools/gen_landmarks.py` 扫描本体与 DLC 的 `Landmarks.artdef`（包括 `Landmarks` 与 `Districts` 两类集合），为这些变体生成 `Culture = DEFAULT` 的同模型版本。
 
 UI 通过 `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)` 发送激活请求，由 Gameplay 脚本校验并执行，因此联机同步安全。状态保存在玩家属性中（`CQ_UNLOCK_<Leader>`、`CQ_TRAIT_<Trait>`），随存档保存。
@@ -144,6 +146,8 @@ The argument is the game install directory; without it the script uses the defau
 | Unique improvements | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT` (the same mechanism city-state suzerain improvements use) |
 | Unique buildings | `TraitType` is cleared and replaced by `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING` (as Secret Societies buildings do); the original civilization still gets them through its own trait |
 | Unique districts | The engine only treats the original civilization's unique districts as their base district (no base-district building can be built in an activated one), so you don't build the unique district; its effects are added to your base districts as modifiers: the district's own modifiers, adjacency bonuses, base yields, Great Person points, housing, amenities, and the halved cost (+100% production toward that base district) |
+
+**Why unique districts aren't converted**: early versions converted the base district into the unique one, but the engine only treats the original civilization's own unique districts as their base district (a building's `PrereqDistrict` is checked inside the engine). No base-district building could be built in a converted one; for example, a converted Vietnamese Thanh couldn't build Barracks. Nothing worked around it: clearing the district's `TraitType`, placing the building with `WorldBuilder` (fails with `NeededDistrict`), duplicate buildings, marker buildings, `GRANT_BUILDING_IN_CITY_IGNORE`. So you build the base district instead and the unique district's effects are added to it as modifiers.
 
 Some unique improvements, districts and buildings register their model only for the original civilization (Nubian Pyramid, Persian Pairidaeza, Dutch Polder, Scottish Golf Course, Cree Mekewap, Japanese Electronics Factory, Mongolian Ordu, Macedonian Basilikoi Paides, Babylonian Palgum, Kongolese Mbanza, Vietnamese Thanh), so other civilizations building them see a red exclamation mark. `tools/gen_landmarks.py` scans the base game and DLC `Landmarks.artdef` files (both the `Landmarks` and `Districts` collections) and generates a `Culture = DEFAULT` copy of those variants using the same model.
 
