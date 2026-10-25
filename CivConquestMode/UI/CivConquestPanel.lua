@@ -267,6 +267,51 @@ local function BuildDistrictBonusText(uniqueType:string, baseType:string)
 	return table.concat(lines, "[NEWLINE]");
 end
 
+-- ===========================================================================
+--	文明 / 领袖能力：原版描述写不清的激活后效果。按特性挂的修改器类型识别，返回多行文字或 nil。
+--	* 越南式“专业区域只能建在某些地貌上”：只限制之后新放置的区域，已建好的区域不受影响
+-- ===========================================================================
+local FEATURE_REQUIRED_MODIFIER :string = "MODIFIER_PLAYER_ADJUST_FEAUTE_REQUIRED_FOR_SPECIALTY_DISTRICTS";
+local m_TraitRequiredFeatures :table = nil;	-- TraitType -> { FeatureType, ... }
+
+local function GetTraitRequiredFeatures(traitType:string)
+	if m_TraitRequiredFeatures == nil then
+		m_TraitRequiredFeatures = {};
+		local modifierFeature = {};
+		for row in GameInfo.Modifiers() do
+			if row.ModifierType == FEATURE_REQUIRED_MODIFIER then modifierFeature[row.ModifierId] = false; end
+		end
+		for row in GameInfo.ModifierArguments() do
+			if modifierFeature[row.ModifierId] == false and row.Name == "FeatureType" then
+				modifierFeature[row.ModifierId] = row.Value;
+			end
+		end
+		for row in GameInfo.TraitModifiers() do
+			local feature = modifierFeature[row.ModifierId];
+			if feature then
+				local list = m_TraitRequiredFeatures[row.TraitType] or {};
+				table.insert(list, feature);
+				m_TraitRequiredFeatures[row.TraitType] = list;
+			end
+		end
+	end
+	return m_TraitRequiredFeatures[traitType];
+end
+
+local function BuildTraitNotes(traitType:string)
+	local features = GetTraitRequiredFeatures(traitType);
+	if features == nil then return nil; end
+	local names = {};
+	for _, feature in ipairs(features) do
+		table.insert(names, TypeName("Features", feature));
+	end
+	return "[COLOR_Civ6Yellow]" .. Locale.Lookup("LOC_CQ_NOTE_HEADER") .. "[ENDCOLOR]"
+		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_FEATURE_REQUIRED",
+			table.concat(names, Locale.Lookup("LOC_CQ_NOTE_FEATURE_SEPARATOR")))
+		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_FEATURE_EXISTING")
+		.. "[NEWLINE][ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_PERMANENT");
+end
+
 local function BuildEntryTexts(entry:table)
 	local name, description, iconName;
 
@@ -274,6 +319,10 @@ local function BuildEntryTexts(entry:table)
 		local trait = GameInfo.Traits[entry.TraitType];
 		name = LookupOr(trait and trait.Name, entry.TraitType);
 		description = LookupOr(trait and trait.Description, "");
+		local notes = BuildTraitNotes(entry.TraitType);
+		if notes ~= nil then
+			description = description .. "[NEWLINE][NEWLINE]" .. notes;
+		end
 		if entry.Category == "LEADER_ABILITY" then
 			iconName = "ICON_" .. (m_SelectedLeader or "");
 		else

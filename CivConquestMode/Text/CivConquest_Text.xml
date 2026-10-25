@@ -55,6 +55,12 @@
 		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="en_US"><Text>strategic</Text></Row>
 		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="en_US"><Text>luxury</Text></Row>
 
+		<Row Tag="LOC_CQ_NOTE_HEADER" Language="en_US"><Text>What activating this means for you:</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_REQUIRED" Language="en_US"><Text>From activation on, specialty districts you place can only go on {1_Features} tiles (non-specialty districts such as the Aqueduct and Neighborhood are not restricted).</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_SEPARATOR" Language="en_US"><Text> / </Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_EXISTING" Language="en_US"><Text>Districts you have already built, and their buildings, are kept wherever they are.</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_PERMANENT" Language="en_US"><Text>Activation cannot be undone; this restriction stays for the rest of the game.</Text></Row>
+
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="en_US"><Text>This unit cannot be trained. It is obtained through its civilization's or leader's ability (activate that ability to gain it).</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE_ALL" Language="en_US"><Text>Activate All</Text></Row>
@@ -135,6 +141,12 @@
 		<Row Tag="LOC_CQ_RESOURCECLASS_BONUS" Language="zh_Hans_CN"><Text>加成</Text></Row>
 		<Row Tag="LOC_CQ_RESOURCECLASS_STRATEGIC" Language="zh_Hans_CN"><Text>战略</Text></Row>
 		<Row Tag="LOC_CQ_RESOURCECLASS_LUXURY" Language="zh_Hans_CN"><Text>奢侈</Text></Row>
+
+		<Row Tag="LOC_CQ_NOTE_HEADER" Language="zh_Hans_CN"><Text>激活后对你的实际影响：</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_REQUIRED" Language="zh_Hans_CN"><Text>从激活起，你新放置的专业区域只能建在{1_Features}地块上（水渠、社区等非专业区域不受限制）。</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_SEPARATOR" Language="zh_Hans_CN"><Text>、</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_FEATURE_EXISTING" Language="zh_Hans_CN"><Text>已经建好的区域及其中的建筑会原地保留，不会被移除。</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_PERMANENT" Language="zh_Hans_CN"><Text>激活后无法撤销，此限制在本局游戏中一直有效。</Text></Row>
 
 		<Row Tag="LOC_CQ_UNIT_UNTRAINABLE_NOTE" Language="zh_Hans_CN"><Text>该单位无法训练，需通过其文明/领袖能力获得（激活对应能力后按原机制获得）。</Text></Row>
 		<Row Tag="LOC_CQ_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>
