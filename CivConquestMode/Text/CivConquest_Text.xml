@@ -64,6 +64,12 @@
 		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_DESCRIPTION" Language="en_US"><Text>Abilities are activated as they are, drawbacks included. Before activating one with drawbacks, a dialog lists them and asks you to confirm.</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="en_US"><Text>Drawbacks of this ability (will NOT apply to you when activated):</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="en_US"><Text>Drawbacks of this ability (will apply to you when activated, and cannot be undone):</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NOT_INHERITED" Language="en_US"><Text>These original effects are tied to the original civilization and are NOT inherited when activated:</Text></Row>
+		<Row Tag="LOC_CQ_NI_ADJACENCY" Language="en_US"><Text>Its removed district adjacency rules (your districts keep the usual adjacency bonuses).</Text></Row>
+		<Row Tag="LOC_CQ_NI_DISTRICT" Language="en_US"><Text>Cannot build the {1_District}.</Text></Row>
+		<Row Tag="LOC_CQ_NI_GREAT_PERSON" Language="en_US"><Text>Cannot earn {1_Class}.</Text></Row>
+		<Row Tag="LOC_CQ_NI_GOVERNOR" Language="en_US"><Text>The unique governor {1_Governor}.</Text></Row>
+		<Row Tag="LOC_CQ_NI_VISIBILITY" Language="en_US"><Text>Extra diplomatic visibility.</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_TITLE" Language="en_US"><Text>Activate abilities with drawbacks?</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_TEXT" Language="en_US"><Text>These abilities also bring the drawbacks below. Activation cannot be undone; the drawbacks stay for the rest of the game.</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE" Language="en_US"><Text>Activate</Text></Row>
@@ -174,6 +180,12 @@
 		<Row Tag="LOC_CQ_OPTION_NEGATIVE_CONFIRM_DESCRIPTION" Language="zh_Hans_CN"><Text>能力按原样激活，负面效果一并生效。激活带负面效果的能力前，会弹窗列出这些效果，确认后才激活。</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你不生效）：</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你生效，且无法撤销）：</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_NOT_INHERITED" Language="zh_Hans_CN"><Text>以下原版效果只对原文明生效，激活后不会继承：</Text></Row>
+		<Row Tag="LOC_CQ_NI_ADJACENCY" Language="zh_Hans_CN"><Text>该文明被取消的区域相邻加成规则（你的区域保留通常的相邻加成）。</Text></Row>
+		<Row Tag="LOC_CQ_NI_DISTRICT" Language="zh_Hans_CN"><Text>不能建造{1_District}。</Text></Row>
+		<Row Tag="LOC_CQ_NI_GREAT_PERSON" Language="zh_Hans_CN"><Text>不能获得{1_Class}。</Text></Row>
+		<Row Tag="LOC_CQ_NI_GOVERNOR" Language="zh_Hans_CN"><Text>专属总督{1_Governor}。</Text></Row>
+		<Row Tag="LOC_CQ_NI_VISIBILITY" Language="zh_Hans_CN"><Text>额外的外交能见度。</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_TITLE" Language="zh_Hans_CN"><Text>激活带负面效果的能力？</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_TEXT" Language="zh_Hans_CN"><Text>以下能力会同时带来这些负面效果。激活后无法撤销，负面效果在本局游戏中一直有效。</Text></Row>
 		<Row Tag="LOC_CQ_CONFIRM_ACTIVATE" Language="zh_Hans_CN"><Text>激活</Text></Row>

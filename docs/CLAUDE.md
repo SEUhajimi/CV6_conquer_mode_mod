@@ -17,6 +17,7 @@
     - 处理 UI 请求的 GameEvents 回调要先校验参数类型：参数来自网络。
     - 不要在 `GameEvents.CityConquered` 里做重活（挂修改器、`WorldBuilder` 改区域），记个标记，留到 `PlayerTurnStarted` 处理（AI 自动激活就是这样做的）。
     - 能力里的负面效果登记在 `CQ_NegativeModifiers`（按修改器，附说明文字）。开局选项 `GAMEOPTION_CIV_CONQUEST_NEGATIVE`：1 = 激活时跳过这些修改器，2 = 照常挂上、面板激活前弹窗确认；旧存档没有该值按 2 处理。新增负面条目时要确认它不是和正面效果配对抵消的（如拉美西斯的建筑 -15% 文化）。
+    - 面板在非原生能力下还会列出“不会继承的原版效果”（`BuildNotInheritedLines`）：`ExcludedAdjacencies`、`ExcludedDistricts`、`ExcludedGreatPersonClasses`、`Governors`、`DiplomaticVisibilitySources` 这些带 `TraitType` 的表由引擎按原生特性判定，激活拿不到。发现新的这类表时加到这里。
     - 联机一致性检查：UI 读档时用 `DB.Query` 遍历整个 Gameplay 数据库算指纹（`CQ.GetFingerprint()`，每次进入游戏算一次并缓存；`DB.Query` 不可用时退回到 `GameInfo` 的几张核心表），经 `EXECUTE_SCRIPT` 上报到玩家属性，各电脑的 UI 互相比对，不一致时弹窗。**改了 Lua 后把 `CQ.VERSION` 加 1**：只改 Lua 时数据库不变，靠它发现两边脚本版本不同。
   - `ArtDefs/Landmarks.artdef`：**生成文件，不要手改**，见下文。
 - `tools/gen_landmarks.py`：开发脚本，不进游戏。

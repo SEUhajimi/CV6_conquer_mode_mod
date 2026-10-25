@@ -278,11 +278,56 @@ local function BuildNegativeLines(traitType:string)
 	return lines;
 end
 
-local function BuildTraitNotes(traitType:string)
-	local lines = BuildNegativeLines(traitType);
-	if #lines == 0 then return nil; end
-	local header = (CQ.GetNegativeMode() == CQ.NEGATIVE_SKIP) and "LOC_CQ_NOTE_NEGATIVE_SKIPPED" or "LOC_CQ_NOTE_NEGATIVE_KEPT";
-	return "[COLOR_Civ6Yellow]" .. Locale.Lookup(header) .. "[ENDCOLOR][NEWLINE]" .. table.concat(lines, "[NEWLINE]");
+--	按原文明判定、激活后不会继承的原版效果（引擎只认原生拥有该特性的玩家）。没有则返回空表
+local function BuildNotInheritedLines(traitType:string)
+	local lines = {};
+	local function Add(text) table.insert(lines, "[ICON_Bullet]" .. text); end
+	if GameInfo.ExcludedAdjacencies ~= nil then
+		for row in GameInfo.ExcludedAdjacencies() do
+			if row.TraitType == traitType then
+				Add(Locale.Lookup("LOC_CQ_NI_ADJACENCY"));
+				break;
+			end
+		end
+	end
+	if GameInfo.ExcludedDistricts ~= nil then
+		for row in GameInfo.ExcludedDistricts() do
+			if row.TraitType == traitType then Add(Locale.Lookup("LOC_CQ_NI_DISTRICT", TypeName("Districts", row.DistrictType))); end
+		end
+	end
+	if GameInfo.ExcludedGreatPersonClasses ~= nil then
+		for row in GameInfo.ExcludedGreatPersonClasses() do
+			if row.TraitType == traitType then Add(Locale.Lookup("LOC_CQ_NI_GREAT_PERSON", TypeName("GreatPersonClasses", row.GreatPersonClassType))); end
+		end
+	end
+	if GameInfo.Governors ~= nil then
+		for row in GameInfo.Governors() do
+			if row.TraitType == traitType then Add(Locale.Lookup("LOC_CQ_NI_GOVERNOR", Locale.Lookup(row.Name))); end
+		end
+	end
+	if GameInfo.DiplomaticVisibilitySources ~= nil then
+		for row in GameInfo.DiplomaticVisibilitySources() do
+			if row.TraitType == traitType then Add(Locale.Lookup("LOC_CQ_NI_VISIBILITY")); end
+		end
+	end
+	return lines;
+end
+
+--	激活相关说明：负面效果是否生效、哪些原版效果不会继承。原生拥有的能力不显示。没有则返回 nil
+local function BuildTraitNotes(traitType:string, isNative:boolean)
+	if isNative then return nil; end
+	local sections = {};
+	local negatives = BuildNegativeLines(traitType);
+	if #negatives > 0 then
+		local header = (CQ.GetNegativeMode() == CQ.NEGATIVE_SKIP) and "LOC_CQ_NOTE_NEGATIVE_SKIPPED" or "LOC_CQ_NOTE_NEGATIVE_KEPT";
+		table.insert(sections, "[COLOR_Civ6Yellow]" .. Locale.Lookup(header) .. "[ENDCOLOR][NEWLINE]" .. table.concat(negatives, "[NEWLINE]"));
+	end
+	local notInherited = BuildNotInheritedLines(traitType);
+	if #notInherited > 0 then
+		table.insert(sections, "[COLOR_Civ6Yellow]" .. Locale.Lookup("LOC_CQ_NOTE_NOT_INHERITED") .. "[ENDCOLOR][NEWLINE]" .. table.concat(notInherited, "[NEWLINE]"));
+	end
+	if #sections == 0 then return nil; end
+	return table.concat(sections, "[NEWLINE][NEWLINE]");
 end
 
 --	“激活前确认”模式下，带负面效果的特性要先弹窗确认
@@ -290,7 +335,7 @@ local function NeedsConfirm(traitType:string)
 	return CQ.GetNegativeMode() == CQ.NEGATIVE_CONFIRM and #CQ.GetTraitNegativeTexts(traitType) > 0;
 end
 
-local function BuildEntryTexts(entry:table)
+local function BuildEntryTexts(entry:table, isNative:boolean)
 	local name, description, iconName;
 
 	if #entry.Items == 0 then
@@ -334,7 +379,7 @@ local function BuildEntryTexts(entry:table)
 		description = table.concat(descriptions, "[NEWLINE][NEWLINE]");
 		iconName = "ICON_" .. entry.Items[1].Type;
 	end
-	local notes = BuildTraitNotes(entry.TraitType);
+	local notes = BuildTraitNotes(entry.TraitType, isNative);
 	if notes ~= nil then
 		description = description .. "[NEWLINE][NEWLINE]" .. notes;
 	end
@@ -393,14 +438,14 @@ local function RefreshDetail()
 
 	for _, entry in ipairs(entries) do
 		local inst = m_TraitIM:GetInstance();
-		local name, description, iconName = BuildEntryTexts(entry);
+		local isNative = CQ.HasTraitNatively(playerID, entry.TraitType);
+		local name, description, iconName = BuildEntryTexts(entry, isNative);
 
 		inst.Category:SetText(Locale.Lookup(CATEGORY_LABELS[entry.Category] or "LOC_CQ_CATEGORY_CIV_ABILITY"));
 		inst.Name:SetText(name);
 		inst.Description:SetText(description);
 		SetIconWithFallback(inst.Icon, iconName, ITEM_ICON_SIZES);
 
-		local isNative = CQ.HasTraitNatively(playerID, entry.TraitType);
 		local isActive = CQ.IsTraitActivated(playerID, entry.TraitType);
 		local conflict = (not isNative and not isActive) and CQ.GetTraitConflict(playerID, entry.TraitType) or nil;
 

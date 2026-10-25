@@ -79,6 +79,7 @@ UI 通过 `UI.RequestPlayerOperation(..., PlayerOperations.EXECUTE_SCRIPT, ...)`
 - 激活得来的特色区域没有自己的模型和放置限制，地图上仍是基础区域。相邻资源加成、专家和贸易路线产出、城防 / 区域控制、不占人口上限等效果无法迁移；基础区域原有的相邻加成会保留。
 - 原本不可训练的特色单位（如大哥伦比亚的总指挥）不会解锁生产，只能通过激活对应能力按原机制获得。
 - 修改器里如果带有「玩家拥有某 Trait」的需求条件，通过激活获得时该条件不满足。
+- 有些原版效果不是修改器，而是引擎按「原生拥有该特性」判定的，激活后不会继承，好坏都一样：被取消的区域相邻加成（高卢、日本、巴西、立陶宛）、禁建区域和禁止获得的伟人（姆本巴不能建圣地、不能获得大先知，毛利不能获得大作家）、专属总督（苏莱曼的易卜拉欣）、外交能见度（凯瑟琳·德·美第奇）。面板上会在对应能力下列出。
 
 ### 排查问题
 
@@ -164,6 +165,7 @@ The gameplay SQL runs with `LoadOrder` 20000, after other civilization mods, so 
 - Activated unique districts have no model or placement rules of their own; on the map they remain the base district. Resource adjacency, specialist and trade route yields, city defense / zone of control and not counting toward the population limit can't be carried over, and the base district keeps its own adjacency bonuses.
 - Unique units that can't normally be trained (e.g. Gran Colombia's Comandante General) are not opened for production; you get them through the original mechanism by activating the matching ability.
 - Modifiers that require "player has trait X" won't have that requirement met when the ability is gained through activation.
+- Some original effects aren't modifiers but are checked by the engine against the native trait, so they are never inherited, good or bad: removed district adjacency rules (Gaul, Japan, Brazil, Lithuania), excluded districts and Great People (Mvemba can't build Holy Sites or earn Great Prophets, the Māori can't earn Great Writers), unique governors (Suleiman's Ibrahim) and diplomatic visibility (Catherine de Medici). The panel lists them under the ability.
 
 ### Troubleshooting
 
