@@ -149,6 +149,17 @@ INSERT OR REPLACE INTO BuildingConditions (BuildingType, UnlocksFromEffect)
 UPDATE Buildings SET TraitType = NULL
 	WHERE BuildingType IN (SELECT ItemType FROM CQ_TraitItems WHERE ItemKind = 'BUILDING');
 
+-- 加载界面和外交界面（Civ6Common.lua 的 GetLeaderUniqueTraits / GetCivilizationUniqueTraits）靠
+-- Buildings.TraitType 找特色建筑。清空后，只带特色建筑的特性（如日本的电子厂）会被当成“特色能力”显示，
+-- 而这类特性没有 Description，界面上就露出占位符 $Description$。给它们补上建筑的说明。
+UPDATE Traits SET Description = (
+		SELECT b.Description FROM CQ_TraitItems ti JOIN Buildings b ON b.BuildingType = ti.ItemType
+		WHERE ti.TraitType = Traits.TraitType AND ti.ItemKind = 'BUILDING' AND b.Description IS NOT NULL
+		ORDER BY ti.ItemType LIMIT 1)
+	WHERE Description IS NULL
+		AND TraitType IN (SELECT TraitType FROM CQ_TraitItems WHERE ItemKind = 'BUILDING')
+		AND TraitType NOT IN (SELECT TraitType FROM CQ_TraitItems WHERE ItemKind <> 'BUILDING');
+
 -- -----------------------------------------------------------------------------
 -- 特色区域：效果加到激活者的基础区域上
 -- -----------------------------------------------------------------------------
