@@ -151,6 +151,27 @@ local function RevertConvertedDistricts(playerID:number)
 end
 
 -- ===========================================================================
+--	特性上指定了特色区域的修改器（见 SQL 的 CQ_DistrictTraitModifiers）：
+--	复制品把特色区域换成了基础区域，要“原修改器所在的特性已拥有（原生或激活）、
+--	特色区域的特性已激活且不是原生”时才挂。两个特性可能先后激活，所以激活时和回合开始时都检查一遍。
+-- ===========================================================================
+local function AttachDistrictTraitModifiers(playerID:number)
+	local pPlayer = Players[playerID];
+	if pPlayer == nil or GameInfo.CQ_DistrictTraitModifiers == nil then return; end
+	for row in GameInfo.CQ_DistrictTraitModifiers() do		-- 数据库顺序，各电脑一致
+		local modifierId = row.ModifierId;
+		if pPlayer:GetProperty(PROP_ACTIVATION_MOD .. modifierId) ~= 1
+			and CQ.IsTraitActivated(playerID, row.DistrictTraitType)
+			and not CQ.HasTraitNatively(playerID, row.DistrictTraitType)
+			and CQ.IsTraitOwned(playerID, row.TraitType) then
+			pPlayer:AttachModifierByID(modifierId);
+			pPlayer:SetProperty(PROP_ACTIVATION_MOD .. modifierId, 1);
+			Log("Player", playerID, "attached district trait modifier", modifierId);
+		end
+	end
+end
+
+-- ===========================================================================
 --	激活一个特性
 -- ===========================================================================
 local function ActivateTrait(playerID:number, traitType:string)
@@ -178,6 +199,7 @@ local function ActivateTrait(playerID:number, traitType:string)
 	end
 	pPlayer:SetProperty(CQ.PROP_TRAIT .. traitType, 1);
 	Log("Player", playerID, "activated", traitType);
+	AttachDistrictTraitModifiers(playerID);
 	return true;
 end
 
@@ -202,6 +224,7 @@ local function AttachMissingActivationModifiers(playerID:number)
 			end
 		end
 	end
+	AttachDistrictTraitModifiers(playerID);		-- 更新前就激活的（如已激活马场）在这里补上
 end
 
 -- ===========================================================================

@@ -46,7 +46,11 @@
 		<UpdateIcons id="CivConquest_Icons" criteria="CivConquest_Mode">
 			<File>Data/CivConquest_Icons.xml</File>
 		</UpdateIcons>
+		<!-- 晚于风云变幻加载，覆盖攻城锤 / 攻城塔的原版说明 -->
 		<UpdateText id="CivConquest_Text" criteria="CivConquest_Mode">
+			<Properties>
+				<LoadOrder>20000</LoadOrder>
+			</Properties>
 			<File>Text/CivConquest_Text.xml</File>
 		</UpdateText>
 		<ImportFiles id="CivConquest_Imports" criteria="CivConquest_Mode">

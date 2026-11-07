@@ -495,6 +495,54 @@ INSERT OR IGNORE INTO CQ_DistrictBonusInfo (ModifierId, DistrictType, Kind, Amou
 INSERT OR IGNORE INTO CQ_ActivationModifiers (TraitType, ModifierId)
 	SELECT TraitType, ModifierId FROM CQ_DistrictBonuses;
 
+-- 8. 特性上指定了特色区域的修改器：复制一份，区域换成基础区域
+--   有些效果不是区域自带的，而是挂在特性上、参数写死了特色区域，例如
+--   拜占庭马场送重骑兵（马场自己的特性）、狄奥多拉“马场相邻农场 +1 信仰”（领袖能力）、
+--   姆本巴建成 Mbanza 送使徒、维多利亚皇家海军船坞送海军单位、高卢 Oppidum 相邻改良加成。
+--   激活者不建造特色区域，原修改器永远不触发，所以复制一份把 DistrictType 换成基础区域。
+--   复制品不进 TraitModifiers（原文明不会拿到），由 Lua 在“原修改器所在的特性已拥有（原生或激活）
+--   且特色区域的特性已激活、不是原生”时挂上（见 Gameplay 脚本 AttachDistrictTraitModifiers）。
+CREATE TABLE IF NOT EXISTS CQ_DistrictTraitModifiers (
+	ModifierId TEXT NOT NULL,			-- 复制出来的修改器
+	OriginalModifierId TEXT NOT NULL,
+	TraitType TEXT NOT NULL,			-- 原修改器所在的特性
+	DistrictTraitType TEXT NOT NULL,	-- 特色区域所属的特性
+	DistrictType TEXT NOT NULL,
+	BaseDistrictType TEXT NOT NULL,
+	PRIMARY KEY (ModifierId)
+);
+
+INSERT OR IGNORE INTO CQ_DistrictTraitModifiers (ModifierId, OriginalModifierId, TraitType, DistrictTraitType, DistrictType, BaseDistrictType)
+	SELECT 'CQ_DT_' || tm.ModifierId || '_' || u.BaseDistrictType, tm.ModifierId, tm.TraitType, u.TraitType, u.DistrictType, u.BaseDistrictType
+	FROM TraitModifiers tm
+	JOIN ModifierArguments a ON a.ModifierId = tm.ModifierId AND a.Name = 'DistrictType'
+	JOIN CQ_UniqueDistricts u ON u.DistrictType = a.Value
+	WHERE tm.TraitType IN (SELECT TraitType FROM CQ_Traits)
+		AND tm.ModifierId NOT LIKE 'CQ_%';
+
+INSERT OR IGNORE INTO Modifiers (ModifierId, ModifierType, RunOnce, NewOnly, Permanent, Repeatable,
+		OwnerRequirementSetId, SubjectRequirementSetId, OwnerStackLimit, SubjectStackLimit)
+	SELECT x.ModifierId, m.ModifierType, m.RunOnce, m.NewOnly, m.Permanent, m.Repeatable,
+		m.OwnerRequirementSetId, m.SubjectRequirementSetId, m.OwnerStackLimit, m.SubjectStackLimit
+	FROM CQ_DistrictTraitModifiers x JOIN Modifiers m ON m.ModifierId = x.OriginalModifierId;
+
+INSERT OR IGNORE INTO ModifierArguments (ModifierId, Name, Type, Value, Extra, SecondExtra)
+	SELECT x.ModifierId, a.Name, a.Type,
+		CASE WHEN a.Name = 'DistrictType' AND a.Value = x.DistrictType THEN x.BaseDistrictType ELSE a.Value END,
+		a.Extra, a.SecondExtra
+	FROM CQ_DistrictTraitModifiers x JOIN ModifierArguments a ON a.ModifierId = x.OriginalModifierId;
+
+INSERT OR IGNORE INTO ModifierStrings (ModifierId, Context, Text)
+	SELECT x.ModifierId, s.Context, s.Text
+	FROM CQ_DistrictTraitModifiers x JOIN ModifierStrings s ON s.ModifierId = x.OriginalModifierId;
+
+-- 面板说明：Target 是原修改器所在的特性；送单位的单独一类
+INSERT OR IGNORE INTO CQ_DistrictBonusInfo (ModifierId, DistrictType, Kind, Target)
+	SELECT x.ModifierId, x.DistrictType,
+		CASE WHEN m.ModifierType LIKE '%CREATE_UNIT%' OR m.ModifierType LIKE '%ADD_NAVAL_UNIT%' THEN 'TRAIT_UNIT' ELSE 'TRAIT_EFFECT' END,
+		x.TraitType
+	FROM CQ_DistrictTraitModifiers x JOIN Modifiers m ON m.ModifierId = x.OriginalModifierId;
+
 -- -----------------------------------------------------------------------------
 -- 把建筑、改良的解锁修改器挂到原特性上：原文明照常拥有，激活该特性的征服者也一并获得
 -- （单位的解锁修改器不挂在这里，见上文 CQ_ActivationModifiers）
@@ -539,3 +587,50 @@ INSERT OR IGNORE INTO CQ_NegativeModifiers (TraitType, ModifierId, Description)
 		UNION ALL SELECT 'JANISSARY_LOSE_POPULATION_IN_FOUNDED_CITIES', 'LOC_CQ_NEG_JANISSARY_POPULATION'
 	) x ON x.ModifierId = tm.ModifierId
 	WHERE tm.TraitType IN (SELECT TraitType FROM CQ_Traits);
+
+-- -----------------------------------------------------------------------------
+-- 攻城锤、攻城塔加强：移动力 +1，各自对高一级的城墙也生效
+--   攻城锤：原版对中世纪城墙（城堡）无效，现在也能全额伤害；文艺复兴城墙仍无效。
+--   攻城塔：原版对文艺复兴城墙（星形要塞）无效，现在也能无视。
+-- 等级限制来自城墙建筑自带的修改器（PREVENT_MELEE_ATTACK / PREVENT_BYPASS），
+-- 去掉对应等级上的这些修改器即可；取代这两种城墙的特色建筑（如格鲁吉亚的 Tsikhe）一并处理。
+-- 城市防御（Urban Defenses）的限制在引擎里，改不了。没装风云变幻时这些行不存在，自动略过。
+-- -----------------------------------------------------------------------------
+UPDATE Units SET BaseMoves = BaseMoves + 1
+	WHERE UnitType IN ('UNIT_BATTERING_RAM', 'UNIT_SIEGE_TOWER')
+		OR UnitType IN (SELECT CivUniqueUnitType FROM UnitReplaces
+			WHERE ReplacesUnitType IN ('UNIT_BATTERING_RAM', 'UNIT_SIEGE_TOWER'));
+
+CREATE TABLE IF NOT EXISTS CQ_DisabledWallModifiers (
+	ModifierId TEXT NOT NULL,
+	PRIMARY KEY (ModifierId)
+);
+
+INSERT OR IGNORE INTO CQ_DisabledWallModifiers (ModifierId)
+	SELECT bm.ModifierId FROM BuildingModifiers bm JOIN Modifiers m ON m.ModifierId = bm.ModifierId
+	WHERE (m.ModifierType = 'MODIFIER_SINGLE_CITY_ADJUST_PREVENT_MELEE_ATTACK_OUTER_DEFENSES'
+			AND (bm.BuildingType = 'BUILDING_CASTLE' OR bm.BuildingType IN
+				(SELECT CivUniqueBuildingType FROM BuildingReplaces WHERE ReplacesBuildingType = 'BUILDING_CASTLE')))
+		OR (m.ModifierType = 'MODIFIER_SINGLE_CITY_ADJUST_PREVENT_BYPASS_OUTER_DEFENSE'
+			AND (bm.BuildingType = 'BUILDING_STAR_FORT' OR bm.BuildingType IN
+				(SELECT CivUniqueBuildingType FROM BuildingReplaces WHERE ReplacesBuildingType = 'BUILDING_STAR_FORT')));
+
+DELETE FROM BuildingModifiers WHERE ModifierId IN (SELECT ModifierId FROM CQ_DisabledWallModifiers);
+
+-- 旧存档里已建好的城墙可能已挂着这些修改器：加上永不满足的城市条件使其失效
+-- （CQ_REQSET_NEVER 是玩家条件，城邦不受影响，这里要对所有城市失效，另建一个）
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType)
+	VALUES ('CQ_REQ_CITY_HAS_PALACE', 'REQUIREMENT_CITY_HAS_BUILDING');
+INSERT OR IGNORE INTO Requirements (RequirementId, RequirementType, Inverse)
+	VALUES ('CQ_REQ_CITY_NO_PALACE', 'REQUIREMENT_CITY_HAS_BUILDING', 1);
+INSERT OR IGNORE INTO RequirementArguments (RequirementId, Name, Value)
+	VALUES ('CQ_REQ_CITY_HAS_PALACE', 'BuildingType', 'BUILDING_PALACE'),
+		('CQ_REQ_CITY_NO_PALACE', 'BuildingType', 'BUILDING_PALACE');
+INSERT OR IGNORE INTO RequirementSets (RequirementSetId, RequirementSetType)
+	VALUES ('CQ_REQSET_CITY_NEVER', 'REQUIREMENTSET_TEST_ALL');
+INSERT OR IGNORE INTO RequirementSetRequirements (RequirementSetId, RequirementId)
+	VALUES ('CQ_REQSET_CITY_NEVER', 'CQ_REQ_CITY_HAS_PALACE'),
+		('CQ_REQSET_CITY_NEVER', 'CQ_REQ_CITY_NO_PALACE');
+
+UPDATE Modifiers SET SubjectRequirementSetId = 'CQ_REQSET_CITY_NEVER'
+	WHERE ModifierId IN (SELECT ModifierId FROM CQ_DisabledWallModifiers);

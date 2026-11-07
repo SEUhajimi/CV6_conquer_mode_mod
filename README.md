@@ -23,6 +23,8 @@
 
   面板上会在每个能力下列出它的负面效果，并注明激活后是否生效。
 
+- 本模式下攻城锤、攻城塔加强（需要「风云变幻」）：两者移动力各 +1；攻城锤对中世纪城墙也能造成全额伤害（文艺复兴城墙仍无效），攻城塔也能无视文艺复兴城墙。对城市防御仍然无效。
+
 ### 安装
 
 1. 把 `CivConquestMode` 文件夹复制到 `文档\My Games\Sid Meier's Civilization VI\Mods\`。只需要这一个文件夹，仓库里的其他内容（`tools/`、`docs/`、`workshop/`、`README.md`、`LICENSE`）不用放进游戏。
@@ -60,7 +62,7 @@ python tools/gen_landmarks.py "D:\Steam\steamapps\common\Sid Meier's Civilizatio
 | 特色单位 | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD`（结社模式「邪教徒」使用的同一机制），只在征服者激活时由脚本挂上；不挂到原特性上，否则原文明会重新能造被取代的基础单位（如巴西尔的拜占庭能造骑士） |
 | 特色改良 | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT`（城邦宗主独特改良使用的同一机制） |
 | 特色建筑 | 去掉 `TraitType`，改为 `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING`（结社模式建筑的做法）；原文明通过自身 Trait 照常获得 |
-| 特色区域 | 引擎只把原文明的特色区域当成基础区域（激活者的特色区域里造不了任何基础区域建筑），所以激活者不建造特色区域，而是把特色区域的效果以修改器的形式加到自己的基础区域上：区域自带修改器、相邻加成、自身产出、伟人点数、住房、宜居度、造价减半（建造该基础区域时生产力 +100%） |
+| 特色区域 | 引擎只把原文明的特色区域当成基础区域（激活者的特色区域里造不了任何基础区域建筑），所以激活者不建造特色区域，而是把特色区域的效果以修改器的形式加到自己的基础区域上：区域自带修改器、相邻加成、自身产出、伟人点数、住房、宜居度、造价减半（建造该基础区域时生产力 +100%）。写在特性上、指定了特色区域的效果（拜占庭马场送重骑兵、狄奥多拉马场旁农场 +1 信仰、姆本巴建成 Mbanza 送使徒、维多利亚皇家海军船坞送海军单位、高卢 Oppidum 旁矿山加成）复制一份改成基础区域；领袖 / 文明能力里的这类效果要同时激活对应的特色区域才生效 |
 
 **为什么不直接把基础区域转换成特色区域**：早期版本就是这么做的，但引擎只把原文明自己的特色区域当成基础区域（建筑的前置区域 `PrereqDistrict` 在引擎内部判定）。激活者转换得来的特色区域里造不了任何基础区域的建筑，例如转换来的越南 Thanh 里造不了兵营。试过的绕法都不行：去掉特色区域的 `TraitType`、用 `WorldBuilder` 直接放建筑（报 `NeededDistrict`）、副本建筑、标记建筑、`GRANT_BUILDING_IN_CITY_IGNORE`。所以改为建造基础区域，再把特色区域的效果以修改器的形式加上去。
 
@@ -109,6 +111,8 @@ A game mode mod for Civilization VI. Enable it under **Game Modes** when setting
 
   The panel lists each ability's drawbacks under it and says whether they will apply.
 
+- In this mode Battering Rams and Siege Towers are stronger (requires Gathering Storm): both get +1 Movement; Battering Rams also do full damage to Medieval Walls (still not Renaissance Walls), and Siege Towers also bypass Renaissance Walls. Neither works against Urban Defenses.
+
 ### Installation
 
 1. Copy the `CivConquestMode` folder to `Documents\My Games\Sid Meier's Civilization VI\Mods\`. That folder is all the game needs; the rest of the repository (`tools/`, `docs/`, `workshop/`, `README.md`, `LICENSE`) stays out of the game.
@@ -146,7 +150,7 @@ The argument is the game install directory; without it the script uses the defau
 | Unique units | `MODIFIER_PLAYER_ADJUST_VALID_UNIT_BUILD` (the same mechanism Secret Societies uses for the Cultist), attached by the script only when a conqueror activates the trait; it is not attached to the original trait, otherwise the original civilization could build the replaced base unit again (e.g. Basil's Byzantium could build Knights) |
 | Unique improvements | `MODIFIER_PLAYER_ADJUST_VALID_IMPROVEMENT` (the same mechanism city-state suzerain improvements use) |
 | Unique buildings | `TraitType` is cleared and replaced by `BuildingConditions.UnlocksFromEffect` + `MODIFIER_PLAYER_ADJUST_VALID_BUILDING` (as Secret Societies buildings do); the original civilization still gets them through its own trait |
-| Unique districts | The engine only treats the original civilization's unique districts as their base district (no base-district building can be built in an activated one), so you don't build the unique district; its effects are added to your base districts as modifiers: the district's own modifiers, adjacency bonuses, base yields, Great Person points, housing, amenities, and the halved cost (+100% production toward that base district) |
+| Unique districts | The engine only treats the original civilization's unique districts as their base district (no base-district building can be built in an activated one), so you don't build the unique district; its effects are added to your base districts as modifiers: the district's own modifiers, adjacency bonuses, base yields, Great Person points, housing, amenities, and the halved cost (+100% production toward that base district). Effects defined on a trait that name the unique district (Byzantium's Hippodrome heavy cavalry, Theodora's +1 Faith for farms next to a Hippodrome, Mvemba's Apostle on finishing an Mbanza, Victoria's naval unit from the Royal Navy Dockyard, Gaul's mine bonus next to an Oppidum) are copied to the base district; when they belong to a leader or civilization ability, the matching unique district must be activated too |
 
 **Why unique districts aren't converted**: early versions converted the base district into the unique one, but the engine only treats the original civilization's own unique districts as their base district (a building's `PrereqDistrict` is checked inside the engine). No base-district building could be built in a converted one; for example, a converted Vietnamese Thanh couldn't build Barracks. Nothing worked around it: clearing the district's `TraitType`, placing the building with `WorldBuilder` (fails with `NeededDistrict`), duplicate buildings, marker buildings, `GRANT_BUILDING_IN_CITY_IGNORE`. So you build the base district instead and the unique district's effects are added to it as modifiers.
 

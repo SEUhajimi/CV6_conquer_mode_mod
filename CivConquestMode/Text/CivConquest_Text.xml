@@ -43,6 +43,17 @@
 		<Row Tag="LOC_CQ_DB_HOUSING" Language="en_US"><Text>{1_Amount} [ICON_Housing] Housing</Text></Row>
 		<Row Tag="LOC_CQ_DB_AMENITY" Language="en_US"><Text>{1_Amount} [ICON_Amenities] Amenity</Text></Row>
 		<Row Tag="LOC_CQ_DB_SPECIAL" Language="en_US"><Text>The district's special effects described above</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_UNIT" Language="en_US"><Text>The units the original grants for this district now come from your {1_Base} instead (same trigger as the original)</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_EFFECT" Language="en_US"><Text>The original's other effects tied to this district now apply to your {1_Base}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_NEEDS" Language="en_US"><Text> (part of {1_Ability}; needs that ability activated too)</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_BUILDINGS" Language="en_US"><Text>Each time your {1_Base} or a building in it is completed, gain a {2_Unit}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_DISTRICT" Language="en_US"><Text>Completing your {1_Base} grants a {2_Unit}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_CLASS" Language="en_US"><Text>{1_Class} unit (the strongest you can currently build)</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_NAVAL" Language="en_US"><Text>naval unit</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_ABILITY" Language="en_US"><Text>, with "{1_Name}": {2_Desc}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_TIMING" Language="en_US"><Text> (only for ones completed after activation; nothing for ones already built)</Text></Row>
+		<Row Tag="LOC_CQ_DB_TE_IMPROVEMENT" Language="en_US"><Text>{1_Improvement} adjacent to your {2_Base}: {3_Amount} {4_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TE_IMPROVEMENT_TILES" Language="en_US"><Text>{1_Improvement}: {4_Amount} {5_Icon} for every {2_Num} adjacent {3_Base}</Text></Row>
 		<Row Tag="LOC_CQ_DB_LOST" Language="en_US"><Text>Not inherited: {1_List}</Text></Row>
 		<Row Tag="LOC_CQ_DB_LIST_SEPARATOR" Language="en_US"><Text>; </Text></Row>
 		<Row Tag="LOC_CQ_DB_LOST_MODEL" Language="en_US"><Text>its look (it stays a {1_Base} on the map)</Text></Row>
@@ -65,6 +76,9 @@
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="en_US"><Text>Drawbacks of this ability (will NOT apply to you when activated):</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="en_US"><Text>Drawbacks of this ability (will apply to you when activated, and cannot be undone):</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NOT_INHERITED" Language="en_US"><Text>These original effects are tied to the original civilization and are NOT inherited when activated:</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED" Language="en_US"><Text>Some effects of this ability are tied to a unique district:</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED_LINE" Language="en_US"><Text>The {1_District} parts: also activate {1_District}; they then apply to your {2_Base}</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED_EFFECT" Language="en_US"><Text>{1_Effect}: needs {2_District} activated too; activating this ability alone does not give it</Text></Row>
 		<Row Tag="LOC_CQ_NI_ADJACENCY" Language="en_US"><Text>The standard adjacency bonuses it removes (you keep them; its own adjacency bonuses are still inherited).</Text></Row>
 		<Row Tag="LOC_CQ_NI_DISTRICT" Language="en_US"><Text>Cannot build the {1_District}.</Text></Row>
 		<Row Tag="LOC_CQ_NI_GREAT_PERSON" Language="en_US"><Text>Cannot earn {1_Class}.</Text></Row>
@@ -159,6 +173,17 @@
 		<Row Tag="LOC_CQ_DB_HOUSING" Language="zh_Hans_CN"><Text>{1_Amount} [ICON_Housing]住房</Text></Row>
 		<Row Tag="LOC_CQ_DB_AMENITY" Language="zh_Hans_CN"><Text>{1_Amount} [ICON_Amenities]宜居度</Text></Row>
 		<Row Tag="LOC_CQ_DB_SPECIAL" Language="zh_Hans_CN"><Text>上述原版能力中该区域自带的特殊效果</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_UNIT" Language="zh_Hans_CN"><Text>原版在该区域上送单位的效果，改为在你的{1_Base}上触发（触发条件和原版一样）</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_EFFECT" Language="zh_Hans_CN"><Text>原版和该区域有关的其他效果，改为对你的{1_Base}生效</Text></Row>
+		<Row Tag="LOC_CQ_DB_TRAIT_NEEDS" Language="zh_Hans_CN"><Text>（属于“{1_Ability}”，要同时激活该能力）</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_BUILDINGS" Language="zh_Hans_CN"><Text>你的{1_Base}和其中的每座建筑建成时，各获得一个{2_Unit}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_DISTRICT" Language="zh_Hans_CN"><Text>你的{1_Base}建成时获得一个{2_Unit}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_CLASS" Language="zh_Hans_CN"><Text>{1_Class}单位（当前可造的最强一种）</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_NAVAL" Language="zh_Hans_CN"><Text>海军单位</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_ABILITY" Language="zh_Hans_CN"><Text>，该单位带有“{1_Name}”：{2_Desc}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TU_TIMING" Language="zh_Hans_CN"><Text>（激活之后建成的才算，之前已建成的不补送）</Text></Row>
+		<Row Tag="LOC_CQ_DB_TE_IMPROVEMENT" Language="zh_Hans_CN"><Text>与你的{2_Base}相邻的{1_Improvement} {3_Amount} {4_Icon}</Text></Row>
+		<Row Tag="LOC_CQ_DB_TE_IMPROVEMENT_TILES" Language="zh_Hans_CN"><Text>{1_Improvement}每相邻{2_Num}个你的{3_Base} {4_Amount} {5_Icon}</Text></Row>
 		<Row Tag="LOC_CQ_DB_LOST" Language="zh_Hans_CN"><Text>未继承：{1_List}</Text></Row>
 		<Row Tag="LOC_CQ_DB_LIST_SEPARATOR" Language="zh_Hans_CN"><Text>、</Text></Row>
 		<Row Tag="LOC_CQ_DB_LOST_MODEL" Language="zh_Hans_CN"><Text>外观（地图上仍是{1_Base}）</Text></Row>
@@ -181,6 +206,9 @@
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_SKIPPED" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你不生效）：</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NEGATIVE_KEPT" Language="zh_Hans_CN"><Text>该能力的负面效果（激活后对你生效，且无法撤销）：</Text></Row>
 		<Row Tag="LOC_CQ_NOTE_NOT_INHERITED" Language="zh_Hans_CN"><Text>以下原版效果只对原文明生效，激活后不会继承：</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED" Language="zh_Hans_CN"><Text>本能力里有和特色区域有关的效果：</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED_LINE" Language="zh_Hans_CN"><Text>和{1_District}有关的部分：要同时激活{1_District}，之后对你的{2_Base}生效</Text></Row>
+		<Row Tag="LOC_CQ_NOTE_DISTRICT_LINKED_EFFECT" Language="zh_Hans_CN"><Text>{1_Effect}：要同时激活{2_District}才生效，只激活本能力不会获得</Text></Row>
 		<Row Tag="LOC_CQ_NI_ADJACENCY" Language="zh_Hans_CN"><Text>该文明被去掉的常规相邻加成（你仍保留这些加成；它自己的相邻加成照常继承）。</Text></Row>
 		<Row Tag="LOC_CQ_NI_DISTRICT" Language="zh_Hans_CN"><Text>不能建造{1_District}。</Text></Row>
 		<Row Tag="LOC_CQ_NI_GREAT_PERSON" Language="zh_Hans_CN"><Text>不能获得{1_Class}。</Text></Row>
@@ -232,5 +260,17 @@
 		<Row Tag="LOC_CQ_NOTIFICATION_UNLOCK_BODY" Language="zh_Hans_CN"><Text>你已控制{2_City}，现在可以激活{1_Leader}的能力。请从左上角工具栏打开“文明征服”界面。</Text></Row>
 		<Row Tag="LOC_CQ_MOD_MISMATCH_TITLE" Language="zh_Hans_CN"><Text>mod 文件不一致</Text></Row>
 		<Row Tag="LOC_CQ_MOD_MISMATCH_BODY" Language="zh_Hans_CN"><Text>本机加载的游戏数据库和其他玩家不同（指纹见下）。联机房间只核对 mod 的 ID，不核对文件内容。如果不同之处涉及规则，游戏会反复不同步；只是说明文字不同则无妨，但也说明两边的 mod 文件不完全一样。[NEWLINE][NEWLINE]本机：{1_Local}[NEWLINE]{2_Others}[NEWLINE][NEWLINE]请确认所有人的 mod 文件夹完全一致（删除旧版本或重复的副本，创意工坊 mod 更新到同一版本），然后重启游戏再读档。</Text></Row>
+
+		<!-- ================================================================ -->
+		<!-- 攻城锤、攻城塔加强：覆盖原版说明（Replace，需 LoadOrder 晚于风云变幻） -->
+		<!-- ================================================================ -->
+		<Replace Tag="LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION" Language="en_US"><Text>Ancient era support unit. When adjacent to a city, attacking melee and anti-cavalry units do full damage to the city's Walls, including Medieval Walls. Does not affect cities with Renaissance Walls. Ineffective against Urban Defenses.</Text></Replace>
+		<Replace Tag="LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION" Language="en_US"><Text>Medieval era support unit. When adjacent to a city, attacking melee and anti-cavalry units ignore Walls, including Renaissance Walls, and immediately assault the city. Ineffective against Urban Defenses.</Text></Replace>
+		<Replace Tag="LOC_ABILITY_ENABLE_WALL_PROMOTION_CLASS_ATTACK_DESCRIPTION" Language="en_US"><Text>When adjacent to an enemy city, melee and anti-cavalry units do full damage to the city's Walls, including Medieval Walls. Does not affect cities with Renaissance Walls. Ineffective against Urban Defenses.</Text></Replace>
+		<Replace Tag="LOC_ABILITY_BYPASS_WALLS_PROMOTION_CLASS_DESCRIPTION" Language="en_US"><Text>When adjacent to an enemy city, friendly melee and anti-cavalry units can bypass the city walls, including Renaissance Walls, and attack the city directly. Ineffective against Urban Defenses.</Text></Replace>
+		<Replace Tag="LOC_UNIT_BATTERING_RAM_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN"><Text>远古时代支援单位。与城市相邻时，近战和抗骑兵单位发起进攻可对城墙（包括中世纪城墙）输出全额伤害。对拥有文艺复兴城墙的城市无效。对城市防御无效。</Text></Replace>
+		<Replace Tag="LOC_UNIT_SIEGE_TOWER_EXPANSION2_DESCRIPTION" Language="zh_Hans_CN"><Text>中世纪支援单位。与城市相邻时，近战和抗骑兵单位可无视城墙（包括文艺复兴城墙）直接对城市发起进攻。对城市防御无效。</Text></Replace>
+		<Replace Tag="LOC_ABILITY_ENABLE_WALL_PROMOTION_CLASS_ATTACK_DESCRIPTION" Language="zh_Hans_CN"><Text>与敌方城市相邻时，近战和抗骑兵单位可对城墙（包括中世纪城墙）输出全额伤害。对拥有文艺复兴城墙的城市无效。对城市防御无效。</Text></Replace>
+		<Replace Tag="LOC_ABILITY_BYPASS_WALLS_PROMOTION_CLASS_DESCRIPTION" Language="zh_Hans_CN"><Text>与敌方城市相邻时，友方近战和抗骑兵单位可穿过城墙（包括文艺复兴城墙）直接攻击城市。对城市防御无效。</Text></Replace>
 	</LocalizedText>
 </GameData>

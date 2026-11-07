@@ -157,6 +157,7 @@ end
 local BONUS_KIND_ORDER :table = {
 	COST = 1, YIELD = 2, ADJ_DISTRICT = 3, NEXT_TO_DISTRICT = 4, ADJ_IMPROVEMENT = 5, ADJ_FEATURE = 6,
 	ADJ_TERRAIN = 7, ADJ_RIVER = 8, NEXT_TO_RESOURCE = 9, GREAT_PERSON = 10, HOUSING = 11, AMENITY = 12, SPECIAL = 13,
+	TRAIT_UNIT = 14, TRAIT_EFFECT = 15,
 };
 
 local function Signed(amount)
@@ -172,6 +173,64 @@ end
 local function TypeName(tableName:string, typeName)
 	local info = typeName and GameInfo[tableName] and GameInfo[tableName][typeName];
 	return LookupOr(info and info.Name, typeName or "");
+end
+
+-- ===========================================================================
+--	特性上指定了特色区域的效果（SQL 的 CQ_DistrictTraitModifiers）：按修改器参数写出具体内容
+--	（送哪种单位、带什么能力、哪种改良加什么产出）。认不出的类型返回 nil，由调用方用笼统说明。
+-- ===========================================================================
+local m_TraitModArgs :table = nil;		-- ModifierId -> { Name = Value }，只收复制出来的修改器
+
+local function GetTraitModArgs(modifierId:string)
+	if m_TraitModArgs == nil then
+		m_TraitModArgs = {};
+		if GameInfo.CQ_DistrictTraitModifiers ~= nil then
+			for r in GameInfo.CQ_DistrictTraitModifiers() do m_TraitModArgs[r.ModifierId] = {}; end
+			for a in GameInfo.ModifierArguments() do
+				local t = m_TraitModArgs[a.ModifierId];
+				if t ~= nil then t[a.Name] = a.Value; end
+			end
+		end
+	end
+	return m_TraitModArgs[modifierId];
+end
+
+local function DescribeTraitModifier(modifierId:string, baseName:string)
+	local args = GetTraitModArgs(modifierId);
+	local mod = GameInfo.Modifiers[modifierId];
+	if args == nil or mod == nil then return nil; end
+	local modType = mod.ModifierType or "";
+
+	-- 送单位
+	local unitName = nil;
+	if args.UnitType ~= nil then
+		unitName = TypeName("Units", args.UnitType);
+	elseif args.UnitPromotionClass ~= nil then
+		unitName = Locale.Lookup("LOC_CQ_DB_TU_CLASS", TypeName("UnitPromotionClasses", args.UnitPromotionClass));
+	elseif string.find(modType, "ADD_NAVAL_UNIT", 1, true) then
+		unitName = Locale.Lookup("LOC_CQ_DB_TU_NAVAL");
+	end
+	if unitName ~= nil then
+		local tag = string.find(modType, "DISTRICT_AND_BUILDINGS", 1, true) and "LOC_CQ_DB_TU_BUILDINGS" or "LOC_CQ_DB_TU_DISTRICT";
+		local text = Locale.Lookup(tag, baseName, unitName);
+		local ability = args.UnitAbilityType and GameInfo.UnitAbilities[args.UnitAbilityType];
+		if ability ~= nil then
+			text = text .. Locale.Lookup("LOC_CQ_DB_TU_ABILITY", LookupOr(ability.Name, args.UnitAbilityType), LookupOr(ability.Description, ""));
+		end
+		return text .. Locale.Lookup("LOC_CQ_DB_TU_TIMING");
+	end
+
+	-- 相邻改良加产出
+	if args.ImprovementType ~= nil and args.YieldType ~= nil then
+		local impName = TypeName("Improvements", args.ImprovementType);
+		local amount, yield = Signed(args.Amount), YieldIcon(args.YieldType);
+		local tiles = tonumber(args.TilesRequired) or 1;
+		if tiles > 1 then
+			return Locale.Lookup("LOC_CQ_DB_TE_IMPROVEMENT_TILES", impName, tiles, baseName, amount, yield);
+		end
+		return Locale.Lookup("LOC_CQ_DB_TE_IMPROVEMENT", impName, baseName, amount, yield);
+	end
+	return nil;
 end
 
 local function DescribeBonus(row:table, baseName:string)
@@ -204,6 +263,20 @@ local function DescribeBonus(row:table, baseName:string)
 		return Locale.Lookup("LOC_CQ_DB_HOUSING", amount);
 	elseif kind == "AMENITY" then
 		return Locale.Lookup("LOC_CQ_DB_AMENITY", amount);
+	elseif kind == "TRAIT_UNIT" or kind == "TRAIT_EFFECT" then
+		-- 特性上指定了特色区域的效果（SQL 的 CQ_DistrictTraitModifiers），Target 是原修改器所在的特性
+		local text = DescribeTraitModifier(row.ModifierId, baseName)
+			or Locale.Lookup((kind == "TRAIT_UNIT") and "LOC_CQ_DB_TRAIT_UNIT" or "LOC_CQ_DB_TRAIT_EFFECT", baseName);
+		local x = nil;
+		if GameInfo.CQ_DistrictTraitModifiers ~= nil then
+			for r in GameInfo.CQ_DistrictTraitModifiers() do
+				if r.ModifierId == row.ModifierId then x = r; break; end
+			end
+		end
+		if x ~= nil and x.TraitType ~= x.DistrictTraitType then
+			text = text .. Locale.Lookup("LOC_CQ_DB_TRAIT_NEEDS", TypeName("Traits", x.TraitType));
+		end
+		return text;
 	end
 	return nil;
 end
@@ -321,6 +394,24 @@ local function BuildTraitNotes(traitType:string, isNative:boolean)
 	if #negatives > 0 then
 		local header = (CQ.GetNegativeMode() == CQ.NEGATIVE_SKIP) and "LOC_CQ_NOTE_NEGATIVE_SKIPPED" or "LOC_CQ_NOTE_NEGATIVE_KEPT";
 		table.insert(sections, "[COLOR_Civ6Yellow]" .. Locale.Lookup(header) .. "[ENDCOLOR][NEWLINE]" .. table.concat(negatives, "[NEWLINE]"));
+	end
+	-- 本能力里和某个特色区域有关的效果：要同时激活那个特色区域（SQL 的 CQ_DistrictTraitModifiers）
+	if GameInfo.CQ_DistrictTraitModifiers ~= nil then
+		local linked = {};
+		for row in GameInfo.CQ_DistrictTraitModifiers() do
+			if row.TraitType == traitType and row.TraitType ~= row.DistrictTraitType then
+				local districtName, baseName = TypeName("Districts", row.DistrictType), TypeName("Districts", row.BaseDistrictType);
+				local effect = DescribeTraitModifier(row.ModifierId, baseName);
+				if effect ~= nil then
+					table.insert(linked, "[ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_DISTRICT_LINKED_EFFECT", effect, districtName));
+				else
+					table.insert(linked, "[ICON_Bullet]" .. Locale.Lookup("LOC_CQ_NOTE_DISTRICT_LINKED_LINE", districtName, baseName));
+				end
+			end
+		end
+		if #linked > 0 then
+			table.insert(sections, "[COLOR_Civ6Yellow]" .. Locale.Lookup("LOC_CQ_NOTE_DISTRICT_LINKED") .. "[ENDCOLOR][NEWLINE]" .. table.concat(linked, "[NEWLINE]"));
+		end
 	end
 	local notInherited = BuildNotInheritedLines(traitType);
 	if #notInherited > 0 then
